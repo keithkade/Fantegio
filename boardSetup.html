@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html>
+<head>
+  	<title>Board Setup</title>
+</head>
+
+<body>
+	
+<div style="width: 100%;">
+   	
+   	<div style="float:left;height:100%; width: 70%">
+		<canvas id="myCanvas" width="480" height="480" style="border:1px solid #000000;">
+		</canvas>
+  		<button type="button">Default Setup</button>
+  		<button type="button" onclick="window.location.href='/rules.html'" target="_blank" >Game Rules</button>
+  		<button type="button" onclick="window.location.href='/mainGame.html'" target="_blank" >Start Game</button>
+   		<span id="timer"></span>
+   		
+   		<script>
+    	var mins = 5;
+    	var secs = mins * 60;
+    	var currentSeconds = 0;
+    	var currentMinutes = 0;
+    	setTimeout('Timer()',1000);
+
+    	function Timer() {
+        	currentMinutes = Math.floor(secs / 60);
+        	currentSeconds = secs % 60;
+        	if(currentSeconds <= 9) currentSeconds = "0" + currentSeconds;
+        	secs--;
+        	document.getElementById("timer").innerHTML = currentMinutes + ":" + currentSeconds; //Set the element id you need the time put into.
+        	if(secs !== -1) setTimeout('Timer()',1000);
+    	}
+		</script>
+   	</div>
+   	
+   	<div style="float:right;height:100%;width: 30%">
+		
+		<h3>Unit info</h3>
+		<p>
+		Unit strength is denoted in the top left corner of the piece.
+		Movement range is one unless denoted otherwise.
+		</p>
+		<p>
+		The Important Thing  
+		Game ends after this is captured
+		</p>
+		<p>
+		Mystic (magic 8 ball)
+		Can see details about pieces directly adjacent
+		</p>
+		<p>
+		Rider (unicorn)
+		Mobility - Any number of spaces vertically or horizontally
+		</p>
+		<p>
+		Trap (box and stick) 
+		Destroys anything that attacks it and cannot be reused
+		Strength - Kills anything that attacks it but is dismantled by the engineer
+		</p>
+		<p>
+		Archer (slinghot with arrow) 
+		Can shoot units 1 or 2 spaces away vertically/horizontally for 3 damage. This counts as a turn
+		Strength - 1 (Defending), 3 (Attacking)
+		</p>
+		<p>
+		Engineer (Engineering student)
+		Can defuse trap
+		</p>		
+		<p>
+		Assassin (kid with water gun)
+		Can defeat the commander if it attacks first
+		</p>
+		<p>
+		Soldier 
+		</p>
+		<p>
+		Captain
+		</p>
+		<p>
+		Commander (Dragon)
+		</p>
+   	</div>
+</div>
+  	
+</body>
+</html>
