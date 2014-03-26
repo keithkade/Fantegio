@@ -1,5 +1,3 @@
-
-
 var stage = new createjs.Stage("myCanvas");
 var boardHeight = 300;
 var boardWidth = 480;
@@ -39,9 +37,28 @@ var rock3 = new createjs.Shape();
 rock3.graphics.beginFill("black").drawCircle(329, 89, 20);
 stage.addChild(rock3);
 
+var isGameLocOccupied = [
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0]
+];
+
+function convertToGameGridXY (dragger){
+	dragger.gameGridX = (dragger.x-2)/60 + 1;
+	dragger.gameGridY = (dragger.y+178)/60 + 1;
+}
+
 function addDragAndDrop (toDrag){
 	//move piece on drag			
 	toDrag.on("pressmove",function(evt) {
+		evt.currentTarget.lastX = evt.currentTarget.gameGridX;
+		evt.currentTarget.lastY = evt.currentTarget.gameGridY;
 		evt.currentTarget.x = evt.stageX;
 		evt.currentTarget.y = evt.stageY;
 		stage.update();   	
@@ -70,13 +87,22 @@ function addDragAndDrop (toDrag){
 			y=122;
 		if(y>540)
 			y=482;					
-		evt.currentTarget.x = x;
-		evt.currentTarget.y = y;
-		evt.currentTarget.gameGridX = (x-2)/60 + 1;
-		evt.currentTarget.gameGridY = (y+178)/60 + 1;
+		//check to ensure that we arent moving onto a piece
+		if (isGameLocOccupied[(x-2)/60 + 1][(y+178)/60 + 1]){
+			evt.currentTarget.x = (evt.currentTarget.gameGridX - 1)*60 + 2;
+			evt.currentTarget.y = (evt.currentTarget.gameGridY - 1)*60 - 178;
+		}
+		else{
+			evt.currentTarget.x = x;
+			evt.currentTarget.y = y;
+			convertToGameGridXY(evt.currentTarget);
+			isGameLocOccupied[evt.currentTarget.gameGridX][evt.currentTarget.gameGridY] = 1;
+			isGameLocOccupied[evt.currentTarget.lastX][evt.currentTarget.lastY] = 0;
+		}
 		stage.update(); 
 	});
 }
+
 
 //create draggable important thing
 var squareIT = new createjs.Shape();
@@ -88,6 +114,7 @@ labelIT.y = 15;
 var importantThingDragger = new createjs.Container();
 importantThingDragger.x = 2;
 importantThingDragger.y = 422;
+convertToGameGridXY(importantThingDragger);
 importantThingDragger.addChild(squareIT, labelIT);
 stage.addChild(importantThingDragger);
 addDragAndDrop(importantThingDragger);
@@ -102,6 +129,7 @@ labelT1.y = 15;
 var trap1Dragger = new createjs.Container();
 trap1Dragger.x = 62;
 trap1Dragger.y = 422;
+convertToGameGridXY(trap1Dragger);
 trap1Dragger.addChild(squareT1, labelT1);
 stage.addChild(trap1Dragger);
 addDragAndDrop(trap1Dragger);
@@ -116,6 +144,7 @@ labelT2.y = 15;
 var trap2Dragger = new createjs.Container();
 trap2Dragger.x = 122;
 trap2Dragger.y = 422;
+convertToGameGridXY(trap2Dragger);
 trap2Dragger.addChild(squareT2, labelT2);
 stage.addChild(trap2Dragger);
 addDragAndDrop(trap2Dragger);
@@ -130,6 +159,7 @@ labelAr.y = 15;
 var archerDragger = new createjs.Container();
 archerDragger.x = 182;
 archerDragger.y = 422;
+convertToGameGridXY(archerDragger);
 archerDragger.addChild(squareAr, labelAr);
 stage.addChild(archerDragger);
 addDragAndDrop(archerDragger);
@@ -144,6 +174,7 @@ labelMy.y = 15;
 var mysticDragger = new createjs.Container();
 mysticDragger.x = 242;
 mysticDragger.y = 422;
+convertToGameGridXY(mysticDragger);
 mysticDragger.addChild(squareMy, labelMy);
 stage.addChild(mysticDragger);
 addDragAndDrop(mysticDragger);
@@ -158,6 +189,7 @@ labelR1.y = 15;
 var rider1Dragger = new createjs.Container();
 rider1Dragger.x = 302;
 rider1Dragger.y = 422;
+convertToGameGridXY(rider1Dragger);
 rider1Dragger.addChild(squareR1, labelR1);
 stage.addChild(rider1Dragger);
 addDragAndDrop(rider1Dragger);
@@ -172,6 +204,7 @@ labelR2.y = 15;
 var rider2Dragger = new createjs.Container();
 rider2Dragger.x = 362;
 rider2Dragger.y = 422;
+convertToGameGridXY(rider2Dragger);
 rider2Dragger.addChild(squareR2, labelR2);
 stage.addChild(rider2Dragger);
 addDragAndDrop(rider2Dragger);
@@ -186,6 +219,7 @@ labelAs.y = 15;
 var assassinDragger = new createjs.Container();
 assassinDragger.x = 422;
 assassinDragger.y = 422;
+convertToGameGridXY(assassinDragger);
 assassinDragger.addChild(squareAs, labelAs);
 stage.addChild(assassinDragger);
 addDragAndDrop(assassinDragger);
@@ -200,6 +234,7 @@ labelS1.y = 15;
 var soldier1Dragger = new createjs.Container();
 soldier1Dragger.x = 2;
 soldier1Dragger.y = 482;
+convertToGameGridXY(soldier1Dragger);
 soldier1Dragger.addChild(squareS1, labelS1);
 stage.addChild(soldier1Dragger);
 addDragAndDrop(soldier1Dragger);
@@ -214,6 +249,7 @@ labelS2.y = 15;
 var soldier2Dragger = new createjs.Container();
 soldier2Dragger.x = 62;
 soldier2Dragger.y = 482;
+convertToGameGridXY(soldier2Dragger);
 soldier2Dragger.addChild(squareS2, labelS2);
 stage.addChild(soldier2Dragger);
 addDragAndDrop(soldier2Dragger);
@@ -228,6 +264,7 @@ labelE1.y = 15;
 var engineer1Dragger = new createjs.Container();
 engineer1Dragger.x = 122;
 engineer1Dragger.y = 482;
+convertToGameGridXY(engineer1Dragger);
 engineer1Dragger.addChild(squareE1, labelE1);
 stage.addChild(engineer1Dragger);
 addDragAndDrop(engineer1Dragger);
@@ -242,6 +279,7 @@ labelE2.y = 15;
 var engineer2Dragger = new createjs.Container();
 engineer2Dragger.x = 182;
 engineer2Dragger.y = 482;
+convertToGameGridXY(engineer2Dragger);
 engineer2Dragger.addChild(squareE2, labelE2);
 stage.addChild(engineer2Dragger);
 addDragAndDrop(engineer2Dragger);
@@ -256,6 +294,7 @@ labelCa.y = 15;
 var captainDragger = new createjs.Container();
 captainDragger.x = 242;
 captainDragger.y = 482;
+convertToGameGridXY(captainDragger);
 captainDragger.addChild(squareCa, labelCa);
 stage.addChild(captainDragger);
 addDragAndDrop(captainDragger);
@@ -270,58 +309,73 @@ labelCo.y = 15;
 var commanderDragger = new createjs.Container();
 commanderDragger.x = 302;
 commanderDragger.y = 482;
+convertToGameGridXY(commanderDragger);
 commanderDragger.addChild(squareCo, labelCo);
 stage.addChild(commanderDragger);
 addDragAndDrop(commanderDragger);
 
 function convertToGameGridXY (dragger){
-	dragger.gameGridX = (x-2)/60 + 1;
-	dragger.gameGridY = (y+178)/60 + 1;
+	dragger.gameGridX = (dragger.x-2)/60 + 1;
+	dragger.gameGridY = (dragger.y+178)/60 + 1;
 }
 
 function setup(){
 	importantThingDragger.x = 122;
 	importantThingDragger.y = 242;
 	convertToGameGridXY(importantThingDragger);
+	
 	archerDragger.x = 62;
 	archerDragger.y = 122;
 	convertToGameGridXY(archerDragger);
+	
 	commanderDragger.x = 182;
 	commanderDragger.y = 182;
 	convertToGameGridXY(commanderDragger);
+
 	trap1Dragger.x = 122;
 	trap1Dragger.y = 182;
 	convertToGameGridXY(trap1Dragger);
+	
 	trap2Dragger.x = 362;
 	trap2Dragger.y = 122;
 	convertToGameGridXY(trap2Dragger);
+	
 	captainDragger.x = 362;
 	captainDragger.y = 182;
 	convertToGameGridXY(captainDragger);
+	
 	engineer1Dragger.x = 62;
 	engineer1Dragger.y = 242;
 	convertToGameGridXY(engineer1Dragger);
+	
 	engineer2Dragger.x = 242;
 	engineer2Dragger.y = 182;
 	convertToGameGridXY(engineer2Dragger);
+	
 	soldier1Dragger.x = 62;
 	soldier1Dragger.y = 182;
 	convertToGameGridXY(soldier1Dragger);
+	
 	soldier2Dragger.x = 302;
 	soldier2Dragger.y = 122;
 	convertToGameGridXY(soldier2Dragger);
+	
 	assassinDragger.x = 302;
 	assassinDragger.y = 182;
 	convertToGameGridXY(assassinDragger);
+	
 	mysticDragger.x = 242;
 	mysticDragger.y = 122;
 	convertToGameGridXY(mysticDragger);
+	
 	rider1Dragger.x = 2;
 	rider1Dragger.y = 182;
 	convertToGameGridXY(rider1Dragger);
+	
 	rider2Dragger.x = 422;
 	rider2Dragger.y = 182;
 	convertToGameGridXY(rider2Dragger);	
+	
 	stage.update();
 }
   			
