@@ -1,3 +1,5 @@
+
+
 var stage = new createjs.Stage("myCanvas");
 var boardHeight = 300;
 var boardWidth = 480;
@@ -26,6 +28,17 @@ for (var y = 0; y <= boardHeight; y += 60) {
     stage.addChild(line);
 }
 
+//rocks //will recieve x and y from server
+var rock1 = new createjs.Shape();
+rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
+stage.addChild(rock1);
+var rock2 = new createjs.Shape();
+rock2.graphics.beginFill("black").drawCircle(209, 89, 20);
+stage.addChild(rock2);
+var rock3 = new createjs.Shape();
+rock3.graphics.beginFill("black").drawCircle(329, 89, 20);
+stage.addChild(rock3);
+
 function addDragAndDrop (toDrag){
 	//move piece on drag			
 	toDrag.on("pressmove",function(evt) {
@@ -47,9 +60,20 @@ function addDragAndDrop (toDrag){
 		if (yRem >= 30)
 			y = y + (60 - yRem) + 2; //round up
 		if (yRem < 30)
-			y = y - yRem + 2; //round down			
+			y = y - yRem + 2; //round down	
+		//do not allow dragging out of canvas or placing outside of placement area
+		if(x<0)
+			x=2;
+		if(x>480)
+			x=422;	
+		if(y<120)
+			y=122;
+		if(y>540)
+			y=482;					
 		evt.currentTarget.x = x;
 		evt.currentTarget.y = y;
+		evt.currentTarget.gameGridX = (x-2)/60 + 1;
+		evt.currentTarget.gameGridY = (y+178)/60 + 1;
 		stage.update(); 
 	});
 }
@@ -250,36 +274,89 @@ commanderDragger.addChild(squareCo, labelCo);
 stage.addChild(commanderDragger);
 addDragAndDrop(commanderDragger);
 
+function convertToGameGridXY (dragger){
+	dragger.gameGridX = (x-2)/60 + 1;
+	dragger.gameGridY = (y+178)/60 + 1;
+}
+
 function setup(){
 	importantThingDragger.x = 122;
 	importantThingDragger.y = 242;
+	convertToGameGridXY(importantThingDragger);
 	archerDragger.x = 62;
 	archerDragger.y = 122;
+	convertToGameGridXY(archerDragger);
 	commanderDragger.x = 182;
 	commanderDragger.y = 182;
+	convertToGameGridXY(commanderDragger);
 	trap1Dragger.x = 122;
 	trap1Dragger.y = 182;
+	convertToGameGridXY(trap1Dragger);
 	trap2Dragger.x = 362;
 	trap2Dragger.y = 122;
+	convertToGameGridXY(trap2Dragger);
 	captainDragger.x = 362;
 	captainDragger.y = 182;
+	convertToGameGridXY(captainDragger);
 	engineer1Dragger.x = 62;
 	engineer1Dragger.y = 242;
+	convertToGameGridXY(engineer1Dragger);
 	engineer2Dragger.x = 242;
 	engineer2Dragger.y = 182;
+	convertToGameGridXY(engineer2Dragger);
 	soldier1Dragger.x = 62;
 	soldier1Dragger.y = 182;
+	convertToGameGridXY(soldier1Dragger);
 	soldier2Dragger.x = 302;
 	soldier2Dragger.y = 122;
+	convertToGameGridXY(soldier2Dragger);
 	assassinDragger.x = 302;
 	assassinDragger.y = 182;
+	convertToGameGridXY(assassinDragger);
 	mysticDragger.x = 242;
 	mysticDragger.y = 122;
+	convertToGameGridXY(mysticDragger);
 	rider1Dragger.x = 2;
 	rider1Dragger.y = 182;
+	convertToGameGridXY(rider1Dragger);
 	rider2Dragger.x = 422;
-	rider2Dragger.y = 182;	
+	rider2Dragger.y = 182;
+	convertToGameGridXY(rider2Dragger);	
 	stage.update();
 }
   			
 stage.update();
+
+function startGame(){
+	var locationArray;
+	locationArray[0] = commanderDragger.gameGridX;
+	locationArray[1] = commanderDragger.gameGridY;
+	locationArray[2] = captainDragger.gameGridX;
+	locationArray[3] = captainDragger.gameGridY;
+	locationArray[4] = soldier1Dragger.gameGridX;
+	locationArray[5] = soldier1Dragger.gameGridY;
+	locationArray[6] = soldier1Dragger.gameGridX;
+	locationArray[7] = soldier1Dragger.gameGridY;
+	locationArray[8] = engineer1Dragger.gameGridX;
+	locationArray[9] = engineer1Dragger.gameGridY;
+	locationArray[10] = engineer2Dragger.gameGridX;
+	locationArray[11] = engineer2Dragger.gameGridY;		
+	locationArray[12] = rider1Dragger.gameGridX;
+	locationArray[13] = rider1Dragger.gameGridY;
+	locationArray[14] = rider2Dragger.gameGridX;
+	locationArray[15] = rider2Dragger.gameGridY;
+	locationArray[16] = assassinDragger.gameGridX;
+	locationArray[17] = assassinDragger.gameGridY;
+	locationArray[18] = archerDragger.gameGridX;
+	locationArray[19] = archerDragger.gameGridY;	
+	locationArray[20] = mysticDragger.gameGridX;
+	locationArray[21] = mysticDragger.gameGridY;		
+	locationArray[22] = trap1Dragger.gameGridX;
+	locationArray[23] = trap1Dragger.gameGridY;	
+	locationArray[24] = trap2Dragger.gameGridX;
+	locationArray[25] = trap2Dragger.gameGridY;		
+	locationArray[26] = importantThingDragger.gameGridX;
+	locationArray[27] = importantThingDragger.gameGridY;
+	//send to server									
+}
+
