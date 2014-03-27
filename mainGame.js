@@ -81,6 +81,8 @@ function addDragAndDrop (toDrag){
 	});
 }
 
+
+//============================================================player 1 pieces
 //create draggable important thing
 var p1squareIT = new createjs.Shape();
 p1squareIT.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
@@ -260,6 +262,219 @@ initializePieceXY(p1commanderDragger);
 p1commanderDragger.addChild(p1squareCo, p1labelCo);
 stage.addChild(p1commanderDragger);
 addDragAndDrop(p1commanderDragger);
+
+
+//============================================================player 2 pieces
+//create draggable important thing
+var p2squareIT = new createjs.Shape();
+p2squareIT.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelIT = new createjs.Text("Important \nThing", "10px Arial", "#FFFFFF");
+p2labelIT.textAlign = "center";
+p2labelIT.x = 28;
+p2labelIT.y = 15;
+var p2importantThingDragger = new createjs.Container();
+initializePieceXY(p2importantThingDragger);
+p2importantThingDragger.addChild(p2squareIT, p2labelIT);
+stage.addChild(p2importantThingDragger);
+addDragAndDrop(p2importantThingDragger);
+
+//create draggable trap2
+var p2squareT1 = new createjs.Shape();
+p2squareT1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelT1 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
+p2labelT1.textAlign = "center";
+p2labelT1.x = 28;
+p2labelT1.y = 15;
+var trap2Dragger = new createjs.Container();
+initializePieceXY(p2trap2Dragger);
+trap2Dragger.addChild(p2squareT1, p2labelT1);
+stage.addChild(p2trap2Dragger);
+addDragAndDrop(p2trap2Dragger);
+
+//create draggable trap2
+var p2squareT2 = new createjs.Shape();
+p2squareT2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelT2 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
+p2labelT2.textAlign = "center";
+var p2trap2Dragger = new createjs.Container();
+initializePieceXY(p2trap2Dragger);
+trap2Dragger.addChild(p2squareT2, p2labelT2);
+stage.addChild(p2trap2Dragger);
+addDragAndDrop(p2trap2Dragger);
+
+//create draggable archer
+var p2squareAr = new createjs.Shape();
+p2squareAr.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelAr = new createjs.Text("Archer - 1", "10px Arial", "#FFFFFF");
+p2labelAr.textAlign = "center";
+p2labelAr.x = 28;
+p2labelAr.y = 15;
+var p2archerDragger = new createjs.Container();
+initializePieceXY(p2archerDragger);
+p2archerDragger.addChild(p2squareAr, p2labelAr);
+stage.addChild(p2archerDragger);
+addDragAndDrop(p2archerDragger);
+
+//create draggable mystic
+var p2squareMy = new createjs.Shape();
+p2squareMy.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelMy = new createjs.Text("Mystic - 1", "10px Arial", "#FFFFFF");
+p2labelMy.textAlign = "center";
+p2labelMy.x = 28;
+p2labelMy.y = 15;
+var p2mysticDragger = new createjs.Container();
+initializePieceXY(p2mysticDragger);
+p2mysticDragger.addChild(p2squareMy, p2labelMy);
+stage.addChild(p2mysticDragger);
+addDragAndDrop(p2mysticDragger);
+
+//create draggable rider1
+var p2squareR1 = new createjs.Shape();
+p2squareR1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelR1 = new createjs.Text("Rider - 2", "10px Arial", "#FFFFFF");
+p2labelR1.textAlign = "center";
+p2labelR1.x = 28;
+p2labelR1.y = 15;
+var p2rider1Dragger = new createjs.Container();
+initializePieceXY(p2rider1Dragger);
+p2rider1Dragger.addChild(squareR1, labelR1);
+stage.addChild(p2rider1Dragger);
+addDragAndDrop(p2rider1Dragger);
+
+//create draggable rider2
+var p2squareR2 = new createjs.Shape();
+p2squareR2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelR2 = new createjs.Text("Rider - 2", "10px Arial", "#FFFFFF");
+p2labelR2.textAlign = "center";
+p2labelR2.x = 28;
+p2labelR2.y = 15;
+var p2rider2Dragger = new createjs.Container();
+initializePieceXY(p2rider2Dragger);
+p2rider2Dragger.addChild(squareR2, labelR2);
+stage.addChild(p2rider2Dragger);
+addDragAndDrop(p2rider2Dragger);
+
+//create draggable assassin
+var p2squareAs = new createjs.Shape();
+p2squareAs.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelAs = new createjs.Text("Assassin\n - A", "10px Arial", "#FFFFFF");
+p2labelAs.textAlign = "center";
+p2labelAs.x = 28;
+p2labelAs.y = 15;
+var p2assassinDragger = new createjs.Container();
+initializePieceXY(p2assassinDragger);
+p2assassinDragger.addChild(p2squareAs, p2labelAs);
+stage.addChild(p2assassinDragger);
+addDragAndDrop(p2assassinDragger);
+
+//create draggable soldier1
+var p2squareS1 = new createjs.Shape();
+p2squareS1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelS1 = new createjs.Text("Soldier - 4", "10px Arial", "#FFFFFF");
+p2labelS1.textAlign = "center";
+p2labelS1.x = 28;
+p2labelS1.y = 15;
+var p2soldier1Dragger = new createjs.Container();
+initializePieceXY(p2soldier1Dragger);
+p2soldier1Dragger.addChild(p2squareS1, p2labelS1);
+stage.addChild(p2soldier1Dragger);
+addDragAndDrop(p2soldier1Dragger);
+
+//create draggable soldier2
+var p2squareS2 = new createjs.Shape();
+p2squareS2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelS2 = new createjs.Text("Soldier - 4", "10px Arial", "#FFFFFF");
+p2labelS2.textAlign = "center";
+p2labelS2.x = 28;
+p2labelS2.y = 15;
+var p2soldier2Dragger = new createjs.Container();
+initializePieceXY(p2soldier2Dragger);
+p2soldier2Dragger.addChild(p2squareS2, p2labelS2);
+stage.addChild(p2soldier2Dragger);
+addDragAndDrop(p2soldier2Dragger);
+
+//create draggable engineer1
+var p2squareE1 = new createjs.Shape();
+p2squareE1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelE1 = new createjs.Text("Engineer\n - 3", "10px Arial", "#FFFFFF");
+p2labelE1.textAlign = "center";
+p2labelE1.x = 28;
+p2labelE1.y = 15;
+var p2engineer1Dragger = new createjs.Container();
+initializePieceXY(p2engineer1Dragger);
+p2engineer1Dragger.addChild(p2squareE1, p2labelE1);
+stage.addChild(p2engineer1Dragger);
+addDragAndDrop(p2engineer1Dragger);
+
+//create draggable engineer2
+var p2squareE2 = new createjs.Shape();
+p2squareE2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelE2 = new createjs.Text("Engineer\n - 3", "10px Arial", "#FFFFFF");
+p2labelE2.textAlign = "center";
+p2labelE2.x = 28;
+p2labelE2.y = 15;
+var p2engineer2Dragger = new createjs.Container();
+initializePieceXY(p2engineer2Dragger);
+p2engineer2Dragger.addChild(p2squareE2, p2labelE2);
+stage.addChild(p2engineer2Dragger);
+addDragAndDrop(p2engineer2Dragger);
+
+//create draggable captain
+var p2squareCa = new createjs.Shape();
+p2squareCa.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelCa = new createjs.Text("Captian - 5", "10px Arial", "#FFFFFF");
+p2labelCa.textAlign = "center";
+p2labelCa.x = 28;
+p2labelCa.y = 15;
+var p2captainDragger = new createjs.Container();
+initializePieceXY(p2captainDragger);
+p2captainDragger.addChild(p2squareCa, p2labelCa);
+stage.addChild(p2captainDragger);
+addDragAndDrop(p2captainDragger);
+
+//create draggable commander
+var p2squareCo = new createjs.Shape();
+p2squareCo.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+var p2labelCo = new createjs.Text("Commander\n - 6", "10px Arial", "#FFFFFF");
+p2labelCo.textAlign = "center";
+p2labelCo.x = 28;
+p2labelCo.y = 15;
+var p2commanderDragger = new createjs.Container();
+initializePieceXY(p2commanderDragger);
+p2commanderDragger.addChild(p2squareCo, p2labelCo);
+stage.addChild(p2commanderDragger);
+addDragAndDrop(p2commanderDragger);
+
+//put all pieces in array so it can be search 
+var pieceArray = newArray();
+pieceArray[0] = p1importantThingDragger;
+pieceArray[1] = p2importantThingDragger;
+pieceArray[2] = p1commanderDragger;
+pieceArray[3] = p2commanderDragger;
+pieceArray[4] = p1captainDragger;
+pieceArray[5] = p2captainDragger;
+pieceArray[6] = p1engineer1Dragger;
+pieceArray[7] = p2engineer1Dragger;
+pieceArray[8] = p1engineer2Dragger;
+pieceArray[9] = p2engineer2Dragger;
+pieceArray[10] = p1soldier1Dragger;
+pieceArray[11] = p2soldier1Dragger;
+pieceArray[12] = p1soldier2Dragger;
+pieceArray[13] = p2soldier2Dragger;
+pieceArray[14] = p1assassinDragger;
+pieceArray[15] = p2assassinDragger;
+pieceArray[16] = p1rider1Dragger;
+pieceArray[17] = p2rider1Dragger;
+pieceArray[18] = p1rider2Dragger;
+pieceArray[19] = p2rider2Dragger;
+pieceArray[20] = p1mysticDragger;
+pieceArray[21] = p2mysticDragger;
+pieceArray[22] = p1archerDragger;
+pieceArray[23] = p1archerDragger;
+pieceArray[24] = p1trap1Dragger;
+pieceArray[25] = p2trap1Dragger;
+pieceArray[26] = p1trap2Dragger;
+pieceArray[27] = p2trap2Dragger;
 
 
 function updateBoard(moveArray){
