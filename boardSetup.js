@@ -5,6 +5,8 @@ var boardWidth = 480;
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
 
+var socket = io.connect('http://' + document.location.host);
+
 //color background green
 var background = new createjs.Shape();
 background.graphics.beginFill("#4E8154").drawRect(0, 0, boardWidth, boardHeight);
@@ -421,7 +423,7 @@ var resultArray = new Array();
 var locationArray = new Array();
 function startGame(){
 	resultArray[0] = "setup";
-	resultArray[1] = playerNum;
+	resultArray[1] = 1;// playerNum;
 
 	locationArray[0] = commanderDragger.gameGridX;
 	locationArray[1] = orient(playerNum, commanderDragger.gameGridY);
@@ -454,7 +456,7 @@ function startGame(){
 	
 	resultArray[2] = locationArray;
 	//send return to server			
-
+	socket.emit("setup", resultArray);
 	window.location.href = "mainGame.html?" + playerNum;
 }
 
