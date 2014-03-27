@@ -458,6 +458,7 @@ function startGame(){
 	//send return to server			
 	socket.emit("setup", resultArray);
 	window.location.href = "mainGame.html?" + playerNum;
+	showHide("infoScroll");
 }
 
 function orient(playerNum, Y_Loc){
@@ -476,4 +477,17 @@ function orient(playerNum, Y_Loc){
 	else{
 		return Y_Loc+3;
 	}
+}
+
+
+function showHide(divId)
+{
+if(document.getElementById(divId).style.display == 'none')
+{
+document.getElementById(divId).style.display='block';
+}
+else
+{
+document.getElementById(divId).style.display = 'none';
+}
 }
