@@ -2,6 +2,9 @@ var stage = new createjs.Stage("myCanvas");
 var boardHeight = 300;
 var boardWidth = 480;
 
+var urlName = window.location.search.substring(1);
+var playerNum = unescape(urlName);
+
 //color background green
 var background = new createjs.Shape();
 background.graphics.beginFill("#4E8154").drawRect(0, 0, boardWidth, boardHeight);
@@ -410,40 +413,65 @@ function setup(){
 	isGameLocOccupied[rider2Dragger.lastX][rider2Dragger.lastY] = 0;	
 		
 	stage.update();
-}
-  			
+}	
+		
 stage.update();
 
+var resultArray = new Array();
+var locationArray = new Array();
 function startGame(){
-	var locationArray;
+	resultArray[0] = "setup";
+	resultArray[1] = playerNum;
+
 	locationArray[0] = commanderDragger.gameGridX;
-	locationArray[1] = commanderDragger.gameGridY;
+	locationArray[1] = orient(playerNum, commanderDragger.gameGridY);
 	locationArray[2] = captainDragger.gameGridX;
-	locationArray[3] = captainDragger.gameGridY;
+	locationArray[3] = orient(playerNum, captainDragger.gameGridY);
 	locationArray[4] = soldier1Dragger.gameGridX;
-	locationArray[5] = soldier1Dragger.gameGridY;
+	locationArray[5] = orient(playerNum, soldier1Dragger.gameGridY);
 	locationArray[6] = soldier1Dragger.gameGridX;
-	locationArray[7] = soldier1Dragger.gameGridY;
+	locationArray[7] = orient(playerNum, soldier1Dragger.gameGridY);
 	locationArray[8] = engineer1Dragger.gameGridX;
-	locationArray[9] = engineer1Dragger.gameGridY;
+	locationArray[9] = orient(playerNum, engineer1Dragger.gameGridY);
 	locationArray[10] = engineer2Dragger.gameGridX;
-	locationArray[11] = engineer2Dragger.gameGridY;		
+	locationArray[11] = orient(playerNum, engineer2Dragger.gameGridY);		
 	locationArray[12] = rider1Dragger.gameGridX;
-	locationArray[13] = rider1Dragger.gameGridY;
+	locationArray[13] = orient(playerNum, rider1Dragger.gameGridY);
 	locationArray[14] = rider2Dragger.gameGridX;
-	locationArray[15] = rider2Dragger.gameGridY;
+	locationArray[15] = orient(playerNum, rider2Dragger.gameGridY);
 	locationArray[16] = assassinDragger.gameGridX;
-	locationArray[17] = assassinDragger.gameGridY;
+	locationArray[17] = orient(playerNum, assassinDragger.gameGridY);
 	locationArray[18] = archerDragger.gameGridX;
-	locationArray[19] = archerDragger.gameGridY;	
+	locationArray[19] = orient(playerNum, archerDragger.gameGridY);	
 	locationArray[20] = mysticDragger.gameGridX;
-	locationArray[21] = mysticDragger.gameGridY;		
+	locationArray[21] = orient(playerNum, mysticDragger.gameGridY);		
 	locationArray[22] = trap1Dragger.gameGridX;
-	locationArray[23] = trap1Dragger.gameGridY;	
+	locationArray[23] = orient(playerNum, trap1Dragger.gameGridY);	
 	locationArray[24] = trap2Dragger.gameGridX;
-	locationArray[25] = trap2Dragger.gameGridY;		
+	locationArray[25] = orient(playerNum, trap2Dragger.gameGridY);		
 	locationArray[26] = importantThingDragger.gameGridX;
-	locationArray[27] = importantThingDragger.gameGridY;
-	//send to server									
+	locationArray[27] = orient(playerNum, importantThingDragger.gameGridY);
+	
+	resultArray[2] = locationArray;
+	//send return to server			
+
+	window.location.href = "/mainGame.html?" + playerNum;
 }
 
+function orient(playerNum, Y_Loc){
+	if(playerNum == "2")
+	{
+		switch(Y_Loc)
+		{
+		case 4:
+			return 2;
+		case 5:
+			return 1;
+		default: 
+			return 3;
+		}
+	}
+	else{
+		return Y_Loc+3;
+	}
+}
