@@ -30,15 +30,15 @@ for (var y = 0; y <= boardHeight; y += 60) {
 }
 
 //rocks //will recieve x and y from server
-var rock1 = new createjs.Shape();
-rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
-stage.addChild(rock1);
-var rock2 = new createjs.Shape();
-rock2.graphics.beginFill("black").drawCircle(209, 89, 20);
-stage.addChild(rock2);
-var rock3 = new createjs.Shape();
-rock3.graphics.beginFill("black").drawCircle(329, 89, 20);
-stage.addChild(rock3);
+//var rock1 = new createjs.Shape();
+//rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
+//stage.addChild(rock1);
+//var rock2 = new createjs.Shape();
+//rock2.graphics.beginFill("black").drawCircle(209, 89, 20);
+//stage.addChild(rock2);
+//var rock3 = new createjs.Shape();
+//rock3.graphics.beginFill("black").drawCircle(329, 89, 20);
+//stage.addChild(rock3);
 
 //this is oddly shaped because 2d arrays are indexed by [row][column] and also because they are zero based
 var isGameLocOccupied = [
