@@ -1,5 +1,9 @@
 <!doctype html>
 
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+
 <html>
 <head>
   	<title>Fantegio Welcome</title>
@@ -10,11 +14,24 @@
 </head>
 
 <body>	
+
+	<script>
+		var socket = io.connect('http://' + document.location.host);
+	/*
+		$('#begin').click(function() {
+				socket.emit('BeginButton', {});
+				}
+	*/
+		//socket.emit('start', { msg: data });
+
+	</script>
+
 	<div align="center">
 	
 	<h1>Welcome to Fantegio!</h1>
 
-  	<button type="button" onclick="window.location.href='setup.html'" >Begin</button>
+  	<button id="begin" type="button" onclick="window.location.href='setup.html'" >Begin</button>
   	</div>
 </body>
 </html>
+
