@@ -455,7 +455,7 @@ function startGame(){
 	resultArray[2] = locationArray;
 	//send return to server			
 
-	window.location.href = "/mainGame.html?" + playerNum;
+	window.location.href = "mainGame.html?" + playerNum;
 }
 
 function orient(playerNum, Y_Loc){
