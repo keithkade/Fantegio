@@ -27,9 +27,9 @@ for (var y = 0; y <= boardHeight; y += 60) {
 
 //also establishes intial lastX and lastY
 function initializePieceXY (dragger){
-	convertToGameGridXY(dragger);
-	dragger.lastX = dragger.gameGridX;
-	dragger.lastY = dragger.gameGridY;
+	//convertToGameGridXY(dragger);
+	//dragger.lastX = dragger.gameGridX;
+	//dragger.lastY = dragger.gameGridY;
 }
 
 function addDragAndDrop (toDrag){
@@ -103,9 +103,9 @@ var p1labelT1 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
 p1labelT1.textAlign = "center";
 p1labelT1.x = 28;
 p1labelT1.y = 15;
-var trap1Dragger = new createjs.Container();
+var p1trap1Dragger = new createjs.Container();
 initializePieceXY(p1trap1Dragger);
-trap1Dragger.addChild(p1squareT1, p1labelT1);
+p1trap1Dragger.addChild(p1squareT1, p1labelT1);
 stage.addChild(p1trap1Dragger);
 addDragAndDrop(p1trap1Dragger);
 
@@ -116,7 +116,7 @@ var p1labelT2 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
 p1labelT2.textAlign = "center";
 var p1trap2Dragger = new createjs.Container();
 initializePieceXY(p1trap2Dragger);
-trap2Dragger.addChild(p1squareT2, p1labelT2);
+p1trap2Dragger.addChild(p1squareT2, p1labelT2);
 stage.addChild(p1trap2Dragger);
 addDragAndDrop(p1trap2Dragger);
 
@@ -155,7 +155,7 @@ p1labelR1.x = 28;
 p1labelR1.y = 15;
 var p1rider1Dragger = new createjs.Container();
 initializePieceXY(p1rider1Dragger);
-p1rider1Dragger.addChild(squareR1, labelR1);
+p1rider1Dragger.addChild(p1squareR1, p1labelR1);
 stage.addChild(p1rider1Dragger);
 addDragAndDrop(p1rider1Dragger);
 
@@ -168,7 +168,7 @@ p1labelR2.x = 28;
 p1labelR2.y = 15;
 var p1rider2Dragger = new createjs.Container();
 initializePieceXY(p1rider2Dragger);
-p1rider2Dragger.addChild(squareR2, labelR2);
+p1rider2Dragger.addChild(p1squareR2, p1labelR2);
 stage.addChild(p1rider2Dragger);
 addDragAndDrop(p1rider2Dragger);
 
@@ -278,18 +278,18 @@ p2importantThingDragger.addChild(p2squareIT, p2labelIT);
 stage.addChild(p2importantThingDragger);
 addDragAndDrop(p2importantThingDragger);
 
-//create draggable trap2
+//create draggable trap1
 var p2squareT1 = new createjs.Shape();
 p2squareT1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
 var p2labelT1 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
 p2labelT1.textAlign = "center";
 p2labelT1.x = 28;
 p2labelT1.y = 15;
-var trap2Dragger = new createjs.Container();
-initializePieceXY(p2trap2Dragger);
-trap2Dragger.addChild(p2squareT1, p2labelT1);
-stage.addChild(p2trap2Dragger);
-addDragAndDrop(p2trap2Dragger);
+var p2trap1Dragger = new createjs.Container();
+initializePieceXY(p2trap1Dragger);
+p2trap1Dragger.addChild(p2squareT1, p2labelT1);
+stage.addChild(p2trap1Dragger);
+addDragAndDrop(p2trap1Dragger);
 
 //create draggable trap2
 var p2squareT2 = new createjs.Shape();
@@ -298,7 +298,7 @@ var p2labelT2 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
 p2labelT2.textAlign = "center";
 var p2trap2Dragger = new createjs.Container();
 initializePieceXY(p2trap2Dragger);
-trap2Dragger.addChild(p2squareT2, p2labelT2);
+p2trap2Dragger.addChild(p2squareT2, p2labelT2);
 stage.addChild(p2trap2Dragger);
 addDragAndDrop(p2trap2Dragger);
 
@@ -337,7 +337,7 @@ p2labelR1.x = 28;
 p2labelR1.y = 15;
 var p2rider1Dragger = new createjs.Container();
 initializePieceXY(p2rider1Dragger);
-p2rider1Dragger.addChild(squareR1, labelR1);
+p2rider1Dragger.addChild(p2squareR1, p2labelR1);
 stage.addChild(p2rider1Dragger);
 addDragAndDrop(p2rider1Dragger);
 
@@ -350,7 +350,7 @@ p2labelR2.x = 28;
 p2labelR2.y = 15;
 var p2rider2Dragger = new createjs.Container();
 initializePieceXY(p2rider2Dragger);
-p2rider2Dragger.addChild(squareR2, labelR2);
+p2rider2Dragger.addChild(p2squareR2, p2labelR2);
 stage.addChild(p2rider2Dragger);
 addDragAndDrop(p2rider2Dragger);
 
@@ -446,7 +446,7 @@ stage.addChild(p2commanderDragger);
 addDragAndDrop(p2commanderDragger);
 
 //put all pieces in array so it can be search 
-var pieceArray = newArray();
+var pieceArray = new Array();
 pieceArray[0] = p1importantThingDragger;
 pieceArray[1] = p2importantThingDragger;
 pieceArray[2] = p1commanderDragger;
