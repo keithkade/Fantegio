@@ -423,7 +423,7 @@ var resultArray = new Array();
 var locationArray = new Array();
 function startGame(){
 	resultArray[0] = "setup";
-	resultArray[1] = 1;// playerNum;
+	resultArray[1] = playerNum;
 
 	locationArray[0] = commanderDragger.gameGridX;
 	locationArray[1] = orient(playerNum, commanderDragger.gameGridY);

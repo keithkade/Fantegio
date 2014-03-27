@@ -386,10 +386,14 @@ var setupboard = function(results) {
 			console.log("hello");
 		}
       }
+	  
+	  var move_peices = function(information){
+	  }
 
 io.sockets.on('connection', function(client) {
 		client.on('setup', setupboard);
 		client.emit('welcome', 'Welcome to this');
+		//client.on('move', move_peice);
 		
 		
 		/*
