@@ -25,6 +25,29 @@ function getLocations(peices){
 	return locations;
 }
 
+//this function checks return the peice
+function getPeice(X, Y){
+
+	for(int i = 0; i < peices.length; i++)
+	{
+		if(peices[i].gridX == X && peices[i].gridY == Y)
+		{
+			return peices[i];
+		}
+	}
+	return;
+}
+
+function peiceExist(X, Y){
+for(int i = 0; i < peices.length; i++)
+	{
+		if(peices[i].gridX == X && peices[i].gridY == Y)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 /*function(boardPeices, playerId){
 var location = new Array();
 
