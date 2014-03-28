@@ -409,6 +409,7 @@ function setupBoard(data) {
 	  
 // As a note, the _1 or _2 denotes the player that corresponds to the var
 function handleMove(data) {
+
 	// Get all information about the move from data
 	var moveData = json2array(data);
 	var xOld = moveData[1];
@@ -424,7 +425,7 @@ function handleMove(data) {
 	if (playerNumber == 1) {
 		if (spaceEmpty(xNew, yNew)) {
 			// Just signal move
-			io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
+			//io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
 		}
 		else {
 			// Here, we assume a player won't move onto his/her own pieces
@@ -436,7 +437,7 @@ function handleMove(data) {
 	else if (playerNumber == 2) {
 		if (spaceEmpty(xNew, yNew)) {
 			// Just signal move
-			io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
+			//io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
 		}
 		else {
 			// Here, we assume a player won't move onto his/her own pieces
@@ -456,13 +457,15 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 	var moving = allPieces[mInd];
 	var attacked = allPieces[aInd];
 
+	io.socket.emit("resolve conflict", 1, 0, xOld, yOld, xNew, yNew, "rider", "engineer");
+
 	if (moving.strength > attacked.strength) {
 		// Need to move piece and destroy attacked piece
 		// Move piece first
 		allPieces[mInd].X = xNew;
 		allPieces[mInd].Y = yNew;
 		allPieces.splice(aInd, 1);
-		io.socket.emit("update", );//TODO
+		//io.socket.emit("update", );//TODO
 	}
 	else if (moving.strength == attacked.strength) {
 		// Need to destroy both pieces (but destroy higher index first!)
@@ -474,12 +477,12 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 			allPieces.splice(mInd, 1);
 			allPieces.splice(aInd, 1);
 		}
-		io.socket.emit("update", );//TODO
+		//io.socket.emit("update", );//TODO
 	}
 	else if (moving.strength < attacked.strength) {
 		// Need to destroy attacking piece
 		allPieces.splice(mInd, 1);
-		io.socket.emit("update", );//TODO
+		//io.socket.emit("update", );//TODO
 	}
 
 }
