@@ -352,18 +352,10 @@ function pieceAtLocation(x, y){
 function orient(playerNum, Y_Loc){
 	if(playerNum == "2")
 	{
-		switch(Y_Loc)
-		{
-		case 4:
-			return 2;
-		case 5:
-			return 1;
-		default: 
-			return 3;
-		}
+		return 9 - Y_Loc;
 	}
 	else{
-		return Y_Loc+3;
+		return Y_Loc;
 	}
 }
 
