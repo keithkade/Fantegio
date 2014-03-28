@@ -248,7 +248,7 @@ function startGame(){
 	
 	resultArray[2] = locationArray;
 	//send return to server			
-	//socket.emit("setup", resultArray);
+	socket.emit("setup", resultArray);
 	
 	hideElem("infoScroll");
 	hideElem("setupCanvas");
