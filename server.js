@@ -483,3 +483,25 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 	}
 
 }
+
+function invalidMove(xOld, yOld, xNew, yNew){
+	//this function checks whether sent is right move or not
+	if(xNew < 1 || xNew > 8 || yNew < 1 || yNew  8){
+		var message = "pieces cannot move out of the board";
+		io.socket.emit('invalid move', xOld, yOld, message);
+	}
+	else if(spaceEmty(xNew, yNew) == false)
+	{
+		var pieceIndOld = getPieceIndex(xOld, yOld);
+		var pieceIndNew = getPieceIndex(xNew, yNew);
+		var peiceWithOlInd = allPieces[pieceIndOld]
+		var pieceToBeMoved = allPieces[pieceIndNew];
+		
+		//checks whether the piece is of the same player
+		if(peiceWithOlInd.team == pieceToBeMoved.team){
+			var message = "Player cannot move their piece on their own piece.";
+			io.socket.emit('invalid move', xOld, yOld, message);
+		}
+	}
+}
+
