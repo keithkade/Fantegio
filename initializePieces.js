@@ -653,7 +653,7 @@ function setBoard(piecesArray){
 		gameStage.addChild(p1archerClickable);
 		
 		p1squareMy.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1mysticClickable.addChild(p1squareMy, p1labelMY);
+		p1mysticClickable.addChild(p1squareMy, p1labelMy);
 		p1mysticClickable.addEventListener("click", pieceClick);
 		p1mysticClickable.x = (piecesArray[20] - 1)  *  60 + 2;
 		p1mysticClickable.y = (piecesArray[21] - 1)  *  60 + 2;
