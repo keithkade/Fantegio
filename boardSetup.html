@@ -4,27 +4,39 @@
 <head>
   	<title>Board Setup</title>
   	<script src="http://code.createjs.com/createjs-2013.12.12.min.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="node_modules/socket.io/socket.io.js"></script>
 </head>
 
 <body>
 	
 <div style="width: 100%;">
    	
-   	<div style="float:left;height:100%; width: 70%">
-		<canvas id="myCanvas" width="480" height="540" style="border:1px solid #000000;">		
+   	<div style="float:left;height:100%; width: 65%">
+		<canvas id="setupCanvas" width="480" height="540" style="border:1px solid #000000;display: block">		
 		</canvas>
-		<script src="boardSetup.js"></script>
+		<canvas id="gameCanvas" width="480" height="480" style="border:1px solid #000000;display: none">		
+		</canvas>
+		
+		
+		<script src="initializePieces.js"></script>
+  		<script src="boardSetup.js"></script>
   		
-  		<button type="button" onclick="setup()">Default Setup</button>
+  		<button id="defaultButton" type="button" onclick="setup()">Default Setup</button>
   		<button type="button" onclick="window.open('rules.html')" >Game Rules</button>
-  		<button type="button" onclick="startGame()">Start Game</button>
+  		<button id="startButton" type="button" onclick="startGame()">Start Game</button>
    		<span id="timer"></span>		
 		<script type="text/javascript" src="timer.js"></script>
    	</div>
    	
-   	<div style="float:right;height:100%;width: 30%;display: block">
+   	<div  style="float:right;height:100%;width: 35%;display: block">
+				
+		<canvas id="lostPiecesCanvas" width="300" height="150" style="border:1px solid #000000;display: none">		
+		</canvas>
 		
+		<canvas id="capPiecesCanvas" width="300" height="150" style="border:1px solid #000000;display: none">		
+		</canvas>
+		
+		<div id="infoScroll"> 
 		<h3>Unit info</h3>
 		<p>
 		Unit strength is denoted in the top left corner of the piece.
@@ -69,6 +81,7 @@
 		<p>
 		Commander (Dragon)
 		</p>
+		</div>
    	</div>
 </div>
   	

@@ -1,46 +1,5 @@
-var stage = new createjs.Stage("myCanvas");
-var boardHeight = 300;
-var boardWidth = 480;
-
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
-
-var socket = io.connect('http://' + document.location.host);
-
-//color background green
-var background = new createjs.Shape();
-background.graphics.beginFill("#4E8154").drawRect(0, 0, boardWidth, boardHeight);
-stage.addChild(background);
-
-//highlight placable area
-var placable = new createjs.Shape();
-placable.graphics.beginFill("#3366FF").drawRect(0, 120, boardWidth, 180);
-placable.alpha = .5;
-stage.addChild(placable);
-
-//draw grid
-for (var x = 0; x <= boardWidth; x += 60) {
-	var line = new createjs.Shape();
-	line.graphics.beginFill("#000000").drawRect(x, 0, 1, boardHeight);
-    stage.addChild(line);
-}
-
-for (var y = 0; y <= boardHeight; y += 60) {
-	var line = new createjs.Shape();
-	line.graphics.beginFill("#000000").drawRect(0, y, boardWidth, 1);
-    stage.addChild(line);
-}
-
-//rocks //will recieve x and y from server
-//var rock1 = new createjs.Shape();
-//rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
-//stage.addChild(rock1);
-//var rock2 = new createjs.Shape();
-//rock2.graphics.beginFill("black").drawCircle(209, 89, 20);
-//stage.addChild(rock2);
-//var rock3 = new createjs.Shape();
-//rock3.graphics.beginFill("black").drawCircle(329, 89, 20);
-//stage.addChild(rock3);
 
 //this is oddly shaped because 2d arrays are indexed by [row][column] and also because they are zero based
 var isGameLocOccupied = [
@@ -56,6 +15,14 @@ var isGameLocOccupied = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0]
 ];
 
+function hideElem(divId){
+	document.getElementById(divId).style.display = 'none';
+}
+
+function showElem(divId){
+	document.getElementById(divId).style.display = 'block';
+}
+
 //also establishes intial lastX and lastY
 function initializePieceXY (dragger){
 	convertToGameGridXY(dragger);
@@ -63,12 +30,13 @@ function initializePieceXY (dragger){
 	dragger.lastY = dragger.gameGridY;
 }
 
+//converts canvas x and y to grid x and y
 function convertToGameGridXY (dragger){
 	dragger.gameGridX = (dragger.x-2)/60 + 1;
-	dragger.gameGridY = (dragger.y+178)/60 + 1;
-	
+	dragger.gameGridY = (dragger.y+178)/60 + 1;	
 }
 
+//adds drag and drop listeners
 function addDragAndDrop (toDrag){
 	//move piece on drag			
 	toDrag.on("pressmove",function(evt) {
@@ -76,7 +44,7 @@ function addDragAndDrop (toDrag){
 		evt.currentTarget.lastY = evt.currentTarget.gameGridY;
 		evt.currentTarget.x = evt.stageX;
 		evt.currentTarget.y = evt.stageY;
-		stage.update();   	
+		setupStage.update();   	
 	});	
 
 	//center piece on release of mouse
@@ -114,221 +82,44 @@ function addDragAndDrop (toDrag){
 			isGameLocOccupied[evt.currentTarget.gameGridX][evt.currentTarget.gameGridY] = 1;
 			isGameLocOccupied[evt.currentTarget.lastX][evt.currentTarget.lastY] = 0;
 		}
-		stage.update(); 
+		setupStage.update(); 
 	});
 }
 
+function initPieces(){
+	addDragAndDrop(commanderDragger);
+	initializePieceXY(commanderDragger);
+	addDragAndDrop(captainDragger);
+	initializePieceXY(captainDragger);  
+	initializePieceXY(importantThingDragger);
+	addDragAndDrop(importantThingDragger);
+	initializePieceXY(trap1Dragger);
+	addDragAndDrop(trap1Dragger);
+	initializePieceXY(trap2Dragger);
+	addDragAndDrop(trap2Dragger);
+	initializePieceXY(archerDragger);
+	addDragAndDrop(archerDragger);
+	initializePieceXY(mysticDragger);
+	addDragAndDrop(mysticDragger);
+	initializePieceXY(rider1Dragger);
+	addDragAndDrop(rider1Dragger);
+	initializePieceXY(rider2Dragger);
+	addDragAndDrop(rider2Dragger);
+	initializePieceXY(assassinDragger);
+	addDragAndDrop(assassinDragger);
+	initializePieceXY(soldier1Dragger);
+	addDragAndDrop(soldier1Dragger);
+	initializePieceXY(soldier2Dragger);
+	addDragAndDrop(soldier2Dragger);
+	initializePieceXY(engineer1Dragger);
+	addDragAndDrop(engineer1Dragger);
+	initializePieceXY(engineer2Dragger);
+	addDragAndDrop(engineer2Dragger);
+}
 
-//create draggable important thing
-var squareIT = new createjs.Shape();
-squareIT.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelIT = new createjs.Text("Important \nThing", "10px Arial", "#FFFFFF");
-labelIT.textAlign = "center";
-labelIT.x = 28;
-labelIT.y = 15;
-var importantThingDragger = new createjs.Container();
-importantThingDragger.x = 2;
-importantThingDragger.y = 422;
-initializePieceXY(importantThingDragger);
-importantThingDragger.addChild(squareIT, labelIT);
-stage.addChild(importantThingDragger);
-addDragAndDrop(importantThingDragger);
+initPieces();
 
-//create draggable trap1
-var squareT1 = new createjs.Shape();
-squareT1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelT1 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
-labelT1.textAlign = "center";
-labelT1.x = 28;
-labelT1.y = 15;
-var trap1Dragger = new createjs.Container();
-trap1Dragger.x = 62;
-trap1Dragger.y = 422;
-initializePieceXY(trap1Dragger);
-trap1Dragger.addChild(squareT1, labelT1);
-stage.addChild(trap1Dragger);
-addDragAndDrop(trap1Dragger);
-
-//create draggable trap2
-var squareT2 = new createjs.Shape();
-squareT2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelT2 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
-labelT2.textAlign = "center";
-labelT2.x = 28;
-labelT2.y = 15;
-var trap2Dragger = new createjs.Container();
-trap2Dragger.x = 122;
-trap2Dragger.y = 422;
-initializePieceXY(trap2Dragger);
-trap2Dragger.addChild(squareT2, labelT2);
-stage.addChild(trap2Dragger);
-addDragAndDrop(trap2Dragger);
-
-//create draggable archer
-var squareAr = new createjs.Shape();
-squareAr.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelAr = new createjs.Text("Archer - 1", "10px Arial", "#FFFFFF");
-labelAr.textAlign = "center";
-labelAr.x = 28;
-labelAr.y = 15;
-var archerDragger = new createjs.Container();
-archerDragger.x = 182;
-archerDragger.y = 422;
-initializePieceXY(archerDragger);
-archerDragger.addChild(squareAr, labelAr);
-stage.addChild(archerDragger);
-addDragAndDrop(archerDragger);
-
-//create draggable mystic
-var squareMy = new createjs.Shape();
-squareMy.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelMy = new createjs.Text("Mystic - 1", "10px Arial", "#FFFFFF");
-labelMy.textAlign = "center";
-labelMy.x = 28;
-labelMy.y = 15;
-var mysticDragger = new createjs.Container();
-mysticDragger.x = 242;
-mysticDragger.y = 422;
-initializePieceXY(mysticDragger);
-mysticDragger.addChild(squareMy, labelMy);
-stage.addChild(mysticDragger);
-addDragAndDrop(mysticDragger);
-
-//create draggable rider1
-var squareR1 = new createjs.Shape();
-squareR1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelR1 = new createjs.Text("Rider - 2", "10px Arial", "#FFFFFF");
-labelR1.textAlign = "center";
-labelR1.x = 28;
-labelR1.y = 15;
-var rider1Dragger = new createjs.Container();
-rider1Dragger.x = 302;
-rider1Dragger.y = 422;
-initializePieceXY(rider1Dragger);
-rider1Dragger.addChild(squareR1, labelR1);
-stage.addChild(rider1Dragger);
-addDragAndDrop(rider1Dragger);
-
-//create draggable rider2
-var squareR2 = new createjs.Shape();
-squareR2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelR2 = new createjs.Text("Rider - 2", "10px Arial", "#FFFFFF");
-labelR2.textAlign = "center";
-labelR2.x = 28;
-labelR2.y = 15;
-var rider2Dragger = new createjs.Container();
-rider2Dragger.x = 362;
-rider2Dragger.y = 422;
-initializePieceXY(rider2Dragger);
-rider2Dragger.addChild(squareR2, labelR2);
-stage.addChild(rider2Dragger);
-addDragAndDrop(rider2Dragger);
-
-//create draggable assassin
-var squareAs = new createjs.Shape();
-squareAs.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelAs = new createjs.Text("Assassin\n - A", "10px Arial", "#FFFFFF");
-labelAs.textAlign = "center";
-labelAs.x = 28;
-labelAs.y = 15;
-var assassinDragger = new createjs.Container();
-assassinDragger.x = 422;
-assassinDragger.y = 422;
-initializePieceXY(assassinDragger);
-assassinDragger.addChild(squareAs, labelAs);
-stage.addChild(assassinDragger);
-addDragAndDrop(assassinDragger);
-
-//create draggable soldier1
-var squareS1 = new createjs.Shape();
-squareS1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelS1 = new createjs.Text("Soldier - 4", "10px Arial", "#FFFFFF");
-labelS1.textAlign = "center";
-labelS1.x = 28;
-labelS1.y = 15;
-var soldier1Dragger = new createjs.Container();
-soldier1Dragger.x = 2;
-soldier1Dragger.y = 482;
-initializePieceXY(soldier1Dragger);
-soldier1Dragger.addChild(squareS1, labelS1);
-stage.addChild(soldier1Dragger);
-addDragAndDrop(soldier1Dragger);
-
-//create draggable soldier2
-var squareS2 = new createjs.Shape();
-squareS2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelS2 = new createjs.Text("Soldier - 4", "10px Arial", "#FFFFFF");
-labelS2.textAlign = "center";
-labelS2.x = 28;
-labelS2.y = 15;
-var soldier2Dragger = new createjs.Container();
-soldier2Dragger.x = 62;
-soldier2Dragger.y = 482;
-initializePieceXY(soldier2Dragger);
-soldier2Dragger.addChild(squareS2, labelS2);
-stage.addChild(soldier2Dragger);
-addDragAndDrop(soldier2Dragger);
-
-//create draggable engineer1
-var squareE1 = new createjs.Shape();
-squareE1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelE1 = new createjs.Text("Engineer\n - 3", "10px Arial", "#FFFFFF");
-labelE1.textAlign = "center";
-labelE1.x = 28;
-labelE1.y = 15;
-var engineer1Dragger = new createjs.Container();
-engineer1Dragger.x = 122;
-engineer1Dragger.y = 482;
-initializePieceXY(engineer1Dragger);
-engineer1Dragger.addChild(squareE1, labelE1);
-stage.addChild(engineer1Dragger);
-addDragAndDrop(engineer1Dragger);
-
-//create draggable engineer2
-var squareE2 = new createjs.Shape();
-squareE2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelE2 = new createjs.Text("Engineer\n - 3", "10px Arial", "#FFFFFF");
-labelE2.textAlign = "center";
-labelE2.x = 28;
-labelE2.y = 15;
-var engineer2Dragger = new createjs.Container();
-engineer2Dragger.x = 182;
-engineer2Dragger.y = 482;
-initializePieceXY(engineer2Dragger);
-engineer2Dragger.addChild(squareE2, labelE2);
-stage.addChild(engineer2Dragger);
-addDragAndDrop(engineer2Dragger);
-
-//create draggable captain
-var squareCa = new createjs.Shape();
-squareCa.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelCa = new createjs.Text("Captian - 5", "10px Arial", "#FFFFFF");
-labelCa.textAlign = "center";
-labelCa.x = 28;
-labelCa.y = 15;
-var captainDragger = new createjs.Container();
-captainDragger.x = 242;
-captainDragger.y = 482;
-initializePieceXY(captainDragger);
-captainDragger.addChild(squareCa, labelCa);
-stage.addChild(captainDragger);
-addDragAndDrop(captainDragger);
-
-//create draggable commander
-var squareCo = new createjs.Shape();
-squareCo.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
-var labelCo = new createjs.Text("Commander\n - 6", "10px Arial", "#FFFFFF");
-labelCo.textAlign = "center";
-labelCo.x = 28;
-labelCo.y = 15;
-var commanderDragger = new createjs.Container();
-commanderDragger.x = 302;
-commanderDragger.y = 482;
-initializePieceXY(commanderDragger);
-commanderDragger.addChild(squareCo, labelCo);
-stage.addChild(commanderDragger);
-addDragAndDrop(commanderDragger);
-
+//puts draggers in initial locations on default setup
 function setup(){
 	importantThingDragger.x = 122;
 	importantThingDragger.y = 242;
@@ -414,11 +205,12 @@ function setup(){
 	isGameLocOccupied[rider2Dragger.gameGridX][rider2Dragger.gameGridY] = 1;
 	isGameLocOccupied[rider2Dragger.lastX][rider2Dragger.lastY] = 0;	
 		
-	stage.update();
+	setupStage.update();
 }	
-		
-stage.update();
 
+setupStage.update()
+
+//to be sent to server on game start	
 var resultArray = new Array();
 var locationArray = new Array();
 function startGame(){
@@ -456,11 +248,26 @@ function startGame(){
 	
 	resultArray[2] = locationArray;
 	//send return to server			
-	socket.emit("setup", resultArray);
-	window.location.href = "mainGame.html?" + playerNum;
-	showHide("infoScroll");
+	//socket.emit("setup", resultArray);
+	
+	hideElem("infoScroll");
+	hideElem("setupCanvas");
+	hideElem("defaultButton");
+	hideElem("startButton");
+	hideElem("timer");
+	showElem("gameCanvas");
+	showElem("lostPiecesCanvas");
+	showElem("capPiecesCanvas");
+	
 }
 
+//if the timer runs out start with default setup
+function gameStartOnTimeout(){
+	setup();
+	startGame();
+}
+
+//switches y coordinate if neccessary for player
 function orient(playerNum, Y_Loc){
 	if(playerNum == "2")
 	{
@@ -479,15 +286,20 @@ function orient(playerNum, Y_Loc){
 	}
 }
 
-
-function showHide(divId)
-{
-if(document.getElementById(divId).style.display == 'none')
-{
-document.getElementById(divId).style.display='block';
-}
-else
-{
-document.getElementById(divId).style.display = 'none';
-}
+function updateBoard(moveArray){
+	var x1 = moveArray[1];
+	var y2 = moveArray[2];
+	var x2 = moveArray[3];
+	var y2 = moveArray[4]; 
+	var actionType = moveArray[5];
+	var playerNum = moveArray[6]; 
+	var p1Piece = moveArray[7];
+	var p2Piece = moveArray[8];
+	
+	for(var i=0; i<pieceArray.length; i++){
+		if (pieceArray[i].gameGridX == x1 && pieceArray[i].gameGridY == y1){
+			pieceArray[i].gameGridX = x2;
+			pieceArray[i].gameGridY = y2;
+		}
+	}	
 }
