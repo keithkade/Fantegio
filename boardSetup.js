@@ -1,6 +1,6 @@
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
-//var socket = io.connect('http://' + document.location.host);
+var socket = io.connect('http://' + document.location.host);
 
 //this is oddly shaped because 2d arrays are indexed by [row][column] and also because they are zero based
 var isGameLocOccupied = [
@@ -254,7 +254,7 @@ function startGame(){
 	
 	resultArray[2] = locationArray;
 	//send return to server			
-	//socket.emit("setup", resultArray);
+	socket.emit("setup", resultArray);
 	
 	hideElem("infoScroll");
 	hideElem("setupCanvas");
@@ -266,25 +266,86 @@ function startGame(){
 	showElem("capPiecesCanvas");	
 }
 
-// Print a message when somebody left.
-socket.on(
-    'startGame',
-    function() {
-      client.get(
-        'user_name',
-        function(err, name) {
-          if (name) {
-            io.sockets.emit('notification', name + ' left the room.');
-          }
-        });
-    });
+//listen 
+socket.on('start game', setupBoard);
+socket.on('resolve conflict', resolveConflict);
+socket.on('simple move', simpleMove);
+socket.on('invalid move', invalidMove);
 
+//[“resolve conflict”, outcome(0->both die, 1->player 1 wins, 2->player 2 wins), pieceOne, pieceTwo]
+//
+function resolveConflict(conflictArray){
+	var playerMoved = conflictArray[0];
+	var outcome = conflictArray[1];
+	var xOld = moveArray[2];
+	var yOld = moveArray[3];
+	var xNew = moveArray[4];
+	var yNew = moveArray[5];
+	if (outcome == 0){ //both die
+		var p1 = pieceAtLocation(xOld, yOld);
+		gameStage.removeChild(p1);
+		var p2 = pieceAtLocation(xNew, yNew);
+		gameStage.removeChild(p1);
+	}
+		
+	if (outcome == 1 && playerMoved == 1){ //player1 wins
+		var p = pieceAtLocation(xNew, yNew); //piece moved onto
+		gameStage.removeChild(p);
+	}
+	else if (outcome == 2 && playerMoved == 1){ //player2 wins
+		var p = pieceAtLocation(xOld, yOld); //piece moved 
+		gameStage.removeChild(p);		
+	}
+	else if (outcome == 1 && playerMoved == 2){ 
+		var p = pieceAtLocation(xOld, yOld);
+		gameStage.removeChild(p);
+	}
+	else if (outcome == 2 && playerMoved == 2){ 
+		var p = pieceAtLocation(xNew, yNew);
+		gameStage.removeChild(p);		
+	}	
+	
+	//move the piece
+	for(var i=0; i<pieceArray.length; i++){
+		if (pieceArray[i].gameGridX == xOld && pieceArray[i].gameGridY == yOld){
+			pieceArray[i].gameGridX = xNew;
+			pieceArray[i].gameGridY = yNew;
+		}
+	}
+}
 
+//move a piece into an open square
+function simpleMove(moveArray){
+	var xOld = moveArray[0];
+	var yOld = moveArray[1];
+	var xNew = moveArray[2];
+	var yNew = moveArray[3]; 
+
+	for(var i=0; i<pieceArray.length; i++){
+		if (pieceArray[i].gameGridX == xOld && pieceArray[i].gameGridY == yOld){
+			pieceArray[i].gameGridX = xNew;
+			pieceArray[i].gameGridY = yNew;
+		}
+	}
+}
+
+//if the server does not think the move sent was valid
+function invalidMove(data){
+	alert("something went wrong");
+	// [“invalid move”, xOld, yOld, message]
+}
 
 //if the timer runs out start with default setup
 function gameStartOnTimeout(){
 	setup();
 	startGame();
+}
+
+//pieceArray
+function pieceAtLocation(x, y){
+	for (var i=0; i < pieceArray.length; i++)
+		if (pieceArray[i].gameGridX == x && pieceArray[i].gameGridY == y)
+			return pieceArray[i];
 }
 
 //switches y coordinate if neccessary for player
@@ -304,23 +365,5 @@ function orient(playerNum, Y_Loc){
 	else{
 		return Y_Loc+3;
 	}
-}
-
-function updateBoard(moveArray){
-	var x1 = moveArray[1];
-	var y2 = moveArray[2];
-	var x2 = moveArray[3];
-	var y2 = moveArray[4]; 
-	var actionType = moveArray[5];
-	var playerNum = moveArray[6]; 
-	var p1Piece = moveArray[7];
-	var p2Piece = moveArray[8];
-	
-	for(var i=0; i<pieceArray.length; i++){
-		if (pieceArray[i].gameGridX == x1 && pieceArray[i].gameGridY == y1){
-			pieceArray[i].gameGridX = x2;
-			pieceArray[i].gameGridY = y2;
-		}
-	}	
 }
 
