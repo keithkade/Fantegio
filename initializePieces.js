@@ -573,6 +573,9 @@ setupStage.addChild(commanderDragger);
 gameStage.update();
 setupStage.update();
 
+//var check = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+//setBoard(check);
+
 var friendlyColor = "blue";
 var enemyColor = "#8b8989";
 function setBoard(piecesArray){
@@ -920,7 +923,7 @@ function setBoard(piecesArray){
 		gameStage.addChild(p2archerClickable);
 		
 		p2squareMy.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2mysticClickable.addChild(p2squareMy, p2labelMY);
+		p2mysticClickable.addChild(p2squareMy, p2labelMy);
 		p2mysticClickable.addEventListener("click", pieceClick);
 		p2mysticClickable.x = (piecesArray[48] - 1)  *  60 + 2;
 		p2mysticClickable.y = (9 -  piecesArray[49] - 1)  *  60 + 2;
