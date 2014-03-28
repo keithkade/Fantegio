@@ -1,5 +1,6 @@
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
+//var socket = io.connect('http://' + document.location.host);
 
 //this is oddly shaped because 2d arrays are indexed by [row][column] and also because they are zero based
 var isGameLocOccupied = [
@@ -36,6 +37,7 @@ function convertToGameGridXY (dragger){
 	dragger.gameGridY = (dragger.y+178)/60 + 1;	
 }
 
+//can cause a bug if you just click the piece and then it moves. The previous location is still marked as full
 //adds drag and drop listeners
 function addDragAndDrop (toDrag){
 	//move piece on drag			
@@ -86,6 +88,8 @@ function addDragAndDrop (toDrag){
 	});
 }
 
+//make all the pieces drag and droppable and initialize their positions
+//made this a function so it can be compressed in IDE
 function initPieces(){
 	addDragAndDrop(commanderDragger);
 	initializePieceXY(commanderDragger);
@@ -116,7 +120,6 @@ function initPieces(){
 	initializePieceXY(engineer2Dragger);
 	addDragAndDrop(engineer2Dragger);
 }
-
 initPieces();
 
 //puts draggers in initial locations on default setup
@@ -208,11 +211,14 @@ function setup(){
 	setupStage.update();
 }	
 
-setupStage.update()
+setupStage.update();
 
 //to be sent to server on game start	
 var resultArray = new Array();
 var locationArray = new Array();
+
+//put all of the piece locations into an array and send to server
+//also update the page by showing old canvas and adding new one
 function startGame(){
 	resultArray[0] = "setup";
 	resultArray[1] = playerNum;
@@ -248,7 +254,7 @@ function startGame(){
 	
 	resultArray[2] = locationArray;
 	//send return to server			
-	socket.emit("setup", resultArray);
+	//socket.emit("setup", resultArray);
 	
 	hideElem("infoScroll");
 	hideElem("setupCanvas");
@@ -257,9 +263,23 @@ function startGame(){
 	hideElem("timer");
 	showElem("gameCanvas");
 	showElem("lostPiecesCanvas");
-	showElem("capPiecesCanvas");
-	
+	showElem("capPiecesCanvas");	
 }
+
+// Print a message when somebody left.
+socket.on(
+    'startGame',
+    function() {
+      client.get(
+        'user_name',
+        function(err, name) {
+          if (name) {
+            io.sockets.emit('notification', name + ' left the room.');
+          }
+        });
+    });
+
+
 
 //if the timer runs out start with default setup
 function gameStartOnTimeout(){
@@ -303,3 +323,4 @@ function updateBoard(moveArray){
 		}
 	}	
 }
+
