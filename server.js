@@ -1,358 +1,485 @@
-// This node.js program implements a simple chat room service.
+var server = require('http').createServer(handler);
+console.log("Server running on port 33331.");
 
-// The node.js HTTP server.
-var app = require('http').createServer(handler);
+var url = require('url');
+var io = require('socket.io').listen(server);
+var fs = require('fs');
 
-//convert json to array
-function json2array(json){
+
+server.listen(33331);
+
+// Listen for initial connection
+// Execute setupBoard for each client that connects
+io.sockets.on('connection', function(client) {
+		client.on('setup', setupBoard);
+		client.on('move', handleMove);
+	});
+
+// Piece object
+function Piece() {
+	this.strength = 11;
+	this.type = "engineer";
+	this.team = 1;
+	this.X = 0;
+	this.Y = 0;
+}
+
+var allPieces = new Array();
+
+// Convert json object to array object
+function json2array(json) {
     var result = [];
     var keys = Object.keys(json);
-    keys.forEach(function(key){
+    keys.forEach(function(key) {
         result.push(json[key]);
-    });
+		});
     return result;
 }
 
-function(boardPeices, playerId){
+// Get x and y board coordinates of all pieces on the board
+function getLocations(pieces) {
+	var locations = new Array();
+	for (var i = 0; i < pieces.length; ++i) {
+		locations.push(pieces[i].X);
+		locations.push(pieces[i].Y);
+	}
+	return locations;
+}
+
+// Get a allPieces index of a piece at x and y board coordinates
+function getPieceIndex(X, Y) {
+	for (var i = 0; i < allPieces.length; ++i) {
+		if (allPieces[i].X == X && allPieces[i].Y == Y) {
+			return i;
+		}
+	}
+	return;
+}
+
+// Take x and y board coordinates and return true if unoccupied, false otherwise
+function spaceEmpty(X, Y) {
+	for (var i = 0; i < allPieces.length; ++i) {
+		if (allPieces[i].X == X && allPieces[i].Y == Y) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/*function(boardPieces, playerId) {
 var location = new Array();
 
+}*/
+
+// Handle connections to port being monitored
+function handler(request,response) {
+	console.log('Got kicked..');//rmv
+	var path = url.parse(request.url).pathname;
+
+	switch (path) {
+		case '/':
+			fs.readFile(__dirname + '/welcome.html', function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading welcome.html');
+					}
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/setup.html':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading setup.html');
+					}
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/rules.html':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading rules.html');
+					}
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/initializePieces.js':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running initializePieces.js');
+					}
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/boardSetup.html':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading boardSetup.html');
+					}
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/boardSetup.js':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running boardSetup.js');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/timer.js':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running timer.js');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+	}
 }
 
-function Piece(){
-this.strength = 11;
-this.type = "engineer";
-this.team = 1;
-this.gridX = 0;
-this.gridY = 0;
-}
+// As a note, the _1 or _2 denotes the player that corresponds to the var
+var numClients = 0;
+function setupBoard(data) {
+	console.log(data);
+	// This function extracts the user name from the login message, stores
+	// it to the client object, sends a login_ok message to the client, and
+	// sends notifications to other clients.
 
-var peices = new Array();
+	var setup = json2array(data);
+	var playerNumber = setup[1];
 
+	if (playerNumber == 1) {
 
-
-// The socket.io WebSocket server, running with the node.js server.
-var io = require('socket.io').listen(app);
-
-// Allows access to local file system.
-var fs = require('fs')
-
-// Listen on a high port.
-app.listen(13522);
-
-// Handles HTTP requests.
-function handler(request, response) {
-  // This will read the file 'index.html', and call the function (the 2nd
-  // argument) to process the content of the file.
-  // __dirname is a preset variable pointing to the folder of this file.
-  fs.readFile(
-    __dirname + '/index.html',
-    function(err, content) {
-      if (err) {
-        // If an error happened when loading 'index.html', return a 500 error.
-        response.writeHead(500);
-        return response.end('Error loading index.html!');
-      }
-      // If no error happened, return the content of 'index.html'
-      response.writeHead(200, {'Content-Type': 'text/html'});
-      response.end(content);
-    });
-}
-
-// Tells socket.io to listen to an event called 'connection'.
-// This is a built-in event that is triggered when a client connects to the
-// server. At that time, the function (the 2nd argument) will be called with an
-// object representing the client.
-io.sockets.on(
-  'connection',
-  function(client) {
-    // Send a welcome message first.
-   // client.emit('welcome', 'Welcome to my chat room!');
-
-    // Listen to an event called 'login'. The client should emit this event when
-    // it wants to log in to the chat room.
-    client.on(
-      'setup',
-      function(results) {
-        // This function extracts the user name from the login message, stores
-        // it to the client object, sends a login_ok message to the client, and
-        // sends notifications to other clients.
-		
-		var count = 0; //to make sure both clients are being recieved
-		
-		var result = json2array(results);
-		var playerNumber = result[1];
-		
-		if(playerNumber == 1){
-		
 		var commander_1 = new Piece();
 		commander_1.strength = 6;
 		commander_1.type = "commander";
 		commander_1.team = playerNumber;
-		commander_1.gridX = result[2][0];
-		commander_1.gridY = result[2][1];
-		peices.push(commander_1);
-		
+		commander_1.X = setup[2][0];
+		commander_1.Y = setup[2][1];
+		allPieces.push(commander_1);
+
 		var captain_1 = new Piece();
 		captain_1.strength = 5;
 		captain_1.type = "captain";
 		captain_1.team = playerNumber;
-		captain_1.gridX = result[2][2];
-		captain_1.gridY = result[2][3];
-		peices.push(captain_1);
-		
+		captain_1.X = setup[2][2];
+		captain_1.Y = setup[2][3];
+		allPieces.push(captain_1);
+
 		var soldier1_1 = new Piece();
 		soldier1_1.strength = 4;
 		soldier1_1.type = "soldier";
 		soldier1_1.team = playerNumber;
-		soldier1_1.gridX = result[2][4];
-		soldier1_1.gridY = result[2][5];
-		peices.push(soldier1_1);
-		
+		soldier1_1.X = setup[2][4];
+		soldier1_1.Y = setup[2][5];
+		allPieces.push(soldier1_1);
+
 		var soldier2_1 = new Piece();
 		soldier2_1.strength = 4;
 		soldier2_1.type = "soldier";
 		soldier2_1.team = playerNumber;
-		soldier2_1.gridX = result[2][6];
-		soldier2_1.gridY = result[2][7];
-		peices.push(soldier2_1);
-		
+		soldier2_1.X = setup[2][6];
+		soldier2_1.Y = setup[2][7];
+		allPieces.push(soldier2_1);
+
 		var engineer1_1 = new Piece();
 		engineer1_1.strength = 3;
 		engineer1_1.type = "engineer";
 		engineer1_1.team = playerNumber;
-		engineer1_1.gridX = result[2][8];
-		engineer1_1.gridY = result[2][9];
-		peices.push(engineer1_1);
-		
+		engineer1_1.X = setup[2][8];
+		engineer1_1.Y = setup[2][9];
+		allPieces.push(engineer1_1);
+
 		var engineer2_1 = new Piece();
 		engineer2_1.strength = 3;
 		engineer2_1.type = "engineer";
 		engineer2_1.team = playerNumber;
-		engineer2_1.gridX = result[2][10];
-		engineer2_1.gridY = result[2][11];
-		peices.push(engineer2_1);
-		
+		engineer2_1.X = setup[2][10];
+		engineer2_1.Y = setup[2][11];
+		allPieces.push(engineer2_1);
+
 		var rider1_1 = new Piece();
 		rider1_1.strength = 2;
 		rider1_1.type = "rider";
 		rider1_1.team = playerNumber;
-		rider1_1.gridX = result[2][12];
-		rider1_1.gridY = result[2][13];
-		peices.push(rider1_1);
-		
+		rider1_1.X = setup[2][12];
+		rider1_1.Y = setup[2][13];
+		allPieces.push(rider1_1);
+
 		var rider2_1 = new Piece();
 		rider2_1.strength = 2;
 		rider2_1.type = "rider";
 		rider2_1.team = playerNumber;
-		rider2_1.gridX = result[2][14];
-		rider2_1.gridY = result[2][15];
-		peices.push(rider2_1);
-		
+		rider2_1.X = setup[2][14];
+		rider2_1.Y = setup[2][15];
+		allPieces.push(rider2_1);
+
 		var assasin_1 = new Piece();
 		assasin_1.strength = 1;
 		assasin_1.type = "assasin";
 		assasin_1.team = playerNumber;
-		assasin_1.gridX = result[2][16];
-		assasin_1.gridY = result[2][17];
-		peices.push(assasin_1);
-		
+		assasin_1.X = setup[2][16];
+		assasin_1.Y = setup[2][17];
+		allPieces.push(assasin_1);
+
 		var archer_1 = new Piece();
 		archer_1.strength = 1;
 		archer_1.type = "archer";
 		archer_1.team = playerNumber;
-		archer_1.gridX = result[2][18];
-		archer_1.gridY = result[2][19];
-		peices.push(archer_1);
-		
+		archer_1.X = setup[2][18];
+		archer_1.Y = setup[2][19];
+		allPieces.push(archer_1);
+
 		var mystic_1 = new Piece();
 		mystic_1.strength = 1;
 		mystic_1.type = "mystic";
 		mystic_1.team = playerNumber;
-		mystic_1.gridX = result[2][20];
-		mystic_1.gridY = result[2][21];
-		peices.push(mystic_1);
-		
+		mystic_1.X = setup[2][20];
+		mystic_1.Y = setup[2][21];
+		allPieces.push(mystic_1);
+
 		var trap1_1 = new Piece();
 		trap1_1.strength = 11;
 		trap1_1.type = "trap";
 		trap1_1.team = playerNumber;
-		trap1_1.gridX = result[2][22];
-		trap1_1.gridY = result[2][23];
-		peices.push(trap1_1);
-		
+		trap1_1.X = setup[2][22];
+		trap1_1.Y = setup[2][23];
+		allPieces.push(trap1_1);
+
 		var trap2_1 = new Piece();
 		trap2_1.strength = 11;
 		trap2_1.type = "trap";
 		trap2_1.team = playerNumber;
-		trap2_1.gridX = result[2][24];
-		trap2_1.gridY = result[2][25];
-		peices.push(trap2_1);
-		
+		trap2_1.X = setup[2][24];
+		trap2_1.Y = setup[2][25];
+		allPieces.push(trap2_1);
+
 		var importantThing_1 = new Piece();
 		importantThing_1.strength = 11;
 		importantThing_1.type = "important thing";
 		importantThing_1.team = playerNumber;
-		importantThing_1.gridX = result[2][26];
-		importantThing_1.gridY = result[2][27];
-		peices.push(importantThing_1);
-		
-		count++;
-		}
-		
-		else if(playerNumber == 2){
+		importantThing_1.X = setup[2][26];
+		importantThing_1.Y = setup[2][27];
+		allPieces.push(importantThing_1);
+
+		++numClients;
+	}
+	else if (playerNumber == 2) {
 		var commander_2 = new Piece();
 		commander_2.strength = 6;
 		commander_2.type = "commander";
 		commander_2.team = playerNumber;
-		commander_2.gridX = result[2][0];
-		commander_2.gridY = result[2][1];
-		peices.push(commander_2);
-		
+		commander_2.X = setup[2][0];
+		commander_2.Y = setup[2][1];
+		allPieces.push(commander_2);
+
 		var captain_2 = new Piece();
 		captain_2.strength = 5;
 		captain_2.type = "captain";
 		captain_2.team = playerNumber;
-		captain_2.gridX = result[2][2];
-		captain_2.gridY = result[2][3];
-		peices.push(captain_2);
-		
+		captain_2.X = setup[2][2];
+		captain_2.Y = setup[2][3];
+		allPieces.push(captain_2);
+
 		var soldier1_2 = new Piece();
 		soldier1_2.strength = 4;
 		soldier1_2.type = "soldier";
 		soldier1_2.team = playerNumber;
-		soldier1_2.gridX = result[2][4];
-		soldier1_2.gridY = result[2][5];
-		peices.push(soldier1_2);
-		
+		soldier1_2.X = setup[2][4];
+		soldier1_2.Y = setup[2][5];
+		allPieces.push(soldier1_2);
+
 		var soldier2_2 = new Piece();
 		soldier2_2.strength = 4;
 		soldier2_2.type = "soldier";
 		soldier2_2.team = playerNumber;
-		soldier2_2.gridX = result[2][6];
-		soldier2_2.gridY = result[2][7];
-		peices.push(soldier2_2);
-		
+		soldier2_2.X = setup[2][6];
+		soldier2_2.Y = setup[2][7];
+		allPieces.push(soldier2_2);
+
 		var engineer1_2 = new Piece();
 		engineer1_2.strength = 3;
 		engineer1_2.type = "engineer";
 		engineer1_2.team = playerNumber;
-		engineer1_2.gridX = result[2][8];
-		engineer1_2.gridY = result[2][9];
-		peices.push(engineer1_2);
-		
+		engineer1_2.X = setup[2][8];
+		engineer1_2.Y = setup[2][9];
+		allPieces.push(engineer1_2);
+
 		var engineer2_2 = new Piece();
 		engineer2_2.strength = 3;
 		engineer2_2.type = "engineer";
 		engineer2_2.team = playerNumber;
-		engineer2_2.gridX = result[2][10];
-		engineer2_2.gridY = result[2][11];
-		peices.push(engineer2_2);
-		
+		engineer2_2.X = setup[2][10];
+		engineer2_2.Y = setup[2][11];
+		allPieces.push(engineer2_2);
+
 		var rider1_2 = new Piece();
 		rider1_2.strength = 2;
 		rider1_2.type = "rider";
 		rider1_2.team = playerNumber;
-		rider1_2.gridX = result[2][12];
-		rider1_2.gridY = result[2][13];
-		peices.push(rider1_2);
-		
+		rider1_2.X = setup[2][12];
+		rider1_2.Y = setup[2][13];
+		allPieces.push(rider1_2);
+
 		var rider2_2 = new Piece();
 		rider2_2.strength = 2;
 		rider2_2.type = "rider";
 		rider2_2.team = playerNumber;
-		rider2_2.gridX = result[2][14];
-		rider2_2.gridY = result[2][15];
-		peices.push(rider2_2);
-		
+		rider2_2.X = setup[2][14];
+		rider2_2.Y = setup[2][15];
+		allPieces.push(rider2_2);
+
 		var assasin_2 = new Piece();
 		assasin_2.strength = 1;
 		assasin_2.type = "assasin";
 		assasin_2.team = playerNumber;
-		assasin_2.gridX = result[2][16];
-		assasin_2.gridY = result[2][17];
-		peices.push(assasin_2);
-		
+		assasin_2.X = setup[2][16];
+		assasin_2.Y = setup[2][17];
+		allPieces.push(assasin_2);
+
 		var archer_2 = new Piece();
 		archer_2.strength = 1;
 		archer_2.type = "archer";
 		archer_2.team = playerNumber;
-		archer_2.gridX = result[2][18];
-		archer_2.gridY = result[2][19];
-		peices.push(archer_2);
-		
+		archer_2.X = setup[2][18];
+		archer_2.Y = setup[2][19];
+		allPieces.push(archer_2);
+
 		var mystic_2 = new Piece();
 		mystic_2.strength = 1;
 		mystic_2.type = "mystic";
 		mystic_2.team = playerNumber;
-		mystic_2.gridX = result[2][20];
-		mystic_2.gridY = result[2][21];
-		peices.push(mystic_2);
-		
+		mystic_2.X = setup[2][20];
+		mystic_2.Y = setup[2][21];
+		allPieces.push(mystic_2);
+
 		var trap1_2 = new Piece();
 		trap1_2.strength = 11;
 		trap1_2.type = "trap";
 		trap1_2.team = playerNumber;
-		trap1_2.gridX = result[2][22];
-		trap1_2.gridY = result[2][23];
-		peices.push(trap1_2);
-		
+		trap1_2.X = setup[2][22];
+		trap1_2.Y = setup[2][23];
+		allPieces.push(trap1_2);
+
 		var trap2_2 = new Piece();
 		trap2_2.strength = 6;
 		trap2_2.type = "trap";
 		trap2_2.team = playerNumber;
-		trap2_2.gridX = result[2][24];
-		trap2_2.gridY = result[2][25];
-		peices.push(trap2_2);
-		
+		trap2_2.X = setup[2][24];
+		trap2_2.Y = setup[2][25];
+		allPieces.push(trap2_2);
+
 		var importantThing_2 = new Piece();
 		importantThing_2.strength = 11;
 		importantThing_2.type = "important thing";
 		importantThing_2.team = playerNumber;
-		importantThing_2.gridX = result[2][26];
-		importantThing_2.gridY = result[2][27];
-		peices.push(importantThing_2);
-		
-		count++;
+		importantThing_2.X = setup[2][26];
+		importantThing_2.Y = setup[2][27];
+		allPieces.push(importantThing_2);
+
+		++numClients;
+	}
+
+	// If both players have connected, signal start game
+	if (numClients == 2) {
+		var locArray = getLocations(allPieces);
+		io.sockets.emit("start game", locArray);
+	}
+}
+	  
+// As a note, the _1 or _2 denotes the player that corresponds to the var
+function handleMove(data) {
+	// Get all information about the move from data
+	var moveData = json2array(data);
+	var xOld = moveData[1];
+	var yOld = moveData[2];
+	var xNew = moveData[3];
+	var yNew = moveData[4];
+	var actionType = moveData[5];
+	var playerNumber = moveData[6];
+	var piece_1 = moveData[7];
+	var piece_2 = moveData[8];
+
+	// Determine who is moving
+	if (playerNumber == 1) {
+		if (spaceEmpty(xNew, yNew)) {
+			// Just signal move
+			io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
 		}
-		
-		if(count == 2)
-          return
-        // When something is wrong, send a login_failed message to the client.
-        client.emit('setup_failed');
-      });
+		else {
+			// Here, we assume a player won't move onto his/her own pieces
+			// Need to check for this later
+			// If space not empty, then handle attack
+			resolveConflict(xOld, yOld, xNew, yNew);
+		}
+	}
+	else if (playerNumber == 2) {
+		if (spaceEmpty(xNew, yNew)) {
+			// Just signal move
+			io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
+		}
+		else {
+			// Here, we assume a player won't move onto his/her own pieces
+			// Need to check for this later
+			// If space not empty, then handle attack
+			resolveConflict(xOld, yOld, xNew, yNew);
+		}
+	}
 
-    // Listen to an event called 'chat'. The client should emit this event when
-    // it sends a chat message.
-    client.on(
-      'start game',
-      function(message) {
-        // This function tries to get the user name from the client object, and
-        // use that to form a chat message that will be sent to all clients.
-        if (message && message.msg) {
-          client.get(
-            'user_name', 
-            function(err, name) {
-              if (!err) {
-                // io.sockets.emit() will send the message to all clients,
-                // including the current client. See socket.io FAQ for more
-                // examples.
-                io.sockets.emit('chat', { user_name: name, msg: message.msg });
-              }
-            });
-        }
-      });
+}
 
-    // Print a message when somebody left.
-    client.on(
-      'move',
-      function() {
-        client.get(
-          'user_name',
-          function(err, name) {
-            if (name) {
-              io.sockets.emit('notification', name + ' left the room.');
-            }
-          });
-      });
-  });
+function resolveConflict(xOld, yOld, xNew, yNew) {
+	// Does JS return reference to piece? That would be easier //rmv
+	// mInd -> moving peice index, aInd -> attacked piece index
+	var mInd = getPieceIndex(xOld, yOld);
+	var aInd = getPieceIndex(xNew, yNew);
+	var moving = allPieces[mInd];
+	var attacked = allPieces[aInd];
 
+	if (moving.strength > attacked.strength) {
+		// Need to move piece and destroy attacked piece
+		// Move piece first
+		allPieces[mInd].X = xNew;
+		allPieces[mInd].Y = yNew;
+		allPieces.splice(aInd, 1);
+		io.socket.emit("update", );//TODO
+	}
+	else if (moving.strength == attacked.strength) {
+		// Need to destroy both pieces (but destroy higher index first!)
+		if (aInd > mInd) {
+			allPieces.splice(aInd, 1);
+			allPieces.splice(mInd, 1);
+		}
+		else {
+			allPieces.splice(mInd, 1);
+			allPieces.splice(aInd, 1);
+		}
+		io.socket.emit("update", );//TODO
+	}
+	else if (moving.strength < attacked.strength) {
+		// Need to destroy attacking piece
+		allPieces.splice(mInd, 1);
+		io.socket.emit("update", );//TODO
+	}
+
+}
