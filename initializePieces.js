@@ -575,7 +575,6 @@ setupStage.update();
 
 var friendlyColor = "blue";
 var enemyColor = "#8b8989";
-
 function setBoard(piecesArray){
 	if(playerNum == '1')
 	{
@@ -605,7 +604,7 @@ function setBoard(piecesArray){
 		p1soldier2Clickable.addChild(p1squareS2, p1labelS2);
 		p1soldier2Clickable.addEventListener("click", pieceClick);
 		p1soldier2Clickable.x = (piecesArray[6] - 1)  *  60 + 2;
-		p1soldier2Clickable.y = iecesArray[7] - 1)  *  60 + 2;
+		p1soldier2Clickable.y = (piecesArray[7] - 1)  *  60 + 2;
 		stage.addChild(p1soldier2Clickable);
 		
 		p1squareE1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
@@ -700,7 +699,7 @@ function setBoard(piecesArray){
 		p2squareS2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
 		p2soldier2Clickable.addChild(p2squareS2);
 		p2soldier2Clickable.x = (piecesArray[34] - 1)  *  60 + 2;
-		p2soldier2Clickable.y = iecesArray[35] - 1)  *  60 + 2;
+		p2soldier2Clickable.y = (piecesArray[35] - 1)  *  60 + 2;
 		stage.addChild(p2soldier2Clickable);
 		
 		p2squareE1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
@@ -875,7 +874,7 @@ function setBoard(piecesArray){
 		p2soldier2Clickable.addChild(p2squareS2, p2labelS2);
 		p2soldier2Clickable.addEventListener("click", pieceClick);
 		p2soldier2Clickable.x = (piecesArray[34] - 1)  *  60 + 2;
-		p2soldier2Clickable.y = iecesArray[35] - 1)  *  60 + 2;
+		p2soldier2Clickable.y = (piecesArray[35] - 1)  *  60 + 2;
 		stage.addChild(p2soldier2Clickable);
 		
 		p2squareE1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
@@ -948,6 +947,8 @@ function setBoard(piecesArray){
 		p2importantThingClickable.y = (9 -  piecesArray[55] - 1)  *  60 + 2;
 		stage.addChild(p2importantThingClickable);
 	}
+
+	gameStage.update();
 }
 
 var pieceSelected = p1importantThingClickable; // just a default value
