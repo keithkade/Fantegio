@@ -267,7 +267,7 @@ function startGame(){
 }
 
 //listen 
-socket.on('start game', setupBoard);
+socket.on('start game', setBoard);
 socket.on('resolve conflict', resolveConflict);
 socket.on('simple move', simpleMove);
 socket.on('invalid move', invalidMove);
