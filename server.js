@@ -489,7 +489,7 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 
 function invalidMove(xOld, yOld, xNew, yNew){
 	//this function checks whether sent is right move or not
-	if(xNew < 1 || xNew > 8 || yNew < 1 || yNew  8){
+	if(xNew < 1 || xNew > 8 || yNew < 1 || yNew > 8){
 		var message = "pieces cannot move out of the board";
 		io.socket.emit('invalid move', xOld, yOld, message);
 	}
