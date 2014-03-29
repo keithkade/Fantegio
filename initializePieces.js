@@ -7,9 +7,6 @@ var setupBoardWidth = 480;
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
 
-//socket stuf is commented out for local testing
-//var socket = io.connect('http://' + document.location.host);
-
 //color background green
 var background = new createjs.Shape();
 background.graphics.beginFill("#4E8154").drawRect(0, 0, setupBoardWidth, setupBoardHeight);
@@ -91,7 +88,7 @@ p1labelIT.textAlign = "center";
 p1labelIT.x = 28;
 p1labelIT.y = 15;
 var p1importantThingClickable = new createjs.Container();
-//p1importantThingClickable.addChild(p1labelIT);
+p1importantThingClickable.pieceType =  "Important Thing";
 
 //create clickable trap1
 var p1squareT1 = new createjs.Shape();
@@ -100,7 +97,7 @@ p1labelT1.textAlign = "center";
 p1labelT1.x = 28;
 p1labelT1.y = 15;
 var p1trap1Clickable = new createjs.Container();
-//p1trap1Clickable.addChild(p1labelT1);
+p1trap1Clickable.pieceType = "Trap";
 
 //create clickable trap2
 var p1squareT2 = new createjs.Shape();
@@ -109,7 +106,7 @@ p1labelT2.textAlign = "center";
 p1labelT2.x = 28;
 p1labelT2.y = 15;
 var p1trap2Clickable = new createjs.Container();
-//p1trap2Clickable.addChild(p1labelT1);
+p1trap2Clickable.pieceType = "Trap";
 
 //create clickable archer
 var p1squareAr = new createjs.Shape();
@@ -119,7 +116,7 @@ p1labelAr.textAlign = "center";
 p1labelAr.x = 28;
 p1labelAr.y = 15;
 var p1archerClickable = new createjs.Container();
-//p1archerClickable.addChild(p1labelAr);
+p1archerClickable.pieceType = "Archer";
 
 //create clickable mystic
 var p1squareMy = new createjs.Shape();
@@ -128,7 +125,7 @@ p1labelMy.textAlign = "center";
 p1labelMy.x = 28;
 p1labelMy.y = 15;
 var p1mysticClickable = new createjs.Container();
-//p1mysticClickable.addChild(p1labelMy);
+p1mysticClickable.pieceType = "Mystic";
 
 //create clickable rider1
 var p1squareR1 = new createjs.Shape();
@@ -138,7 +135,7 @@ p1labelR1.textAlign = "center";
 p1labelR1.x = 28;
 p1labelR1.y = 15;
 var p1rider1Clickable = new createjs.Container();
-//p1rider1Clickable.addChild(p1labelR1);
+p1rider1Clickable.pieceType = "Rider";
 
 //create clickable rider2
 var p1squareR2 = new createjs.Shape();
@@ -147,7 +144,7 @@ p1labelR2.textAlign = "center";
 p1labelR2.x = 28;
 p1labelR2.y = 15;
 var p1rider2Clickable = new createjs.Container();
-//p1rider2Clickable.addChild(p1labelR2);
+p1rider2Clickable.pieceType = "Rider";
 
 //create clickable assassin
 var p1squareAs = new createjs.Shape();
@@ -156,7 +153,7 @@ p1labelAs.textAlign = "center";
 p1labelAs.x = 28;
 p1labelAs.y = 15;
 var p1assassinClickable = new createjs.Container();
-//p1assassinClickable.addChild(p1labelAs);
+p1assassinClickable.pieceType = "Assassin";
 
 //create clickable soldier1
 var p1squareS1 = new createjs.Shape();
@@ -165,7 +162,7 @@ p1labelS1.textAlign = "center";
 p1labelS1.x = 28;
 p1labelS1.y = 15;
 var p1soldier1Clickable = new createjs.Container();
-//p1soldier1Clickable.addChild(p1labelS1);
+p1soldier1Clickable.pieceType = "Soldier";
 
 //create clickable soldier2
 var p1squareS2 = new createjs.Shape();
@@ -174,7 +171,7 @@ p1labelS2.textAlign = "center";
 p1labelS2.x = 28;
 p1labelS2.y = 15;
 var p1soldier2Clickable = new createjs.Container();
-//p1soldier2Clickable.addChild(p1labelS2);
+p1soldier2Clickable.pieceType = "Soldier";
 
 //create clickable engineer1
 var p1squareE1 = new createjs.Shape();
@@ -183,7 +180,7 @@ p1labelE1.textAlign = "center";
 p1labelE1.x = 28;
 p1labelE1.y = 15;
 var p1engineer1Clickable = new createjs.Container();
-//p1engineer1Clickable.addChild(p1labelE1);
+p1engineer1Clickable.pieceType = "Engineer";
 
 //create clickable engineer2
 var p1squareE2 = new createjs.Shape();
@@ -192,7 +189,7 @@ p1labelE2.textAlign = "center";
 p1labelE2.x = 28;
 p1labelE2.y = 15;
 var p1engineer2Clickable = new createjs.Container();
-//p1engineer2Clickable.addChild(p1labelE2);
+p1engineer2Clickable.pieceType = "Engineer";
 
 //create clickable captain
 var p1squareCa = new createjs.Shape();
@@ -201,7 +198,7 @@ p1labelCa.textAlign = "center";
 p1labelCa.x = 28;
 p1labelCa.y = 15;
 var p1captainClickable = new createjs.Container();
-//p1captainClickable.addChild(p1labelCa);
+p1captainClickable.pieceType = "Captain";
 
 //create clickable commander
 var p1squareCo = new createjs.Shape();
@@ -210,7 +207,7 @@ p1labelCo.textAlign = "center";
 p1labelCo.x = 28;
 p1labelCo.y = 15;
 var p1commanderClickable = new createjs.Container();
-//p1commanderClickable.addChild(p1labelCo);
+p1commanderClickable.pieceType = "Commander";
 
 //==========================================================================Player 2 game pieces
 //create clickable important thing
@@ -229,7 +226,7 @@ p2labelT1.textAlign = "center";
 p2labelT1.x = 28;
 p2labelT1.y = 15;
 var p2trap1Clickable = new createjs.Container();
-//p2trap1Clickable.addChild(p2labelT1);
+p2trap1Clickable.pieceType = "Trap";
 
 //create clickable trap2
 var p2squareT2 = new createjs.Shape();
@@ -238,7 +235,7 @@ p2labelT2.textAlign = "center";
 p2labelT2.x = 28;
 p2labelT2.y = 15;
 var p2trap2Clickable = new createjs.Container();
-//p2trap2Clickable.addChild(p2labelT2);
+p2trap2Clickable.pieceType = "Trap";
 
 //create clickable archer
 var p2squareAr = new createjs.Shape();
@@ -247,7 +244,7 @@ p2labelAr.textAlign = "center";
 p2labelAr.x = 28;
 p2labelAr.y = 15;
 var p2archerClickable = new createjs.Container();
-//p2archerClickable.addChild(p2labelAr);
+p2archerClickable.pieceType = "Archer";
 
 //create clickable mystic
 var p2squareMy = new createjs.Shape();
@@ -256,7 +253,7 @@ p2labelMy.textAlign = "center";
 p2labelMy.x = 28;
 p2labelMy.y = 15;
 var p2mysticClickable = new createjs.Container();
-//p2mysticClickable.addChild(p2labelMy);
+p2mysticClickable.pieceType = "Mystic";
 
 //create clickable rider1
 var p2squareR1 = new createjs.Shape();
@@ -265,7 +262,7 @@ p2labelR1.textAlign = "center";
 p2labelR1.x = 28;
 p2labelR1.y = 15;
 var p2rider1Clickable = new createjs.Container();
-//p2rider1Clickable.addChild(p2labelR1);
+p2rider1Clickable.pieceType = "Rider";
 
 //create clickable rider2
 var p2squareR2 = new createjs.Shape();
@@ -274,7 +271,7 @@ p2labelR2.textAlign = "center";
 p2labelR2.x = 28;
 p2labelR2.y = 15;
 var p2rider2Clickable = new createjs.Container();
-//p2rider2Clickable.addChild(p2labelR2);
+p2rider2Clickable.pieceType = "Rider";
 
 //create clickable assassin
 var p2squareAs = new createjs.Shape();
@@ -283,7 +280,7 @@ p2labelAs.textAlign = "center";
 p2labelAs.x = 28;
 p2labelAs.y = 15;
 var p2assassinClickable = new createjs.Container();
-//p2assassinClickable.addChild(p2labelAs);
+p2assassinClickable.pieceType = "Assassin";
 
 //create clickable soldier1
 var p2squareS1 = new createjs.Shape();
@@ -292,7 +289,7 @@ p2labelS1.textAlign = "center";
 p2labelS1.x = 28;
 p2labelS1.y = 15;
 var p2soldier1Clickable = new createjs.Container();
-//p2soldier1Clickable.addChild(p2labelS1);
+p2soldier1Clickable.pieceType = "Soldier";
 
 //create clickable soldier2
 var p2squareS2 = new createjs.Shape();
@@ -301,7 +298,7 @@ p2labelS2.textAlign = "center";
 p2labelS2.x = 28;
 p2labelS2.y = 15;
 var p2soldier2Clickable = new createjs.Container();
-//p2soldier2Clickable.addChild(p2labelS2);
+p2soldier2Clickable.pieceType = "Soldier";
 
 //create clickable engineer1
 var p2squareE1 = new createjs.Shape();
@@ -310,7 +307,7 @@ p2labelE1.textAlign = "center";
 p2labelE1.x = 28;
 p2labelE1.y = 15;
 var p2engineer1Clickable = new createjs.Container();
-//p2engineer1Clickable.addChild(p2labelE1);
+p2engineer1Clickable.pieceType = "Engineer";
 
 //create clickable engineer2
 var p2squareE2 = new createjs.Shape();
@@ -319,7 +316,7 @@ p2labelE2.textAlign = "center";
 p2labelE2.x = 28;
 p2labelE2.y = 15;
 var p2engineer2Clickable = new createjs.Container();
-//p2engineer2Clickable.addChild(p2labelE2);
+p2engineer2Clickable.pieceType = "Engineer";
 
 //create clickable captain
 var p2squareCa = new createjs.Shape();
@@ -328,7 +325,7 @@ p2labelCa.textAlign = "center";
 p2labelCa.x = 28;
 p2labelCa.y = 15;
 var p2captainClickable = new createjs.Container();
-//p2captainClickable.addChild(p2labelCa);
+p2captainClickable.pieceType = "Captain";
 
 //create clickable commander
 var p2squareCo = new createjs.Shape();
@@ -337,7 +334,7 @@ p2labelCo.textAlign = "center";
 p2labelCo.x = 28;
 p2labelCo.y = 15;
 var p2commanderClickable = new createjs.Container();
-//p2commanderClickable.addChild(p2labelCo);
+p2commanderClickable.pieceType = "Commander";
 
 //put all pieces in array so it can be search 
 var pieceArray = new Array();

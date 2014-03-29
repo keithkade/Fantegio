@@ -289,20 +289,40 @@ function resolveConflict(conflictArray){
 	}
 		
 	if (outcome == 1 && playerMoved == 1){ //player1 wins
-		var p = pieceAtLocation(xNew, yNew); //piece moved onto
-		gameStage.removeChild(p);
+		var loser = pieceAtLocation(xNew, yNew); //piece moved onto
+		var winner = pieceAtLocation(xOld, yOld);
+		gameStage.removeChild(loser);
+		if (playerNum == 1)
+			alert("You captured your opponent's " + loser.pieceType);
+		else
+			alert("Your piece was taken by your opponent's " + winner.pieceType);
 	}
 	else if (outcome == 2 && playerMoved == 1){ //player2 wins
-		var p = pieceAtLocation(xOld, yOld); //piece moved 
-		gameStage.removeChild(p);		
+		var loser = pieceAtLocation(xOld, yOld); //piece moved 
+		var winner = pieceAtLocation(xNew, yNew);
+		gameStage.removeChild(loser);
+		if (playerNum == 2)
+			alert("You captured your opponent's " + loser.pieceType);
+		else
+			alert("Your piece was taken by your opponent's " + winner.pieceType);		
 	}
 	else if (outcome == 1 && playerMoved == 2){ 
-		var p = pieceAtLocation(xOld, yOld);
-		gameStage.removeChild(p);
+		var loser = pieceAtLocation(xOld, yOld); //piece moved 
+		var winner = pieceAtLocation(xNew, yNew);
+		gameStage.removeChild(loser);
+		if (playerNum == 1)
+			alert("You captured your opponent's " + loser.pieceType);
+		else
+			alert("Your piece was taken by your opponent's " + winner.pieceType);			
 	}
 	else if (outcome == 2 && playerMoved == 2){ 
-		var p = pieceAtLocation(xNew, yNew);
+		var loser = pieceAtLocation(xNew, yNew); 
+		var winner = pieceAtLocation(xOld, yOld);
 		gameStage.removeChild(p);		
+		if (playerNum == 2)
+			alert("You captured your opponent's " + loser.pieceType);
+		else
+			alert("Your piece was taken by your opponent's " + winner.pieceType);	
 	}	
 	
 	//move the piece
