@@ -106,8 +106,8 @@ var p1trap1Clickable = new createjs.Container();
 var p1squareT2 = new createjs.Shape();
 var p1labelT2 = new createjs.Text("Trap - T", "10px Arial", "#FFFFFF");
 p1labelT2.textAlign = "center";
-p1labelT1.x = 28;
-p1labelT1.y = 15;
+p1labelT2.x = 28;
+p1labelT2.y = 15;
 var p1trap2Clickable = new createjs.Container();
 //p1trap2Clickable.addChild(p1labelT1);
 
