@@ -526,23 +526,53 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 
 // Determine if a requested move is valid, if so return true, return false otherwise
 function validMove(xOld, yOld, xNew, yNew) {
+	// mInd -> moving piece index, aInd -> attacked piece index
+	var mInd = getPieceIndex(xOld, yOld);
+	var aInd = getPieceIndex(xNew, yNew);
+	var moving = allPieces[mInd];
+	var attacked = allPieces[aInd];
+		
 	if (xNew < 1 || xNew > 8 || yNew < 1 || yNew > 8) {
 		var message = "Pieces cannot move off of the board.";
 		io.socket.emit('invalid move', xOld, yOld, message);
 		return false;
 	}
 	else if (!spaceEmpty(xNew, yNew)) {
-		var pieceIndOld = getPieceIndex(xOld, yOld);
-		var pieceIndNew = getPieceIndex(xNew, yNew);
-		var pieceWithOldInd = allPieces[pieceIndOld]
-		var pieceToBeMoved = allPieces[pieceIndNew];
-		
 		//checks whether the piece is of the same player
-		if (pieceWithOldInd.team == pieceToBeMoved.team) {
+		if (moving.team == attacked.team) {
 			var message = "Pieces on the same team cannot attack each other.";
 			io.socket.emit('invalid move', xOld, yOld, message);
 			return false;
 		}
+	}
+	else if (moving.type == "trap" || moving.type == "important thing") {
+		var message = "The Important Thing and Traps cannot be moved.";
+		io.socket.emit('invalid move', xOld, yOld, message);
+		return false;
+	}
+	else if (xOld != xNew && yOld != yNew) {
+		// All pieces must keep the same x coordinate OR
+		// the same y coordinate when moving
+		var message = "Pieces cannot move diagnally";
+		io.socket.emit('invalid move', xOld, yOld, message);
+		return false;
+	}
+	else if (moving.type == "mystic" || moving.type == "assassin" ||
+			moving.type == "engineer" || moving.type == "soldier" ||
+			moving.type == "captain" || moving.type == "commander") {
+		// All the pieces that can only move one space
+		
+		if (Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) {
+			// Trying to move a piece too far
+			var message = moving.type + " cannot move that far.";
+			io.socket.emit('invalid move', xOld, yOld, message);
+			return false;
+		}
+	}
+	else if (moving.type == "rider") {
+		// TODO
+		// This gets complicated, because rider's cannot move through other pieces
+		// I'll come back to this
 	}
 	return true;
 }
