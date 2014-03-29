@@ -24,7 +24,7 @@ function Piece() {
 	this.Y = 0;
 }
 
-var allPieces = new Array();
+var allPieces = new Array(28);
 
 // Convert json object to array object
 function json2array(json) {
@@ -176,7 +176,7 @@ function setupBoard(data) {
 		commander_1.team = playerNumber;
 		commander_1.X = setup[2][0];
 		commander_1.Y = setup[2][1];
-		allPieces.push(commander_1);
+		allPieces[0] = commander_1;
 
 		var captain_1 = new Piece();
 		captain_1.strength = 5;
@@ -184,7 +184,7 @@ function setupBoard(data) {
 		captain_1.team = playerNumber;
 		captain_1.X = setup[2][2];
 		captain_1.Y = setup[2][3];
-		allPieces.push(captain_1);
+		allPieces[1] = captain_1;
 
 		var soldier1_1 = new Piece();
 		soldier1_1.strength = 4;
@@ -192,7 +192,7 @@ function setupBoard(data) {
 		soldier1_1.team = playerNumber;
 		soldier1_1.X = setup[2][4];
 		soldier1_1.Y = setup[2][5];
-		allPieces.push(soldier1_1);
+		allPieces[2] = soldier1_1;
 
 		var soldier2_1 = new Piece();
 		soldier2_1.strength = 4;
@@ -200,7 +200,7 @@ function setupBoard(data) {
 		soldier2_1.team = playerNumber;
 		soldier2_1.X = setup[2][6];
 		soldier2_1.Y = setup[2][7];
-		allPieces.push(soldier2_1);
+		allPieces[3] = soldier2_1;
 
 		var engineer1_1 = new Piece();
 		engineer1_1.strength = 3;
@@ -208,7 +208,7 @@ function setupBoard(data) {
 		engineer1_1.team = playerNumber;
 		engineer1_1.X = setup[2][8];
 		engineer1_1.Y = setup[2][9];
-		allPieces.push(engineer1_1);
+		allPieces[4] = engineer1_1;
 
 		var engineer2_1 = new Piece();
 		engineer2_1.strength = 3;
@@ -216,7 +216,7 @@ function setupBoard(data) {
 		engineer2_1.team = playerNumber;
 		engineer2_1.X = setup[2][10];
 		engineer2_1.Y = setup[2][11];
-		allPieces.push(engineer2_1);
+		allPieces[5] = engineer2_1;
 
 		var rider1_1 = new Piece();
 		rider1_1.strength = 2;
@@ -224,7 +224,7 @@ function setupBoard(data) {
 		rider1_1.team = playerNumber;
 		rider1_1.X = setup[2][12];
 		rider1_1.Y = setup[2][13];
-		allPieces.push(rider1_1);
+		allPieces[6] = rider1_1;
 
 		var rider2_1 = new Piece();
 		rider2_1.strength = 2;
@@ -232,7 +232,7 @@ function setupBoard(data) {
 		rider2_1.team = playerNumber;
 		rider2_1.X = setup[2][14];
 		rider2_1.Y = setup[2][15];
-		allPieces.push(rider2_1);
+		allPieces[7] = rider2_1;
 
 		var assasin_1 = new Piece();
 		assasin_1.strength = 1;
@@ -240,7 +240,7 @@ function setupBoard(data) {
 		assasin_1.team = playerNumber;
 		assasin_1.X = setup[2][16];
 		assasin_1.Y = setup[2][17];
-		allPieces.push(assasin_1);
+		allPieces[8] = assasin_1;
 
 		var archer_1 = new Piece();
 		archer_1.strength = 1;
@@ -248,7 +248,7 @@ function setupBoard(data) {
 		archer_1.team = playerNumber;
 		archer_1.X = setup[2][18];
 		archer_1.Y = setup[2][19];
-		allPieces.push(archer_1);
+		allPieces[9] = archer_1;
 
 		var mystic_1 = new Piece();
 		mystic_1.strength = 1;
@@ -256,7 +256,7 @@ function setupBoard(data) {
 		mystic_1.team = playerNumber;
 		mystic_1.X = setup[2][20];
 		mystic_1.Y = setup[2][21];
-		allPieces.push(mystic_1);
+		allPieces[10] = mystic_1;
 
 		var trap1_1 = new Piece();
 		trap1_1.strength = 11;
@@ -264,7 +264,7 @@ function setupBoard(data) {
 		trap1_1.team = playerNumber;
 		trap1_1.X = setup[2][22];
 		trap1_1.Y = setup[2][23];
-		allPieces.push(trap1_1);
+		allPieces[11] = trap1_1;
 
 		var trap2_1 = new Piece();
 		trap2_1.strength = 11;
@@ -272,7 +272,7 @@ function setupBoard(data) {
 		trap2_1.team = playerNumber;
 		trap2_1.X = setup[2][24];
 		trap2_1.Y = setup[2][25];
-		allPieces.push(trap2_1);
+		allPieces[12] = trap2_1;
 
 		var importantThing_1 = new Piece();
 		importantThing_1.strength = 11;
@@ -280,7 +280,7 @@ function setupBoard(data) {
 		importantThing_1.team = playerNumber;
 		importantThing_1.X = setup[2][26];
 		importantThing_1.Y = setup[2][27];
-		allPieces.push(importantThing_1);
+		allPieces[13] = importantThing_1;
 
 		++numClients;
 	}
@@ -291,7 +291,7 @@ function setupBoard(data) {
 		commander_2.team = playerNumber;
 		commander_2.X = setup[2][0];
 		commander_2.Y = setup[2][1];
-		allPieces.push(commander_2);
+		allPieces[14] = commander_2;
 
 		var captain_2 = new Piece();
 		captain_2.strength = 5;
@@ -299,7 +299,7 @@ function setupBoard(data) {
 		captain_2.team = playerNumber;
 		captain_2.X = setup[2][2];
 		captain_2.Y = setup[2][3];
-		allPieces.push(captain_2);
+		allPieces[15] = captain_2;
 
 		var soldier1_2 = new Piece();
 		soldier1_2.strength = 4;
@@ -307,7 +307,7 @@ function setupBoard(data) {
 		soldier1_2.team = playerNumber;
 		soldier1_2.X = setup[2][4];
 		soldier1_2.Y = setup[2][5];
-		allPieces.push(soldier1_2);
+		allPieces[16] = soldier1_2;
 
 		var soldier2_2 = new Piece();
 		soldier2_2.strength = 4;
@@ -315,7 +315,7 @@ function setupBoard(data) {
 		soldier2_2.team = playerNumber;
 		soldier2_2.X = setup[2][6];
 		soldier2_2.Y = setup[2][7];
-		allPieces.push(soldier2_2);
+		allPieces[17] = soldier2_2;
 
 		var engineer1_2 = new Piece();
 		engineer1_2.strength = 3;
@@ -323,7 +323,7 @@ function setupBoard(data) {
 		engineer1_2.team = playerNumber;
 		engineer1_2.X = setup[2][8];
 		engineer1_2.Y = setup[2][9];
-		allPieces.push(engineer1_2);
+		allPieces[18] = engineer1_2;
 
 		var engineer2_2 = new Piece();
 		engineer2_2.strength = 3;
@@ -331,7 +331,7 @@ function setupBoard(data) {
 		engineer2_2.team = playerNumber;
 		engineer2_2.X = setup[2][10];
 		engineer2_2.Y = setup[2][11];
-		allPieces.push(engineer2_2);
+		allPieces[19] = engineer2_2;
 
 		var rider1_2 = new Piece();
 		rider1_2.strength = 2;
@@ -339,7 +339,7 @@ function setupBoard(data) {
 		rider1_2.team = playerNumber;
 		rider1_2.X = setup[2][12];
 		rider1_2.Y = setup[2][13];
-		allPieces.push(rider1_2);
+		allPieces[20] = rider1_2;
 
 		var rider2_2 = new Piece();
 		rider2_2.strength = 2;
@@ -347,7 +347,7 @@ function setupBoard(data) {
 		rider2_2.team = playerNumber;
 		rider2_2.X = setup[2][14];
 		rider2_2.Y = setup[2][15];
-		allPieces.push(rider2_2);
+		allPieces[21] = rider2_2;
 
 		var assasin_2 = new Piece();
 		assasin_2.strength = 1;
@@ -355,7 +355,7 @@ function setupBoard(data) {
 		assasin_2.team = playerNumber;
 		assasin_2.X = setup[2][16];
 		assasin_2.Y = setup[2][17];
-		allPieces.push(assasin_2);
+		allPieces[22] = assasin_2;
 
 		var archer_2 = new Piece();
 		archer_2.strength = 1;
@@ -363,7 +363,7 @@ function setupBoard(data) {
 		archer_2.team = playerNumber;
 		archer_2.X = setup[2][18];
 		archer_2.Y = setup[2][19];
-		allPieces.push(archer_2);
+		allPieces[23] = archer_2;
 
 		var mystic_2 = new Piece();
 		mystic_2.strength = 1;
@@ -371,7 +371,7 @@ function setupBoard(data) {
 		mystic_2.team = playerNumber;
 		mystic_2.X = setup[2][20];
 		mystic_2.Y = setup[2][21];
-		allPieces.push(mystic_2);
+		allPieces[24] = mystic_2;
 
 		var trap1_2 = new Piece();
 		trap1_2.strength = 11;
@@ -379,7 +379,7 @@ function setupBoard(data) {
 		trap1_2.team = playerNumber;
 		trap1_2.X = setup[2][22];
 		trap1_2.Y = setup[2][23];
-		allPieces.push(trap1_2);
+		allPieces[25] = trap1_2;
 
 		var trap2_2 = new Piece();
 		trap2_2.strength = 6;
@@ -387,7 +387,7 @@ function setupBoard(data) {
 		trap2_2.team = playerNumber;
 		trap2_2.X = setup[2][24];
 		trap2_2.Y = setup[2][25];
-		allPieces.push(trap2_2);
+		allPieces[26] = trap2_2;
 
 		var importantThing_2 = new Piece();
 		importantThing_2.strength = 11;
@@ -395,7 +395,7 @@ function setupBoard(data) {
 		importantThing_2.team = playerNumber;
 		importantThing_2.X = setup[2][26];
 		importantThing_2.Y = setup[2][27];
-		allPieces.push(importantThing_2);
+		allPieces[27] = importantThing_2;
 
 		++numClients;
 	}
