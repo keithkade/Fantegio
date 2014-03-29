@@ -448,7 +448,7 @@ function handleMove(data) {
 }
 
 function resolveConflict(xOld, yOld, xNew, yNew) {
-	// mInd -> moving peice index, aInd -> attacked piece index
+	// mInd -> moving piece index, aInd -> attacked piece index
 	var mInd = getPieceIndex(xOld, yOld);
 	var aInd = getPieceIndex(xNew, yNew);
 	var moving = allPieces[mInd];
@@ -495,36 +495,38 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 
 }
 
-function invalidMove(xOld, yOld, xNew, yNew){
-	//this function checks whether sent is right move or not
-	if(xNew < 1 || xNew > 8 || yNew < 1 || yNew > 8){
-		var message = "pieces cannot move out of the board";
+// Determine if a requested move is valid, if so return true, return false otherwise
+function invalidMove(xOld, yOld, xNew, yNew) {
+	if (xNew < 1 || xNew > 8 || yNew < 1 || yNew > 8) {
+		var message = "Pieces cannot move of the board.";
 		io.socket.emit('invalid move', xOld, yOld, message);
+		return false;
 	}
-	else if(spaceEmty(xNew, yNew) == false)
-	{
+	else if (!spaceEmpty(xNew, yNew)) {
 		var pieceIndOld = getPieceIndex(xOld, yOld);
 		var pieceIndNew = getPieceIndex(xNew, yNew);
-		var peiceWithOlInd = allPieces[pieceIndOld]
+		var pieceWithOldInd = allPieces[pieceIndOld]
 		var pieceToBeMoved = allPieces[pieceIndNew];
 		
 		//checks whether the piece is of the same player
-		if(peiceWithOlInd.team == pieceToBeMoved.team){
-			var message = "Player cannot move their piece on their own piece.";
+		if (pieceWithOldInd.team == pieceToBeMoved.team) {
+			var message = "Pieces on the same team cannot attack each other.";
 			io.socket.emit('invalid move', xOld, yOld, message);
+			return false;
 		}
 	}
+	return true;
 }
 
 function checkMystic(xOld, yOld, xNew, yNew)
 {
 	var pieceIndOld = getPieceIndex(xOld, yOld);
 	var pieceIndNew = getPieceIndex(xNew, yNew);
-	var peiceWithOlInd = allPieces[pieceIndOld]
+	var pieceWithOlInd = allPieces[pieceIndOld]
 	var pieceToBeSeen = allPieces[pieceIndNew];
 	
 	//checks whether the piece is mystic or not
-		if(peiceWithOlInd.type == "mystic"){
+		if(pieceWithOlInd.type == "mystic"){
 			
 			io.socket.emit('mystic', xNew, yNew, pieceToBeSeen);
 		}
