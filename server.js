@@ -516,3 +516,21 @@ function invalidMove(xOld, yOld, xNew, yNew){
 	}
 }
 
+function checkMystic(xOld, yOld, xNew, yNew)
+{
+	var pieceIndOld = getPieceIndex(xOld, yOld);
+	var pieceIndNew = getPieceIndex(xNew, yNew);
+	var peiceWithOlInd = allPieces[pieceIndOld]
+	var pieceToBeSeen = allPieces[pieceIndNew];
+	
+	//checks whether the piece is mystic or not
+		if(peiceWithOlInd.type == "mystic"){
+			
+			io.socket.emit('mystic', xNew, yNew, pieceToBeSeen);
+		}
+		
+		else{
+			return;
+		}
+
+}

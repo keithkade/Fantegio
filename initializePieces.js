@@ -877,7 +877,7 @@ function setBoard(piecesArray){
 		p2soldier2Clickable.addChild(p2squareS2, p2labelS2);
 		p2soldier2Clickable.addEventListener("click", pieceClick);
 		p2soldier2Clickable.x = (piecesArray[34] - 1)  *  60 + 2;
-		p2soldier2Clickable.y = (piecesArray[35] - 1)  *  60 + 2;
+		p2soldier2Clickable.y = (9 - piecesArray[35] - 1)  *  60 + 2;
 		gameStage.addChild(p2soldier2Clickable);
 		
 		p2squareE1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
