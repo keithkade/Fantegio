@@ -229,8 +229,8 @@ function startGame(){
 	locationArray[3] = orient(playerNum, captainDragger.gameGridY);
 	locationArray[4] = soldier1Dragger.gameGridX;
 	locationArray[5] = orient(playerNum, soldier1Dragger.gameGridY);
-	locationArray[6] = soldier1Dragger.gameGridX;
-	locationArray[7] = orient(playerNum, soldier1Dragger.gameGridY);
+	locationArray[6] = soldier2Dragger.gameGridX;
+	locationArray[7] = orient(playerNum, soldier2Dragger.gameGridY);
 	locationArray[8] = engineer1Dragger.gameGridX;
 	locationArray[9] = orient(playerNum, engineer1Dragger.gameGridY);
 	locationArray[10] = engineer2Dragger.gameGridX;
