@@ -416,16 +416,14 @@ function handleMove(data) {
 	var yOld = moveData[2];
 	var xNew = moveData[3];
 	var yNew = moveData[4];
-	var actionType = moveData[5];
+	var actionType = moveData[5]; // 1->normal, 2->archer
 	var playerNumber = moveData[6];
-	var piece_1 = moveData[7];
-	var piece_2 = moveData[8];
 
 	// Determine who is moving
 	if (playerNumber == 1) {
 		if (spaceEmpty(xNew, yNew)) {
-			// Just signal move
-			//io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
+			// Just signal a simple move
+			io.socket.emit("simple move", xOld, yOld, xNew, yNew);
 		}
 		else {
 			// Here, we assume a player won't move onto his/her own pieces
@@ -450,14 +448,12 @@ function handleMove(data) {
 }
 
 function resolveConflict(xOld, yOld, xNew, yNew) {
-	// Does JS return reference to piece? That would be easier //rmv
 	// mInd -> moving peice index, aInd -> attacked piece index
 	var mInd = getPieceIndex(xOld, yOld);
 	var aInd = getPieceIndex(xNew, yNew);
 	var moving = allPieces[mInd];
 	var attacked = allPieces[aInd];
 
-	io.socket.emit("resolve conflict", 1, 0, xOld, yOld, xNew, yNew, "rider", "engineer");
 
 	if (moving.strength > attacked.strength) {
 		// Need to move piece and destroy attacked piece
@@ -465,7 +461,13 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 		allPieces[mInd].X = xNew;
 		allPieces[mInd].Y = yNew;
 		allPieces.splice(aInd, 1);
-		//io.socket.emit("update", );//TODO
+		// Sent message is based on who's turn it was
+		if (moving.team == 1) {
+			io.socket.emit("resolve conflict", 1, 1, xOld, yOld, xNew, yNew, attacked.type, "");
+		}
+		else if (moving.team == 2) {
+			io.socket.emit("resolve conflict", 2, 2, xOld, yOld, xNew, yNew, attacked.type, "");
+		}
 	}
 	else if (moving.strength == attacked.strength) {
 		// Need to destroy both pieces (but destroy higher index first!)
@@ -477,12 +479,18 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 			allPieces.splice(mInd, 1);
 			allPieces.splice(aInd, 1);
 		}
-		//io.socket.emit("update", );//TODO
+
+		io.socket.emit("resolve conflict", moving.team, 0, xOld, yOld, xNew, yNew, attacked.type, moving.type);
 	}
 	else if (moving.strength < attacked.strength) {
-		// Need to destroy attacking piece
+		// Need to destroy the piece that moved
 		allPieces.splice(mInd, 1);
-		//io.socket.emit("update", );//TODO
+		if (moving.team == 1) {
+			io.socket.emit("resolve conflict", 1, 2, xOld, yOld, xNew, yNew, moving.type, "");
+		}
+		else if (moving.team == 2) {
+			io.socket.emit("resolve conflict", 2, 1, xOld, yOld, xNew, yNew, moving.type, "");
+		}
 	}
 
 }
