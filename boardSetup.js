@@ -465,12 +465,13 @@ var move = new Array();
 function movePiece(event){
    if(playerTurn == playerNum)
    {
+
       alert("move sent");
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
-      move[2] = selectedPiece.gameGridY;
+      move[2] = orient(selectedPiece.gameGridY);
       move[3] = event.target.parent.gameGridX;
-      move[4] = event.target.parent.gameGridY;
+      move[4] = orient(event.target.parent.gameGridY);
       move[5] = 1;
       move[6] = playerNum;
       socket.emit("move", move);
