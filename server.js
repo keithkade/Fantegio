@@ -1,12 +1,14 @@
 var server = require('http').createServer(handler);
-console.log("Server running on port 33131.");
+
+console.log("Server running on port 32421.");
+
 
 var url = require('url');
 var io = require('socket.io').listen(server);
 var fs = require('fs');
 
 
-server.listen(33131);
+server.listen(32421);
 
 // Listen for initial connection
 // Execute setupBoard for each client that connects
