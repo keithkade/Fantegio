@@ -403,10 +403,48 @@ function orient(playerNum, Y_Loc){
 	}
 }
 
+//used to know which piece needs to be moved in movePiece() updated in pieceClick
+var selectedPiece = p1importantThingClickable;
+//list of current pieces possible move choices
+var choices = [];
+
+//called when a piece owned by a player is clicked.
 function pieceClick(event){
-	var selected = event.target;
-	// for each move that is viable call
-	board[0][0].addEventListener("click", movePiece());
-	
+	//clear previously clicked piece's choices
+	while(choices.length > 0)
+	{
+		destinations.pop().removeEventListener("click", movePiece);
+	}
+
+	selectedPiece = event.target;
+
+	possibleMoveDest(selected.gameGridX,selected.gameGridY+1);
+	possibleMoveDest(selected.gameGridX,selected.gameGridY-1);
+	possibleMoveDest(selected.gameGridX+1,selected.gameGridY);
+	possibleMoveDest(selected.gameGridX-1,selected.gameGridY);
 }
 
+//Used in pieceClick() to set the square as clickable if moving there is legal.
+//	returns true if open square
+// 	returns false if non-open square 
+function possibleMoveDest(destX, destY){
+	var curPiece = pieceAtLocation(destX,destY);
+	if(curPiece == false)
+	{
+		board[destX][destY].addEventListener("click", movePiece);
+		destinations.push(board[destX][destY]);
+		return true;
+	}
+	if(curPiece.team != playerNum)
+	{
+		curPiece.addEventListener("click", movePiece);
+		destinations.push(curPiece);
+	}
+	return false;
+}
+
+//called when pieces a player can move the selectedPiece to are clicked.
+function movePiece(event){
+	var destination = event.target;
+	socket.emit("move", selectedPiece.gameGridX, selectedPiece.gameGridY, destination.gameGridX, destination.gameGridY, 1, playerNum);
+}
