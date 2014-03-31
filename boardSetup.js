@@ -37,6 +37,11 @@ function convertToGameGridXY (dragger){
 	dragger.gameGridY = (dragger.y+178)/60 + 1;	
 }
 
+function addGameGridXY (clickAble){
+	clickAble.gameGridX = (clickAble.x-2)/60 + 1;
+	clickAble.gameGridY = (clickAble.y-2)/60 + 1;	
+}
+
 //can cause a bug if you just click the piece and then it moves. The previous location is still marked as full
 //adds drag and drop listeners
 function addDragAndDrop (toDrag){
@@ -366,6 +371,7 @@ function pieceAtLocation(x, y){
 	for (var i=0; i < pieceArray.length; i++)
 		if (pieceArray[i].gameGridX == x && pieceArray[i].gameGridY == y)
 			return pieceArray[i];
+	
 }
 
 //switches y coordinate if neccessary for player
@@ -377,5 +383,12 @@ function orient(playerNum, Y_Loc){
 	else{
 		return Y_Loc;
 	}
+}
+
+function pieceClick(event){
+	var selected = event.target;
+	// for each move that is viable call
+	board[0][0].addEventListener("click", movePiece());
+	
 }
 
