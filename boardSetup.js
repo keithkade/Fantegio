@@ -286,7 +286,23 @@ function resolveConflict(conflictArray){
 	var yOld = moveArray[3];
 	var xNew = moveArray[4];
 	var yNew = moveArray[5];
-	if (outcome == 0){ //both die
+		
+	var attacked = pieceAtLocation(xNew, yNew);
+	if(attacked.type == "Important Thing"){
+		if (playerMoved == 1 && playerNum == 1){
+			alert("You have won!");
+		}	
+		if (playerMoved == 1 && playerNum == 2){
+			alert("You have lost!");
+		}	
+		if (playerMoved == 2 && playerNum == 1){
+			alert("You have lost!");
+		}	
+		if (playerMoved == 2 && playerNum == 2){
+			alert("You have won!");
+		}							
+	}
+	else if (outcome == 0){ //both die
 		var p1 = pieceAtLocation(xOld, yOld);
 		gameStage.removeChild(p1);
 		var p2 = pieceAtLocation(xNew, yNew);
@@ -366,11 +382,13 @@ function gameStartOnTimeout(){
 	startGame();
 }
 
-//pieceArray
+//return the piece at a given location, if no piece is there return false
 function pieceAtLocation(x, y){
 	for (var i=0; i < pieceArray.length; i++)
 		if (pieceArray[i].gameGridX == x && pieceArray[i].gameGridY == y)
 			return pieceArray[i];
+	
+	return false;
 	
 }
 
