@@ -7,6 +7,11 @@ var setupBoardWidth = 480;
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
 
+//make canvas white
+var whiteBackdrop = new createjs.Shape();
+whiteBackdrop.graphics.beginFill("#FFFFFF").drawRect(0, 0, setupBoardWidth, 580);
+setupStage.addChild(whiteBackdrop);
+
 //color background green
 var background = new createjs.Shape();
 background.graphics.beginFill("#4E8154").drawRect(0, 0, setupBoardWidth, setupBoardHeight);
