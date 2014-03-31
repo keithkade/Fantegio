@@ -281,7 +281,24 @@ function resolveConflict(conflictArray){
 	var yOld = moveArray[3];
 	var xNew = moveArray[4];
 	var yNew = moveArray[5];
-	if (outcome == 0){ //both die
+	
+	
+	var attacked = pieceAtLocation(xNew, yNew);
+	if(attacked.type == "Important Thing"){
+		if (playerMoved == 1 && playerNum == 1){
+			alert("You have won!");
+		}	
+		if (playerMoved == 1 && playerNum == 2){
+			alert("You have lost!");
+		}	
+		if (playerMoved == 2 && playerNum == 1){
+			alert("You have lost!");
+		}	
+		if (playerMoved == 2 && playerNum == 2){
+			alert("You have won!");
+		}							
+	}
+	else if (outcome == 0){ //both die
 		var p1 = pieceAtLocation(xOld, yOld);
 		gameStage.removeChild(p1);
 		var p2 = pieceAtLocation(xNew, yNew);
