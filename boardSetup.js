@@ -430,10 +430,10 @@ function pieceClick(event){
 
 	selectedPiece = event.target;
 
-	possibleMoveDest(selected.gameGridX,selected.gameGridY+1);
-	possibleMoveDest(selected.gameGridX,selected.gameGridY-1);
-	possibleMoveDest(selected.gameGridX+1,selected.gameGridY);
-	possibleMoveDest(selected.gameGridX-1,selected.gameGridY);
+	possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
+	possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
+	possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
+	possibleMoveDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
 }
 
 //Used in pieceClick() to set the square as clickable if moving there is legal.
