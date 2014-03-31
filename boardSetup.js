@@ -1,6 +1,7 @@
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
 var socket = io.connect('http://' + document.location.host);
+var playerTurn = '1';
 
 //this is oddly shaped because 2d arrays are indexed by [row][column] and also because they are zero based
 var isGameLocOccupied = [
@@ -225,6 +226,7 @@ var locationArray = new Array();
 //put all of the piece locations into an array and send to server
 //also update the page by showing old canvas and adding new one
 function startGame(){
+	playerTurn = '1';
 	resultArray[0] = "setup";
 	resultArray[1] = playerNum;
 
@@ -353,6 +355,11 @@ function resolveConflict(conflictArray){
 			pieceArray[i].gameGridY = yNew;
 		}
 	}
+	
+	if(playerTurn = '1')
+		playerTurn = '2';
+	else
+		playerTurn = '1';
 }
 
 //move a piece into an open square
@@ -368,6 +375,11 @@ function simpleMove(moveArray){
 			pieceArray[i].gameGridY = yNew;
 		}
 	}
+	
+	if(playerTurn = '1')
+		playerTurn = '2';
+	else
+		playerTurn = '1';
 }
 
 //if the server does not think the move sent was valid
@@ -443,8 +455,15 @@ function possibleMoveDest(destX, destY){
 	return false;
 }
 
+
 //called when pieces a player can move the selectedPiece to are clicked.
 function movePiece(event){
-	var destination = event.target;
-	socket.emit("move", selectedPiece.gameGridX, selectedPiece.gameGridY, destination.gameGridX, destination.gameGridY, 1, playerNum);
+	if(playerTurn == playerNum)
+	{			
+		var destination = event.target;
+		socket.emit("move", selectedPiece.gameGridX, selectedPiece.gameGridY, destination.gameGridX, destination.gameGridY, 1, playerNum);
+	}
+	else{
+		alert("Not your turn");
+	}
 }
