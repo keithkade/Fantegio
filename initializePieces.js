@@ -49,26 +49,26 @@ for (var y = 0; y <= setupBoardHeight; y += 60) {
 
 //==========================================================================game board
 var gameStage = new createjs.Stage("gameCanvas");
-var board = new Array(8);
+var board = new Array(9);
 var gameBoardHeight = 480;
 var gameBoardWidth = 480;
 
 
-for (var x = 0; x < 8; x++)
+for (var x = 1; x < 9; x++)
 {
-	board[x] = new Array(8);
-	for (var y = 0; y < 8; y++)
+	board[x] = new Array(9);
+	for (var y = 1; y < 9; y++)
 	{
 		var squareIT = new createjs.Shape();
 		squareIT.graphics.beginFill("#4E8154").drawRect(0, 0, 60, 60);
 		board[x][y] = new createjs.Container();
-		board[x][y].x = (x*60);
-		board[x][y].y = (y*60);
+		board[x][y].x = ((x-1)*60);
+		board[x][y].y = ((y-1)*60);
 		board[x][y].gameGridX = x;
 		board[x][y].gameGridY = y;
 		board[x][y].addChild(squareIT);
 		gameStage.addChild(board[x][y]);
-	}
+        }
 }
 
 //draw grid for game 

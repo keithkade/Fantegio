@@ -440,6 +440,10 @@ function pieceClick(event){
 //	returns true if open square
 // 	returns false if non-open square 
 function possibleMoveDest(destX, destY){
+   if( destX < 1 || destX > 8 || destY < 1 || destY > 8)
+   {
+      return false;
+   }
    var curPiece = pieceAtLocation(destX,destY);
    if(curPiece == false)
    {
