@@ -426,7 +426,7 @@ function handleMove(data) {
 		if (spaceEmpty(xNew, yNew)) {
 			// Just signal a simple move
 			var tempArray = [xOld, yOld, xNew, yNew];
-			io.socket.emit("simple move", tempArray);
+			io.sockets.emit("simple move", tempArray);
 		}
 		else {
 			// If space not empty, then handle attack
@@ -445,7 +445,7 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 	// Handle special cases
 	if (attacked.type == "important thing") {
 		var tempArray = [moving.team];
-		io.socket.emit("game over", tempArray);
+		io.sockets.emit("game over", tempArray);
 	}
 	else if (attacked.type == "trap") {
 		if (moving.type == "engineer") {
@@ -456,11 +456,11 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 			allPieces.splice(aInd, 1);
 			if (moving.team == 1) {
 				var tempArray = [1, 1, xOld, yOld, xNew, yNew, attacked.type, ""];
-				io.socket.emit("resolve conflict", tempArray);
+				io.sockets.emit("resolve conflict", tempArray);
 			}
 			else if (moving.team == 2) {
 				var tempArray = [2, 2, xOld, yOld, xNew, yNew, attacked.type, ""];
-				io.socket.emit("resolve conflict", tempArray);
+				io.sockets.emit("resolve conflict", tempArray);
 			}
 		}
 		else {
@@ -475,7 +475,7 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 				allPieces.splice(aInd, 1);
 			}
 			var tempArray = [moving.team, 0, xOld, yOld, xNew, yNew, attacked.type, moving.type];
-			io.socket.emit("resolve conflict", tempArray);
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 	}
 	else if (attacked.type == "commander" && moving.type == "assassin") {
@@ -486,11 +486,11 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 		allPieces.splice(aInd, 1);
 		if (moving.team == 1) {
 			var tempArray = [1, 1, xOld, yOld, xNew, yNew, attacked.type, ""];
-			io.socket.emit("resolve conflict", tempArray);
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 		else if (moving.team == 2) {
 			var tempArray = [2, 2, xOld, yOld, xNew, yNew, attacked.type, ""];
-			io.socket.emit("resolve conflict", tempArray);
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 	}
 	// Now handle normal case based on strength alone
@@ -503,11 +503,11 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 		// Sent message is based on who's turn it was
 		if (moving.team == 1) {
 			var tempArray = [1, 1, xOld, yOld, xNew, yNew, attacked.type, ""];
-			io.socket.emit("resolve conflict", tempArray);
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 		else if (moving.team == 2) {
 			var tempArray = [2, 2, xOld, yOld, xNew, yNew, attacked.type, ""];
-			io.socket.emit("resolve conflict", tempArray);
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 	}
 	else if (moving.strength == attacked.strength) {
@@ -521,18 +521,18 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 			allPieces.splice(aInd, 1);
 		}
 		var tempArray = [moving.team, 0, xOld, yOld, xNew, yNew, attacked.type, moving.type];
-		io.socket.emit("resolve conflict", tempArray);
+		io.sockets.emit("resolve conflict", tempArray);
 	}
 	else if (moving.strength < attacked.strength) {
 		// Need to destroy the piece that moved
 		allPieces.splice(mInd, 1);
 		if (moving.team == 1) {
 			var tempArray = [1, 2, xOld, yOld, xNew, yNew, moving.type, ""];
-			io.socket.emit("resolve conflict", tempArray);
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 		else if (moving.team == 2) {
 			var tempArray = [2, 1, xOld, yOld, xNew, yNew, moving.type, ""];
-			io.socket.emit("resolve conflict", tempArray);
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 	}
 }
@@ -548,7 +548,7 @@ function validMove(xOld, yOld, xNew, yNew) {
 	if (xNew < 1 || xNew > 8 || yNew < 1 || yNew > 8) {
 		var message = "Pieces cannot move off of the board.";
 		var tempArray = [xOld, yOld, message];
-		io.socket.emit('invalid move', tempArray);
+		io.sockets.emit('invalid move', tempArray);
 		return false;
 	}
 	else if (!spaceEmpty(xNew, yNew)) {
@@ -556,14 +556,14 @@ function validMove(xOld, yOld, xNew, yNew) {
 		if (moving.team == attacked.team) {
 			var message = "Pieces on the same team cannot attack each other.";
 			var tempArray = [xOld, yOld, message];
-			io.socket.emit('invalid move', tempArray);
+			io.sockets.emit('invalid move', tempArray);
 			return false;
 		}
 	}
 	else if (moving.type == "trap" || moving.type == "important thing") {
 		var message = "The Important Thing and Traps cannot be moved.";
 		var tempArray = [xOld, yOld, message];
-		io.socket.emit('invalid move', tempArray);
+		io.sockets.emit('invalid move', tempArray);
 		return false;
 	}
 	else if (xOld != xNew && yOld != yNew) {
@@ -571,7 +571,7 @@ function validMove(xOld, yOld, xNew, yNew) {
 		// the same y coordinate when moving
 		var message = "Pieces cannot move diagnally";
 		var tempArray = [xOld, yOld, message];
-		io.socket.emit('invalid move', tempArray);
+		io.sockets.emit('invalid move', tempArray);
 		return false;
 	}
 	else if (moving.type == "mystic" || moving.type == "assassin" ||
@@ -583,7 +583,7 @@ function validMove(xOld, yOld, xNew, yNew) {
 			// Trying to move a piece too far
 			var message = moving.type + " cannot move that far.";
 			var tempArray = [xOld, yOld, message];
-			io.socket.emit('invalid move', tempArray);
+			io.sockets.emit('invalid move', tempArray);
 			return false;
 		}
 	}
@@ -606,7 +606,7 @@ function checkMystic(xOld, yOld, xNew, yNew)
 		if(pieceWithOlInd.type == "mystic"){
 			
 			var tempArray = [xNew, yNew, pieceToBeSeen];
-			io.socket.emit('mystic', tempArray);
+			io.sockets.emit('mystic', tempArray);
 		}
 		
 		else{
