@@ -236,7 +236,7 @@ function setupBoard(data) {
 
 		var assasin_1 = new Piece();
 		assasin_1.strength = 1;
-		assasin_1.type = "assasin";
+		assasin_1.type = "assassin";
 		assasin_1.team = playerNumber;
 		assasin_1.X = setup[2][16];
 		assasin_1.Y = setup[2][17];
@@ -351,7 +351,7 @@ function setupBoard(data) {
 
 		var assasin_2 = new Piece();
 		assasin_2.strength = 1;
-		assasin_2.type = "assasin";
+		assasin_2.type = "assassin";
 		assasin_2.team = playerNumber;
 		assasin_2.X = setup[2][16];
 		assasin_2.Y = setup[2][17];
@@ -419,32 +419,17 @@ function handleMove(data) {
 	var actionType = moveData[5]; // 1->normal, 2->archer
 	var playerNumber = moveData[6];
 
-	// Determine who is moving
-	if (playerNumber == 1) {
+	// Only execute if move is valid
+	if (validMove(xOld, yOld, xNew, yNew)) {
 		if (spaceEmpty(xNew, yNew)) {
 			// Just signal a simple move
 			io.socket.emit("simple move", xOld, yOld, xNew, yNew);
 		}
 		else {
-			// Here, we assume a player won't move onto his/her own pieces
-			// Need to check for this later
 			// If space not empty, then handle attack
 			resolveConflict(xOld, yOld, xNew, yNew);
 		}
 	}
-	else if (playerNumber == 2) {
-		if (spaceEmpty(xNew, yNew)) {
-			// Just signal move
-			//io.socket.emit("update", xOld, yOld, xNew, yNew);//TODO
-		}
-		else {
-			// Here, we assume a player won't move onto his/her own pieces
-			// Need to check for this later
-			// If space not empty, then handle attack
-			resolveConflict(xOld, yOld, xNew, yNew);
-		}
-	}
-
 }
 
 function resolveConflict(xOld, yOld, xNew, yNew) {
@@ -454,8 +439,53 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 	var moving = allPieces[mInd];
 	var attacked = allPieces[aInd];
 
-
-	if (moving.strength > attacked.strength) {
+	// Handle special cases
+	if (attacked.type == "important thing") {
+		io.socket.emit("game over", moving.team);
+	}
+	else if (attacked.type == "trap") {
+		if (moving.type == "engineer") {
+			// Engineer disables trap
+			// Move the engineer, then remove trap from allPieces
+			allPieces[mInd].X = xNew;
+			allPieces[mInd].Y = yNew;
+			allPieces.splice(aInd, 1);
+			if (moving.team == 1) {
+				io.socket.emit("resolve conflict", 1, 1, xOld, yOld, xNew, yNew, attacked.type, "");
+			}
+			else if (moving.team == 2) {
+				io.socket.emit("resolve conflict", 2, 2, xOld, yOld, xNew, yNew, attacked.type, "");
+			}
+		}
+		else {
+			// Anything else dies along with the trap
+			// Need to destroy both pieces (but destroy higher index first!)
+			if (aInd > mInd) {
+				allPieces.splice(aInd, 1);
+				allPieces.splice(mInd, 1);
+			}
+			else {
+				allPieces.splice(mInd, 1);
+				allPieces.splice(aInd, 1);
+			}
+			io.socket.emit("resolve conflict", moving.team, 0, xOld, yOld, xNew, yNew, attacked.type, moving.type);
+		}
+	}
+	else if (attacked.type == "commander" && moving.type == "assassin") {
+		// Assassin beats commander when assassin attacks
+		// Move the assassin, then remove commander from allPieces
+		allPieces[mInd].X = xNew;
+		allPieces[mInd].Y = yNew;
+		allPieces.splice(aInd, 1);
+		if (moving.team == 1) {
+			io.socket.emit("resolve conflict", 1, 1, xOld, yOld, xNew, yNew, attacked.type, "");
+		}
+		else if (moving.team == 2) {
+			io.socket.emit("resolve conflict", 2, 2, xOld, yOld, xNew, yNew, attacked.type, "");
+		}
+	}
+	// Now handle normal case based on strength alone
+	else if (moving.strength > attacked.strength) {
 		// Need to move piece and destroy attacked piece
 		// Move piece first
 		allPieces[mInd].X = xNew;
@@ -463,6 +493,7 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 		allPieces.splice(aInd, 1);
 		// Sent message is based on who's turn it was
 		if (moving.team == 1) {
+			//var tempArray = [1, 1, xOld, yOld, xNew, yNew, attacked.type, ""] //need to send data with an array???
 			io.socket.emit("resolve conflict", 1, 1, xOld, yOld, xNew, yNew, attacked.type, "");
 		}
 		else if (moving.team == 2) {
@@ -479,7 +510,6 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 			allPieces.splice(mInd, 1);
 			allPieces.splice(aInd, 1);
 		}
-
 		io.socket.emit("resolve conflict", moving.team, 0, xOld, yOld, xNew, yNew, attacked.type, moving.type);
 	}
 	else if (moving.strength < attacked.strength) {
@@ -492,28 +522,57 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 			io.socket.emit("resolve conflict", 2, 1, xOld, yOld, xNew, yNew, moving.type, "");
 		}
 	}
-
 }
 
 // Determine if a requested move is valid, if so return true, return false otherwise
-function invalidMove(xOld, yOld, xNew, yNew) {
+function validMove(xOld, yOld, xNew, yNew) {
+	// mInd -> moving piece index, aInd -> attacked piece index
+	var mInd = getPieceIndex(xOld, yOld);
+	var aInd = getPieceIndex(xNew, yNew);
+	var moving = allPieces[mInd];
+	var attacked = allPieces[aInd];
+		
 	if (xNew < 1 || xNew > 8 || yNew < 1 || yNew > 8) {
-		var message = "Pieces cannot move of the board.";
+		var message = "Pieces cannot move off of the board.";
 		io.socket.emit('invalid move', xOld, yOld, message);
 		return false;
 	}
 	else if (!spaceEmpty(xNew, yNew)) {
-		var pieceIndOld = getPieceIndex(xOld, yOld);
-		var pieceIndNew = getPieceIndex(xNew, yNew);
-		var pieceWithOldInd = allPieces[pieceIndOld]
-		var pieceToBeMoved = allPieces[pieceIndNew];
-		
 		//checks whether the piece is of the same player
-		if (pieceWithOldInd.team == pieceToBeMoved.team) {
+		if (moving.team == attacked.team) {
 			var message = "Pieces on the same team cannot attack each other.";
 			io.socket.emit('invalid move', xOld, yOld, message);
 			return false;
 		}
+	}
+	else if (moving.type == "trap" || moving.type == "important thing") {
+		var message = "The Important Thing and Traps cannot be moved.";
+		io.socket.emit('invalid move', xOld, yOld, message);
+		return false;
+	}
+	else if (xOld != xNew && yOld != yNew) {
+		// All pieces must keep the same x coordinate OR
+		// the same y coordinate when moving
+		var message = "Pieces cannot move diagnally";
+		io.socket.emit('invalid move', xOld, yOld, message);
+		return false;
+	}
+	else if (moving.type == "mystic" || moving.type == "assassin" ||
+			moving.type == "engineer" || moving.type == "soldier" ||
+			moving.type == "captain" || moving.type == "commander") {
+		// All the pieces that can only move one space
+		
+		if (Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) {
+			// Trying to move a piece too far
+			var message = moving.type + " cannot move that far.";
+			io.socket.emit('invalid move', xOld, yOld, message);
+			return false;
+		}
+	}
+	else if (moving.type == "rider") {
+		// TODO
+		// This gets complicated, because rider's cannot move through other pieces
+		// I'll come back to this
 	}
 	return true;
 }
