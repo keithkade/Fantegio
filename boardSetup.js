@@ -507,7 +507,7 @@ function pieceClick(event){
 //	returns true if open square
 // 	returns false if non-open square 
 function possibleMoveDest(destX, destY){
-   if( destX < 1 || destX > 8 || destY < 1 || destY > 8){
+   if( destX < 1 || destX > 8 || destY < 1 || destY > 8 ||  curPiece.team == '3'){
       return false;
    }
    var curPiece = pieceAtLocation(destX,destY);
@@ -528,7 +528,7 @@ var move = new Array();
 //called when pieces a player can move the selectedPiece to are clicked.
 function movePiece(event){
    if(playerTurn == playerNum){
-      alert("move sent");
+      //alert("move sent");
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
       move[2] = orient(playerNum, selectedPiece.gameGridY);
