@@ -25,15 +25,15 @@ setupStage.addChild(placable);
 
 //draw grid for setup 
 for (var x = 0; x <= setupBoardWidth; x += 60) {
-	var line = new createjs.Shape();
-	line.graphics.beginFill("#000000").drawRect(x, 0, 1, setupBoardHeight);
-    setupStage.addChild(line);
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(x, 0, 1, setupBoardHeight);
+   setupStage.addChild(line);
 }
 
 for (var y = 0; y <= setupBoardHeight; y += 60) {
-	var line = new createjs.Shape();
-	line.graphics.beginFill("#000000").drawRect(0, y, setupBoardWidth, 1);
-    setupStage.addChild(line);
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(0, y, setupBoardWidth, 1);
+   setupStage.addChild(line);
 }
 
 //rocks //will recieve x and y from server
@@ -56,32 +56,32 @@ var gameBoardWidth = 480;
 
 for (var x = 1; x < 9; x++)
 {
-	board[x] = new Array(9);
-	for (var y = 1; y < 9; y++)
-	{
-		var squareIT = new createjs.Shape();
-		squareIT.graphics.beginFill("#4E8154").drawRect(0, 0, 60, 60);
-		board[x][y] = new createjs.Container();
-		board[x][y].x = ((x-1)*60);
-		board[x][y].y = ((y-1)*60);
-		board[x][y].gameGridX = x;
-		board[x][y].gameGridY = y;
-		board[x][y].addChild(squareIT);
-		gameStage.addChild(board[x][y]);
-        }
+   board[x] = new Array(9);
+   for (var y = 1; y < 9; y++)
+   {
+      var squareIT = new createjs.Shape();
+      squareIT.graphics.beginFill("#4E8154").drawRect(0, 0, 60, 60);
+      board[x][y] = new createjs.Container();
+      board[x][y].x = ((x-1)*60);
+      board[x][y].y = ((y-1)*60);
+      board[x][y].gameGridX = x;
+      board[x][y].gameGridY = y;
+      board[x][y].addChild(squareIT);
+      gameStage.addChild(board[x][y]);
+   }
 }
 
 //draw grid for game 
 for (var x = 0; x <= gameBoardWidth; x += 60) {
-	var line = new createjs.Shape();
-	line.graphics.beginFill("#000000").drawRect(x, 0, 1, gameBoardHeight);
-    gameStage.addChild(line);
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(x, 0, 1, gameBoardHeight);
+   gameStage.addChild(line);
 }
 
 for (var y = 0; y <= gameBoardHeight; y += 60) {
-	var line = new createjs.Shape();
-	line.graphics.beginFill("#000000").drawRect(0, y, gameBoardWidth, 1);
-    gameStage.addChild(line);
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(0, y, gameBoardWidth, 1);
+   gameStage.addChild(line);
 }
 
 
@@ -403,9 +403,9 @@ pieceArray[26] = p1trap2Clickable;
 pieceArray[27] = p2trap2Clickable;
 
 for (var i = 0; i < pieceArray.length; i++){
-	pieceArray[i].x = 100;
-	pieceArray[i].y = 100;
-	gameStage.addChild(pieceArray[i]);
+   pieceArray[i].x = 100;
+   pieceArray[i].y = 100;
+   gameStage.addChild(pieceArray[i]);
 }
 
 //==========================================================================draggable pieces used for setup
@@ -611,435 +611,435 @@ setupStage.update();
 var friendlyColor = "blue";
 var enemyColor = "#8b8989";
 function setBoard(initXYArray){
-	if(playerNum == '1')
-	{
-		//Player 1
-		p1squareCo.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1commanderClickable.addChild(p1squareCo, p1labelCo);
-		p1commanderClickable.addEventListener("click", pieceClick);
-		p1commanderClickable.x = (initXYArray[0] - 1)  *  60 + 2;
-		p1commanderClickable.y = (initXYArray[1] - 1)  *  60 + 2;
-		addGameGridXY(p1commanderClickable);
-		gameStage.addChild(p1commanderClickable);
-		
-		p1squareCa.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1captainClickable.addChild(p1squareCa, p1labelCa);
-		p1captainClickable.addEventListener("click", pieceClick);
-		p1captainClickable.x = (initXYArray[2] - 1)  *  60 + 2;
-		p1captainClickable.y = (initXYArray[3] - 1)  *  60 + 2;
-		addGameGridXY(p1captainClickable);
-		gameStage.addChild(p1captainClickable);
-		
-		p1squareS1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1soldier1Clickable.addChild(p1squareS1, p1labelS1);
-		p1soldier1Clickable.addEventListener("click", pieceClick);
-		p1soldier1Clickable.x = (initXYArray[4] - 1)  *  60 + 2;
-		p1soldier1Clickable.y = (initXYArray[5] - 1)  *  60 + 2;
-		addGameGridXY(p1soldier1Clickable);
-		gameStage.addChild(p1soldier1Clickable);
+   if(playerNum == '1')
+   {
+      //Player 1
+      p1squareCo.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1commanderClickable.addChild(p1squareCo, p1labelCo);
+      p1commanderClickable.addEventListener("click", pieceClick);
+      p1commanderClickable.x = (initXYArray[0] - 1)  *  60 + 2;
+      p1commanderClickable.y = (initXYArray[1] - 1)  *  60 + 2;
+      addGameGridXY(p1commanderClickable);
+      gameStage.addChild(p1commanderClickable);
 
-		p1squareS2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1soldier2Clickable.addChild(p1squareS2, p1labelS2);
-		p1soldier2Clickable.addEventListener("click", pieceClick);
-		p1soldier2Clickable.x = (initXYArray[6] - 1)  *  60 + 2;
-		p1soldier2Clickable.y = (initXYArray[7] - 1)  *  60 + 2;
-		addGameGridXY(p1soldier2Clickable);
-		gameStage.addChild(p1soldier2Clickable);
-		
-		p1squareE1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1engineer1Clickable.addChild(p1squareE1, p1labelE1);
-		p1engineer1Clickable.addEventListener("click", pieceClick);
-		p1engineer1Clickable.x = (initXYArray[8] - 1)  *  60 + 2;
-		p1engineer1Clickable.y = (initXYArray[9] - 1)  *  60 + 2;
-		addGameGridXY(p1engineer1Clickable);
-		gameStage.addChild(p1engineer1Clickable);
+      p1squareCa.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1captainClickable.addChild(p1squareCa, p1labelCa);
+      p1captainClickable.addEventListener("click", pieceClick);
+      p1captainClickable.x = (initXYArray[2] - 1)  *  60 + 2;
+      p1captainClickable.y = (initXYArray[3] - 1)  *  60 + 2;
+      addGameGridXY(p1captainClickable);
+      gameStage.addChild(p1captainClickable);
 
-		p1squareE2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1engineer2Clickable.addChild(p1squareE2, p1labelE2);
-		p1engineer2Clickable.addEventListener("click", pieceClick);
-		p1engineer2Clickable.x = (initXYArray[10] - 1)  *  60 + 2;
-		p1engineer2Clickable.y = (initXYArray[11] - 1)  *  60 + 2;
-		addGameGridXY(p1engineer2Clickable);
-		gameStage.addChild(p1engineer2Clickable);
-		
-		p1squareR1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1rider1Clickable.addChild(p1squareR1, p1labelR1);
-		p1rider1Clickable.addEventListener("click", pieceClick);
-		p1rider1Clickable.x = (initXYArray[12] - 1)  *  60 + 2;
-		p1rider1Clickable.y = (initXYArray[13] - 1)  *  60 + 2;
-		addGameGridXY(p1rider1Clickable);
-		gameStage.addChild(p1rider1Clickable);
-		
-		p1squareR2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1rider2Clickable.addChild(p1squareR2, p1labelR2);
-		p1rider2Clickable.addEventListener("click", pieceClick);
-		p1rider2Clickable.x = (initXYArray[14] - 1)  *  60 + 2;
-		p1rider2Clickable.y = (initXYArray[15] - 1)  *  60 + 2;
-		addGameGridXY(p1rider2Clickable);
-		gameStage.addChild(p1rider2Clickable);
-		
-		p1squareAs.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1assassinClickable.addChild(p1squareAs, p1labelAs);
-		p1assassinClickable.addEventListener("click", pieceClick);
-		p1assassinClickable.x = (initXYArray[16] - 1)  *  60 + 2;
-		p1assassinClickable.y = (initXYArray[17] - 1)  *  60 + 2;
-		addGameGridXY(p1assassinClickable);
-		gameStage.addChild(p1assassinClickable);
-		
-		p1squareAr.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1archerClickable.addChild(p1squareAr, p1labelAr);
-		p1archerClickable.addEventListener("click", pieceClick);
-		p1archerClickable.x = (initXYArray[18] - 1)  *  60 + 2;
-		p1archerClickable.y = (initXYArray[19] - 1)  *  60 + 2;
-		addGameGridXY(p1archerClickable);
-		gameStage.addChild(p1archerClickable);
-		
-		p1squareMy.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1mysticClickable.addChild(p1squareMy, p1labelMy);
-		p1mysticClickable.addEventListener("click", pieceClick);
-		p1mysticClickable.x = (initXYArray[20] - 1)  *  60 + 2;
-		p1mysticClickable.y = (initXYArray[21] - 1)  *  60 + 2;
-		addGameGridXY(p1mysticClickable);
-		gameStage.addChild(p1mysticClickable);
-		
-		p1squareT1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1trap1Clickable.addChild(p1squareT1, p1labelT1);
-		p1trap1Clickable.addEventListener("click", pieceClick);
-		p1trap1Clickable.x = (initXYArray[22] - 1)  *  60 + 2;
-		p1trap1Clickable.y = (initXYArray[23] - 1)  *  60 + 2;
-		addGameGridXY(p1trap1Clickable);
-		gameStage.addChild(p1trap1Clickable);
-		
-		p1squareT2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1trap2Clickable.addChild(p1squareT2, p1labelT2);
-		p1trap2Clickable.addEventListener("click", pieceClick);
-		p1trap2Clickable.x = (initXYArray[24] - 1)  *  60 + 2;
-		p1trap2Clickable.y = (initXYArray[25] - 1)  *  60 + 2;
-		addGameGridXY(p1trap2Clickable);
-		gameStage.addChild(p1trap2Clickable);
-		
-		p1squareIT.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p1importantThingClickable.addChild(p1squareIT, p1labelIT);
-		p1importantThingClickable.addEventListener("click", pieceClick);
-		p1importantThingClickable.x = (initXYArray[26] - 1)  *  60 + 2;
-		p1importantThingClickable.y = (initXYArray[27] - 1)  *  60 + 2;
-		addGameGridXY(p1importantThingClickable);
-		gameStage.addChild(p1importantThingClickable);
-		
-		//Player 2
-		p2squareCo.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2commanderClickable.addChild(p2squareCo);
-		p2commanderClickable.x = (initXYArray[28] - 1)  *  60 + 2;
-		p2commanderClickable.y = (initXYArray[29] - 1)  *  60 + 2;
-		addGameGridXY(p2commanderClickable);
-		gameStage.addChild(p2commanderClickable);
-		
-		p2squareCa.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2captainClickable.addChild(p2squareCa);
-		p2captainClickable.x = (initXYArray[30] - 1)  *  60 + 2;
-		p2captainClickable.y = (initXYArray[31] - 1)  *  60 + 2;
-		addGameGridXY(p2captainClickable);
-		gameStage.addChild(p2captainClickable);
-		
-		p2squareS1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2soldier1Clickable.addChild(p2squareS1);
-		p2soldier1Clickable.x = (initXYArray[32] - 1)  *  60 + 2;
-		p2soldier1Clickable.y = (initXYArray[33] - 1)  *  60 + 2;
-		addGameGridXY(p2soldier1Clickable);
-		gameStage.addChild(p2soldier1Clickable);
+      p1squareS1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1soldier1Clickable.addChild(p1squareS1, p1labelS1);
+      p1soldier1Clickable.addEventListener("click", pieceClick);
+      p1soldier1Clickable.x = (initXYArray[4] - 1)  *  60 + 2;
+      p1soldier1Clickable.y = (initXYArray[5] - 1)  *  60 + 2;
+      addGameGridXY(p1soldier1Clickable);
+      gameStage.addChild(p1soldier1Clickable);
 
-		p2squareS2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2soldier2Clickable.addChild(p2squareS2);
-		p2soldier2Clickable.x = (initXYArray[34] - 1)  *  60 + 2;
-		p2soldier2Clickable.y = (initXYArray[35] - 1)  *  60 + 2;
-		addGameGridXY(p2soldier2Clickable);
-		gameStage.addChild(p2soldier2Clickable);
-		
-		p2squareE1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2engineer1Clickable.addChild(p2squareE1);
-		p2engineer1Clickable.x = (initXYArray[36] - 1)  *  60 + 2;
-		p2engineer1Clickable.y = (initXYArray[37] - 1)  *  60 + 2;
-		addGameGridXY(p2engineer1Clickable);
-		gameStage.addChild(p2engineer1Clickable);
+      p1squareS2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1soldier2Clickable.addChild(p1squareS2, p1labelS2);
+      p1soldier2Clickable.addEventListener("click", pieceClick);
+      p1soldier2Clickable.x = (initXYArray[6] - 1)  *  60 + 2;
+      p1soldier2Clickable.y = (initXYArray[7] - 1)  *  60 + 2;
+      addGameGridXY(p1soldier2Clickable);
+      gameStage.addChild(p1soldier2Clickable);
 
-		p2squareE2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2engineer2Clickable.addChild(p2squareE2);
-		p2engineer2Clickable.x = (initXYArray[38] - 1)  *  60 + 2;
-		p2engineer2Clickable.y = (initXYArray[39] - 1)  *  60 + 2;
-		addGameGridXY(p2engineer2Clickable);
-		gameStage.addChild(p2engineer2Clickable);
-		
-		p2squareR1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2rider1Clickable.addChild(p2squareR1);
-		p2rider1Clickable.x = (initXYArray[40] - 1)  *  60 + 2;
-		p2rider1Clickable.y = (initXYArray[41] - 1)  *  60 + 2;
-		addGameGridXY(p2rider1Clickable);
-		gameStage.addChild(p2rider1Clickable);
-		
-		p2squareR2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2rider2Clickable.addChild(p2squareR2);
-		p2rider2Clickable.x = (initXYArray[42] - 1)  *  60 + 2;
-		p2rider2Clickable.y = (initXYArray[43] - 1)  *  60 + 2;
-		addGameGridXY(p2rider2Clickable);
-		gameStage.addChild(p2rider2Clickable);
-		
-		p2squareAs.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2assassinClickable.addChild(p2squareAs);
-		p2assassinClickable.x = (initXYArray[44] - 1)  *  60 + 2;
-		p2assassinClickable.y = (initXYArray[45] - 1)  *  60 + 2;
-		addGameGridXY(p2assassinClickable);
-		gameStage.addChild(p2assassinClickable);
-		
-		p2squareAr.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2archerClickable.addChild(p2squareAr);
-		p2archerClickable.x = (initXYArray[46] - 1)  *  60 + 2;
-		p2archerClickable.y = (initXYArray[47] - 1)  *  60 + 2;
-		addGameGridXY(p2archerClickable);
-		gameStage.addChild(p2archerClickable);
-		
-		p2squareMy.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2mysticClickable.addChild(p2squareMy);
-		p2mysticClickable.x = (initXYArray[48] - 1)  *  60 + 2;
-		p2mysticClickable.y = (initXYArray[49] - 1)  *  60 + 2;
-		addGameGridXY(p2mysticClickable);
-		gameStage.addChild(p2mysticClickable);
-		
-		p2squareT1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2trap1Clickable.addChild(p2squareT1);
-		p2trap1Clickable.x = (initXYArray[50] - 1)  *  60 + 2;
-		p2trap1Clickable.y = (initXYArray[51] - 1)  *  60 + 2;
-		addGameGridXY(p2trap2Clickable);
-		gameStage.addChild(p2trap2Clickable);
-		
-		p2squareT2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2trap2Clickable.addChild(p2squareT2);
-		p2trap2Clickable.x = (initXYArray[52] - 1)  *  60 + 2;
-		p2trap2Clickable.y = (initXYArray[53] - 1)  *  60 + 2;
-		addGameGridXY(p2trap2Clickable);
-		gameStage.addChild(p2trap2Clickable);
-		
-		p2squareIT.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p2importantThingClickable.addChild(p2squareIT);
-		p2importantThingClickable.x = (initXYArray[54] - 1)  *  60 + 2;
-		p2importantThingClickable.y = (initXYArray[55] - 1)  *  60 + 2;
-		addGameGridXY(p2importantThingClickable);
-		gameStage.addChild(p2importantThingClickable);
-	}
-	else{ // Piece X and Ys from Player 1's perspective. so Y's need to be flipped. 
-		//Player 1
-		p1squareCo.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1commanderClickable.addChild(p1squareCo);
-		p1commanderClickable.x = (initXYArray[0] - 1) * 60 + 2;
-		p1commanderClickable.y = (9 -  initXYArray[1] - 1)  *  60 + 2;
-		addGameGridXY(p1commanderClickable);
-		gameStage.addChild(p1commanderClickable);
-		
-		p1squareCa.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1captainClickable.addChild(p1squareCa);
-		p1captainClickable.x = (initXYArray[2] - 1)  *  60 + 2;
-		p1captainClickable.y = (9 -  initXYArray[3] - 1)  *  60 + 2;
-		addGameGridXY(p1captainClickable);
-		gameStage.addChild(p1captainClickable);
-		
-		p1squareS1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1soldier1Clickable.addChild(p1squareS1);
-		p1soldier1Clickable.x = (initXYArray[4] - 1)  *  60 + 2;
-		p1soldier1Clickable.y = (9 -  initXYArray[5] - 1)  *  60 + 2;
-		addGameGridXY(p1soldier1Clickable);
-		gameStage.addChild(p1soldier1Clickable);
+      p1squareE1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1engineer1Clickable.addChild(p1squareE1, p1labelE1);
+      p1engineer1Clickable.addEventListener("click", pieceClick);
+      p1engineer1Clickable.x = (initXYArray[8] - 1)  *  60 + 2;
+      p1engineer1Clickable.y = (initXYArray[9] - 1)  *  60 + 2;
+      addGameGridXY(p1engineer1Clickable);
+      gameStage.addChild(p1engineer1Clickable);
 
-		p1squareS2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1soldier2Clickable.addChild(p1squareS2);
-		p1soldier2Clickable.x = (initXYArray[6] - 1)  *  60 + 2;
-		p1soldier2Clickable.y = (9 -  initXYArray[7] - 1)  *  60 + 2;
-		addGameGridXY(p1soldier2Clickable);
-		gameStage.addChild(p1soldier2Clickable);
-		
-		p1squareE1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1engineer1Clickable.addChild(p1squareE1);
-		p1engineer1Clickable.x = (initXYArray[8] - 1)  *  60 + 2;
-		p1engineer1Clickable.y = (9 -  initXYArray[9] - 1)  *  60 + 2;
-		addGameGridXY(p1engineer1Clickable);
-		gameStage.addChild(p1engineer1Clickable);
+      p1squareE2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1engineer2Clickable.addChild(p1squareE2, p1labelE2);
+      p1engineer2Clickable.addEventListener("click", pieceClick);
+      p1engineer2Clickable.x = (initXYArray[10] - 1)  *  60 + 2;
+      p1engineer2Clickable.y = (initXYArray[11] - 1)  *  60 + 2;
+      addGameGridXY(p1engineer2Clickable);
+      gameStage.addChild(p1engineer2Clickable);
 
-		p1squareE2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1engineer2Clickable.addChild(p1squareE2);
-		p1engineer2Clickable.x = (initXYArray[10] - 1)  *  60 + 2;
-		p1engineer2Clickable.y = (9 -  initXYArray[11] - 1)  *  60 + 2;
-		addGameGridXY(p1engineer2Clickable);
-		gameStage.addChild(p1engineer2Clickable);
-		
-		p1squareR1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1rider1Clickable.addChild(p1squareR1);
-		p1rider1Clickable.x = (initXYArray[12] - 1)  *  60 + 2;
-		p1rider1Clickable.y = (9 -  initXYArray[13] - 1)  *  60 + 2;
-		addGameGridXY(p1rider1Clickable);
-		gameStage.addChild(p1rider1Clickable);
-		
-		p1squareR2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1rider2Clickable.addChild(p1squareR2);
-		p1rider2Clickable.x = (initXYArray[14] - 1)  *  60 + 2;
-		p1rider2Clickable.y = (9 -  initXYArray[15] - 1)  *  60 + 2;
-		addGameGridXY(p1rider2Clickable);
-		gameStage.addChild(p1rider2Clickable);
-		
-		p1squareAs.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1assassinClickable.addChild(p1squareAs);
-		p1assassinClickable.x = (initXYArray[16] - 1)  *  60 + 2;
-		p1assassinClickable.y = (9 -  initXYArray[17] - 1)  *  60 + 2;
-		addGameGridXY(p1assassinClickable);
-		gameStage.addChild(p1assassinClickable);
-		
-		p1squareAr.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1archerClickable.addChild(p1squareAr);
-		p1archerClickable.x = (initXYArray[18] - 1)  *  60 + 2;
-		p1archerClickable.y = (9 -  initXYArray[19] - 1)  *  60 + 2;
-		addGameGridXY(p1archerClickable);
-		gameStage.addChild(p1archerClickable);
-		
-		p1squareMy.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1mysticClickable.addChild(p1squareMy);
-		p1mysticClickable.x = (initXYArray[20] - 1)  *  60 + 2;
-		p1mysticClickable.y = (9 -  initXYArray[21] - 1)  *  60 + 2;
-		addGameGridXY(p1mysticClickable);
-		gameStage.addChild(p1mysticClickable);
-		
-		p1squareT1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1trap1Clickable.addChild(p1squareT1);
-		p1trap1Clickable.x = (initXYArray[22] - 1)  *  60 + 2;
-		p1trap1Clickable.y = (9 -  initXYArray[23] - 1)  *  60 + 2;
-		addGameGridXY(p1trap1Clickable);
-		gameStage.addChild(p1trap1Clickable);
-		
-		p1squareT2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1trap2Clickable.addChild(p1squareT2);
-		p1trap2Clickable.x = (initXYArray[24] - 1)  *  60 + 2;
-		p1trap2Clickable.y = (9 -  initXYArray[25] - 1)  *  60 + 2;
-		addGameGridXY(p1trap2Clickable);
-		gameStage.addChild(p1trap2Clickable);
-		
-		p1squareIT.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		p1importantThingClickable.addChild(p1squareIT);
-		p1importantThingClickable.x = (initXYArray[26] - 1)  *  60 + 2;
-		p1importantThingClickable.y = (9 -  initXYArray[27] - 1)  *  60 + 2;
-		addGameGridXY(p1importantThingClickable);
-		gameStage.addChild(p1importantThingClickable);
-		
-		//Player 2
-		p2squareCo.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2commanderClickable.addChild(p2squareCo, p2labelCo);
-		p2commanderClickable.addEventListener("click", pieceClick);
-		p2commanderClickable.x = (initXYArray[28] - 1)  *  60 + 2;
-		p2commanderClickable.y = (9 -  initXYArray[29] - 1)  *  60 + 2;
-		addGameGridXY(p2commanderClickable);
-		gameStage.addChild(p2commanderClickable);
-		
-		p2squareCa.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2captainClickable.addChild(p2squareCa, p2labelCa);
-		p2captainClickable.addEventListener("click", pieceClick);
-		p2captainClickable.x = (initXYArray[30] - 1)  *  60 + 2;
-		p2captainClickable.y = (9 -  initXYArray[31] - 1)  *  60 + 2;
-		addGameGridXY(p2captainClickable);
-		gameStage.addChild(p2captainClickable);
-		
-		p2squareS1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2soldier1Clickable.addChild(p2squareS1, p2labelS1);
-		p2soldier1Clickable.addEventListener("click", pieceClick);
-		p2soldier1Clickable.x = (initXYArray[32] - 1)  *  60 + 2;
-		p2soldier1Clickable.y = (9 -  initXYArray[33] - 1)  *  60 + 2;
-		addGameGridXY(p2soldier1Clickable);
-		gameStage.addChild(p2soldier1Clickable);
+      p1squareR1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1rider1Clickable.addChild(p1squareR1, p1labelR1);
+      p1rider1Clickable.addEventListener("click", pieceClick);
+      p1rider1Clickable.x = (initXYArray[12] - 1)  *  60 + 2;
+      p1rider1Clickable.y = (initXYArray[13] - 1)  *  60 + 2;
+      addGameGridXY(p1rider1Clickable);
+      gameStage.addChild(p1rider1Clickable);
 
-		p2squareS2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2soldier2Clickable.addChild(p2squareS2, p2labelS2);
-		p2soldier2Clickable.addEventListener("click", pieceClick);
-		p2soldier2Clickable.x = (initXYArray[34] - 1)  *  60 + 2;
-		p2soldier2Clickable.y = (9 - initXYArray[35] - 1)  *  60 + 2;
-		addGameGridXY(p2soldier2Clickable);
-		gameStage.addChild(p2soldier2Clickable);
-		
-		p2squareE1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2engineer1Clickable.addChild(p2squareE1, p2labelE1);
-		p2engineer1Clickable.addEventListener("click", pieceClick);
-		p2engineer1Clickable.x = (initXYArray[36] - 1)  *  60 + 2;
-		p2engineer1Clickable.y = (9 -  initXYArray[37] - 1)  *  60 + 2;
-		addGameGridXY(p2engineer1Clickable);
-		gameStage.addChild(p2engineer1Clickable);
+      p1squareR2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1rider2Clickable.addChild(p1squareR2, p1labelR2);
+      p1rider2Clickable.addEventListener("click", pieceClick);
+      p1rider2Clickable.x = (initXYArray[14] - 1)  *  60 + 2;
+      p1rider2Clickable.y = (initXYArray[15] - 1)  *  60 + 2;
+      addGameGridXY(p1rider2Clickable);
+      gameStage.addChild(p1rider2Clickable);
 
-		p2squareE2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2engineer2Clickable.addChild(p2squareE2, p2labelE2);
-		p2engineer2Clickable.addEventListener("click", pieceClick);
-		p2engineer2Clickable.x = (initXYArray[38] - 1)  *  60 + 2;
-		p2engineer2Clickable.y = (9 -  initXYArray[39] - 1)  *  60 + 2;
-		addGameGridXY(p2engineer2Clickable);
-		gameStage.addChild(p2engineer2Clickable);
-		
-		p2squareR1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2rider1Clickable.addChild(p2squareR1, p2labelR1);
-		p2rider1Clickable.addEventListener("click", pieceClick);
-		p2rider1Clickable.x = (initXYArray[40] - 1)  *  60 + 2;
-		p2rider1Clickable.y = (9 -  initXYArray[41] - 1)  *  60 + 2;
-		addGameGridXY(p2rider1Clickable);
-		gameStage.addChild(p2rider1Clickable);
-		
-		p2squareR2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2rider2Clickable.addChild(p2squareR2, p2labelR2);
-		p2rider2Clickable.addEventListener("click", pieceClick);
-		p2rider2Clickable.x = (initXYArray[42] - 1)  *  60 + 2;
-		p2rider2Clickable.y = (9 -  initXYArray[43] - 1)  *  60 + 2;
-		addGameGridXY(p2rider2Clickable);
-		gameStage.addChild(p2rider2Clickable);
-		
-		p2squareAs.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2assassinClickable.addChild(p2squareAs, p2labelAs);
-		p2assassinClickable.addEventListener("click", pieceClick);
-		p2assassinClickable.x = (initXYArray[44] - 1)  *  60 + 2;
-		p2assassinClickable.y = (9 -  initXYArray[45] - 1)  *  60 + 2;
-		addGameGridXY(p2assassinClickable);
-		gameStage.addChild(p2assassinClickable);
-		
-		p2squareAr.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2archerClickable.addChild(p2squareAr, p2labelAr);
-		p2archerClickable.addEventListener("click", pieceClick);
-		p2archerClickable.x = (initXYArray[46] - 1)  *  60 + 2;
-		p2archerClickable.y = (9 -  initXYArray[47] - 1)  *  60 + 2;
-		addGameGridXY(p2archerClickable);
-		gameStage.addChild(p2archerClickable);
-		
-		p2squareMy.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2mysticClickable.addChild(p2squareMy, p2labelMy);
-		p2mysticClickable.addEventListener("click", pieceClick);
-		p2mysticClickable.x = (initXYArray[48] - 1)  *  60 + 2;
-		p2mysticClickable.y = (9 -  initXYArray[49] - 1)  *  60 + 2;
-		addGameGridXY(p2mysticClickable);
-		gameStage.addChild(p2mysticClickable);
-		
-		p2squareT1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2trap1Clickable.addChild(p2squareT1, p2labelT1);
-		p2trap1Clickable.addEventListener("click", pieceClick);
-		p2trap1Clickable.x = (initXYArray[50] - 1)  *  60 + 2;
-		p2trap1Clickable.y = (9 -  initXYArray[51] - 1)  *  60 + 2;
-		addGameGridXY(p2trap2Clickable);
-		gameStage.addChild(p2trap2Clickable);
-		
-		p2squareT2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2trap2Clickable.addChild(p2squareT2, p2labelT2);
-		p2trap2Clickable.addEventListener("click", pieceClick);
-		p2trap2Clickable.x = (initXYArray[52] - 1)  *  60 + 2;
-		p2trap2Clickable.y = (9 -  initXYArray[53] - 1)  *  60 + 2;
-		addGameGridXY(p2trap2Clickable);
-		gameStage.addChild(p2trap2Clickable);
-		
-		p2squareIT.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
-		p2importantThingClickable.addChild(p2squareIT, p2labelIT);
-		p2importantThingClickable.addEventListener("click", pieceClick);
-		p2importantThingClickable.x = (initXYArray[54] - 1)  *  60 + 2;
-		p2importantThingClickable.y = (9 -  initXYArray[55] - 1)  *  60 + 2;
-		addGameGridXY(p2importantThingClickable);
-		gameStage.addChild(p2importantThingClickable);
-	}
+      p1squareAs.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1assassinClickable.addChild(p1squareAs, p1labelAs);
+      p1assassinClickable.addEventListener("click", pieceClick);
+      p1assassinClickable.x = (initXYArray[16] - 1)  *  60 + 2;
+      p1assassinClickable.y = (initXYArray[17] - 1)  *  60 + 2;
+      addGameGridXY(p1assassinClickable);
+      gameStage.addChild(p1assassinClickable);
 
-	gameStage.update();
+      p1squareAr.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1archerClickable.addChild(p1squareAr, p1labelAr);
+      p1archerClickable.addEventListener("click", pieceClick);
+      p1archerClickable.x = (initXYArray[18] - 1)  *  60 + 2;
+      p1archerClickable.y = (initXYArray[19] - 1)  *  60 + 2;
+      addGameGridXY(p1archerClickable);
+      gameStage.addChild(p1archerClickable);
+
+      p1squareMy.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1mysticClickable.addChild(p1squareMy, p1labelMy);
+      p1mysticClickable.addEventListener("click", pieceClick);
+      p1mysticClickable.x = (initXYArray[20] - 1)  *  60 + 2;
+      p1mysticClickable.y = (initXYArray[21] - 1)  *  60 + 2;
+      addGameGridXY(p1mysticClickable);
+      gameStage.addChild(p1mysticClickable);
+
+      p1squareT1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1trap1Clickable.addChild(p1squareT1, p1labelT1);
+      p1trap1Clickable.addEventListener("click", pieceClick);
+      p1trap1Clickable.x = (initXYArray[22] - 1)  *  60 + 2;
+      p1trap1Clickable.y = (initXYArray[23] - 1)  *  60 + 2;
+      addGameGridXY(p1trap1Clickable);
+      gameStage.addChild(p1trap1Clickable);
+
+      p1squareT2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1trap2Clickable.addChild(p1squareT2, p1labelT2);
+      p1trap2Clickable.addEventListener("click", pieceClick);
+      p1trap2Clickable.x = (initXYArray[24] - 1)  *  60 + 2;
+      p1trap2Clickable.y = (initXYArray[25] - 1)  *  60 + 2;
+      addGameGridXY(p1trap2Clickable);
+      gameStage.addChild(p1trap2Clickable);
+
+      p1squareIT.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p1importantThingClickable.addChild(p1squareIT, p1labelIT);
+      p1importantThingClickable.addEventListener("click", pieceClick);
+      p1importantThingClickable.x = (initXYArray[26] - 1)  *  60 + 2;
+      p1importantThingClickable.y = (initXYArray[27] - 1)  *  60 + 2;
+      addGameGridXY(p1importantThingClickable);
+      gameStage.addChild(p1importantThingClickable);
+
+      //Player 2
+      p2squareCo.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2commanderClickable.addChild(p2squareCo);
+      p2commanderClickable.x = (initXYArray[28] - 1)  *  60 + 2;
+      p2commanderClickable.y = (initXYArray[29] - 1)  *  60 + 2;
+      addGameGridXY(p2commanderClickable);
+      gameStage.addChild(p2commanderClickable);
+
+      p2squareCa.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2captainClickable.addChild(p2squareCa);
+      p2captainClickable.x = (initXYArray[30] - 1)  *  60 + 2;
+      p2captainClickable.y = (initXYArray[31] - 1)  *  60 + 2;
+      addGameGridXY(p2captainClickable);
+      gameStage.addChild(p2captainClickable);
+
+      p2squareS1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2soldier1Clickable.addChild(p2squareS1);
+      p2soldier1Clickable.x = (initXYArray[32] - 1)  *  60 + 2;
+      p2soldier1Clickable.y = (initXYArray[33] - 1)  *  60 + 2;
+      addGameGridXY(p2soldier1Clickable);
+      gameStage.addChild(p2soldier1Clickable);
+
+      p2squareS2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2soldier2Clickable.addChild(p2squareS2);
+      p2soldier2Clickable.x = (initXYArray[34] - 1)  *  60 + 2;
+      p2soldier2Clickable.y = (initXYArray[35] - 1)  *  60 + 2;
+      addGameGridXY(p2soldier2Clickable);
+      gameStage.addChild(p2soldier2Clickable);
+
+      p2squareE1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2engineer1Clickable.addChild(p2squareE1);
+      p2engineer1Clickable.x = (initXYArray[36] - 1)  *  60 + 2;
+      p2engineer1Clickable.y = (initXYArray[37] - 1)  *  60 + 2;
+      addGameGridXY(p2engineer1Clickable);
+      gameStage.addChild(p2engineer1Clickable);
+
+      p2squareE2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2engineer2Clickable.addChild(p2squareE2);
+      p2engineer2Clickable.x = (initXYArray[38] - 1)  *  60 + 2;
+      p2engineer2Clickable.y = (initXYArray[39] - 1)  *  60 + 2;
+      addGameGridXY(p2engineer2Clickable);
+      gameStage.addChild(p2engineer2Clickable);
+
+      p2squareR1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2rider1Clickable.addChild(p2squareR1);
+      p2rider1Clickable.x = (initXYArray[40] - 1)  *  60 + 2;
+      p2rider1Clickable.y = (initXYArray[41] - 1)  *  60 + 2;
+      addGameGridXY(p2rider1Clickable);
+      gameStage.addChild(p2rider1Clickable);
+
+      p2squareR2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2rider2Clickable.addChild(p2squareR2);
+      p2rider2Clickable.x = (initXYArray[42] - 1)  *  60 + 2;
+      p2rider2Clickable.y = (initXYArray[43] - 1)  *  60 + 2;
+      addGameGridXY(p2rider2Clickable);
+      gameStage.addChild(p2rider2Clickable);
+
+      p2squareAs.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2assassinClickable.addChild(p2squareAs);
+      p2assassinClickable.x = (initXYArray[44] - 1)  *  60 + 2;
+      p2assassinClickable.y = (initXYArray[45] - 1)  *  60 + 2;
+      addGameGridXY(p2assassinClickable);
+      gameStage.addChild(p2assassinClickable);
+
+      p2squareAr.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2archerClickable.addChild(p2squareAr);
+      p2archerClickable.x = (initXYArray[46] - 1)  *  60 + 2;
+      p2archerClickable.y = (initXYArray[47] - 1)  *  60 + 2;
+      addGameGridXY(p2archerClickable);
+      gameStage.addChild(p2archerClickable);
+
+      p2squareMy.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2mysticClickable.addChild(p2squareMy);
+      p2mysticClickable.x = (initXYArray[48] - 1)  *  60 + 2;
+      p2mysticClickable.y = (initXYArray[49] - 1)  *  60 + 2;
+      addGameGridXY(p2mysticClickable);
+      gameStage.addChild(p2mysticClickable);
+
+      p2squareT1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2trap1Clickable.addChild(p2squareT1);
+      p2trap1Clickable.x = (initXYArray[50] - 1)  *  60 + 2;
+      p2trap1Clickable.y = (initXYArray[51] - 1)  *  60 + 2;
+      addGameGridXY(p2trap2Clickable);
+      gameStage.addChild(p2trap2Clickable);
+
+      p2squareT2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2trap2Clickable.addChild(p2squareT2);
+      p2trap2Clickable.x = (initXYArray[52] - 1)  *  60 + 2;
+      p2trap2Clickable.y = (initXYArray[53] - 1)  *  60 + 2;
+      addGameGridXY(p2trap2Clickable);
+      gameStage.addChild(p2trap2Clickable);
+
+      p2squareIT.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p2importantThingClickable.addChild(p2squareIT);
+      p2importantThingClickable.x = (initXYArray[54] - 1)  *  60 + 2;
+      p2importantThingClickable.y = (initXYArray[55] - 1)  *  60 + 2;
+      addGameGridXY(p2importantThingClickable);
+      gameStage.addChild(p2importantThingClickable);
+   }
+   else{ // Piece X and Ys from Player 1's perspective. so Y's need to be flipped. 
+      //Player 1
+      p1squareCo.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1commanderClickable.addChild(p1squareCo);
+      p1commanderClickable.x = (initXYArray[0] - 1) * 60 + 2;
+      p1commanderClickable.y = (9 -  initXYArray[1] - 1)  *  60 + 2;
+      addGameGridXY(p1commanderClickable);
+      gameStage.addChild(p1commanderClickable);
+
+      p1squareCa.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1captainClickable.addChild(p1squareCa);
+      p1captainClickable.x = (initXYArray[2] - 1)  *  60 + 2;
+      p1captainClickable.y = (9 -  initXYArray[3] - 1)  *  60 + 2;
+      addGameGridXY(p1captainClickable);
+      gameStage.addChild(p1captainClickable);
+
+      p1squareS1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1soldier1Clickable.addChild(p1squareS1);
+      p1soldier1Clickable.x = (initXYArray[4] - 1)  *  60 + 2;
+      p1soldier1Clickable.y = (9 -  initXYArray[5] - 1)  *  60 + 2;
+      addGameGridXY(p1soldier1Clickable);
+      gameStage.addChild(p1soldier1Clickable);
+
+      p1squareS2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1soldier2Clickable.addChild(p1squareS2);
+      p1soldier2Clickable.x = (initXYArray[6] - 1)  *  60 + 2;
+      p1soldier2Clickable.y = (9 -  initXYArray[7] - 1)  *  60 + 2;
+      addGameGridXY(p1soldier2Clickable);
+      gameStage.addChild(p1soldier2Clickable);
+
+      p1squareE1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1engineer1Clickable.addChild(p1squareE1);
+      p1engineer1Clickable.x = (initXYArray[8] - 1)  *  60 + 2;
+      p1engineer1Clickable.y = (9 -  initXYArray[9] - 1)  *  60 + 2;
+      addGameGridXY(p1engineer1Clickable);
+      gameStage.addChild(p1engineer1Clickable);
+
+      p1squareE2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1engineer2Clickable.addChild(p1squareE2);
+      p1engineer2Clickable.x = (initXYArray[10] - 1)  *  60 + 2;
+      p1engineer2Clickable.y = (9 -  initXYArray[11] - 1)  *  60 + 2;
+      addGameGridXY(p1engineer2Clickable);
+      gameStage.addChild(p1engineer2Clickable);
+
+      p1squareR1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1rider1Clickable.addChild(p1squareR1);
+      p1rider1Clickable.x = (initXYArray[12] - 1)  *  60 + 2;
+      p1rider1Clickable.y = (9 -  initXYArray[13] - 1)  *  60 + 2;
+      addGameGridXY(p1rider1Clickable);
+      gameStage.addChild(p1rider1Clickable);
+
+      p1squareR2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1rider2Clickable.addChild(p1squareR2);
+      p1rider2Clickable.x = (initXYArray[14] - 1)  *  60 + 2;
+      p1rider2Clickable.y = (9 -  initXYArray[15] - 1)  *  60 + 2;
+      addGameGridXY(p1rider2Clickable);
+      gameStage.addChild(p1rider2Clickable);
+
+      p1squareAs.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1assassinClickable.addChild(p1squareAs);
+      p1assassinClickable.x = (initXYArray[16] - 1)  *  60 + 2;
+      p1assassinClickable.y = (9 -  initXYArray[17] - 1)  *  60 + 2;
+      addGameGridXY(p1assassinClickable);
+      gameStage.addChild(p1assassinClickable);
+
+      p1squareAr.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1archerClickable.addChild(p1squareAr);
+      p1archerClickable.x = (initXYArray[18] - 1)  *  60 + 2;
+      p1archerClickable.y = (9 -  initXYArray[19] - 1)  *  60 + 2;
+      addGameGridXY(p1archerClickable);
+      gameStage.addChild(p1archerClickable);
+
+      p1squareMy.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1mysticClickable.addChild(p1squareMy);
+      p1mysticClickable.x = (initXYArray[20] - 1)  *  60 + 2;
+      p1mysticClickable.y = (9 -  initXYArray[21] - 1)  *  60 + 2;
+      addGameGridXY(p1mysticClickable);
+      gameStage.addChild(p1mysticClickable);
+
+      p1squareT1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1trap1Clickable.addChild(p1squareT1);
+      p1trap1Clickable.x = (initXYArray[22] - 1)  *  60 + 2;
+      p1trap1Clickable.y = (9 -  initXYArray[23] - 1)  *  60 + 2;
+      addGameGridXY(p1trap1Clickable);
+      gameStage.addChild(p1trap1Clickable);
+
+      p1squareT2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1trap2Clickable.addChild(p1squareT2);
+      p1trap2Clickable.x = (initXYArray[24] - 1)  *  60 + 2;
+      p1trap2Clickable.y = (9 -  initXYArray[25] - 1)  *  60 + 2;
+      addGameGridXY(p1trap2Clickable);
+      gameStage.addChild(p1trap2Clickable);
+
+      p1squareIT.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+      p1importantThingClickable.addChild(p1squareIT);
+      p1importantThingClickable.x = (initXYArray[26] - 1)  *  60 + 2;
+      p1importantThingClickable.y = (9 -  initXYArray[27] - 1)  *  60 + 2;
+      addGameGridXY(p1importantThingClickable);
+      gameStage.addChild(p1importantThingClickable);
+
+      //Player 2
+      p2squareCo.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2commanderClickable.addChild(p2squareCo, p2labelCo);
+      p2commanderClickable.addEventListener("click", pieceClick);
+      p2commanderClickable.x = (initXYArray[28] - 1)  *  60 + 2;
+      p2commanderClickable.y = (9 -  initXYArray[29] - 1)  *  60 + 2;
+      addGameGridXY(p2commanderClickable);
+      gameStage.addChild(p2commanderClickable);
+
+      p2squareCa.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2captainClickable.addChild(p2squareCa, p2labelCa);
+      p2captainClickable.addEventListener("click", pieceClick);
+      p2captainClickable.x = (initXYArray[30] - 1)  *  60 + 2;
+      p2captainClickable.y = (9 -  initXYArray[31] - 1)  *  60 + 2;
+      addGameGridXY(p2captainClickable);
+      gameStage.addChild(p2captainClickable);
+
+      p2squareS1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2soldier1Clickable.addChild(p2squareS1, p2labelS1);
+      p2soldier1Clickable.addEventListener("click", pieceClick);
+      p2soldier1Clickable.x = (initXYArray[32] - 1)  *  60 + 2;
+      p2soldier1Clickable.y = (9 -  initXYArray[33] - 1)  *  60 + 2;
+      addGameGridXY(p2soldier1Clickable);
+      gameStage.addChild(p2soldier1Clickable);
+
+      p2squareS2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2soldier2Clickable.addChild(p2squareS2, p2labelS2);
+      p2soldier2Clickable.addEventListener("click", pieceClick);
+      p2soldier2Clickable.x = (initXYArray[34] - 1)  *  60 + 2;
+      p2soldier2Clickable.y = (9 - initXYArray[35] - 1)  *  60 + 2;
+      addGameGridXY(p2soldier2Clickable);
+      gameStage.addChild(p2soldier2Clickable);
+
+      p2squareE1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2engineer1Clickable.addChild(p2squareE1, p2labelE1);
+      p2engineer1Clickable.addEventListener("click", pieceClick);
+      p2engineer1Clickable.x = (initXYArray[36] - 1)  *  60 + 2;
+      p2engineer1Clickable.y = (9 -  initXYArray[37] - 1)  *  60 + 2;
+      addGameGridXY(p2engineer1Clickable);
+      gameStage.addChild(p2engineer1Clickable);
+
+      p2squareE2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2engineer2Clickable.addChild(p2squareE2, p2labelE2);
+      p2engineer2Clickable.addEventListener("click", pieceClick);
+      p2engineer2Clickable.x = (initXYArray[38] - 1)  *  60 + 2;
+      p2engineer2Clickable.y = (9 -  initXYArray[39] - 1)  *  60 + 2;
+      addGameGridXY(p2engineer2Clickable);
+      gameStage.addChild(p2engineer2Clickable);
+
+      p2squareR1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2rider1Clickable.addChild(p2squareR1, p2labelR1);
+      p2rider1Clickable.addEventListener("click", pieceClick);
+      p2rider1Clickable.x = (initXYArray[40] - 1)  *  60 + 2;
+      p2rider1Clickable.y = (9 -  initXYArray[41] - 1)  *  60 + 2;
+      addGameGridXY(p2rider1Clickable);
+      gameStage.addChild(p2rider1Clickable);
+
+      p2squareR2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2rider2Clickable.addChild(p2squareR2, p2labelR2);
+      p2rider2Clickable.addEventListener("click", pieceClick);
+      p2rider2Clickable.x = (initXYArray[42] - 1)  *  60 + 2;
+      p2rider2Clickable.y = (9 -  initXYArray[43] - 1)  *  60 + 2;
+      addGameGridXY(p2rider2Clickable);
+      gameStage.addChild(p2rider2Clickable);
+
+      p2squareAs.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2assassinClickable.addChild(p2squareAs, p2labelAs);
+      p2assassinClickable.addEventListener("click", pieceClick);
+      p2assassinClickable.x = (initXYArray[44] - 1)  *  60 + 2;
+      p2assassinClickable.y = (9 -  initXYArray[45] - 1)  *  60 + 2;
+      addGameGridXY(p2assassinClickable);
+      gameStage.addChild(p2assassinClickable);
+
+      p2squareAr.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2archerClickable.addChild(p2squareAr, p2labelAr);
+      p2archerClickable.addEventListener("click", pieceClick);
+      p2archerClickable.x = (initXYArray[46] - 1)  *  60 + 2;
+      p2archerClickable.y = (9 -  initXYArray[47] - 1)  *  60 + 2;
+      addGameGridXY(p2archerClickable);
+      gameStage.addChild(p2archerClickable);
+
+      p2squareMy.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2mysticClickable.addChild(p2squareMy, p2labelMy);
+      p2mysticClickable.addEventListener("click", pieceClick);
+      p2mysticClickable.x = (initXYArray[48] - 1)  *  60 + 2;
+      p2mysticClickable.y = (9 -  initXYArray[49] - 1)  *  60 + 2;
+      addGameGridXY(p2mysticClickable);
+      gameStage.addChild(p2mysticClickable);
+
+      p2squareT1.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2trap1Clickable.addChild(p2squareT1, p2labelT1);
+      p2trap1Clickable.addEventListener("click", pieceClick);
+      p2trap1Clickable.x = (initXYArray[50] - 1)  *  60 + 2;
+      p2trap1Clickable.y = (9 -  initXYArray[51] - 1)  *  60 + 2;
+      addGameGridXY(p2trap2Clickable);
+      gameStage.addChild(p2trap2Clickable);
+
+      p2squareT2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2trap2Clickable.addChild(p2squareT2, p2labelT2);
+      p2trap2Clickable.addEventListener("click", pieceClick);
+      p2trap2Clickable.x = (initXYArray[52] - 1)  *  60 + 2;
+      p2trap2Clickable.y = (9 -  initXYArray[53] - 1)  *  60 + 2;
+      addGameGridXY(p2trap2Clickable);
+      gameStage.addChild(p2trap2Clickable);
+
+      p2squareIT.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
+      p2importantThingClickable.addChild(p2squareIT, p2labelIT);
+      p2importantThingClickable.addEventListener("click", pieceClick);
+      p2importantThingClickable.x = (initXYArray[54] - 1)  *  60 + 2;
+      p2importantThingClickable.y = (9 -  initXYArray[55] - 1)  *  60 + 2;
+      addGameGridXY(p2importantThingClickable);
+      gameStage.addChild(p2importantThingClickable);
+   }
+
+   gameStage.update();
 }
 
 

@@ -360,6 +360,8 @@ function resolveConflict(conflictArray){
       playerTurn = '2';
    else
       playerTurn = '1';
+
+   gameStage.update();
 }
 
 //move a piece into an open square
@@ -380,6 +382,8 @@ function simpleMove(moveArray){
       playerTurn = '2';
    else
       playerTurn = '1';
+
+   gameStage.update();
 }
 
 //if the server does not think the move sent was valid
@@ -469,9 +473,9 @@ function movePiece(event){
       alert("move sent");
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
-      move[2] = orient(selectedPiece.gameGridY);
+      move[2] = orient(playerNum, selectedPiece.gameGridY);
       move[3] = event.target.parent.gameGridX;
-      move[4] = orient(event.target.parent.gameGridY);
+      move[4] = orient(playerNum, event.target.parent.gameGridY);
       move[5] = 1;
       move[6] = playerNum;
       socket.emit("move", move);
