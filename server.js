@@ -650,7 +650,7 @@ function checkMystic(xOld, yOld, xNew, yNew) {
 	//checks whether the piece is mystic or not
 		if(pieceWithOlInd.type == "mystic") {
 			
-			var tempArray = [xNew, yNew, pieceToBeSeen];
+			var tempArray = [xNew, yNew, pieceToBeSeen.type];
 			io.sockets.emit('mystic', tempArray);
 		}
 		else {
