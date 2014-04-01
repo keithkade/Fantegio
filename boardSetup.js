@@ -364,10 +364,16 @@ function resolveConflict(conflictArray){
       }
    }
 
-   if(playerTurn == '1')
+   if(playerTurn == '1'){
+   	  if(playerTurn == 2){ alert("Your turn"); }
       playerTurn = '2';
-   else
+   }
+   else{
+   	  if(playerTurn == 1){ alert("Your turn"); }
       playerTurn = '1';
+   }
+    
+
 
    gameStage.update();
 }
@@ -394,10 +400,14 @@ function simpleMove(moveArray){
       }
    }
 
-   if(playerTurn == '1')
+   if(playerTurn == '1'){
+   	  if(playerTurn == 2){ alert("Your turn"); }
       playerTurn = '2';
-   else
+   }
+   else{
+   	  if(playerTurn == 1){ alert("Your turn"); }
       playerTurn = '1';
+   }
 
    gameStage.update();
 }
