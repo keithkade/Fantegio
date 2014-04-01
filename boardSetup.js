@@ -383,11 +383,11 @@ function resolveConflict(conflictArray){
    }
 
    if(playerTurn == '1'){
-   	  if(playerTurn == 2){ alert("Your turn"); }
+   	  if(playerNum == 2){ alert("Your turn"); }
       playerTurn = '2';
    }
    else{
-   	  if(playerTurn == 1){ alert("Your turn"); }
+   	  if(playerNum == 1){ alert("Your turn"); }
       playerTurn = '1';
    }
     
@@ -418,11 +418,11 @@ function simpleMove(moveArray){
    }
 
    if(playerTurn == '1'){
-   	  if(playerTurn == 2){ alert("Your turn"); }
+   	  if(playerNum == 2){ alert("Your turn"); }
       playerTurn = '2';
    }
    else{
-   	  if(playerTurn == 1){ alert("Your turn"); }
+   	  if(playerNum == 1){ alert("Your turn"); }
       playerTurn = '1';
    }
 
