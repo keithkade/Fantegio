@@ -404,7 +404,35 @@ function setupBoard(data) {
 
 	// If both players have connected, signal start game
 	if (numClients == 2) {
+	
+		//initializing all the rocks
+		var rock1 = new Piece();
+		rock1.strength = 20;
+		rock1.type = "rock";
+		rock1.team = 3;
+		rock1.X = 3;
+		rock1.Y = 3;
+		allPieces[28] = rock1;
+		
+		var rock2 = new Piece();
+		rock2.strength = 20;
+		rock2.type = "rock";
+		rock2.team = 3;
+		rock2.X = 4;
+		rock2.Y = 3;
+		allPieces[29] = rock2;
+		
+		var rock3 = new Piece();
+		rock3.strength = 20;
+		rock3.type = "rock";
+		rock3.team = 3;
+		rock3.X = 3;
+		rock3.Y = 5;
+		allPieces[30] = rock3;
+		
+		//get the location vector that will be sent to client
 		var locArray = getLocations(allPieces);
+		
 		io.sockets.emit("start game", locArray);
 	}
 }
@@ -423,6 +451,10 @@ function handleMove(data) {
 
 	// Only execute if move is valid
 	if (validMove(xOld, yOld, xNew, yNew)) {
+	
+		//check to see if the move is made by mystic
+		checkMystic(xOld, yOld, xNew, YNew);
+		
 		if (spaceEmpty(xNew, yNew)) {
 			// We need to update piece position in allPieces
 			// mInd -> moving index
