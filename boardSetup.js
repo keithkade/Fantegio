@@ -477,7 +477,25 @@ function pieceClick(event){
 
    selectedPiece = event.target.parent;
    
-   if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
+   if(selectedPiece.pieceType == "Rider")
+   {
+      var count = 1;
+      while(possibleMoveDest(selectedPiece.gameGridX, selectedPiece.gameGridY+count))
+         count++;
+      
+      count = 1;
+      while(possibleMoveDest(selectedPiece.gameGridX, selectedPiece.gameGridY-count))
+         count++;
+
+      count = 1;
+      while(possibleMoveDest(selectedPiece.gameGridX+count, selectedPiece.gameGridY))
+         count++;
+
+      count = 1;
+      while(possibleMoveDest(selectedPiece.gameGridX-count, selectedPiece.gameGridY))
+         count++;
+   }
+   else if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
       possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
       possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
       possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
