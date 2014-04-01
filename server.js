@@ -462,7 +462,7 @@ function handleMove(data) {
    }
    else {
 		//check to see if the move is made by mystic
-		checkMystic(xOld, yOld, xNew, YNew);
+		checkMystic(xOld, yOld, xNew, yNew);
 		
 		// If space not empty, then handle attack
 		resolveConflict(xOld, yOld, xNew, yNew);
