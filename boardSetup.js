@@ -459,11 +459,14 @@ function pieceClick(event){
    }
 
    selectedPiece = event.target.parent;
-
-   possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
-   possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
-   possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
-   possibleMoveDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
+   
+   if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing")
+   {
+      possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
+      possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
+      possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
+      possibleMoveDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
+   }
 }
 
 //Used in pieceClick() to set the square as clickable if moving there is legal.
