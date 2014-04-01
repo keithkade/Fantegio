@@ -285,9 +285,9 @@ function resolveConflict(conflictArray){
    var playerMoved = conflictArray[0];
    var outcome = conflictArray[1];
    var xOld = moveArray[2];
-   var yOld = moveArray[3];
+   var yOld = orient(playerNum, moveArray[3]);
    var xNew = moveArray[4];
-   var yNew = moveArray[5];
+   var yNew = orient(playerNum, moveArray[5]);
 
    var attacked = pieceAtLocation(xNew, yNew);
    if(attacked.type == "Important Thing"){
@@ -353,33 +353,41 @@ function resolveConflict(conflictArray){
       if (pieceArray[i].gameGridX == xOld && pieceArray[i].gameGridY == yOld){
          pieceArray[i].gameGridX = xNew;
          pieceArray[i].gameGridY = yNew;
+         pieceArray[i].x = ((xNew - 1) * 60) + 2;
+         pieceArray[i].y = ((yNew - 1) * 60) + 2;
       }
    }
 
-   if(playerTurn = '1')
+   if(playerTurn == '1')
       playerTurn = '2';
    else
       playerTurn = '1';
+
+   gameStage.update();
 }
 
 //move a piece into an open square
 function simpleMove(moveArray){
    var xOld = moveArray[0];
-   var yOld = moveArray[1];
+   var yOld = orient(playerNum, moveArray[1]);
    var xNew = moveArray[2];
-   var yNew = moveArray[3]; 
+   var yNew = orient(playerNum, moveArray[3]); 
 
    for(var i=0; i<pieceArray.length; i++){
       if (pieceArray[i].gameGridX == xOld && pieceArray[i].gameGridY == yOld){
          pieceArray[i].gameGridX = xNew;
          pieceArray[i].gameGridY = yNew;
+         pieceArray[i].x = ((xNew - 1) * 60) + 2;
+         pieceArray[i].y = ((yNew - 1) * 60) + 2;
       }
    }
 
-   if(playerTurn = '1')
+   if(playerTurn == '1')
       playerTurn = '2';
    else
       playerTurn = '1';
+
+   gameStage.update();
 }
 
 //if the server does not think the move sent was valid
@@ -469,9 +477,9 @@ function movePiece(event){
       alert("move sent");
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
-      move[2] = orient(selectedPiece.gameGridY);
+      move[2] = orient(playerNum, selectedPiece.gameGridY);
       move[3] = event.target.parent.gameGridX;
-      move[4] = orient(event.target.parent.gameGridY);
+      move[4] = orient(playerNum, event.target.parent.gameGridY);
       move[5] = 1;
       move[6] = playerNum;
       socket.emit("move", move);
