@@ -300,7 +300,7 @@ socket.on('game over', gameOver);
 
 //message recieved that someone has won
 function gameOver(gameOverArray){
-	var playerWon = conflictArray[0];
+	var playerWon = gameOverArray[0];
     if (playerWon == 1 && playerNum == 1){
          alert("You have won!");
     }	
