@@ -598,6 +598,13 @@ function validMove(xOld, yOld, xNew, yNew) {
 			io.sockets.emit('invalid move', tempArray);
 			return false;
 		}
+		else if(attacked.type == "rock"){
+			var message = "Pieces cannot move on the rock.";
+			var tempArray = [xOld, yOld, message];
+			io.sockets.emit('invalid move', tempArray);
+			return false;
+			
+		}
 	}
 	else if (moving.type == "trap" || moving.type == "important thing") {
 		var message = "The Important Thing and Traps cannot be moved.";
