@@ -1,5 +1,7 @@
 //==========================================================================setup board 
 var setupStage = new createjs.Stage("setupCanvas");
+var lostPiecesStage = new createjs.Stage("lostPiecesCanvas");
+var capPiecesStage = new createjs.Stage("capPiecesCanvas"; 
 
 var setupBoardHeight = 300;
 var setupBoardWidth = 480;
@@ -272,7 +274,11 @@ p2archerClickable.pieceType = "Archer";
 p2archerClickable.team =  '2';
 
 //create clickable mystic
-var p2squareMy = new createjs.Shape();
+var p2squareMy = new createjs.Shape();var count = 1;
+      while(possibleMoveDest(selectedPiece.gameGridX, selectedPiece.gameGridY+count)
+         count++;
+
+
 var p2labelMy = new createjs.Text("Mystic - 1", "10px Arial", "#FFFFFF");
 p2labelMy.textAlign = "center";
 p2labelMy.x = 28;
