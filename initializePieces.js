@@ -809,7 +809,7 @@ function setBoard(initXYArray){
       p2trap1Clickable.x = (initXYArray[50] - 1)  *  60 + 2;
       p2trap1Clickable.y = (initXYArray[51] - 1)  *  60 + 2;
       addGameGridXY(p2trap2Clickable);
-      gameStage.addChild(p2trap2Clickable);
+      gameStage.addChild(p2trap1Clickable);
 
       p2squareT2.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
       p2trap2Clickable.addChild(p2squareT2);

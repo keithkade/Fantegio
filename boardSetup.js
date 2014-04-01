@@ -278,9 +278,27 @@ socket.on('start game', setBoard);
 socket.on('resolve conflict', resolveConflict);
 socket.on('simple move', simpleMove);
 socket.on('invalid move', invalidMove);
+socket.on('game over', gameOver);
 
-//[“resolve conflict”, outcome(0->both die, 1->player 1 wins, 2->player 2 wins), pieceOne, pieceTwo]
-//
+//message recieved that someone has won
+function gameOver(gameOverArray){
+	var playerWon = conflictArray[0];
+    if (playerWon == 1 && playerNum == 1){
+         alert("You have won!");
+    }	
+    else if (playerWon == 1 && playerNum == 2){
+         alert("You have lost!");
+    }	
+    else if (playerWon == 2 && playerNum == 1){
+         alert("You have lost!");
+    }	
+    else if (playerWon == 2 && playerNum == 2){
+         alert("You have won!");
+    }							
+}
+
+
+//message recieved that contains the results of a conflict
 function resolveConflict(conflictArray){
    var playerMoved = conflictArray[0];
    var outcome = conflictArray[1];
@@ -290,25 +308,13 @@ function resolveConflict(conflictArray){
    var yNew = orient(playerNum, conflictArray[5]);
 
    var attacked = pieceAtLocation(xNew, yNew);
-   if(attacked.type == "Important Thing"){
-      if (playerMoved == 1 && playerNum == 1){
-         alert("You have won!");
-      }	
-      if (playerMoved == 1 && playerNum == 2){
-         alert("You have lost!");
-      }	
-      if (playerMoved == 2 && playerNum == 1){
-         alert("You have lost!");
-      }	
-      if (playerMoved == 2 && playerNum == 2){
-         alert("You have won!");
-      }							
-   }
-   else if (outcome == 0){ //both die
+
+   if (outcome == 0){ //both die
       var p1 = pieceAtLocation(xOld, yOld);
-      gameStage.removeChild(p1);
       var p2 = pieceAtLocation(xNew, yNew);
-      gameStage.removeChild(p2);
+      removeClickable(p1);
+      removeClickable(p2);
+      alert("A " + p1.pieceType + " and a " + p2.pieceType + "defeated each other");
    }
 
    if (outcome == 1 && playerMoved == 1){ //player1 wins
