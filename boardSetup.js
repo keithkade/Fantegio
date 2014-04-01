@@ -1,6 +1,11 @@
+//the player number is passed as a url argument
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
+
+//create socket for communication
 var socket = io.connect('http://' + document.location.host);
+
+//player one always start first
 var playerTurn = '1';
 
 //this is oddly shaped because 2d arrays are indexed by [row][column] and also because they are zero based
@@ -17,6 +22,7 @@ var isGameLocOccupied = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0]
 ];
 
+//when game starts we hide and/or show html elements
 function hideElem(divId){
    document.getElementById(divId).style.display = 'none';
 }
@@ -25,19 +31,21 @@ function showElem(divId){
    document.getElementById(divId).style.display = 'block';
 }
 
-//also establishes intial lastX and lastY
+//creates initial gameGrid x and y for draggers. also establishes initial lastX and lastY
+//lastX and lastY are used for collision detection
 function initializePieceXY (dragger){
    convertToGameGridXY(dragger);
    dragger.lastX = dragger.gameGridX;
    dragger.lastY = dragger.gameGridY;
 }
 
-//converts canvas x and y to grid x and y
+//converts canvas x and y to gameGrid x and y for draggers
 function convertToGameGridXY (dragger){
    dragger.gameGridX = (dragger.x-2)/60 + 1;
    dragger.gameGridY = (dragger.y+178)/60 + 1;	
 }
 
+//converts canvas x and y to gameGrid x and y for clickers
 function addGameGridXY (clickAble){
    clickAble.gameGridX = (clickAble.x-2)/60 + 1;
    clickAble.gameGridY = (clickAble.y-2)/60 + 1;	
@@ -83,6 +91,7 @@ function addDragAndDrop (toDrag){
             evt.currentTarget.x = (evt.currentTarget.gameGridX - 1)*60 + 2;
             evt.currentTarget.y = (evt.currentTarget.gameGridY - 1)*60 - 178;
          }
+         //otherwise update location of piece, both on canvas and gameGrid
          else{
             evt.currentTarget.x = x;
             evt.currentTarget.y = y;
@@ -216,7 +225,6 @@ function setup(){
 
    setupStage.update();
 }	
-
 setupStage.update();
 
 //to be sent to server on game start	
@@ -224,8 +232,18 @@ var resultArray = new Array();
 var locationArray = new Array();
 
 //put all of the piece locations into an array and send to server
-//also update the page by showing old canvas and adding new one
+//also update the page by removing old html elements and adding new ones
 function startGame(){
+	
+   //if not all pieces have been placed then just give the default setup
+   for (var i=0; i < pieceArray.length; i++){
+      if (pieceArray[i].gameGridY > 8){
+         alert("You had at least one piece off the board so you were given the default setup");
+         setup();
+         startGame();
+      }
+   }
+	
    playerTurn = '1';
    resultArray[0] = "setup";
    resultArray[1] = playerNum;
@@ -273,48 +291,54 @@ function startGame(){
    showElem("capPiecesCanvas");	
 }
 
-//listen 
+//listen to server
 socket.on('start game', setBoard);
 socket.on('resolve conflict', resolveConflict);
 socket.on('simple move', simpleMove);
 socket.on('invalid move', invalidMove);
+socket.on('game over', gameOver);
 
-//[“resolve conflict”, outcome(0->both die, 1->player 1 wins, 2->player 2 wins), pieceOne, pieceTwo]
-//
+//message recieved that someone has won
+function gameOver(gameOverArray){
+	var playerWon = gameOverArray[0];
+    if (playerWon == 1 && playerNum == 1){
+         alert("You have won!");
+    }	
+    else if (playerWon == 1 && playerNum == 2){
+         alert("You have lost!");
+    }	
+    else if (playerWon == 2 && playerNum == 1){
+         alert("You have lost!");
+    }	
+    else if (playerWon == 2 && playerNum == 2){
+         alert("You have won!");
+    }							
+}
+
+
+//message recieved that contains the results of a conflict
 function resolveConflict(conflictArray){
    var playerMoved = conflictArray[0];
    var outcome = conflictArray[1];
-   var xOld = moveArray[2];
-   var yOld = orient(playerNum, moveArray[3]);
-   var xNew = moveArray[4];
-   var yNew = orient(playerNum, moveArray[5]);
+   var xOld = conflictArray[2];
+   var yOld = orient(playerNum, conflictArray[3]);
+   var xNew = conflictArray[4];
+   var yNew = orient(playerNum, conflictArray[5]);
 
    var attacked = pieceAtLocation(xNew, yNew);
-   if(attacked.type == "Important Thing"){
-      if (playerMoved == 1 && playerNum == 1){
-         alert("You have won!");
-      }	
-      if (playerMoved == 1 && playerNum == 2){
-         alert("You have lost!");
-      }	
-      if (playerMoved == 2 && playerNum == 1){
-         alert("You have lost!");
-      }	
-      if (playerMoved == 2 && playerNum == 2){
-         alert("You have won!");
-      }							
-   }
-   else if (outcome == 0){ //both die
+
+   if (outcome == 0){ //both die
       var p1 = pieceAtLocation(xOld, yOld);
-      gameStage.removeChild(p1);
       var p2 = pieceAtLocation(xNew, yNew);
-      gameStage.removeChild(p1);
+      removeClickable(p1);
+      removeClickable(p2);
+      alert("A " + p1.pieceType + " and a " + p2.pieceType + "defeated each other");
    }
 
    if (outcome == 1 && playerMoved == 1){ //player1 wins
       var loser = pieceAtLocation(xNew, yNew); //piece moved onto
       var winner = pieceAtLocation(xOld, yOld);
-      gameStage.removeChild(loser);
+      removeClickable(loser);
       if (playerNum == 1)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -323,7 +347,7 @@ function resolveConflict(conflictArray){
    else if (outcome == 2 && playerMoved == 1){ //player2 wins
       var loser = pieceAtLocation(xOld, yOld); //piece moved 
       var winner = pieceAtLocation(xNew, yNew);
-      gameStage.removeChild(loser);
+      removeClickable(loser);
       if (playerNum == 2)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -332,7 +356,7 @@ function resolveConflict(conflictArray){
    else if (outcome == 1 && playerMoved == 2){ 
       var loser = pieceAtLocation(xOld, yOld); //piece moved 
       var winner = pieceAtLocation(xNew, yNew);
-      gameStage.removeChild(loser);
+      removeClickable(loser);
       if (playerNum == 1)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -341,7 +365,7 @@ function resolveConflict(conflictArray){
    else if (outcome == 2 && playerMoved == 2){ 
       var loser = pieceAtLocation(xNew, yNew); 
       var winner = pieceAtLocation(xOld, yOld);
-      gameStage.removeChild(p);		
+      removeClickable(loser);		
       if (playerNum == 2)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -358,12 +382,23 @@ function resolveConflict(conflictArray){
       }
    }
 
-   if(playerTurn == '1')
+   if(playerTurn == '1'){
+   	  if(playerNum == 2){ alert("Your turn"); }
       playerTurn = '2';
-   else
+   }
+   else{
+   	  if(playerNum == 1){ alert("Your turn"); }
       playerTurn = '1';
-
+   }
+    
    gameStage.update();
+}
+
+//when a clickable is defeated set it off the board 
+function removeClickable(clickable){
+   clickable.gameGridX = -1;
+   clickable.gameGridY = -1;
+   gameStage.removeChild(clickable);
 }
 
 //move a piece into an open square
@@ -382,10 +417,14 @@ function simpleMove(moveArray){
       }
    }
 
-   if(playerTurn == '1')
+   if(playerTurn == '1'){
+   	  if(playerNum == 2){ alert("Your turn"); }
       playerTurn = '2';
-   else
+   }
+   else{
+   	  if(playerNum == 1){ alert("Your turn"); }
       playerTurn = '1';
+   }
 
    gameStage.update();
 }
@@ -404,18 +443,19 @@ function gameStartOnTimeout(){
 
 //return the piece at a given location, if no piece is there return false
 function pieceAtLocation(x, y){
-   for (var i=0; i < pieceArray.length; i++)
-      if (pieceArray[i].gameGridX == x && pieceArray[i].gameGridY == y)
+   for (var i=0; i < pieceArray.length; i++){
+      if (pieceArray[i].gameGridX == x && pieceArray[i].gameGridY == y){
          return pieceArray[i];
+      }
+   }
 
    return false;
 
 }
 
-//switches y coordinate if neccessary for player
+//switches y coordinate if neccessary for player 2
 function orient(playerNum, Y_Loc){
-   if(playerNum == "2")
-   {
+   if(playerNum == "2"){
       return 9 - Y_Loc;
    }
    else{
@@ -431,37 +471,35 @@ var choices = [];
 //called when a piece owned by a player is clicked.
 function pieceClick(event){
    //clear previously clicked piece's choices
-   while(choices.length > 0)
-   {
+   while(choices.length > 0){
       choices.pop().removeEventListener("click", movePiece);
    }
 
    selectedPiece = event.target.parent;
-
-   possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
-   possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
-   possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
-   possibleMoveDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
+   
+   if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
+      possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
+      possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
+      possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
+      possibleMoveDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
+   }
 }
 
 //Used in pieceClick() to set the square as clickable if moving there is legal.
 //	returns true if open square
 // 	returns false if non-open square 
 function possibleMoveDest(destX, destY){
-   if( destX < 1 || destX > 8 || destY < 1 || destY > 8)
-   {
+   if( destX < 1 || destX > 8 || destY < 1 || destY > 8){
       return false;
    }
    var curPiece = pieceAtLocation(destX,destY);
-   if(curPiece == false)
-   {
+   if(curPiece == false){
       var temp = board[destX][destY];
       board[destX][destY].addEventListener("click", movePiece);
       choices.push(board[destX][destY]);
       return true;
    }
-   else if(curPiece.team != playerNum)
-   {
+   else if(curPiece.team != playerNum){
       curPiece.addEventListener("click", movePiece);
       choices.push(curPiece);
    }
@@ -471,9 +509,7 @@ function possibleMoveDest(destX, destY){
 var move = new Array();
 //called when pieces a player can move the selectedPiece to are clicked.
 function movePiece(event){
-   if(playerTurn == playerNum)
-   {
-
+   if(playerTurn == playerNum){
       alert("move sent");
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
