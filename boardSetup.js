@@ -477,25 +477,7 @@ function pieceClick(event){
 
    selectedPiece = event.target.parent;
    
-   if(selectedPiece.pieceType == "Rider")
-   {
-      var count = 1;
-      while(possibleMoveDest(selectedPiece.gameGridX, selectedPiece.gameGridY+count))
-         count++;
-      
-      count = 1;
-      while(possibleMoveDest(selectedPiece.gameGridX, selectedPiece.gameGridY-count))
-         count++;
-
-      count = 1;
-      while(possibleMoveDest(selectedPiece.gameGridX+count, selectedPiece.gameGridY))
-         count++;
-
-      count = 1;
-      while(possibleMoveDest(selectedPiece.gameGridX-count, selectedPiece.gameGridY))
-         count++;
-   }
-   else if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
+   if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
       possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
       possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
       possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
@@ -507,7 +489,7 @@ function pieceClick(event){
 //	returns true if open square
 // 	returns false if non-open square 
 function possibleMoveDest(destX, destY){
-   if( destX < 1 || destX > 8 || destY < 1 || destY > 8 ||  curPiece.team == '3'){
+   if( destX < 1 || destX > 8 || destY < 1 || destY > 8){
       return false;
    }
    var curPiece = pieceAtLocation(destX,destY);
@@ -528,7 +510,7 @@ var move = new Array();
 //called when pieces a player can move the selectedPiece to are clicked.
 function movePiece(event){
    if(playerTurn == playerNum){
-      //alert("move sent");
+      alert("move sent");
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
       move[2] = orient(playerNum, selectedPiece.gameGridY);
