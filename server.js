@@ -426,6 +426,7 @@ function handleMove(data) {
 		if (spaceEmpty(xNew, yNew)) {
 			// Just signal a simple move
 			var tempArray = [xOld, yOld, xNew, yNew];
+			console.log(tempArray);
 			io.sockets.emit("simple move", tempArray);
 		}
 		else {
