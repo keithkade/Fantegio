@@ -422,7 +422,7 @@ function handleMove(data) {
 	var playerNumber = moveData[6];
 
 	// Only execute if move is valid
-	//if (validMove(xOld, yOld, xNew, yNew)) {
+	if (validMove(xOld, yOld, xNew, yNew)) {
 		if (spaceEmpty(xNew, yNew)) {
 			// We need to update piece position in allPieces
 			// mInd -> moving index
