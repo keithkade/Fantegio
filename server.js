@@ -33,7 +33,7 @@ function json2array(json) {
     var result = [];
     var keys = Object.keys(json);
     keys.forEach(function(key) {
-        result.push(json[key]);
+			result.push(json[key]);
 		});
     return result;
 }
@@ -439,7 +439,7 @@ function handleMove(data) {
 			// If space not empty, then handle attack
 			resolveConflict(xOld, yOld, xNew, yNew);
 		}
-	//}
+	}
 }
 
 function resolveConflict(xOld, yOld, xNew, yNew) {
@@ -602,22 +602,19 @@ function validMove(xOld, yOld, xNew, yNew) {
 	return true;
 }
 
-function checkMystic(xOld, yOld, xNew, yNew)
-{
+function checkMystic(xOld, yOld, xNew, yNew) {
 	var pieceIndOld = getPieceIndex(xOld, yOld);
 	var pieceIndNew = getPieceIndex(xNew, yNew);
 	var pieceWithOlInd = allPieces[pieceIndOld]
 	var pieceToBeSeen = allPieces[pieceIndNew];
 	
 	//checks whether the piece is mystic or not
-		if(pieceWithOlInd.type == "mystic"){
+		if(pieceWithOlInd.type == "mystic") {
 			
 			var tempArray = [xNew, yNew, pieceToBeSeen];
 			io.sockets.emit('mystic', tempArray);
 		}
-		
-		else{
+		else {
 			return;
 		}
-
 }
