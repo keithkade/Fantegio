@@ -302,25 +302,25 @@ function gameOver(gameOverArray){
 function resolveConflict(conflictArray){
    var playerMoved = conflictArray[0];
    var outcome = conflictArray[1];
-   var xOld = moveArray[2];
-   var yOld = orient(playerNum, moveArray[3]);
-   var xNew = moveArray[4];
-   var yNew = orient(playerNum, moveArray[5]);
+   var xOld = conflictArray[2];
+   var yOld = orient(playerNum, conflictArray[3]);
+   var xNew = conflictArray[4];
+   var yNew = orient(playerNum, conflictArray[5]);
 
    var attacked = pieceAtLocation(xNew, yNew);
 
    if (outcome == 0){ //both die
       var p1 = pieceAtLocation(xOld, yOld);
-      gameStage.removeChild(p1);
       var p2 = pieceAtLocation(xNew, yNew);
-      gameStage.removeChild(p1);
-      alert("A " + loser.pieceType + " and a " + loser.pieceType + "defeated each other");
+      removeClickable(p1);
+      removeClickable(p2);
+      alert("A " + p1.pieceType + " and a " + p2.pieceType + "defeated each other");
    }
 
    if (outcome == 1 && playerMoved == 1){ //player1 wins
       var loser = pieceAtLocation(xNew, yNew); //piece moved onto
       var winner = pieceAtLocation(xOld, yOld);
-      gameStage.removeChild(loser);
+      removeClickable(loser);
       if (playerNum == 1)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -329,7 +329,7 @@ function resolveConflict(conflictArray){
    else if (outcome == 2 && playerMoved == 1){ //player2 wins
       var loser = pieceAtLocation(xOld, yOld); //piece moved 
       var winner = pieceAtLocation(xNew, yNew);
-      gameStage.removeChild(loser);
+      removeClickable(loser);
       if (playerNum == 2)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -338,7 +338,7 @@ function resolveConflict(conflictArray){
    else if (outcome == 1 && playerMoved == 2){ 
       var loser = pieceAtLocation(xOld, yOld); //piece moved 
       var winner = pieceAtLocation(xNew, yNew);
-      gameStage.removeChild(loser);
+      removeClickable(loser);
       if (playerNum == 1)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -347,7 +347,7 @@ function resolveConflict(conflictArray){
    else if (outcome == 2 && playerMoved == 2){ 
       var loser = pieceAtLocation(xNew, yNew); 
       var winner = pieceAtLocation(xOld, yOld);
-      gameStage.removeChild(p);		
+      removeClickable(loser);		
       if (playerNum == 2)
          alert("You captured your opponent's " + loser.pieceType);
       else
@@ -370,6 +370,12 @@ function resolveConflict(conflictArray){
       playerTurn = '1';
 
    gameStage.update();
+}
+
+function removeClickable(clickable){
+   clickable.gameGridX = -1;
+   clickable.gameGridY = -1;
+   gameStage.removeChild(clickable);
 }
 
 //move a piece into an open square
