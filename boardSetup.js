@@ -466,40 +466,99 @@ var selectedPiece = p1importantThingClickable;
 //list of current pieces possible move choices
 var choices = [];
 
+function removeChoices(){
+   while(choices.length > 0){
+      var cur = choices.pop();
+      cur.removeAllEventListeners();
+      cur.removeChild(cur.getChildByName("moveIcon"));
+   }
+}
+
 //called when a piece owned by a player is clicked.
 function pieceClick(event){
    //clear previously clicked piece's choices
-   while(choices.length > 0){
-      choices.pop().removeEventListener("click", movePiece);
-   }
+   removeChoices();
 
    selectedPiece = event.target.parent;
-   
+
    if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
-      possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
-      possibleMoveDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
-      possibleMoveDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
-      possibleMoveDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
+      possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
+      possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
+      possibleActionDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
+      possibleActionDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
    }
+   if(selectedPiece.pieceType == "Rider")
+   {
+      var count = 1;
+      while(possibleActionDest(selectedPiece.gameGridX, selectedPiece.gameGridY+count))
+         count++;
+      
+      count = 1;
+      while(possibleActionDest(selectedPiece.gameGridX, selectedPiece.gameGridY-count))
+         count++;
+
+      count = 1;
+      while(possibleActionDest(selectedPiece.gameGridX+count, selectedPiece.gameGridY))
+         count++;
+
+      count = 1;
+      while(possibleActionDest(selectedPiece.gameGridX-count, selectedPiece.gameGridY))
+         count++;
+   }
+   else if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
+      possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
+      possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
+      possibleActionDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
+      possibleActionDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
+      if(selectedPiece.pieceType == "Archer")
+      {
+         possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+2,"shot");
+         possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-2,"shot");
+         possibleActionDest(selectedPiece.gameGridX+2,selectedPiece.gameGridY,"shot");
+         possibleActionDest(selectedPiece.gameGridX-2,selectedPiece.gameGridY,"shot");
+      }
+   }
+
+   gameStage.update();
 }
 
 //Used in pieceClick() to set the square as clickable if moving there is legal.
 //	returns true if open square
-// 	returns false if non-open square 
-function possibleMoveDest(destX, destY){
-   if( destX < 1 || destX > 8 || destY < 1 || destY > 8){
+// 	returns false if non-open square
+function possibleActionDest(destX, destY, actionType){
+   var curPiece = pieceAtLocation(destX,destY);
+
+   if( destX < 1 || destX > 8 || destY < 1 || destY > 8 || curPiece.team == '3'){
       return false;
    }
-   var curPiece = pieceAtLocation(destX,destY);
    if(curPiece == false){
       var temp = board[destX][destY];
-      board[destX][destY].addEventListener("click", movePiece);
+      if(actionType === undefined){
+         board[destX][destY].addEventListener("click", movePiece);
+         var moveIcon = new createjs.Shape();
+         moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+         moveIcon.name = "moveIcon";
+         board[destX][destY].addChild(moveIcon);
+      }
       choices.push(board[destX][destY]);
       return true;
    }
    else if(curPiece.team != playerNum){
-      curPiece.addEventListener("click", movePiece);
-      choices.push(curPiece);
+      if(actionType === undefined){
+         curPiece.addEventListener("click", movePiece);
+         var moveIcon = new createjs.Shape();
+         moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+         moveIcon.name = "moveIcon";
+         board[destX][destY].addChild(moveIcon);
+      }
+      else if(actionType == "shot"){
+         curPiece.addEventListener("click", shootPiece);
+         var moveIcon = new createjs.Shape();
+         moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+         moveIcon.name = "moveIcon";
+         board[destX][destY].addChild(moveIcon);
+      }
+   choices.push(curPiece);
    }
    return false;
 }
@@ -507,6 +566,7 @@ function possibleMoveDest(destX, destY){
 var move = new Array();
 //called when pieces a player can move the selectedPiece to are clicked.
 function movePiece(event){
+   removeChoices();
    if(playerTurn == playerNum){
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
@@ -522,6 +582,25 @@ function movePiece(event){
    }
 }
 
+function shootPiece(event){
+   removeChoices();
+   if(playerTurn == playerNum){
+      //alert("move sent");
+      move[0] = "move";
+      move[1] = selectedPiece.gameGridX;
+      move[2] = orient(playerNum, selectedPiece.gameGridY);
+      move[3] = event.target.parent.gameGridX;
+      move[4] = orient(playerNum, event.target.parent.gameGridY);
+      move[5] = 2;
+      move[6] = playerNum;
+      socket.emit("move", move);
+   }
+   else{
+      alert("Not your turn");
+   }
+}
+
+
 function updateTurnIndicator(){
 	if(playerTurn == playerNum){
 	   document.getElementById("turnIndicator").innerHTML = "Your turn";
@@ -530,3 +609,5 @@ function updateTurnIndicator(){
 	   document.getElementById("turnIndicator").innerHTML = "         ";
 	}
 }
+
+

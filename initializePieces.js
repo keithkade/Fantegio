@@ -84,21 +84,24 @@ var gameStage = new createjs.Stage("gameCanvas");
 var board = new Array(9);
 var gameBoardHeight = 480;
 var gameBoardWidth = 480;
-
+var background = new createjs.Shape();
+background.graphics.beginFill("#4E8154").drawRect(0,0,gameBoardHeight,gameBoardWidth);
+gameStage.addChild(background);
 
 for (var x = 1; x < 9; x++)
 {
    board[x] = new Array(9);
    for (var y = 1; y < 9; y++)
    {
-      var squareIT = new createjs.Shape();
-      squareIT.graphics.beginFill("#4E8154").drawRect(0, 0, 60, 60);
+      //var square = new createjs.Shape();      
+      //square.graphics.beginFill("#4E8154").drawRect(0, 0, 60, 60);
       board[x][y] = new createjs.Container();
       board[x][y].x = ((x-1)*60);
       board[x][y].y = ((y-1)*60);
       board[x][y].gameGridX = x;
       board[x][y].gameGridY = y;
-      board[x][y].addChild(squareIT);
+      board[x][y].team = '0';
+      //board[x][y].addChild(square);
       gameStage.addChild(board[x][y]);
    }
 }
@@ -193,7 +196,7 @@ p1rider2Clickable.pieceType = "Rider";
 p1rider2Clickable.team =  '1';
 
 //create clickable assassin
-var p1squareAs = new createjs.Shape();
+var p1squareAs = new createjs.Shape();;
 var p1labelAs = new createjs.Text("Assassin\n - A", "10px Arial", "#FFFFFF");
 p1labelAs.textAlign = "center";
 p1labelAs.x = 28;
@@ -828,7 +831,7 @@ function setBoard(initXYArray){
       p2archerClickable.y = (initXYArray[47] - 1)  *  60 + 2;
       addGameGridXY(p2archerClickable);
       gameStage.addChild(p2archerClickable);
-
+;
       p2squareMy.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
       p2mysticClickable.addChild(p2squareMy);
       p2mysticClickable.x = (initXYArray[48] - 1)  *  60 + 2;
@@ -855,7 +858,7 @@ function setBoard(initXYArray){
       p2importantThingClickable.x = (initXYArray[54] - 1)  *  60 + 2;
       p2importantThingClickable.y = (initXYArray[55] - 1)  *  60 + 2;
       addGameGridXY(p2importantThingClickable);
-      gameStage.addChild(p2importantThingClickable);
+      gameStage.addChild(p2importantThingClickable);;
    }
    else{ // Piece X and Ys from Player 1's perspective. so Y's need to be flipped. 
       //Player 1
@@ -920,7 +923,7 @@ function setBoard(initXYArray){
       p1assassinClickable.x = (initXYArray[16] - 1)  *  60 + 2;
       p1assassinClickable.y = (9 -  initXYArray[17] - 1)  *  60 + 2;
       addGameGridXY(p1assassinClickable);
-      gameStage.addChild(p1assassinClickable);
+      gameStage.addChild(p1assassinClickable);;
 
       p1squareAr.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
       p1archerClickable.addChild(p1squareAr);
