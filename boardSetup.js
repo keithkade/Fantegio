@@ -315,7 +315,6 @@ function gameOver(gameOverArray){
     }							
 }
 
-
 //message recieved that contains the results of a conflict
 function resolveConflict(conflictArray){
    var playerMoved = conflictArray[0];
@@ -383,14 +382,13 @@ function resolveConflict(conflictArray){
    }
 
    if(playerTurn == '1'){
-   	  if(playerNum == 2){ alert("Your turn"); }
       playerTurn = '2';
    }
    else{
-   	  if(playerNum == 1){ alert("Your turn"); }
       playerTurn = '1';
    }
     
+   updateTurnIndicator();
    gameStage.update();
 }
 
@@ -418,14 +416,13 @@ function simpleMove(moveArray){
    }
 
    if(playerTurn == '1'){
-   	  if(playerNum == 2){ alert("Your turn"); }
       playerTurn = '2';
    }
    else{
-   	  if(playerNum == 1){ alert("Your turn"); }
       playerTurn = '1';
    }
 
+   updateTurnIndicator();
    gameStage.update();
 }
 
@@ -510,7 +507,6 @@ var move = new Array();
 //called when pieces a player can move the selectedPiece to are clicked.
 function movePiece(event){
    if(playerTurn == playerNum){
-      alert("move sent");
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
       move[2] = orient(playerNum, selectedPiece.gameGridY);
@@ -523,4 +519,13 @@ function movePiece(event){
    else{
       alert("Not your turn");
    }
+}
+
+function updateTurnIndicator(){
+	if(playerTurn == playerNum){
+	   document.getElementById("turnIndicator").innerHTML = "Your turn";
+	}
+	else{
+	   document.getElementById("turnIndicator").innerHTML = "         ";
+	}
 }

@@ -8,7 +8,8 @@
 	<style>
   		body {background-color:#242856;}
   		p {color:white;}
-  		span {color:#F7DE99;font-size:200%;float:right;}
+  		#timer {color:#F7DE99;font-size:200%;float:right;}
+  		#turnIndicator {color:#F7DE99;font-size:150%;}
   		h3 {color:white;}
   	</style>
 </head>
@@ -23,14 +24,15 @@
 		<canvas id="gameCanvas" width="480" height="480" style="border:1px solid #000000;display: none">		
 		</canvas>
 		
-		
-		<script src="initializePieces.js"></script>
-  		<script src="boardSetup.js"></script>
-  		
   		<button id="defaultButton" type="button" onclick="setup()">Default Setup</button>
   		<button type="button" onclick="window.open('rules.html')" >Game Rules</button>
   		<button id="startButton" type="button" onclick="startGame()">Start Game</button>	
-   		<span id="timer"></span>		
+   		
+   		<span id="timer"></span>	
+   		<span id="turnIndicator"></span>	
+   		
+   		<script src="initializePieces.js"></script>
+  		<script src="boardSetup.js"></script>	
 		<script type="text/javascript" src="timer.js"></script>
    	</div>
    	

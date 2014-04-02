@@ -1039,6 +1039,7 @@ function setBoard(initXYArray){
       gameStage.addChild(p2importantThingClickable);
    }
 
+   updateTurnIndicator();
    gameStage.update();
 }
 
