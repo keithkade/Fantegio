@@ -331,7 +331,7 @@ function resolveConflict(conflictArray){
       var p2 = pieceAtLocation(xNew, yNew);
       removeClickable(p1);
       removeClickable(p2);
-      alert("A " + p1.pieceType + " and a " + p2.pieceType + "defeated each other");
+      alert("A " + p1.pieceType + " and a " + p2.pieceType + " defeated each other");
    }
 
    if (outcome == 1 && playerMoved == 1){ //player1 wins
