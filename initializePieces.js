@@ -1,5 +1,7 @@
 //==========================================================================setup board 
 var setupStage = new createjs.Stage("setupCanvas");
+var lostStage = new createjs.Stage("lostPiecesCanvas");
+var captStage = new createjs.Stage("capPiecesCanvas");
 
 var setupBoardHeight = 300;
 var setupBoardWidth = 480;
@@ -35,6 +37,36 @@ for (var y = 0; y <= setupBoardHeight; y += 60) {
    line.graphics.beginFill("#000000").drawRect(0, y, setupBoardWidth, 1);
    setupStage.addChild(line);
 }
+
+
+//draw grid for lostCanvas
+for (var x = 0; x <= 300; x += 60) {
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(x, 0, 1, 150);
+   lostStage.addChild(line);
+}
+
+for (var y = 0; y <= 150; y += 60) {
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(0, y, 300, 1);
+   lostStage.addChild(line);
+}
+
+//draw grid for captCanvas
+for (var x = 0; x <= 300; x += 60) {
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(x, 0, 1, 150);
+   captStage.addChild(line);
+}
+
+for (var y = 0; y <= 150; y += 60) {
+   var line = new createjs.Shape();
+   line.graphics.beginFill("#000000").drawRect(0, y, 300, 1);
+   captStage.addChild(line);
+}
+
+captStage.update();
+lostStage.update();
 
 //rocks //will recieve x and y from server
 //var rock1 = new createjs.Shape();

@@ -289,6 +289,7 @@ function startGame(){
    showElem("gameCanvas");
    showElem("lostPiecesCanvas");
    showElem("capPiecesCanvas");	
+
 }
 
 //listen to server
