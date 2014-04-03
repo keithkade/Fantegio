@@ -53,6 +53,7 @@ rock3.team = '3';
 //==========================================================================canvases for lostcaptured units board 
 var lostStage = new createjs.Stage("lostPiecesCanvas");
 var captStage = new createjs.Stage("capPiecesCanvas");
+
 //draw grid for lostCanvas
 for (var x = 0; x <= 300; x += 60) {
    var line = new createjs.Shape();
