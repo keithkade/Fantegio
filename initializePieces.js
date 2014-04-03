@@ -68,16 +68,19 @@ for (var y = 0; y <= 150; y += 60) {
 captStage.update();
 lostStage.update();
 
-//rocks //will recieve x and y from server
-//var rock1 = new createjs.Shape();
+//rocks will recieve x and y from server
+var rock1 = new createjs.Shape();
 //rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
-//stage.addChild(rock1);
-//var rock2 = new createjs.Shape();
-//rock2.graphics.beginFill("black").drawCircle(209, 89, 20);
-//stage.addChild(rock2);
-//var rock3 = new createjs.Shape();
-//rock3.graphics.beginFill("black").drawCircle(329, 89, 20);
-//stage.addChild(rock3);
+rock1.pieceType = "rock";
+rock1.team = '3';
+var rock2 = new createjs.Shape();
+//rock2.graphics.beginFill("black").drawCircle(209, 60, 20);
+rock2.pieceType = "rock";
+rock2.team = '3';
+var rock3 = new createjs.Shape();
+//rock3.graphics.beginFill("black").drawCircle(329, 60, 20);
+rock3.pieceType = "rock";
+rock3.team = '3';
 
 //==========================================================================game board
 var gameStage = new createjs.Stage("gameCanvas");
@@ -437,12 +440,15 @@ pieceArray[25] = p2trap1Clickable;
 pieceArray[26] = p1trap2Clickable;
 pieceArray[27] = p2trap2Clickable;
 
+
 for (var i = 0; i < pieceArray.length; i++){
    pieceArray[i].x = 100;
    pieceArray[i].y = 100;
    gameStage.addChild(pieceArray[i]);
 }
-
+pieceArray[28] = rock1;
+pieceArray[29] = rock2;
+pieceArray[30] = rock3;
 //==========================================================================draggable pieces used for setup
 //create draggable important thing
 var squareIT = new createjs.Shape();
@@ -858,7 +864,29 @@ function setBoard(initXYArray){
       p2importantThingClickable.x = (initXYArray[54] - 1)  *  60 + 2;
       p2importantThingClickable.y = (initXYArray[55] - 1)  *  60 + 2;
       addGameGridXY(p2importantThingClickable);
-      gameStage.addChild(p2importantThingClickable);;
+      gameStage.addChild(p2importantThingClickable);
+	  
+	  //added rocks for player 1's perspective
+	  rock1_x = (initXYArray[56] - 1)  *  60 + 2 + 28.5 + 57;
+	  rock1_y = (initXYArray[57] - 1)  *  60 + 2 + 28.5;
+	  rock1.graphics.beginFill("black").drawCircle(rock1_y, rock1_x, 20);
+	  gameStage.addChild(rock1);
+	  rock1.x = initXYArray[56] - 1;
+	  rock1.y = initXYArray[57] - 1;
+	  
+	  rock2_x = (initXYArray[58] - 1)  *  60 + 2 + 28.5 + 57;
+	  rock2_y = (initXYArray[59] - 1)  *  60 + 2 + 28.5;
+	  rock2.graphics.beginFill("black").drawCircle(rock2_y, rock2_x, 20);
+	  gameStage.addChild(rock2);
+	  rock2.x = initXYArray[58] - 1;
+	  rock2.y = initXYArray[59] - 1;
+	  
+	  rock3_x = (initXYArray[60] - 1)  *  60 + 2 + 28.5 + 57;
+	  rock3_y = (initXYArray[61] - 1)  *  60 + 2 + 28.5;
+	  rock3.graphics.beginFill("black").drawCircle(rock3_y, rock3_x, 20);
+	  gameStage.addChild(rock3);  
+	  rock3.x = initXYArray[60] - 1;
+	  rock3.y = initXYArray[61] - 1;
    }
    else{ // Piece X and Ys from Player 1's perspective. so Y's need to be flipped. 
       //Player 1
@@ -1072,6 +1100,29 @@ function setBoard(initXYArray){
       p2importantThingClickable.y = (9 -  initXYArray[55] - 1)  *  60 + 2;
       addGameGridXY(p2importantThingClickable);
       gameStage.addChild(p2importantThingClickable);
+	  
+	  //added rocks for player 1's perspective
+	  rock1_x = (9 - initXYArray[56] - 1)  *  60 + 2 + 28.5 - 57;
+	  rock1_y = (9 - initXYArray[57] - 1)  *  60 + 2 + 28.5 + 171;
+	  rock1.graphics.beginFill("black").drawCircle(rock1_y, rock1_x, 20);
+	  gameStage.addChild(rock1);
+	  rock1.x = 9 - initXYArray[56] - 1;
+	  rock1.y = 9 - initXYArray[57] - 1;
+	  
+	  rock2_x = (9 - initXYArray[58] - 1)  *  60 + 2 + 28.5 - 57;
+	  rock2_y = (9 - initXYArray[59] - 1)  *  60 + 2 + 28.5 + 171;
+	  rock2.graphics.beginFill("black").drawCircle(rock2_y, rock2_x, 20);
+	  gameStage.addChild(rock2);
+	  rock2.x = 9 - initXYArray[58] - 1;
+	  rock2.y = 9 - initXYArray[59] - 1;
+	  
+	  rock3_x = (9 - initXYArray[60] - 1)  *  60 + 2 + 28.5 - 57 ;
+	  rock3_y = (9 - initXYArray[61] - 1)  *  60 + 2 + 28.5 + 171;
+	  rock3.graphics.beginFill("black").drawCircle(rock3_y, rock3_x, 20);
+	  gameStage.addChild(rock3);  
+	  rock3.x = 9 - initXYArray[60] - 1;
+	  rock3.y = 9 - initXYArray[61] - 1;
+	  
    }
 
    updateTurnIndicator();
