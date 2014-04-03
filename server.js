@@ -423,7 +423,7 @@ function setupBoard(data) {
 		rock1.strength = 17;
 		rock1.type = "boulder";
 		rock1.team = 3;
-		rock1.X = 4;
+		rock1.X = 2;
 		rock1.Y = 4;
 		allPieces[28] = rock1;
 		
@@ -432,15 +432,15 @@ function setupBoard(data) {
 		rock2.type = "boulder";
 		rock2.team = 3;
 		rock2.X = 4;
-		rock2.Y = 6;
+		rock2.Y = 5;
 		allPieces[29] = rock2;
 		
 		var rock3 = new Piece();
 		rock3.strength = 17;
 		rock3.type = "boulder";
 		rock3.team = playerNumber;
-		rock3.X = 4;
-		rock3.Y = 8;
+		rock3.X = 8;
+		rock3.Y = 4;
 		allPieces[30] = rock3;
 		
 		var locArray = getLocations(allPieces);

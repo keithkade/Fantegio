@@ -845,28 +845,25 @@ function setBoard(initXYArray){
       p2importantThingClickable.y = (initXYArray[55] - 1)  *  60 + 2;
       addGameGridXY(p2importantThingClickable);
       gameStage.addChild(p2importantThingClickable);
-	  
-	  //added rocks for player 1's perspective
-	  rock1_x = (initXYArray[56] - 1)  *  60 + 2 + 28.5 + 57;
-	  rock1_y = (initXYArray[57] - 1)  *  60 + 2 + 28.5;
-	  rock1.graphics.beginFill("black").drawCircle(rock1_y, rock1_x, 20);
-	  gameStage.addChild(rock1);
-	  rock1.x = initXYArray[56] - 1;
-	  rock1.y = initXYArray[57] - 1;
-	  
-	  rock2_x = (initXYArray[58] - 1)  *  60 + 2 + 28.5 + 57;
-	  rock2_y = (initXYArray[59] - 1)  *  60 + 2 + 28.5;
-	  rock2.graphics.beginFill("black").drawCircle(rock2_y, rock2_x, 20);
-	  gameStage.addChild(rock2);
-	  rock2.x = initXYArray[58] - 1;
-	  rock2.y = initXYArray[59] - 1;
-	  
-	  rock3_x = (initXYArray[60] - 1)  *  60 + 2 + 28.5 + 57;
-	  rock3_y = (initXYArray[61] - 1)  *  60 + 2 + 28.5;
-	  rock3.graphics.beginFill("black").drawCircle(rock3_y, rock3_x, 20);
-	  gameStage.addChild(rock3);  
-	  rock3.x = initXYArray[60] - 1;
-	  rock3.y = initXYArray[61] - 1;
+
+      //added rocks for player 1's perspective 
+      rock1.graphics.beginFill("black").drawCircle(28, 28, 20);
+      rock1.x = (initXYArray[56] - 1)  *  60 + 2;
+      rock1.y = (initXYArray[57] - 1)  *  60 + 2;
+      addGameGridXY(rock1);
+      gameStage.addChild(rock1);
+
+      rock2.graphics.beginFill("black").drawCircle(28, 28, 20);
+      rock2.x = (initXYArray[58] - 1)  *  60 + 2;
+      rock2.y = (initXYArray[59] - 1)  *  60 + 2;
+      addGameGridXY(rock2);
+      gameStage.addChild(rock2);
+
+      rock3.graphics.beginFill("black").drawCircle(28, 28, 20);
+      rock3.x = (initXYArray[60] - 1)  *  60 + 2;
+      rock3.y = (initXYArray[61] - 1)  *  60 + 2;
+      addGameGridXY(rock3);
+      gameStage.addChild(rock3);
    }
    else{ // Piece X and Ys from Player 1's perspective. so Y's need to be flipped. 
       //Player 1
@@ -1062,8 +1059,8 @@ function setBoard(initXYArray){
       p2trap1Clickable.addEventListener("click", pieceClick);
       p2trap1Clickable.x = (initXYArray[50] - 1)  *  60 + 2;
       p2trap1Clickable.y = (9 -  initXYArray[51] - 1)  *  60 + 2;
-      addGameGridXY(p2trap2Clickable);
-      gameStage.addChild(p2trap2Clickable);
+      addGameGridXY(p2trap1Clickable);
+      gameStage.addChild(p2trap1Clickable);
 
       p2squareT2.graphics.beginFill(friendlyColor).drawRect(0, 0, 57, 57);
       p2trap2Clickable.addChild(p2squareT2, p2labelT2);
@@ -1080,29 +1077,25 @@ function setBoard(initXYArray){
       p2importantThingClickable.y = (9 -  initXYArray[55] - 1)  *  60 + 2;
       addGameGridXY(p2importantThingClickable);
       gameStage.addChild(p2importantThingClickable);
-	  
-	  //added rocks for player 1's perspective
-	  rock1_x = (9 - initXYArray[56] - 1)  *  60 + 2 + 28.5 - 57;
-	  rock1_y = (9 - initXYArray[57] - 1)  *  60 + 2 + 28.5 + 171;
-	  rock1.graphics.beginFill("black").drawCircle(rock1_y, rock1_x, 20);
-	  gameStage.addChild(rock1);
-	  rock1.x = 9 - initXYArray[56] - 1;
-	  rock1.y = 9 - initXYArray[57] - 1;
-	  
-	  rock2_x = (9 - initXYArray[58] - 1)  *  60 + 2 + 28.5 - 57;
-	  rock2_y = (9 - initXYArray[59] - 1)  *  60 + 2 + 28.5 + 171;
-	  rock2.graphics.beginFill("black").drawCircle(rock2_y, rock2_x, 20);
-	  gameStage.addChild(rock2);
-	  rock2.x = 9 - initXYArray[58] - 1;
-	  rock2.y = 9 - initXYArray[59] - 1;
-	  
-	  rock3_x = (9 - initXYArray[60] - 1)  *  60 + 2 + 28.5 - 57 ;
-	  rock3_y = (9 - initXYArray[61] - 1)  *  60 + 2 + 28.5 + 171;
-	  rock3.graphics.beginFill("black").drawCircle(rock3_y, rock3_x, 20);
-	  gameStage.addChild(rock3);  
-	  rock3.x = 9 - initXYArray[60] - 1;
-	  rock3.y = 9 - initXYArray[61] - 1;
-	  
+
+      //added rocks for player 1's perspective
+      rock1.graphics.beginFill("black").drawCircle(28, 28, 20);
+      rock1.x = (initXYArray[56] - 1)  *  60 + 2;
+      rock1.y = (9 - initXYArray[57] - 1)  *  60 + 2;
+      addGameGridXY(rock1);
+      gameStage.addChild(rock1);
+
+      rock2.graphics.beginFill("black").drawCircle(28, 28, 20);
+      rock2.x = (initXYArray[58] - 1)  *  60 + 2;
+      rock2.y = (9 - initXYArray[59] - 1)  *  60 + 2;
+      addGameGridXY(rock2);
+      gameStage.addChild(rock2);
+
+      rock3.graphics.beginFill("black").drawCircle(28, 28, 20);
+      rock3.x = (initXYArray[60] - 1)  *  60 + 2;
+      rock3.y = (9 - initXYArray[61] - 1)  *  60 + 2;
+      addGameGridXY(rock3);
+      gameStage.addChild(rock3);
    }
 
    updateTurnIndicator();

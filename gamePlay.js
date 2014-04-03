@@ -221,15 +221,9 @@ function removeChoices(){
 function pieceClick(event){
    //clear previously clicked piece's choices
    removeChoices();
-
+   
    selectedPiece = event.target.parent;
-
-   if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
-      possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
-      possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
-      possibleActionDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
-      possibleActionDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
-   }
+  
    if(selectedPiece.pieceType == "Rider")
    {
       var count = 1;
