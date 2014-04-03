@@ -1,10 +1,74 @@
 
+//create socket for communication
+var socket = io.connect('http://' + document.location.host);
+
 //listen to server
 socket.on('start game', setBoard);
 socket.on('resolve conflict', resolveConflict);
 socket.on('simple move', simpleMove);
 socket.on('invalid move', invalidMove);
 socket.on('game over', gameOver);
+
+//put all of the piece locations into an array and send to server
+//also update the page by removing old html elements and adding new ones
+function startGame(){
+	
+   //if not all pieces have been placed then just give the default setup
+   for (var i=0; i < pieceArray.length; i++){
+      if (pieceArray[i].gameGridY > 8){
+         alert("You had at least one piece off the board so you were given the default setup");
+         setup();
+         startGame();
+      }
+   }
+	
+   playerTurn = '1';
+   resultArray[0] = "setup";
+   resultArray[1] = playerNum;
+
+   locationArray[0] = commanderDragger.gameGridX;
+   locationArray[1] = orient(playerNum, commanderDragger.gameGridY);
+   locationArray[2] = captainDragger.gameGridX;
+   locationArray[3] = orient(playerNum, captainDragger.gameGridY);
+   locationArray[4] = soldier1Dragger.gameGridX;
+   locationArray[5] = orient(playerNum, soldier1Dragger.gameGridY);
+   locationArray[6] = soldier2Dragger.gameGridX;
+   locationArray[7] = orient(playerNum, soldier2Dragger.gameGridY);
+   locationArray[8] = engineer1Dragger.gameGridX;
+   locationArray[9] = orient(playerNum, engineer1Dragger.gameGridY);
+   locationArray[10] = engineer2Dragger.gameGridX;
+   locationArray[11] = orient(playerNum, engineer2Dragger.gameGridY);		
+   locationArray[12] = rider1Dragger.gameGridX;
+   locationArray[13] = orient(playerNum, rider1Dragger.gameGridY);
+   locationArray[14] = rider2Dragger.gameGridX;
+   locationArray[15] = orient(playerNum, rider2Dragger.gameGridY);
+   locationArray[16] = assassinDragger.gameGridX;
+   locationArray[17] = orient(playerNum, assassinDragger.gameGridY);
+   locationArray[18] = archerDragger.gameGridX;
+   locationArray[19] = orient(playerNum, archerDragger.gameGridY);	
+   locationArray[20] = mysticDragger.gameGridX;
+   locationArray[21] = orient(playerNum, mysticDragger.gameGridY);		
+   locationArray[22] = trap1Dragger.gameGridX;
+   locationArray[23] = orient(playerNum, trap1Dragger.gameGridY);	
+   locationArray[24] = trap2Dragger.gameGridX;
+   locationArray[25] = orient(playerNum, trap2Dragger.gameGridY);		
+   locationArray[26] = importantThingDragger.gameGridX;
+   locationArray[27] = orient(playerNum, importantThingDragger.gameGridY);
+
+   resultArray[2] = locationArray;
+   //send return to server			
+   socket.emit("setup", resultArray);
+
+   hideElem("infoScroll");
+   hideElem("setupCanvas");
+   hideElem("defaultButton");
+   hideElem("startButton");
+   hideElem("timer");
+   showElem("gameCanvas");
+   showElem("lostPiecesCanvas");
+   showElem("capPiecesCanvas");	
+
+}
 
 //message recieved that someone has won
 function gameOver(gameOverArray){
@@ -278,9 +342,3 @@ function shootPiece(event){
       alert("Not your turn");
    }
 }
-
-var lostStage = new createjs.Stage("lostPiecesCanvas");
-var captStage = new createjs.Stage("capPiecesCanvas");
-
-
-
