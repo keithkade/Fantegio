@@ -137,6 +137,28 @@ function handler(request,response) {
 					response.end();
 				});
 			break;
+		case '/gamePlay.js':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running gamePlay.js');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/helpers.js':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running helpers.js');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
 		case '/timer.js':
 			fs.readFile(__dirname + path, function(error, data) {
 					if (error) {
@@ -265,50 +287,6 @@ function setupBoard(data) {
 		trap2_1.type = "trap";
 		trap2_1.team = playerNumber;
 		trap2_1.X = setup[2][24];
-		trap2_1.Y = setup[2][25];
-		allPieces[12] = trap2_1;
-
-		var importantThing_1 = new Piece();
-		importantThing_1.strength = 11;
-		importantThing_1.type = "important thing";
-		importantThing_1.team = playerNumber;
-		importantThing_1.X = setup[2][26];
-		importantThing_1.Y = setup[2][27];
-		allPieces[13] = importantThing_1;
-
-		++numClients;
-	}
-	else if (playerNumber == 2) {
-		var commander_2 = new Piece();
-		commander_2.strength = 6;
-		commander_2.type = "commander";
-		commander_2.team = playerNumber;
-		commander_2.X = setup[2][0];
-		commander_2.Y = setup[2][1];
-		allPieces[14] = commander_2;
-
-		var captain_2 = new Piece();
-		captain_2.strength = 5;
-		captain_2.type = "captain";
-		captain_2.team = playerNumber;
-		captain_2.X = setup[2][2];
-		captain_2.Y = setup[2][3];
-		allPieces[15] = captain_2;
-
-		var soldier1_2 = new Piece();
-		soldier1_2.strength = 4;
-		soldier1_2.type = "soldier";
-		soldier1_2.team = playerNumber;
-		soldier1_2.X = setup[2][4];
-		soldier1_2.Y = setup[2][5];
-		allPieces[16] = soldier1_2;
-
-		var soldier2_2 = new Piece();
-		soldier2_2.strength = 4;
-		soldier2_2.type = "soldier";
-		soldier2_2.team = playerNumber;
-		soldier2_2.X = setup[2][6];
-		soldier2_2.Y = setup[2][7];
 		allPieces[17] = soldier2_2;
 
 		var engineer1_2 = new Piece();
