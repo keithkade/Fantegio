@@ -23,7 +23,7 @@ function Piece() {
 	this.Y = 0;
 }
 
-var allPieces = new Array(28);
+var allPieces = new Array(30);
 
 // Convert json object to array object
 function json2array(json) {
@@ -396,6 +396,31 @@ function setupBoard(data) {
 
 	// If both players have connected, signal start game
 	if (numClients == 2) {
+		//creating three rocks
+		var rock1 = new Piece();
+		rock1.strength = 17;
+		rock1.type = "boulder";
+		rock1.team = 3;
+		rock1.X = 4;
+		rock1.Y = 4;
+		allPieces[28] = rock1;
+		
+		var rock2 = new Piece();
+		rock2.strength = 17;
+		rock2.type = "boulder";
+		rock2.team = 3;
+		rock2.X = 4;
+		rock2.Y = 6;
+		allPieces[29] = rock2;
+		
+		var rock3 = new Piece();
+		rock3.strength = 17;
+		rock3.type = "boulder";
+		rock3.team = playerNumber;
+		rock3.X = 4;
+		rock3.Y = 8;
+		allPieces[30] = rock3;
+		
 		var locArray = getLocations(allPieces);
 		io.sockets.emit("start game", locArray);
 	}
@@ -572,7 +597,7 @@ function validMove(xOld, yOld, xNew, yNew) {
 			return false;
 		}
 	}
-
+	
 	// Riders cannot move through other pieces
 	if (moving.type == "rider") {
 		var xMoveDist = Math.abs(xOld - xNew);
