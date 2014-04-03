@@ -287,7 +287,7 @@ function setupBoard(data) {
 		trap2_1.type = "trap";
 		trap2_1.team = playerNumber;
 		trap2_1.X = setup[2][24];
-		allPieces[17] = soldier2_2;
+		allPieces[17] = trap2_1;
 
 		var engineer1_2 = new Piece();
 		engineer1_2.strength = 3;
