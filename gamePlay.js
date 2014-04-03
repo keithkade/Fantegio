@@ -113,7 +113,7 @@ function resolveConflict(conflictArray){
       if (playerNum == 1)
          alert("You captured your opponent's " + loser.pieceType);
       else
-         alert("Your piece was taken by your opponent's " + winner.pieceType);
+         alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);
    }
    else if (outcome == 2 && playerMoved == 1){ //player2 wins
       var loser = pieceAtLocation(xOld, yOld); //piece moved 
@@ -122,7 +122,7 @@ function resolveConflict(conflictArray){
       if (playerNum == 2)
          alert("You captured your opponent's " + loser.pieceType);
       else
-         alert("Your piece was taken by your opponent's " + winner.pieceType);		
+         alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);		
    }
    else if (outcome == 1 && playerMoved == 2){ 
       var loser = pieceAtLocation(xOld, yOld); //piece moved 
@@ -131,7 +131,7 @@ function resolveConflict(conflictArray){
       if (playerNum == 1)
          alert("You captured your opponent's " + loser.pieceType);
       else
-         alert("Your piece was taken by your opponent's " + winner.pieceType);			
+         alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);			
    }
    else if (outcome == 2 && playerMoved == 2){ 
       var loser = pieceAtLocation(xNew, yNew); 
@@ -140,17 +140,49 @@ function resolveConflict(conflictArray){
       if (playerNum == 2)
          alert("You captured your opponent's " + loser.pieceType);
       else
-         alert("Your piece was taken by your opponent's " + winner.pieceType);	
+         alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);	
    }	
+   else if (outcome == 3 && playerMoved == 1){ //failed archer attack
+	   var attacked = pieceAtLocation(xNew, yNew);
+	   if (playerNum == 1)
+		   alert("The piece you attacked has a strength higher than 3.");
+	   else
+		   alert("Your " + attacked.pieceType + " was attacked by an archer.");
+   }
+   else if (outcome == 3 && playerMoved == 2){ //failed archer attack
+	   var attacked = pieceAtLocation(xNew, yNew);
+	   if (playerNum == 2)
+		   alert("The piece you attacked has a strength higher than 3.");
+	   else
+		   alert("Your " + attacked.pieceType + " was attacked by an archer.");
+   }
+   else if (outcome == 4 && playerMoved == 1){
+	   var loser = pieceAtLocation(xNew, yNew);
+       removeClickable(loser);		
+	   if (playerNum == 1)
+		   alert("You defeated your opponent's " + loser.pieceType + ".");
+	   else
+		   alert("Your " + loser.pieceType + " was defeated by your opponent's archer.");
+   }
+   else if (outcome == 4 && playerMoved == 2){
+	   var loser = pieceAtLocation(xNew, yNew);
+	   removeClickable(loser);		
+	   if (playerNum == 2)
+		   alert("You defeated your opponent's " + loser.pieceType + ".");
+	   else
+		   alert("Your " + loser.pieceType + " was defeated by your opponent's archer.");
+   }
 
-   //move the piece
-   for(var i=0; i<pieceArray.length; i++){
-      if (pieceArray[i].gameGridX == xOld && pieceArray[i].gameGridY == yOld){
-         pieceArray[i].gameGridX = xNew;
-         pieceArray[i].gameGridY = yNew;
-         pieceArray[i].x = ((xNew - 1) * 60) + 2;
-         pieceArray[i].y = ((yNew - 1) * 60) + 2;
-      }
+   if (outcome != 3 && outcome != 4) {
+	   //move the piece
+	   for(var i=0; i<pieceArray.length; i++){
+		  if (pieceArray[i].gameGridX == xOld && pieceArray[i].gameGridY == yOld){
+			 pieceArray[i].gameGridX = xNew;
+			 pieceArray[i].gameGridY = yNew;
+			 pieceArray[i].x = ((xNew - 1) * 60) + 2;
+			 pieceArray[i].y = ((yNew - 1) * 60) + 2;
+		  }
+	   }
    }
 
    if(playerTurn == '1'){
