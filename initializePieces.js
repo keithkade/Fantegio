@@ -1,7 +1,5 @@
 //==========================================================================setup board 
 var setupStage = new createjs.Stage("setupCanvas");
-var lostStage = new createjs.Stage("lostPiecesCanvas");
-var captStage = new createjs.Stage("capPiecesCanvas");
 
 var setupBoardHeight = 300;
 var setupBoardWidth = 480;
@@ -38,7 +36,23 @@ for (var y = 0; y <= setupBoardHeight; y += 60) {
    setupStage.addChild(line);
 }
 
+//rocks will recieve x and y from server
+var rock1 = new createjs.Shape();
+//rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
+rock1.pieceType = "rock";
+rock1.team = '3';
+var rock2 = new createjs.Shape();
+//rock2.graphics.beginFill("black").drawCircle(209, 60, 20);
+rock2.pieceType = "rock";
+rock2.team = '3';
+var rock3 = new createjs.Shape();
+//rock3.graphics.beginFill("black").drawCircle(329, 60, 20);
+rock3.pieceType = "rock";
+rock3.team = '3';
 
+//==========================================================================canvases for lostcaptured units board 
+var lostStage = new createjs.Stage("lostPiecesCanvas");
+var captStage = new createjs.Stage("capPiecesCanvas");
 //draw grid for lostCanvas
 for (var x = 0; x <= 300; x += 60) {
    var line = new createjs.Shape();
@@ -67,20 +81,6 @@ for (var y = 0; y <= 150; y += 60) {
 
 captStage.update();
 lostStage.update();
-
-//rocks will recieve x and y from server
-var rock1 = new createjs.Shape();
-//rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
-rock1.pieceType = "rock";
-rock1.team = '3';
-var rock2 = new createjs.Shape();
-//rock2.graphics.beginFill("black").drawCircle(209, 60, 20);
-rock2.pieceType = "rock";
-rock2.team = '3';
-var rock3 = new createjs.Shape();
-//rock3.graphics.beginFill("black").drawCircle(329, 60, 20);
-rock3.pieceType = "rock";
-rock3.team = '3';
 
 //==========================================================================game board
 var gameStage = new createjs.Stage("gameCanvas");
@@ -122,10 +122,10 @@ for (var y = 0; y <= gameBoardHeight; y += 60) {
    gameStage.addChild(line);
 }
 
-
 gameStage.update();
 
 //==========================================================================Player 1 game pieces
+
 //create clickable important thing
 var p1squareIT = new createjs.Shape();
 var p1labelIT = new createjs.Text("Important \nThing", "10px Arial", "#FFFFFF");
@@ -439,16 +439,10 @@ pieceArray[24] = p1trap1Clickable;
 pieceArray[25] = p2trap1Clickable;
 pieceArray[26] = p1trap2Clickable;
 pieceArray[27] = p2trap2Clickable;
-
-
-for (var i = 0; i < pieceArray.length; i++){
-   pieceArray[i].x = 100;
-   pieceArray[i].y = 100;
-   gameStage.addChild(pieceArray[i]);
-}
 pieceArray[28] = rock1;
 pieceArray[29] = rock2;
 pieceArray[30] = rock3;
+
 //==========================================================================draggable pieces used for setup
 //create draggable important thing
 var squareIT = new createjs.Shape();
@@ -463,7 +457,6 @@ importantThingDragger.y = 422;
 importantThingDragger.addChild(squareIT, labelIT);
 setupStage.addChild(importantThingDragger);
 
-
 //create draggable trap1
 var squareT1 = new createjs.Shape();
 squareT1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
@@ -476,7 +469,6 @@ trap1Dragger.x = 62;
 trap1Dragger.y = 422;
 trap1Dragger.addChild(squareT1, labelT1);
 setupStage.addChild(trap1Dragger);
-
 
 //create draggable trap2
 var squareT2 = new createjs.Shape();
@@ -491,7 +483,6 @@ trap2Dragger.y = 422;
 trap2Dragger.addChild(squareT2, labelT2);
 setupStage.addChild(trap2Dragger);
 
-
 //create draggable archer
 var squareAr = new createjs.Shape();
 squareAr.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
@@ -504,7 +495,6 @@ archerDragger.x = 182;
 archerDragger.y = 422;
 archerDragger.addChild(squareAr, labelAr);
 setupStage.addChild(archerDragger);
-
 
 //create draggable mystic
 var squareMy = new createjs.Shape();
@@ -519,7 +509,6 @@ mysticDragger.y = 422;
 mysticDragger.addChild(squareMy, labelMy);
 setupStage.addChild(mysticDragger);
 
-
 //create draggable rider1
 var squareR1 = new createjs.Shape();
 squareR1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
@@ -533,7 +522,6 @@ rider1Dragger.y = 422;
 rider1Dragger.addChild(squareR1, labelR1);
 setupStage.addChild(rider1Dragger);
 
-
 //create draggable rider2
 var squareR2 = new createjs.Shape();
 squareR2.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
@@ -546,7 +534,6 @@ rider2Dragger.x = 362;
 rider2Dragger.y = 422;
 rider2Dragger.addChild(squareR2, labelR2);
 setupStage.addChild(rider2Dragger);
-
 
 //create draggable assassin
 var squareAs = new createjs.Shape();
@@ -587,7 +574,6 @@ soldier2Dragger.y = 482;
 soldier2Dragger.addChild(squareS2, labelS2);
 setupStage.addChild(soldier2Dragger);
 
-
 //create draggable engineer1
 var squareE1 = new createjs.Shape();
 squareE1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
@@ -600,7 +586,6 @@ engineer1Dragger.x = 122;
 engineer1Dragger.y = 482;
 engineer1Dragger.addChild(squareE1, labelE1);
 setupStage.addChild(engineer1Dragger);
-
 
 //create draggable engineer2
 var squareE2 = new createjs.Shape();
@@ -615,7 +600,6 @@ engineer2Dragger.y = 482;
 engineer2Dragger.addChild(squareE2, labelE2);
 setupStage.addChild(engineer2Dragger);
 
-
 //create draggable captain
 var squareCa = new createjs.Shape();
 squareCa.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
@@ -628,7 +612,6 @@ captainDragger.x = 242;
 captainDragger.y = 482;
 captainDragger.addChild(squareCa, labelCa);
 setupStage.addChild(captainDragger);
-
 
 //create draggable commander
 var squareCo = new createjs.Shape();
@@ -645,9 +628,6 @@ setupStage.addChild(commanderDragger);
 
 gameStage.update();
 setupStage.update();
-
-//var check = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-//setBoard(check);
 
 var friendlyColor = "blue";
 var enemyColor = "#8b8989";
