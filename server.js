@@ -3,7 +3,7 @@ var url = require('url');
 var io = require('socket.io').listen(server);
 var fs = require('fs');
 
-var portNumber = 33332;
+var portNumber = 32421;
 console.log("Server running on port " + portNumber + ".");
 server.listen(portNumber);
 
@@ -476,12 +476,12 @@ function handleMove(data) {
 		}
 		else {
 			// If space not empty, then handle attack
-			resolveConflict(xOld, yOld, xNew, yNew);
+			resolveConflict(xOld, yOld, xNew, yNew, actionType);
 		}
 	}
 }
 
-function resolveConflict(xOld, yOld, xNew, yNew) {
+function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 	// mInd -> moving piece index, aInd -> attacked piece index
 	var mInd = getPieceIndex(xOld, yOld);
 	var aInd = getPieceIndex(xNew, yNew);
@@ -489,7 +489,21 @@ function resolveConflict(xOld, yOld, xNew, yNew) {
 	var attacked = allPieces[aInd];
 
 	// Handle special cases
-	if (attacked.type == "important thing") {
+	if (actionType == 2) {
+		// Handle archer range attack
+		// Archer attacks with strength 3 from 2 spaces away.
+		if (attacked.type == "mystic" || attacked.type == "rider" ||
+			attacked.type == "archer" || attacked.type == "engineer" ||
+			attacked.type == "assassin") {
+				var tempArray = [moving.team, 4, xOld, yOld, xNew, yNew, attacked.type, ""];
+				io.sockets.emit("resolve conflict", tempArray);
+		}
+		else {
+			var tempArray = [moving.team, 3, xOld, yOld, xNew, yNew, "", ""];
+			io.sockets.emit("resolve conflict", tempArray);
+		}
+	}
+	else if (attacked.type == "important thing") {
 		var tempArray = [moving.team];
 		io.sockets.emit("game over", tempArray);
 	}
@@ -608,16 +622,16 @@ function validMove(xOld, yOld, xNew, yNew) {
 
 	// All the pieces that can only move one space
 	if (moving.type == "mystic" || moving.type == "assassin" ||
-			moving.type == "engineer" || moving.type == "soldier" ||
-			moving.type == "captain" || moving.type == "commander") {
-		
-		if (Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) {
-			// Trying to move a piece too far
-			var message = moving.type + " cannot move that far.";
-			var tempArray = [xOld, yOld, message];
-			io.sockets.emit('invalid move', tempArray);
-			return false;
-		}
+		moving.type == "engineer" || moving.type == "soldier" ||
+		moving.type == "captain" || moving.type == "commander") {
+			
+			if (Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) {
+				// Trying to move a piece too far
+				var message = moving.type + " cannot move that far.";
+				var tempArray = [xOld, yOld, message];
+				io.sockets.emit('invalid move', tempArray);
+				return false;
+			}
 	}
 	
 	// Riders cannot move through other pieces
