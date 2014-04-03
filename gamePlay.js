@@ -314,8 +314,8 @@ function movePiece(event){
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
       move[2] = orient(playerNum, selectedPiece.gameGridY);
-      move[3] = event.target.parent.gameGridX;
-      move[4] = orient(playerNum, event.target.parent.gameGridY);
+      move[3] = event.currentTarget.gameGridX;
+      move[4] = orient(playerNum, event.currentTarget.gameGridY);
       move[5] = 1;
       move[6] = playerNum;
       socket.emit("move", move);
@@ -332,8 +332,8 @@ function shootPiece(event){
       move[0] = "move";
       move[1] = selectedPiece.gameGridX;
       move[2] = orient(playerNum, selectedPiece.gameGridY);
-      move[3] = event.target.parent.gameGridX;
-      move[4] = orient(playerNum, event.target.parent.gameGridY);
+      move[3] = event.currentTarget.gameGridX;
+      move[4] = orient(playerNum, event.currentTarget.gameGridY);
       move[5] = 2;
       move[6] = playerNum;
       socket.emit("move", move);
