@@ -19,6 +19,12 @@ var isGameLocOccupied = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0]
 ];
 
+//this array keeps track of the pieces lost by each player
+var piecesLost = new Array();
+
+//this array keeps track of the pieces captured by each player
+var piecesCaptured = new Array();
+
 //when game starts we hide and/or show html elements
 function hideElem(divId){
    document.getElementById(divId).style.display = 'none';
@@ -262,6 +268,74 @@ function updateTurnIndicator(){
 	else{
 	   document.getElementById("turnIndicator").innerHTML = "         ";
 	}
+}
+
+//this function adds the clickable to the pieces lost array of appropriate player
+function pieceLost(clickable){
+	if(playerNum == 1){
+		piecesLost.push(clickable);
+		drawPiecesOnLost(clickable, piecesLost.length);
+		
+	}
+	else{
+		piecesLost.push(clickable);
+		drawPiecesOnLost(clickable, piecesLost.length);
+	}
+}
+
+
+//this function adds the clickable to the pieces lost array of appropriate player
+function pieceCaptured(clickable){
+	if(playerNum == 1){
+		piecesCaptured.push(clickable);
+		drawPiecesOnCaptured(clickable,piecesCaptured.length);
+	}
+	else{
+		piecesCaptured.push(clickable);
+		drawPiecesOnCaptured(clickable,piecesCaptured.length);
+	}
+}
+
+//this function addes the pieces lost in the lost canvas
+function drawPiecesOnLost(clickable, loc){
+	if(loc < 6){
+		clickable.x = (loc - 1)*60 + 3;
+		clickable.y = 3;
+	}
+	else if(loc > 5 && loc < 11){
+		loc = loc%6;
+		clickable.x = (loc - 1)*60 + 3;
+		clickable.y = 60 + 3;
+		
+	}
+	else{
+		loc = loc%6;
+		clickable.x = (loc - 1)*60 + 3;
+		clickable.y = 120 + 3;	
+	}
+	lostStage.addChild(clickable);
+	lostStage.update();
+}
+
+//this function addes the pieces captured in the captured canvas
+function drawPiecesOnCaptured(clickable, loc){
+	if(loc < 6){
+		clickable.x = (loc - 1)*60 + 3;
+		clickable.y = 3;
+	}
+	else if(loc > 5 && loc < 11){
+		loc = loc%6;
+		clickable.x = (loc - 1)*60 + 3;
+		clickable.y = 60 + 3;
+		
+	}
+	else{
+		loc = loc%6;
+		clickable.x = (loc - 1)*60 + 3;
+		clickable.y = 120 + 3;	
+	}
+	captStage.addChild(clickable);
+	captStage.update();
 }
 
 

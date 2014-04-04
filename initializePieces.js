@@ -57,11 +57,11 @@ var captStage = new createjs.Stage("capPiecesCanvas");
 //draw grid for lostCanvas
 for (var x = 0; x <= 300; x += 60) {
    var line = new createjs.Shape();
-   line.graphics.beginFill("#000000").drawRect(x, 0, 1, 150);
+   line.graphics.beginFill("#000000").drawRect(x, 0, 1, 180);
    lostStage.addChild(line);
 }
 
-for (var y = 0; y <= 150; y += 60) {
+for (var y = 0; y <= 180; y += 60) {
    var line = new createjs.Shape();
    line.graphics.beginFill("#000000").drawRect(0, y, 300, 1);
    lostStage.addChild(line);
@@ -70,11 +70,11 @@ for (var y = 0; y <= 150; y += 60) {
 //draw grid for captCanvas
 for (var x = 0; x <= 300; x += 60) {
    var line = new createjs.Shape();
-   line.graphics.beginFill("#000000").drawRect(x, 0, 1, 150);
+   line.graphics.beginFill("#000000").drawRect(x, 0, 1, 180);
    captStage.addChild(line);
 }
 
-for (var y = 0; y <= 150; y += 60) {
+for (var y = 0; y <= 180; y += 60) {
    var line = new createjs.Shape();
    line.graphics.beginFill("#000000").drawRect(0, y, 300, 1);
    captStage.addChild(line);

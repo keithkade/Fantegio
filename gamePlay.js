@@ -197,7 +197,26 @@ function resolveConflict(conflictArray){
 }
 
 //when a clickable is defeated set it off the board 
-function removeClickable(clickable){
+//and pieces are moved to the pieces captured and pieces
+//lost canvas
+function removeClickable(clickable){4
+   if(playerNum == 1){
+		if(clickable.team == 1){
+			pieceLost(clickable);
+		}
+		else{
+			pieceCaptured(clickable);
+		}
+   }
+   else{
+		if(clickable.team == 2){
+			pieceLost(clickable);
+		}
+		else{
+			pieceCaptured(clickable);
+		}
+		
+   }
    clickable.gameGridX = -1;
    clickable.gameGridY = -1;
    gameStage.removeChild(clickable);
