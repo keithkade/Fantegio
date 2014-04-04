@@ -199,7 +199,7 @@ function resolveConflict(conflictArray){
 //when a clickable is defeated set it off the board 
 //and pieces are moved to the pieces captured and pieces
 //lost canvas
-function removeClickable(clickable){4
+function removeClickable(clickable){
    if(playerNum == 1){
 		if(clickable.team == 1){
 			pieceLost(clickable);

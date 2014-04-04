@@ -286,13 +286,40 @@ function pieceLost(clickable){
 
 //this function adds the clickable to the pieces lost array of appropriate player
 function pieceCaptured(clickable){
+
 	if(playerNum == 1){
-		piecesCaptured.push(clickable);
-		drawPiecesOnCaptured(clickable,piecesCaptured.length);
+		//creating a new clickable
+		var square1 = new createjs.Shape();
+		var squareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#FFFFFF");
+		squareIT.textAlign = "center";
+		squareIT.x = 28;
+		squareIT.y = 15;
+		var newClickable = new createjs.Container();
+		newClickable.pieceType =  clickable.pieceType;
+		newClickable.team = clickable.pieceType;
+		square1.graphics.beginFill("blue").drawRect(0, 0, 60, 60);
+		newClickable.addChild(square, squareIT);
+		
+		//adding the new clickable in the piecesCaptured array and then displaying it
+		piecesCaptured.push(newClickable);
+		drawPiecesOnCaptured(newClickable,piecesCaptured.length);
 	}
 	else{
-		piecesCaptured.push(clickable);
-		drawPiecesOnCaptured(clickable,piecesCaptured.length);
+		//creating a new clickable
+		var square1 = new createjs.Shape();
+		var squareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#FFFFFF");
+		squareIT.textAlign = "center";
+		squareIT.x = 28;
+		squareIT.y = 15;
+		var newClickable = new createjs.Container();
+		newClickable.pieceType =  clickable.pieceType;
+		newClickable.team = clickable.pieceType;
+		square1.graphics.beginFill("blue").drawRect(0, 0, 60, 60);
+		newClickable.addChild(square, squareIT);
+		
+		//adding the new clickable in the piecesCaptured array and then displaying it
+		piecesCaptured.push(newClickable);
+		drawPiecesOnCaptured(newClickable,piecesCaptured.length);
 	}
 }
 
