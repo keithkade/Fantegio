@@ -445,24 +445,27 @@ function setupBoard(data) {
 		boulder1.strength = 17;
 		boulder1.type = "boulder";
 		boulder1.team = 3;
-		boulder1.X = 2;
-		boulder1.Y = 4;
+		// Random square with x in [1,3] and y in [4,5]
+		boulder1.X = Math.floor((Math.random() * 3) + 1);
+		boulder1.Y = Math.floor((Math.random() * 2) + 4);
 		allPieces[28] = boulder1;
 		
 		var boulder2 = new Piece();
 		boulder2.strength = 17;
 		boulder2.type = "boulder";
 		boulder2.team = 3;
-		boulder2.X = 4;
-		boulder2.Y = 5;
+		// Random square with x in [4,5] and y in [4,5]
+		boulder2.X = Math.floor((Math.random() * 2) + 4);
+		boulder2.Y = Math.floor((Math.random() * 2) + 4);
 		allPieces[29] = boulder2;
 		
 		var boulder3 = new Piece();
 		boulder3.strength = 17;
 		boulder3.type = "boulder";
 		boulder3.team = playerNumber;
-		boulder3.X = 8;
-		boulder3.Y = 4;
+		// Random square with x in [1,3] and y in [4,5]
+		boulder3.X = Math.floor((Math.random() * 3) + 6);
+		boulder3.Y = Math.floor((Math.random() * 2) + 4);
 		allPieces[30] = boulder3;
 		
 		var locArray = getLocations(allPieces);
