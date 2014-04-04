@@ -192,6 +192,17 @@ function handler(request,response) {
 					response.end();
 				});
 			break;
+		case '/FantegioBackground.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running timer.js');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;			
 	}
 }
 

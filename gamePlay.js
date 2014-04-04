@@ -264,7 +264,7 @@ function removeChoices(){
    while(choices.length > 0){
       var cur = choices.pop();
       cur.removeAllEventListeners();
-      cur.removeChild(cur.getChildByName("moveIcon"));
+      //cur.removeChild(cur.getChildByName("moveIcon"));
    }
 }
 
@@ -275,8 +275,7 @@ function pieceClick(event){
    
    selectedPiece = event.target.parent;
   
-   if(selectedPiece.pieceType == "Rider")
-   {
+   if(selectedPiece.pieceType == "Rider"){
       var count = 1;
       while(possibleActionDest(selectedPiece.gameGridX, selectedPiece.gameGridY+count))
          count++;
@@ -293,18 +292,22 @@ function pieceClick(event){
       while(possibleActionDest(selectedPiece.gameGridX-count, selectedPiece.gameGridY))
          count++;
    }
+   else if(selectedPiece.pieceType == "Archer"){
+		if(possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1))
+			possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+2,"shot");
+		if(possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1))
+			possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-2,"shot");
+		if(possibleActionDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY))
+			possibleActionDest(selectedPiece.gameGridX+2,selectedPiece.gameGridY,"shot");
+		if(possibleActionDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY))
+			possibleActionDest(selectedPiece.gameGridX-2,selectedPiece.gameGridY,"shot");
+   }
    else if(selectedPiece.pieceType != "Trap" && selectedPiece.pieceType != "Important Thing"){
       possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+1);
       possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-1);
       possibleActionDest(selectedPiece.gameGridX+1,selectedPiece.gameGridY);
       possibleActionDest(selectedPiece.gameGridX-1,selectedPiece.gameGridY);
-      if(selectedPiece.pieceType == "Archer")
-      {
-         possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY+2,"shot");
-         possibleActionDest(selectedPiece.gameGridX,selectedPiece.gameGridY-2,"shot");
-         possibleActionDest(selectedPiece.gameGridX+2,selectedPiece.gameGridY,"shot");
-         possibleActionDest(selectedPiece.gameGridX-2,selectedPiece.gameGridY,"shot");
-      }
+      
    }
 
    gameStage.update();
@@ -323,10 +326,10 @@ function possibleActionDest(destX, destY, actionType){
       var temp = board[destX][destY];
       if(actionType === undefined){
          board[destX][destY].addEventListener("click", movePiece);
-         var moveIcon = new createjs.Shape();
-         moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
-         moveIcon.name = "moveIcon";
-         board[destX][destY].addChild(moveIcon);
+         //var moveIcon = new createjs.Shape();
+         //moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+         //moveIcon.name = "moveIcon";
+         //board[destX][destY].addChild(moveIcon);
       }
       choices.push(board[destX][destY]);
       return true;
@@ -334,17 +337,17 @@ function possibleActionDest(destX, destY, actionType){
    else if(curPiece.team != playerNum){
       if(actionType === undefined){
          curPiece.addEventListener("click", movePiece);
-         var moveIcon = new createjs.Shape();
-         moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
-         moveIcon.name = "moveIcon";
-         board[destX][destY].addChild(moveIcon);
+         //var moveIcon = new createjs.Shape();
+         //moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+         //moveIcon.name = "moveIcon";
+         //board[destX][destY].addChild(moveIcon);
       }
       else if(actionType == "shot"){
          curPiece.addEventListener("click", shootPiece);
-         var moveIcon = new createjs.Shape();
-         moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
-         moveIcon.name = "moveIcon";
-         board[destX][destY].addChild(moveIcon);
+         //var moveIcon = new createjs.Shape();
+         //moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+         //moveIcon.name = "moveIcon";
+         //board[destX][destY].addChild(moveIcon);
       }
    choices.push(curPiece);
    }

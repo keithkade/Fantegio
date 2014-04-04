@@ -80,16 +80,16 @@ for (var x = 1; x < 9; x++)
    board[x] = new Array(9);
    for (var y = 1; y < 9; y++)
    {
-      //var square = new createjs.Shape();      
-      //square.graphics.beginFill("#4E8154").drawRect(0, 0, 60, 60);
+      var square = new createjs.Shape();      
+      square.graphics.beginFill("#4E8154").drawRect(3, 3, 54, 54);
       board[x][y] = new createjs.Container();
       board[x][y].x = ((x-1)*60);
       board[x][y].y = ((y-1)*60);
       board[x][y].gameGridX = x;
       board[x][y].gameGridY = y;
       board[x][y].team = '0';
-      //board[x][y].addChild(square);
-      gameStage.addChild(board[x][y]);
+      board[x][y].addChild(square);
+      //gameStage.addChild(board[x][y]);
    }
 }
 
