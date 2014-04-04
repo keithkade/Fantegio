@@ -104,11 +104,33 @@ function handler(request,response) {
 					response.end();
 				});
 			break;
+		case '/initializeStages.js':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running initializeStages.js');
+					}
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.write(data);
+					response.end();
+				});
+			break;
 		case '/initializePieces.js':
 			fs.readFile(__dirname + path, function(error, data) {
 					if (error) {
 						response.writeHead(500);
 						return response.end('Error running initializePieces.js');
+					}
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/initializeDraggers.js':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error running initializeDraggers.js');
 					}
 					response.writeHead(200, {"Content-Type": "text/html"});
 					response.write(data);
