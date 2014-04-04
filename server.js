@@ -418,30 +418,30 @@ function setupBoard(data) {
 
 	// If both players have connected, signal start game
 	if (numClients == 2) {
-		//creating three rocks
-		var rock1 = new Piece();
-		rock1.strength = 17;
-		rock1.type = "boulder";
-		rock1.team = 3;
-		rock1.X = 2;
-		rock1.Y = 4;
-		allPieces[28] = rock1;
+		//creating three boulders
+		var boulder1 = new Piece();
+		boulder1.strength = 17;
+		boulder1.type = "boulder";
+		boulder1.team = 3;
+		boulder1.X = 2;
+		boulder1.Y = 4;
+		allPieces[28] = boulder1;
 		
-		var rock2 = new Piece();
-		rock2.strength = 17;
-		rock2.type = "boulder";
-		rock2.team = 3;
-		rock2.X = 4;
-		rock2.Y = 5;
-		allPieces[29] = rock2;
+		var boulder2 = new Piece();
+		boulder2.strength = 17;
+		boulder2.type = "boulder";
+		boulder2.team = 3;
+		boulder2.X = 4;
+		boulder2.Y = 5;
+		allPieces[29] = boulder2;
 		
-		var rock3 = new Piece();
-		rock3.strength = 17;
-		rock3.type = "boulder";
-		rock3.team = playerNumber;
-		rock3.X = 8;
-		rock3.Y = 4;
-		allPieces[30] = rock3;
+		var boulder3 = new Piece();
+		boulder3.strength = 17;
+		boulder3.type = "boulder";
+		boulder3.team = playerNumber;
+		boulder3.X = 8;
+		boulder3.Y = 4;
+		allPieces[30] = boulder3;
 		
 		var locArray = getLocations(allPieces);
 		io.sockets.emit("start game", locArray);
@@ -461,7 +461,7 @@ function handleMove(data) {
 	var playerNumber = moveData[6];
 
 	// Only execute if move is valid
-	if (validMove(xOld, yOld, xNew, yNew)) {
+	if (validMove(xOld, yOld, xNew, yNew, actionType)) {
 		if (spaceEmpty(xNew, yNew)) {
 			// We need to update piece position in allPieces
 			// mInd -> moving index
@@ -495,8 +495,10 @@ function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 		if (attacked.type == "mystic" || attacked.type == "rider" ||
 			attacked.type == "archer" || attacked.type == "engineer" ||
 			attacked.type == "assassin") {
-				var tempArray = [moving.team, 4, xOld, yOld, xNew, yNew, attacked.type, ""];
-				io.sockets.emit("resolve conflict", tempArray);
+
+			allPieces.splice(aInd, 1);
+			var tempArray = [moving.team, 4, xOld, yOld, xNew, yNew, attacked.type, ""];
+			io.sockets.emit("resolve conflict", tempArray);
 		}
 		else {
 			var tempArray = [moving.team, 3, xOld, yOld, xNew, yNew, "", ""];
@@ -598,7 +600,7 @@ function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 }
 
 // Determine if a requested move is valid, if so return true, return false otherwise
-function validMove(xOld, yOld, xNew, yNew) {
+function validMove(xOld, yOld, xNew, yNew, actionType) {
 	// mInd -> moving piece index, aInd -> attacked piece index
 	var mInd = getPieceIndex(xOld, yOld);
 	var aInd = getPieceIndex(xNew, yNew);
@@ -620,20 +622,64 @@ function validMove(xOld, yOld, xNew, yNew) {
 		return false;
 	}
 
-	// All the pieces that can only move one space
+	// All the pieces that can only move one space (minus archer)
 	if (moving.type == "mystic" || moving.type == "assassin" ||
 		moving.type == "engineer" || moving.type == "soldier" ||
 		moving.type == "captain" || moving.type == "commander") {
 			
-			if (Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) {
-				// Trying to move a piece too far
-				var message = moving.type + " cannot move that far.";
+		if (Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) {
+			// Trying to move a piece too far
+			var message = moving.type + " cannot move that far.";
+			var tempArray = [xOld, yOld, message];
+			io.sockets.emit('invalid move', tempArray);
+			return false;
+		}
+	}
+
+	// Archers can only move one space
+	// They can range attack two spaces away (but not over other pieces)
+	if (moving.type == "archer") {
+		if ((Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) &&
+			actionType == 1) {
+
+			// Trying to move archer too far
+			var message = "Archer's cannot move that far.";
+			var tempArray = [xOld, yOld, message];
+			io.sockets.emit('invalid move', tempArray);
+			return false;
+		}
+		else if (actionType == 2) {
+			// Archer is range attacking
+
+			if (spaceEmpty(xNew, yNew)) {
+				var message = "Cannot shoot on empty space.";
 				var tempArray = [xOld, yOld, message];
 				io.sockets.emit('invalid move', tempArray);
 				return false;
 			}
+
+			if (Math.abs(xOld - xNew) != 2 &&
+				Math.abs(yOld - yNew) != 2) {
+
+				// Trying to shoot too far
+				var message = "Can only shoot pieces two spaces away.";
+				var tempArray = [xOld, yOld, message];
+				io.sockets.emit('invalid move', tempArray);
+				return false;
+			}
+
+			var xAvg = (xOld + xNew) / 2;
+			var yAvg = (yOld + yNew) / 2;
+			// Make sure archer isn't shooting OVER another piece
+			if (!spaceEmpty(xAvg, yAvg)) {
+				var message = "Cannot shoot over boulders or other pieces.";
+				var tempArray = [xOld, yOld, message];
+				io.sockets.emit('invalid move', tempArray);
+				return false;
+			}
+		}
 	}
-	
+
 	// Riders cannot move through other pieces
 	if (moving.type == "rider") {
 		var xMoveDist = Math.abs(xOld - xNew);

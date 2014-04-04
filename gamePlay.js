@@ -251,7 +251,7 @@ function simpleMove(moveArray){
 
 //if the server does not think the move sent was valid
 function invalidMove(data){
-   alert("something went wrong");
+   alert("Error: " + data[2]);
    // [“invalid move”, xOld, yOld, message]
 }
 
