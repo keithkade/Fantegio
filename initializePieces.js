@@ -298,7 +298,7 @@ var p2commanderClickable = new createjs.Container();
 p2commanderClickable.pieceType = "Commander";
 p2commanderClickable.team =  '2';
 
-//put all pieces in array so it can be search 
+//put all pieces in array so it can be searched
 var pieceArray = new Array();
 pieceArray[0] = p1importantThingClickable;
 pieceArray[1] = p2importantThingClickable;

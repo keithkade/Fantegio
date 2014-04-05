@@ -270,6 +270,35 @@ function updateTurnIndicator(){
 	}
 }
 
+function showMovementArrow(xOld, yOld, xNew, yNew) {
+	var xDif = xNew - xOld;
+	var yDif = yNew - yOld;
+	var moveArrow = new createjs.Shape();
+	moveArrow.name = "moveArrow";
+
+	if (xDif == 0 && yDif == 0) {
+		return; // nothing moved
+	}
+	if (xDif > 0) {
+		// Moved to the right
+		moveArrow.graphics.beginFill("#CCCC00").drawPolyStar(37, 30, 15, 3, 0.5, 0);
+	}
+	else if (xDif < 0) {
+		// Moved to the left
+		//
+		moveArrow.graphics.beginFill("#CCCC00").drawPolyStar(23, 30, 15, 3, 0.5, 60);
+	}
+	else if (yDif > 0) {
+		// Moved down
+		moveArrow.graphics.beginFill("#CCCC00").drawPolyStar(30, 37, 15, 3, 0.5, 90);
+	}
+	else if (yDif < 0) {
+		// Moved up
+		moveArrow.graphics.beginFill("#CCCC00").drawPolyStar(30, 23, 15, 3, 0.5, 30);
+	}
+	board[xOld][yOld].addChild(moveArrow);
+}
+
 //this function adds the clickable to the pieces lost array of appropriate player
 function pieceLost(clickable){
 	if(playerNum == 1){

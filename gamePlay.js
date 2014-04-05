@@ -87,6 +87,10 @@ function gameOver(gameOverArray){
     }							
 }
 
+// Store the board location of the last created direction of movement arrow
+// Used to delete arrow after next move
+var lastMoveArrow;
+
 //message recieved that contains the results of a conflict
 function resolveConflict(conflictArray){
    var playerMoved = conflictArray[0];
@@ -183,6 +187,16 @@ function resolveConflict(conflictArray){
 			 pieceArray[i].y = ((yNew - 1) * 60) + 2;
 		  }
 	   }
+
+	   // Add direction of movement arrow
+	   lastMoveArrow = board[xOld][yOld];
+	   if (playerNum != playerTurn) {
+		   showMovementArrow(xOld, yOld, xNew, yNew);
+	   }
+   }
+   // Always remove last direction arrow even if archer just shot..
+   if (lastMoveArrow !== undefined) {
+	   lastMoveArrow.removeChild(lastMoveArrow.getChildByName("moveArrow"));
    }
 
    if(playerTurn == '1'){
@@ -228,6 +242,15 @@ function simpleMove(moveArray){
    var yOld = orient(playerNum, moveArray[1]);
    var xNew = moveArray[2];
    var yNew = orient(playerNum, moveArray[3]); 
+
+   // Handle adding and removing direction of movement arrow
+   if (lastMoveArrow !== undefined) {
+	   lastMoveArrow.removeChild(lastMoveArrow.getChildByName("moveArrow"));
+   }
+   lastMoveArrow = board[xOld][yOld];
+   if (playerNum != playerTurn) {
+	   showMovementArrow(xOld, yOld, xNew, yNew);
+   }
 
    for(var i=0; i<pieceArray.length; i++){
       if (pieceArray[i].gameGridX == xOld && pieceArray[i].gameGridY == yOld){
