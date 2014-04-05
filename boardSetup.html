@@ -16,6 +16,8 @@
   		p {color:white;}
   		#timer {color:#F7DE99;font-size:200%;float:right;}
   		#turnIndicator {color:#F7DE99;font-size:150%;}
+  		#setupCanvas {border:1px solid #000000;display: block; position:absolute; left:6px; top:6px;}
+  		#gameCanvas {border:1px solid #000000;display: none; position:absolute; left:6px; top:6px;}
   		h3 {color:white;}
   	</style>
 </head>
@@ -23,19 +25,23 @@
 <body>
 	
 <div style="width: 100%;">
-   	
-   	<div style="float:left;height:100%; width: 60%">
-		<canvas id="setupCanvas" width="480" height="540" style="border:1px solid #000000;display: block">		
-		</canvas>
-		<canvas id="gameCanvas" width="480" height="480" style="border:1px solid #000000;display: none">		
+	   	
+   	<div style="float:left;height:100%; width: 61%">
+   		<img id="gameBoardPNG" src="gameBoard.png" width="480" height="480"/> 
+   		   		
+		<canvas id="setupCanvas" width="480" height="540">
+		</canvas>	
+		<canvas id="gameCanvas" width="480" height="480">		
 		</canvas>
 		
   		<button id="defaultButton" type="button" onclick="setup()">Default Setup</button>
   		<button type="button" onclick="window.open('rules.html')" >Game Rules</button>
   		<button id="startButton" type="button" onclick="startGame()">Start Game</button>	
    		
-   		<span id="timer"></span>	
-   		<span id="turnIndicator"></span>	
+   		<span id="timer">
+   		</span>	
+   		<span id="turnIndicator">
+   		</span>	
    		
    	</div>
    	

@@ -7,15 +7,10 @@ var setupBoardWidth = 480;
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
 
-//make canvas white
+//make bottom white
 var whiteBackdrop = new createjs.Shape();
-whiteBackdrop.graphics.beginFill("#FFFFFF").drawRect(0, 0, setupBoardWidth, 580);
+whiteBackdrop.graphics.beginFill("#FFFFFF").drawRect(0, 300, setupBoardWidth, 240);
 setupStage.addChild(whiteBackdrop);
-
-//color background green
-var background = new createjs.Shape();
-background.graphics.beginFill("#4E8154").drawRect(0, 0, setupBoardWidth, setupBoardHeight);
-setupStage.addChild(background);
 
 //highlight placable area
 var placable = new createjs.Shape();
@@ -72,8 +67,7 @@ var board = new Array(9);
 var gameBoardHeight = 480;
 var gameBoardWidth = 480;
 var background = new createjs.Shape();
-background.graphics.beginFill("#4E8154").drawRect(0,0,gameBoardHeight,gameBoardWidth);
-gameStage.addChild(background);
+
 
 for (var x = 1; x < 9; x++)
 {

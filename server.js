@@ -196,13 +196,24 @@ function handler(request,response) {
 			fs.readFile(__dirname + path, function(error, data) {
 					if (error) {
 						response.writeHead(500);
-						return response.end('Error running timer.js');
+						return response.end('Error loading FantegioBackground.png');
 					}
 					response.writeHead(200, {"Content-Type": "application/x-javascript"});
 					response.write(data);
 					response.end();
 				});
-			break;			
+			break;
+		case '/gameBoard.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading gameBoard.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;								
 	}
 }
 
