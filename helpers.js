@@ -319,11 +319,11 @@ function pieceCaptured(clickable){
 	if(playerNum == 1){
 		//adding the content in the grey box
 		var newSquare1 = new createjs.Shape();
-		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#FFFFFF");
+		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
 		newSquareIT.textAlign = "center";
 		newSquareIT.x = 28;
 		newSquareIT.y = 15;
-		newSquare1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
 		clickable.addChild(newSquare1, newSquareIT);
 		
 		//adding the new clickable in the piecesCaptured array and then displaying it
@@ -333,11 +333,11 @@ function pieceCaptured(clickable){
 	else{
 		//adding the content in the grey box
 		var newSquare1 = new createjs.Shape();
-		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#FFFFFF");
+		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
 		newSquareIT.textAlign = "center";
 		newSquareIT.x = 28;
 		newSquareIT.y = 15;
-		newSquare1.graphics.beginFill("blue").drawRect(0, 0, 57, 57);
+		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
 		clickable.addChild(newSquare1, newSquareIT);
 		
 		//adding the new clickable in the piecesCaptured array and then displaying it
