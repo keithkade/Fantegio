@@ -177,10 +177,6 @@ function resolveConflict(conflictArray){
 		   alert("Your " + loser.pieceType + " was defeated by your opponent's archer.");
    }
 
-   // Always remove last direction arrow, even if archer attacked
-   if (lastMoveArrow !== undefined) {
-	   lastMoveArrow.removeChild(lastMoveArrow.getChildByName("moveArrow"));
-   }
    if (outcome != 3 && outcome != 4) {
 	   //move the piece
 	   for(var i=0; i<pieceArray.length; i++){
@@ -192,11 +188,15 @@ function resolveConflict(conflictArray){
 		  }
 	   }
 
-	   // Handle adding and removing direction of movement arrow
+	   // Add direction of movement arrow
 	   lastMoveArrow = board[xOld][yOld];
 	   if (playerNum != playerTurn) {
 		   showMovementArrow(xOld, yOld, xNew, yNew);
 	   }
+   }
+   // Always remove last direction arrow even if archer just shot..
+   if (lastMoveArrow !== undefined) {
+	   lastMoveArrow.removeChild(lastMoveArrow.getChildByName("moveArrow"));
    }
 
    if(playerTurn == '1'){
