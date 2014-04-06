@@ -17,7 +17,7 @@ io.sockets.on('connection', function(client) {
 // Piece object
 function Piece() {
 	this.strength = 11;
-	this.type = "engineer";
+	this.type = "Engineer";
 	this.team = 1;
 	this.X = 0;
 	this.Y = 0;
@@ -232,7 +232,7 @@ function setupBoard(data) {
 
 		var commander_1 = new Piece();
 		commander_1.strength = 6;
-		commander_1.type = "commander";
+		commander_1.type = "Commander";
 		commander_1.team = playerNumber;
 		commander_1.X = setup[2][0];
 		commander_1.Y = setup[2][1];
@@ -240,7 +240,7 @@ function setupBoard(data) {
 
 		var captain_1 = new Piece();
 		captain_1.strength = 5;
-		captain_1.type = "captain";
+		captain_1.type = "Captain";
 		captain_1.team = playerNumber;
 		captain_1.X = setup[2][2];
 		captain_1.Y = setup[2][3];
@@ -248,7 +248,7 @@ function setupBoard(data) {
 
 		var soldier1_1 = new Piece();
 		soldier1_1.strength = 4;
-		soldier1_1.type = "soldier";
+		soldier1_1.type = "Soldier";
 		soldier1_1.team = playerNumber;
 		soldier1_1.X = setup[2][4];
 		soldier1_1.Y = setup[2][5];
@@ -256,7 +256,7 @@ function setupBoard(data) {
 
 		var soldier2_1 = new Piece();
 		soldier2_1.strength = 4;
-		soldier2_1.type = "soldier";
+		soldier2_1.type = "Soldier";
 		soldier2_1.team = playerNumber;
 		soldier2_1.X = setup[2][6];
 		soldier2_1.Y = setup[2][7];
@@ -264,7 +264,7 @@ function setupBoard(data) {
 
 		var engineer1_1 = new Piece();
 		engineer1_1.strength = 3;
-		engineer1_1.type = "engineer";
+		engineer1_1.type = "Engineer";
 		engineer1_1.team = playerNumber;
 		engineer1_1.X = setup[2][8];
 		engineer1_1.Y = setup[2][9];
@@ -272,7 +272,7 @@ function setupBoard(data) {
 
 		var engineer2_1 = new Piece();
 		engineer2_1.strength = 3;
-		engineer2_1.type = "engineer";
+		engineer2_1.type = "Engineer";
 		engineer2_1.team = playerNumber;
 		engineer2_1.X = setup[2][10];
 		engineer2_1.Y = setup[2][11];
@@ -280,7 +280,7 @@ function setupBoard(data) {
 
 		var rider1_1 = new Piece();
 		rider1_1.strength = 2;
-		rider1_1.type = "rider";
+		rider1_1.type = "Rider";
 		rider1_1.team = playerNumber;
 		rider1_1.X = setup[2][12];
 		rider1_1.Y = setup[2][13];
@@ -288,7 +288,7 @@ function setupBoard(data) {
 
 		var rider2_1 = new Piece();
 		rider2_1.strength = 2;
-		rider2_1.type = "rider";
+		rider2_1.type = "Rider";
 		rider2_1.team = playerNumber;
 		rider2_1.X = setup[2][14];
 		rider2_1.Y = setup[2][15];
@@ -296,7 +296,7 @@ function setupBoard(data) {
 
 		var assasin_1 = new Piece();
 		assasin_1.strength = 1;
-		assasin_1.type = "assassin";
+		assasin_1.type = "Assassin";
 		assasin_1.team = playerNumber;
 		assasin_1.X = setup[2][16];
 		assasin_1.Y = setup[2][17];
@@ -304,7 +304,7 @@ function setupBoard(data) {
 
 		var archer_1 = new Piece();
 		archer_1.strength = 1;
-		archer_1.type = "archer";
+		archer_1.type = "Archer";
 		archer_1.team = playerNumber;
 		archer_1.X = setup[2][18];
 		archer_1.Y = setup[2][19];
@@ -312,7 +312,7 @@ function setupBoard(data) {
 
 		var mystic_1 = new Piece();
 		mystic_1.strength = 1;
-		mystic_1.type = "mystic";
+		mystic_1.type = "Mystic";
 		mystic_1.team = playerNumber;
 		mystic_1.X = setup[2][20];
 		mystic_1.Y = setup[2][21];
@@ -320,7 +320,7 @@ function setupBoard(data) {
 
 		var trap1_1 = new Piece();
 		trap1_1.strength = 11;
-		trap1_1.type = "trap";
+		trap1_1.type = "Trap";
 		trap1_1.team = playerNumber;
 		trap1_1.X = setup[2][22];
 		trap1_1.Y = setup[2][23];
@@ -328,7 +328,7 @@ function setupBoard(data) {
 
 		var trap2_1 = new Piece();
 		trap2_1.strength = 11;
-		trap2_1.type = "trap";
+		trap2_1.type = "Trap";
 		trap2_1.team = playerNumber;
 		trap2_1.X = setup[2][24];
 		trap2_1.Y = setup[2][25];
@@ -336,7 +336,7 @@ function setupBoard(data) {
  
  		var importantThing_1 = new Piece();
  		importantThing_1.strength = 11;
- 		importantThing_1.type = "important thing";
+ 		importantThing_1.type = "Important Thing";
  		importantThing_1.team = playerNumber;
  		importantThing_1.X = setup[2][26];
  		importantThing_1.Y = setup[2][27];
@@ -347,7 +347,7 @@ function setupBoard(data) {
  	else if (playerNumber == 2) {
  		var commander_2 = new Piece();
  		commander_2.strength = 6;
- 		commander_2.type = "commander";
+ 		commander_2.type = "Commander";
  		commander_2.team = playerNumber;
  		commander_2.X = setup[2][0];
  		commander_2.Y = setup[2][1];
@@ -355,7 +355,7 @@ function setupBoard(data) {
  
  		var captain_2 = new Piece();
  		captain_2.strength = 5;
- 		captain_2.type = "captain";
+ 		captain_2.type = "Captain";
  		captain_2.team = playerNumber;
  		captain_2.X = setup[2][2];
  		captain_2.Y = setup[2][3];
@@ -363,7 +363,7 @@ function setupBoard(data) {
  
  		var soldier1_2 = new Piece();
  		soldier1_2.strength = 4;
- 		soldier1_2.type = "soldier";
+ 		soldier1_2.type = "Soldier";
  		soldier1_2.team = playerNumber;
  		soldier1_2.X = setup[2][4];
  		soldier1_2.Y = setup[2][5];
@@ -371,15 +371,15 @@ function setupBoard(data) {
  
  		var soldier2_2 = new Piece();
  		soldier2_2.strength = 4;
- 		soldier2_2.type = "soldier";
+ 		soldier2_2.type = "Soldier";
  		soldier2_2.team = playerNumber;
  		soldier2_2.X = setup[2][6];
  		soldier2_2.Y = setup[2][7];
-                allPieces[17] = soldier2_2;
+		allPieces[17] = soldier2_2;
 
 		var engineer1_2 = new Piece();
 		engineer1_2.strength = 3;
-		engineer1_2.type = "engineer";
+		engineer1_2.type = "Engineer";
 		engineer1_2.team = playerNumber;
 		engineer1_2.X = setup[2][8];
 		engineer1_2.Y = setup[2][9];
@@ -387,7 +387,7 @@ function setupBoard(data) {
 
 		var engineer2_2 = new Piece();
 		engineer2_2.strength = 3;
-		engineer2_2.type = "engineer";
+		engineer2_2.type = "Engineer";
 		engineer2_2.team = playerNumber;
 		engineer2_2.X = setup[2][10];
 		engineer2_2.Y = setup[2][11];
@@ -395,7 +395,7 @@ function setupBoard(data) {
 
 		var rider1_2 = new Piece();
 		rider1_2.strength = 2;
-		rider1_2.type = "rider";
+		rider1_2.type = "Rider";
 		rider1_2.team = playerNumber;
 		rider1_2.X = setup[2][12];
 		rider1_2.Y = setup[2][13];
@@ -403,7 +403,7 @@ function setupBoard(data) {
 
 		var rider2_2 = new Piece();
 		rider2_2.strength = 2;
-		rider2_2.type = "rider";
+		rider2_2.type = "Rider";
 		rider2_2.team = playerNumber;
 		rider2_2.X = setup[2][14];
 		rider2_2.Y = setup[2][15];
@@ -411,7 +411,7 @@ function setupBoard(data) {
 
 		var assasin_2 = new Piece();
 		assasin_2.strength = 1;
-		assasin_2.type = "assassin";
+		assasin_2.type = "Assassin";
 		assasin_2.team = playerNumber;
 		assasin_2.X = setup[2][16];
 		assasin_2.Y = setup[2][17];
@@ -419,7 +419,7 @@ function setupBoard(data) {
 
 		var archer_2 = new Piece();
 		archer_2.strength = 1;
-		archer_2.type = "archer";
+		archer_2.type = "Archer";
 		archer_2.team = playerNumber;
 		archer_2.X = setup[2][18];
 		archer_2.Y = setup[2][19];
@@ -427,7 +427,7 @@ function setupBoard(data) {
 
 		var mystic_2 = new Piece();
 		mystic_2.strength = 1;
-		mystic_2.type = "mystic";
+		mystic_2.type = "Mystic";
 		mystic_2.team = playerNumber;
 		mystic_2.X = setup[2][20];
 		mystic_2.Y = setup[2][21];
@@ -435,7 +435,7 @@ function setupBoard(data) {
 
 		var trap1_2 = new Piece();
 		trap1_2.strength = 11;
-		trap1_2.type = "trap";
+		trap1_2.type = "Trap";
 		trap1_2.team = playerNumber;
 		trap1_2.X = setup[2][22];
 		trap1_2.Y = setup[2][23];
@@ -443,7 +443,7 @@ function setupBoard(data) {
 
 		var trap2_2 = new Piece();
 		trap2_2.strength = 6;
-		trap2_2.type = "trap";
+		trap2_2.type = "Trap";
 		trap2_2.team = playerNumber;
 		trap2_2.X = setup[2][24];
 		trap2_2.Y = setup[2][25];
@@ -451,7 +451,7 @@ function setupBoard(data) {
 
 		var importantThing_2 = new Piece();
 		importantThing_2.strength = 11;
-		importantThing_2.type = "important thing";
+		importantThing_2.type = "Important Thing";
 		importantThing_2.team = playerNumber;
 		importantThing_2.X = setup[2][26];
 		importantThing_2.Y = setup[2][27];
@@ -504,7 +504,7 @@ function handleMove(data) {
 	var yOld = moveData[2];
 	var xNew = moveData[3];
 	var yNew = moveData[4];
-	var actionType = moveData[5]; // 1->normal, 2->archer
+	var actionType = moveData[5]; // 1->normal, 2->Archer
 	var playerNumber = moveData[6];
 
 	// Only execute if move is valid
@@ -552,7 +552,7 @@ function checkAroundMystic() {
 	var mysticTeam2;
 	for (var i = 0; i < allPieces.length; ++i) {
 		// Find both mystics
-		if (allPieces[i].type == "mystic") {
+		if (allPieces[i].type == "Mystic") {
 			if (allPieces[i].team == 1) {
 				mysticTeam1 = allPieces[i];
 			}
@@ -569,19 +569,19 @@ function checkAroundMystic() {
 		var p2Name = "";
 		var p3Name = "";
 		var p4Name = "";
-		// Check above mystic
+		// Check above Mystic
 		if (pieceToReveal(x, y - 1, 2)) {
 			p1Name = allPieces[getPieceIndex(x, y - 1)].type;
 		}
-		// Check to the right of mystic
+		// Check to the right of Mystic
 		if (pieceToReveal(x + 1, y, 2)) {
 			p2Name = allPieces[getPieceIndex(x + 1, y)].type;
 		}
-		// Check below mystic
+		// Check below Mystic
 		if (pieceToReveal(x, y + 1, 2)) {
 			p3Name = allPieces[getPieceIndex(x, y + 1)].type;
 		}
-		// Check to the left of mystic
+		// Check to the left of Mystic
 		if (pieceToReveal(x - 1, y, 2)) {
 			p4Name = allPieces[getPieceIndex(x - 1, y)].type;
 		}
@@ -598,19 +598,19 @@ function checkAroundMystic() {
 		var p2Name = "";
 		var p3Name = "";
 		var p4Name = "";
-		// Check above mystic
+		// Check above Mystic
 		if (pieceToReveal(x, y - 1, 1)) {
 			p1Name = allPieces[getPieceIndex(x, y - 1)].type;
 		}
-		// Check to the right of mystic
+		// Check to the right of Mystic
 		if (pieceToReveal(x + 1, y, 1)) {
 			p2Name = allPieces[getPieceIndex(x + 1, y)].type;
 		}
-		// Check below mystic
+		// Check below Mystic
 		if (pieceToReveal(x, y + 1, 1)) {
 			p3Name = allPieces[getPieceIndex(x, y + 1)].type;
 		}
-		// Check to the left of mystic
+		// Check to the left of Mystic
 		if (pieceToReveal(x - 1, y, 1)) {
 			p4Name = allPieces[getPieceIndex(x - 1, y)].type;
 		}
@@ -631,11 +631,11 @@ function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 
 	// Handle special cases
 	if (actionType == 2) {
-		// Handle archer range attack
+		// Handle Archer range attack
 		// Archer attacks with strength 3 from 2 spaces away.
-		if (attacked.type == "mystic" || attacked.type == "rider" ||
-			attacked.type == "archer" || attacked.type == "engineer" ||
-			attacked.type == "assassin") {
+		if (attacked.type == "Mystic" || attacked.type == "Rider" ||
+			attacked.type == "Archer" || attacked.type == "Engineer" ||
+			attacked.type == "Assassin") {
 
 			allPieces.splice(aInd, 1);
 			var tempArray = [moving.team, 4, xOld, yOld, xNew, yNew, attacked.type, ""];
@@ -646,14 +646,14 @@ function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 			io.sockets.emit("resolve conflict", tempArray);
 		}
 	}
-	else if (attacked.type == "important thing") {
+	else if (attacked.type == "Important Thing") {
 		var tempArray = [moving.team];
 		io.sockets.emit("game over", tempArray);
 	}
-	else if (attacked.type == "trap") {
-		if (moving.type == "engineer") {
-			// Engineer disables trap
-			// Move the engineer, then remove trap from allPieces
+	else if (attacked.type == "Trap") {
+		if (moving.type == "Engineer") {
+			// Engineer disables Trap
+			// Move the Engineer, then remove Trap from allPieces
 			allPieces[mInd].X = xNew;
 			allPieces[mInd].Y = yNew;
 			allPieces.splice(aInd, 1);
@@ -667,7 +667,7 @@ function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 			}
 		}
 		else {
-			// Anything else dies along with the trap
+			// Anything else dies along with the Trap
 			// Need to destroy both pieces (but destroy higher index first!)
 			if (aInd > mInd) {
 				allPieces.splice(aInd, 1);
@@ -681,9 +681,9 @@ function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 			io.sockets.emit("resolve conflict", tempArray);
 		}
 	}
-	else if (attacked.type == "commander" && moving.type == "assassin") {
-		// Assassin beats commander when assassin attacks
-		// Move the assassin, then remove commander from allPieces
+	else if (attacked.type == "Commander" && moving.type == "Assassin") {
+		// Assassin beats Commander when Assassin attacks
+		// Move the Assassin, then remove Commander from allPieces
 		allPieces[mInd].X = xNew;
 		allPieces[mInd].Y = yNew;
 		allPieces.splice(aInd, 1);
@@ -763,10 +763,10 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 		return false;
 	}
 
-	// All the pieces that can only move one space (minus archer)
-	if (moving.type == "mystic" || moving.type == "assassin" ||
-		moving.type == "engineer" || moving.type == "soldier" ||
-		moving.type == "captain" || moving.type == "commander") {
+	// All the pieces that can only move one space (minus Archer)
+	if (moving.type == "Mystic" || moving.type == "Assassin" ||
+		moving.type == "Engineer" || moving.type == "Soldier" ||
+		moving.type == "Captain" || moving.type == "Commander") {
 			
 		if (Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) {
 			// Trying to move a piece too far
@@ -779,11 +779,11 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 
 	// Archers can only move one space
 	// They can range attack two spaces away (but not over other pieces)
-	if (moving.type == "archer") {
+	if (moving.type == "Archer") {
 		if ((Math.abs(xOld - xNew) > 1 || Math.abs(yOld - yNew) > 1) &&
 			actionType == 1) {
 
-			// Trying to move archer too far
+			// Trying to move Archer too far
 			var message = "Archer's cannot move that far.";
 			var tempArray = [xOld, yOld, message];
 			io.sockets.emit('invalid move', tempArray);
@@ -811,7 +811,7 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 
 			var xAvg = (xOld + xNew) / 2;
 			var yAvg = (yOld + yNew) / 2;
-			// Make sure archer isn't shooting OVER another piece
+			// Make sure Archer isn't shooting OVER another piece
 			if (!spaceEmpty(xAvg, yAvg)) {
 				var message = "Cannot shoot over boulders or other pieces.";
 				var tempArray = [xOld, yOld, message];
@@ -822,7 +822,7 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 	}
 
 	// Riders cannot move through other pieces
-	if (moving.type == "rider") {
+	if (moving.type == "Rider") {
 		var xMoveDist = Math.abs(xOld - xNew);
 		var yMoveDist = Math.abs(yOld - yNew);
 
@@ -847,7 +847,7 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 	}
 
 	// Trap and Important Thing are immobile
-	if (moving.type == "trap" || moving.type == "important thing") {
+	if (moving.type == "Trap" || moving.type == "Important Thing") {
 		var message = "The Important Thing and Traps cannot be moved.";
 		var tempArray = [xOld, yOld, message];
 		io.sockets.emit('invalid move', tempArray);
