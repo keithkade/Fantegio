@@ -270,6 +270,7 @@ function updateTurnIndicator(){
 	}
 }
 
+// Show direction of opponent's last move
 function showMovementArrow(xOld, yOld, xNew, yNew) {
 	var xDif = xNew - xOld;
 	var yDif = yNew - yOld;
@@ -285,7 +286,6 @@ function showMovementArrow(xOld, yOld, xNew, yNew) {
 	}
 	else if (xDif < 0) {
 		// Moved to the left
-		//
 		moveArrow.graphics.beginFill("#CCCC00").drawPolyStar(23, 30, 15, 3, 0.5, 60);
 	}
 	else if (yDif > 0) {

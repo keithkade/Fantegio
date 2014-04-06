@@ -526,6 +526,100 @@ function handleMove(data) {
 			resolveConflict(xOld, yOld, xNew, yNew, actionType);
 		}
 	}
+
+	// Need to check if Mystic should reveal any pieces
+	checkAroundMystic();
+}
+
+// Return true if opposing team piece is at location
+// Used by checkAroundMystic
+function pieceToReveal(X, Y, opponentNum) {
+	// Check for out of bounds..
+	if (X < 1 || X > 8 || Y < 1 || Y > 8) {
+		return false;
+	}
+	for (var i = 0; i < allPieces.length; ++i) {
+		if (allPieces[i].X == X && allPieces[i].Y == Y && allPieces[i].team == opponentNum) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// Check all pieces around both mystics and emit "mystic" when necessary
+function checkAroundMystic() {
+	var mysticTeam1;
+	var mysticTeam2;
+	for (var i = 0; i < allPieces.length; ++i) {
+		// Find both mystics
+		if (allPieces[i].type == "mystic") {
+			if (allPieces[i].team == 1) {
+				mysticTeam1 = allPieces[i];
+			}
+			else if (allPieces[i].team == 2) {
+				mysticTeam2 = allPieces[i];
+			}
+		}
+	}
+
+	if (mysticTeam1 !== undefined) {
+		var x = mysticTeam1.X;
+		var y = mysticTeam1.Y;
+		var p1Name = "";
+		var p2Name = "";
+		var p3Name = "";
+		var p4Name = "";
+		// Check above mystic
+		if (pieceToReveal(x, y - 1, 2)) {
+			p1Name = allPieces[getPieceIndex(x, y - 1)].type;
+		}
+		// Check to the right of mystic
+		if (pieceToReveal(x + 1, y, 2)) {
+			p2Name = allPieces[getPieceIndex(x + 1, y)].type;
+		}
+		// Check below mystic
+		if (pieceToReveal(x, y + 1, 2)) {
+			p3Name = allPieces[getPieceIndex(x, y + 1)].type;
+		}
+		// Check to the left of mystic
+		if (pieceToReveal(x - 1, y, 2)) {
+			p4Name = allPieces[getPieceIndex(x - 1, y)].type;
+		}
+		// Need to emit every time even if all names are empty string
+		// so that old labels can be cleared (if there are any).
+		var tempArray = [1, x, y, p1Name, p2Name, p3Name, p4Name];
+		console.log(tempArray);
+		io.sockets.emit("mystic", tempArray);
+	}
+	if (mysticTeam2 !== undefined) {
+		var x = mysticTeam2.X;
+		var y = mysticTeam2.Y;
+		var p1Name = "";
+		var p2Name = "";
+		var p3Name = "";
+		var p4Name = "";
+		// Check above mystic
+		if (pieceToReveal(x, y - 1, 1)) {
+			p1Name = allPieces[getPieceIndex(x, y - 1)].type;
+		}
+		// Check to the right of mystic
+		if (pieceToReveal(x + 1, y, 1)) {
+			p2Name = allPieces[getPieceIndex(x + 1, y)].type;
+		}
+		// Check below mystic
+		if (pieceToReveal(x, y + 1, 1)) {
+			p3Name = allPieces[getPieceIndex(x, y + 1)].type;
+		}
+		// Check to the left of mystic
+		if (pieceToReveal(x - 1, y, 1)) {
+			p4Name = allPieces[getPieceIndex(x - 1, y)].type;
+		}
+		// Need to emit every time even if all names are empty string
+		// so that old labels can be cleared (if there are any).
+		var tempArray = [2, x, y, p1Name, p2Name, p3Name, p4Name];
+		console.log(tempArray);
+		io.sockets.emit("mystic", tempArray);
+	}
 }
 
 function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
@@ -778,19 +872,4 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 	return true;
 }
 
-function checkMystic(xOld, yOld, xNew, yNew) {
-	var pieceIndOld = getPieceIndex(xOld, yOld);
-	var pieceIndNew = getPieceIndex(xNew, yNew);
-	var pieceWithOlInd = allPieces[pieceIndOld]
-	var pieceToBeSeen = allPieces[pieceIndNew];
-	
-	//checks whether the piece is mystic or not
-		if(pieceWithOlInd.type == "mystic") {
-			
-			var tempArray = [xNew, yNew, pieceToBeSeen];
-			io.sockets.emit('mystic', tempArray);
-		}
-		else {
-			return;
-		}
-}
+
