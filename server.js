@@ -825,25 +825,49 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 
 	// Riders cannot move through other pieces
 	if (moving.type == "Rider") {
-		var xMoveDist = Math.abs(xOld - xNew);
-		var yMoveDist = Math.abs(yOld - yNew);
+		var xMoveDist = xNew - xOld;
+		var yMoveDist = yNew - yOld;
 
 		var message = "Riders cannot move through other pieces.";
 		var tempArray = [xOld, yOld, message];
 
 		// Test horizontal
-		for (var i = 1; i < xMoveDist; ++i) {
-			if (!spaceEmpty((xOld + i), yOld) && (i + 1) != xMoveDist) {
-				io.sockets.emit('invalid move', tempArray);
-				return false;
+		if (xMoveDist > 0) {
+			// Test horizontal in positive direction
+			for (var i = 1; i < xMoveDist; ++i) {
+				if (!spaceEmpty((xOld + i), yOld) && i != xMoveDist) {
+					io.sockets.emit('invalid move', tempArray);
+					return false;
+				}
+			}
+		}
+		else if (xMoveDist < 0) {
+			// Test horizontal in negative direction
+			for (var i = -1; i > xMoveDist; --i) {
+				if (!spaceEmpty((xOld + i), yOld) && i != xMoveDist) {
+					io.sockets.emit('invalid move', tempArray);
+					return false;
+				}
 			}
 		}
 
 		// Test vertical
-		for (var i = 1; i < yMoveDist; ++i) {
-			if (!spaceEmpty(xOld, (yOld + 1)) && (i + 1) != yMoveDist) {
-				io.sockets.emit('invalid move', tempArray);
-				return false;
+		if (yMoveDist > 0) {
+			// Test vertical in positive direction
+			for (var i = 1; i < yMoveDist; ++i) {
+				if (!spaceEmpty(xOld, (yOld + i)) && i != yMoveDist) {
+					io.sockets.emit('invalid move', tempArray);
+					return false;
+				}
+			}
+		}
+		else if (yMoveDist < 0) {
+			// Test vertical in positive direction
+			for (var i = -1; i > yMoveDist; --i) {
+				if (!spaceEmpty(xOld, (yOld + i)) && i != yMoveDist) {
+					io.sockets.emit('invalid move', tempArray);
+					return false;
+				}
 			}
 		}
 	}
