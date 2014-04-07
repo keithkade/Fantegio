@@ -492,6 +492,8 @@ function setupBoard(data) {
 		
 		var locArray = getLocations(allPieces);
 		io.sockets.emit("start game", locArray);
+		// So that server does't have to be restarted
+		numClients = 0;
 	}
 }
 	  
