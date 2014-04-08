@@ -112,7 +112,7 @@ labelS1.x = 28;
 labelS1.y = 15;
 var soldier1Dragger = new createjs.Container();
 soldier1Dragger.x = 2;
-soldier1Dragger.y = 482;
+soldier1Dragger.y = 362;
 soldier1Dragger.addChild(squareS1, labelS1);
 setupStage.addChild(soldier1Dragger);
 
@@ -125,7 +125,7 @@ labelS2.x = 28;
 labelS2.y = 15;
 var soldier2Dragger = new createjs.Container();
 soldier2Dragger.x = 62;
-soldier2Dragger.y = 482;
+soldier2Dragger.y = 362;
 soldier2Dragger.addChild(squareS2, labelS2);
 setupStage.addChild(soldier2Dragger);
 
@@ -138,7 +138,7 @@ labelE1.x = 28;
 labelE1.y = 15;
 var engineer1Dragger = new createjs.Container();
 engineer1Dragger.x = 122;
-engineer1Dragger.y = 482;
+engineer1Dragger.y = 362;
 engineer1Dragger.addChild(squareE1, labelE1);
 setupStage.addChild(engineer1Dragger);
 
@@ -151,7 +151,7 @@ labelE2.x = 28;
 labelE2.y = 15;
 var engineer2Dragger = new createjs.Container();
 engineer2Dragger.x = 182;
-engineer2Dragger.y = 482;
+engineer2Dragger.y = 362;
 engineer2Dragger.addChild(squareE2, labelE2);
 setupStage.addChild(engineer2Dragger);
 
@@ -164,7 +164,7 @@ labelCa.x = 28;
 labelCa.y = 15;
 var captainDragger = new createjs.Container();
 captainDragger.x = 242;
-captainDragger.y = 482;
+captainDragger.y = 362;
 captainDragger.addChild(squareCa, labelCa);
 setupStage.addChild(captainDragger);
 
@@ -177,6 +177,6 @@ labelCo.x = 28;
 labelCo.y = 15;
 var commanderDragger = new createjs.Container();
 commanderDragger.x = 302;
-commanderDragger.y = 482;
+commanderDragger.y = 362;
 commanderDragger.addChild(squareCo, labelCo);
 setupStage.addChild(commanderDragger);

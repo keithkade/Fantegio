@@ -54,22 +54,32 @@ function addGameGridXY (clickAble){
    clickAble.gameGridY = (clickAble.y-2)/60 + 1;	
 }
 
+var xOffset;
+var yOffset;
+
 //can cause a bug if you just click the piece and then it moves. The previous location is still marked as full
 //adds drag and drop listeners
 function addDragAndDrop (toDrag){
+	
+   //set an offset so that the the piece moves with mouse correctly
+   toDrag.on("mousedown",function(evt) {
+         xOffset = evt.stageX % 60;
+         yOffset = evt.stageY % 60; 	
+         });
+         
    //move piece on drag			
    toDrag.on("pressmove",function(evt) {
          evt.currentTarget.lastX = evt.currentTarget.gameGridX;
          evt.currentTarget.lastY = evt.currentTarget.gameGridY;
-         evt.currentTarget.x = evt.stageX;
-         evt.currentTarget.y = evt.stageY;
+         evt.currentTarget.x = evt.stageX-xOffset;
+         evt.currentTarget.y = evt.stageY-yOffset;
          setupStage.update();   	
          });	
 
    //center piece on release of mouse
    toDrag.on("pressup", function(evt) {
-         var x = evt.stageX;	
-         var y = evt.stageY;
+         var x = evt.currentTarget.x;	
+         var y = evt.currentTarget.y;
          var xRem = x % 60;
          var yRem = y % 60;
          if (xRem >= 30)
@@ -87,8 +97,8 @@ function addDragAndDrop (toDrag){
          x=422;	
          if(y<120)
          y=122;
-         if(y>540)
-            y=482;					
+         if(y>480)
+            y=422;					
          //check to ensure that we arent moving onto a piece
          if (isGameLocOccupied[(x-2)/60 + 1][(y+178)/60 + 1]){
             evt.currentTarget.x = (evt.currentTarget.gameGridX - 1)*60 + 2;

@@ -2,14 +2,14 @@
 var setupStage = new createjs.Stage("setupCanvas");
 
 var setupBoardHeight = 300;
-var setupBoardWidth = 480;
+var setupBoardWidth = 540;
 
 var urlName = window.location.search.substring(1);
 var playerNum = unescape(urlName);
 
 //make bottom white
 var whiteBackdrop = new createjs.Shape();
-whiteBackdrop.graphics.beginFill("#FFFFFF").drawRect(0, 300, setupBoardWidth, 240);
+whiteBackdrop.graphics.beginFill("#FFFFFF").drawRect(0, 300, setupBoardWidth, 180);
 setupStage.addChild(whiteBackdrop);
 
 //highlight placable area
