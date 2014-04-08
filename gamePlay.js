@@ -291,7 +291,7 @@ function resolveConflict(conflictArray){
 			}
 		}
 
-		// Handle adding and removing direction of movement arrow
+		// Handle adding direction of movement arrow
 		lastMoveArrow = board[xOld][yOld];
 		if (playerNum != playerTurn) {
 			showMovementArrow(xOld, yOld, xNew, yNew);
@@ -386,7 +386,10 @@ function removeChoices(){
 	while(choices.length > 0){
 		var cur = choices.pop();
 		cur.removeAllEventListeners();
-		//cur.removeChild(cur.getChildByName("moveIcon"));
+	}
+	while (highlightSpaces.length > 0) {
+		var h = highlightSpaces.pop();
+		h.removeChild(h.getChildByName("highlightIcon"));
 	}
 }
 
@@ -396,6 +399,7 @@ function pieceClick(event){
 	removeChoices();
 
 	selectedPiece = event.target.parent;
+	highlightPossibleMoves(selectedPiece);
 
 	if(selectedPiece.pieceType == "Rider"){
 		var count = 1;
@@ -435,7 +439,125 @@ function pieceClick(event){
 	gameStage.update();
 }
 
-//Used in pieceClick() to set the square as clickable if moving there is legal.
+
+var highlightSpaces = new Array();
+// Does what it says, takes a piece clickable, p, as parameter
+function highlightPossibleMoves(p) {
+
+	// Don't highlight moves during opponent's turn
+	if (playerNum != playerTurn) {
+		return;
+	}
+
+	if (p.pieceType == "Rider") {
+
+		// Look above rider for open moves
+		for (var i = -1; p.gameGridY + i > 0; --i) {
+			var above = pieceAtLocation(p.gameGridX, p.gameGridY + i);
+			if (above == false) {
+				var h = new createjs.Shape();
+				h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+				h.name = "highlightIcon";
+				board[p.gameGridX][p.gameGridY + i].addChild(h);
+				highlightSpaces.push(board[p.gameGridX][p.gameGridY + i]);
+			}
+			else {
+				break; // Done looking here
+			}
+		}
+		// Look to the right of rider for open moves
+		for (var i = 1; p.gameGridX + i < 9; ++i) {
+			var right = pieceAtLocation(p.gameGridX + i, p.gameGridY);
+			if (right == false) {
+				var h = new createjs.Shape();
+				h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+				h.name = "highlightIcon";
+				board[p.gameGridX + i][p.gameGridY].addChild(h);
+				highlightSpaces.push(board[p.gameGridX + i][p.gameGridY]);
+			}
+			else {
+				break; // Done looking here
+			}
+		}
+		// Look below rider for open moves
+		for (var i = 1; p.gameGridY + i < 9; ++i) {
+			var below = pieceAtLocation(p.gameGridX, p.gameGridY + i);
+			if (below == false) {
+				var h = new createjs.Shape();
+				h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+				h.name = "highlightIcon";
+				board[p.gameGridX][p.gameGridY + i].addChild(h);
+				highlightSpaces.push(board[p.gameGridX][p.gameGridY + i]);
+			}
+			else {
+				break; // Done looking here
+			}
+		}
+		// Look to the left of rider for open moves
+		for (var i = -1; p.gameGridX + i > 0; --i) {
+			var left = pieceAtLocation(p.gameGridX + i, p.gameGridY);
+			if (left == false) {
+				var h = new createjs.Shape();
+				h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+				h.name = "highlightIcon";
+				board[p.gameGridX + i][p.gameGridY].addChild(h);
+				highlightSpaces.push(board[p.gameGridX + i][p.gameGridY]);
+			}
+			else {
+				break; // Done looking here
+			}
+		}
+	}
+	// Regular piece moving (including archer close range)
+	else if (p.pieceType != "Trap" && p.pieceType != "Important Thing") {
+		var above = pieceAtLocation(p.gameGridX, p.gameGridY - 1);
+		var right = pieceAtLocation(p.gameGridX + 1, p.gameGridY);
+		var below = pieceAtLocation(p.gameGridX, p.gameGridY + 1);
+		var left = pieceAtLocation(p.gameGridX - 1, p.gameGridY);
+		// Empty space above
+		if (above == false && (p.gameGridY - 1) > 0) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+			h.name = "highlightIcon";
+			board[p.gameGridX][p.gameGridY - 1].addChild(h);
+			highlightSpaces.push(board[p.gameGridX][p.gameGridY - 1]);
+		}
+		// Empty space to the right
+		if (right == false && (p.gameGridX + 1) < 9) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+			h.name = "highlightIcon";
+			board[p.gameGridX + 1][p.gameGridY].addChild(h);
+			highlightSpaces.push(board[p.gameGridX + 1][p.gameGridY]);
+		}
+		// Empty space to the left
+		if (below == false && (p.gameGridY + 1) < 9) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+			h.name = "highlightIcon";
+			board[p.gameGridX][p.gameGridY + 1].addChild(h);
+			highlightSpaces.push(board[p.gameGridX][p.gameGridY + 1]);
+		}
+		// Empty space to the left
+		if (left == false && (p.gameGridX - 1) > 0) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
+			h.name = "highlightIcon";
+			board[p.gameGridX - 1][p.gameGridY].addChild(h);
+			highlightSpaces.push(board[p.gameGridX - 1][p.gameGridY]);
+		}
+	}
+
+	// Archer long range highlighting
+	if (p.pieceType == "Archer") {
+
+	}
+
+	gameStage.update();
+
+}
+
+// Used in pieceClick() to set the square as clickable if moving there is legal.
 //	returns true if open square
 // 	returns false if non-open square
 function possibleActionDest(destX, destY, actionType){
@@ -448,10 +570,6 @@ function possibleActionDest(destX, destY, actionType){
 		var temp = board[destX][destY];
 		if(actionType === undefined){
 			board[destX][destY].addEventListener("click", movePiece);
-			//var moveIcon = new createjs.Shape();
-			//moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
-			//moveIcon.name = "moveIcon";
-			//board[destX][destY].addChild(moveIcon);
 		}
 		choices.push(board[destX][destY]);
 		return true;
@@ -459,17 +577,9 @@ function possibleActionDest(destX, destY, actionType){
 	else if(curPiece.team != playerNum){
 		if(actionType === undefined){
 			curPiece.addEventListener("click", movePiece);
-			//var moveIcon = new createjs.Shape();
-			//moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
-			//moveIcon.name = "moveIcon";
-			//board[destX][destY].addChild(moveIcon);
 		}
 		else if(actionType == "shot"){
 			curPiece.addEventListener("click", shootPiece);
-			//var moveIcon = new createjs.Shape();
-			//moveIcon.graphics.beginFill("#CCCC00").drawRect(13,13,30,30);
-			//moveIcon.name = "moveIcon";
-			//board[destX][destY].addChild(moveIcon);
 		}
 		choices.push(curPiece);
 	}
