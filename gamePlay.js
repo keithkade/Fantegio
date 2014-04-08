@@ -550,7 +550,42 @@ function highlightPossibleMoves(p) {
 
 	// Archer long range highlighting
 	if (p.pieceType == "Archer") {
-
+		var above = pieceAtLocation(p.gameGridX, p.gameGridY - 2);
+		var right = pieceAtLocation(p.gameGridX + 2, p.gameGridY);
+		var below = pieceAtLocation(p.gameGridX, p.gameGridY + 2);
+		var left = pieceAtLocation(p.gameGridX - 2, p.gameGridY);
+		// Piece to shoot above
+		if (above !== undefined && (p.gameGridY - 2) > 0) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.name = "highlightIcon";
+			board[p.gameGridX][p.gameGridY - 2].addChild(h);
+			highlightSpaces.push(board[p.gameGridX][p.gameGridY - 2]);
+		}
+		// Piece to shoot to the right
+		if (right !== undefined && (p.gameGridX + 2) < 9) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.name = "highlightIcon";
+			board[p.gameGridX + 2][p.gameGridY].addChild(h);
+			highlightSpaces.push(board[p.gameGridX + 2][p.gameGridY]);
+		}
+		// Piece to shoot below
+		if (below !== undefined && (p.gameGridY + 2) < 9) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.name = "highlightIcon";
+			board[p.gameGridX][p.gameGridY + 2].addChild(h);
+			highlightSpaces.push(board[p.gameGridX][p.gameGridY + 2]);
+		}
+		// Piece to shoot to the left
+		if (left !== undefined && (p.gameGridX - 2) > 0) {
+			var h = new createjs.Shape();
+			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.name = "highlightIcon";
+			board[p.gameGridX - 2][p.gameGridY].addChild(h);
+			highlightSpaces.push(board[p.gameGridX - 2][p.gameGridY]);
+		}
 	}
 
 	gameStage.update();
