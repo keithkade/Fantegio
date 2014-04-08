@@ -625,7 +625,9 @@ function highlightPossibleMoves(p) {
 		var below = pieceAtLocation(p.gameGridX, p.gameGridY + 2);
 		var left = pieceAtLocation(p.gameGridX - 2, p.gameGridY);
 		// Piece to shoot above
-		if (above !== false && (p.gameGridY - 2) > 0 && above.team != playerNum && above.pieceType != "rock") {
+		if (above !== false && (p.gameGridY - 2) > 0 &&
+				above.team != playerNum && above.pieceType != "rock" &&
+				pieceAtLocation(p.gameGridX, p.gameGridY - 1) == false) {
 			var h = new createjs.Shape();
 			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
@@ -633,7 +635,9 @@ function highlightPossibleMoves(p) {
 			highlightSpaces.push(above);
 		}
 		// Piece to shoot to the right
-		if (right !== false && (p.gameGridX + 2) < 9 && right.team != playerNum && right.pieceType != "rock") {
+		if (right !== false && (p.gameGridX + 2) < 9 &&
+				right.team != playerNum && right.pieceType != "rock" &&
+				pieceAtLocation(p.gameGridX + 1, p.gameGridY) == false) {
 			var h = new createjs.Shape();
 			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
@@ -641,7 +645,9 @@ function highlightPossibleMoves(p) {
 			highlightSpaces.push(right);
 		}
 		// Piece to shoot below
-		if (below !== false && (p.gameGridY + 2) < 9 && below.team != playerNum && below.pieceType != "rock") {
+		if (below !== false && (p.gameGridY + 2) < 9 &&
+				below.team != playerNum && below.pieceType != "rock" &&
+				pieceAtLocation(p.gameGridX, p.gameGridY + 1) == false) {
 			var h = new createjs.Shape();
 			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
@@ -649,7 +655,9 @@ function highlightPossibleMoves(p) {
 			highlightSpaces.push(below);
 		}
 		// Piece to shoot to the left
-		if (left !== false && (p.gameGridX - 2) > 0 && left.team != playerNum && left.pieceType != "rock") {
+		if (left !== false && (p.gameGridX - 2) > 0 &&
+				left.team != playerNum && left.pieceType != "rock" &&
+				pieceAtLocation(p.gameGridX - 1, p.gameGridY) == false) {
 			var h = new createjs.Shape();
 			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
