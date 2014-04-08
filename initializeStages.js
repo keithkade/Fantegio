@@ -65,7 +65,7 @@ for (var y = 0; y <= 180; y += 60) {
 var gameStage = new createjs.Stage("gameCanvas");
 var board = new Array(9);
 var gameBoardHeight = 480;
-var gameBoardWidth = 480;
+var gameBoardWidth = 540;
 var background = new createjs.Shape();
 
 
