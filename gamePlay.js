@@ -555,36 +555,36 @@ function highlightPossibleMoves(p) {
 		var below = pieceAtLocation(p.gameGridX, p.gameGridY + 2);
 		var left = pieceAtLocation(p.gameGridX - 2, p.gameGridY);
 		// Piece to shoot above
-		if (above !== undefined && (p.gameGridY - 2) > 0) {
+		if (above !== false && (p.gameGridY - 2) > 0 && above.team != playerNum && above.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
-			board[p.gameGridX][p.gameGridY - 2].addChild(h);
-			highlightSpaces.push(board[p.gameGridX][p.gameGridY - 2]);
+			above.addChild(h);
+			highlightSpaces.push(above);
 		}
 		// Piece to shoot to the right
-		if (right !== undefined && (p.gameGridX + 2) < 9) {
+		if (right !== false && (p.gameGridX + 2) < 9 && right.team != playerNum && right.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
-			board[p.gameGridX + 2][p.gameGridY].addChild(h);
-			highlightSpaces.push(board[p.gameGridX + 2][p.gameGridY]);
+			right.addChild(h);
+			highlightSpaces.push(right);
 		}
 		// Piece to shoot below
-		if (below !== undefined && (p.gameGridY + 2) < 9) {
+		if (below !== false && (p.gameGridY + 2) < 9 && below.team != playerNum && below.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
-			board[p.gameGridX][p.gameGridY + 2].addChild(h);
-			highlightSpaces.push(board[p.gameGridX][p.gameGridY + 2]);
+			below.addChild(h);
+			highlightSpaces.push(below);
 		}
 		// Piece to shoot to the left
-		if (left !== undefined && (p.gameGridX - 2) > 0) {
+		if (left !== false && (p.gameGridX - 2) > 0 && left.team != playerNum && left.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(30, 30, 10);
+			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
-			board[p.gameGridX - 2][p.gameGridY].addChild(h);
-			highlightSpaces.push(board[p.gameGridX - 2][p.gameGridY]);
+			left.addChild(h);
+			highlightSpaces.push(left);
 		}
 	}
 
