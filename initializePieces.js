@@ -341,7 +341,7 @@ var friendlyColor = "blue";
 var enemyColor = "#8b8989";
 function setBoard(initXYArray){
 	
-	for (var x = 1; x < 9; x++){
+	for (var x = 1; x < 10; x++){
 		for (var y = 1; y < 9; y++){
 			gameStage.addChild(board[x][y]);
 		}

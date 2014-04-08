@@ -63,13 +63,13 @@ for (var y = 0; y <= 180; y += 60) {
 
 //==========================================================================game board
 var gameStage = new createjs.Stage("gameCanvas");
-var board = new Array(9);
+var board = new Array(10);
 var gameBoardHeight = 480;
 var gameBoardWidth = 540;
 var background = new createjs.Shape();
 
 
-for (var x = 1; x < 9; x++)
+for (var x = 1; x < 10; x++)
 {
    board[x] = new Array(9);
    for (var y = 1; y < 9; y++)

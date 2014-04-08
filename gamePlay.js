@@ -484,7 +484,7 @@ function highlightPossibleMoves(p) {
 			}
 		}
 		// Look to the right of rider for open moves
-		for (var i = 1; p.gameGridX + i < 9; ++i) {
+		for (var i = 1; p.gameGridX + i < 10; ++i) {
 			var right = pieceAtLocation(p.gameGridX + i, p.gameGridY);
 			if (right == false) {
 				var h = new createjs.Shape();
@@ -572,14 +572,14 @@ function highlightPossibleMoves(p) {
 			highlightSpaces.push(above);
 		}
 		// Empty space to the right
-		if (right == false && (p.gameGridX + 1) < 9) {
+		if (right == false && (p.gameGridX + 1) < 10) {
 			var h = new createjs.Shape();
 			h.graphics.beginFill("#CCCC00").drawRect(15, 15, 30, 30);
 			h.name = "highlightIcon";
 			board[p.gameGridX + 1][p.gameGridY].addChild(h);
 			highlightSpaces.push(board[p.gameGridX + 1][p.gameGridY]);
 		}
-		else if ((p.gameGridX + 1) < 9 && right.team != playerNum && right.pieceType != "rock") {
+		else if ((p.gameGridX + 1) < 10 && right.team != playerNum && right.pieceType != "rock") {
 			var h = new createjs.Shape();
 			h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
 			h.name = "highlightIcon";
@@ -635,7 +635,7 @@ function highlightPossibleMoves(p) {
 			highlightSpaces.push(above);
 		}
 		// Piece to shoot to the right
-		if (right !== false && (p.gameGridX + 2) < 9 &&
+		if (right !== false && (p.gameGridX + 2) < 10 &&
 				right.team != playerNum && right.pieceType != "rock" &&
 				pieceAtLocation(p.gameGridX + 1, p.gameGridY) == false) {
 			var h = new createjs.Shape();
@@ -673,7 +673,7 @@ function highlightPossibleMoves(p) {
 function possibleActionDest(destX, destY, actionType){
 	var curPiece = pieceAtLocation(destX,destY);
 
-	if( destX < 1 || destX > 8 || destY < 1 || destY > 8 || curPiece.team == '3'){
+	if( destX < 1 || destX > 9 || destY < 1 || destY > 8 || curPiece.team == '3'){
 		return false;
 	}
 	if(curPiece == false){

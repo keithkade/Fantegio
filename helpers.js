@@ -93,8 +93,8 @@ function addDragAndDrop (toDrag){
          //do not allow dragging out of canvas or placing outside of placement area
          if(x<0)
          x=2;
-         if(x>480)
-         x=422;	
+         if(x>540)
+         x=482;	
          if(y<120)
          y=122;
          if(y>480)
