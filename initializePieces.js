@@ -144,7 +144,7 @@ p2archerClickable.team =  '2';
 
 //create clickable mystic
 var p2squareMy = new createjs.Shape();
-var p2mystic1BMP = new createjs.Bitmap("images/Mystic.png");
+var p2mysticBMP = new createjs.Bitmap("images/Mystic.png");
 var p2mysticClickable = new createjs.Container();
 p2mysticClickable.pieceType = "Mystic";
 p2mysticClickable.team =  '2';
