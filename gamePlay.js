@@ -250,15 +250,29 @@ function resolveConflict(conflictArray){
 		var attacked = pieceAtLocation(xNew, yNew);
 		if (playerNum == 1)
 			alert("The piece you attacked has a strength higher than 3.");
-		else
+		else {
 			alert("Your " + attacked.pieceType + " was attacked by an archer.");
+			// Draw a circle on the attacked piece
+			var c = new createjs.Shape();
+			c.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			c.name = "highlightIcon";
+			attacked.addChild(c);
+			highlightSpaces.push(attacked);
+		}
 	}
 	else if (outcome == 3 && playerMoved == 2){ //failed archer attack
 		var attacked = pieceAtLocation(xNew, yNew);
 		if (playerNum == 2)
 			alert("The piece you attacked has a strength higher than 3.");
-		else
+		else {
 			alert("Your " + attacked.pieceType + " was attacked by an archer.");
+			// Draw a circle on the attacked piece
+			var c = new createjs.Shape();
+			c.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			c.name = "highlightIcon";
+			attacked.addChild(c);
+			highlightSpaces.push(attacked);
+		}
 	}
 	else if (outcome == 4 && playerMoved == 1){
 		var loser = pieceAtLocation(xNew, yNew);
