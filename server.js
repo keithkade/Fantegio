@@ -192,7 +192,7 @@ function handler(request,response) {
 					response.end();
 				});
 			break;
-		case '/FantegioBackground.png':
+		case '/images/FantegioBackground.png':
 			fs.readFile(__dirname + path, function(error, data) {
 					if (error) {
 						response.writeHead(500);
@@ -203,7 +203,7 @@ function handler(request,response) {
 					response.end();
 				});
 			break;
-		case '/gameBoard.png':
+		case '/images/gameBoard.png':
 			fs.readFile(__dirname + path, function(error, data) {
 					if (error) {
 						response.writeHead(500);
@@ -213,7 +213,117 @@ function handler(request,response) {
 					response.write(data);
 					response.end();
 				});
-			break;								
+			break;	
+		case '/images/ImportantThing.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading ImportantThing.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Trap.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Trap.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Engineer.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Engineer.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Rider.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Rider.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Mystic.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Mystic.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Archer.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Archer.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Assassin.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Assassin.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/images/Soldier.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Soldier.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/images/Captain.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Captain.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/images/Commander.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Commander.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;																																					
 	}
 }
 

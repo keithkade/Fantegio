@@ -101,9 +101,14 @@ for (var y = 0; y <= gameBoardHeight; y += 60) {
    gameStage.addChild(line);
 }
 
-captStage.update();
-lostStage.update();
-gameStage.update();
-setupStage.update();
+//update each frame each stage. may need to find better solution if this is too costly
+createjs.Ticker.addEventListener("tick", handleTick);
+function handleTick(event) {
+    captStage.update();
+	lostStage.update();
+	gameStage.update();
+	setupStage.update();
+ }
+
 
 
