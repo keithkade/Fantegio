@@ -679,7 +679,7 @@ function setBoard(initXYArray){
       addGameGridXY(p2importantThingClickable);
       gameStage.addChild(p2importantThingClickable);
 
-      //added rocks for player 1's perspective
+      //added rocks for player 2's perspective
       rock1.graphics.beginFill("black").drawCircle(28, 28, 20);
       rock1.x = (initXYArray[56] - 1)  *  60 + 2;
       rock1.y = (9 - initXYArray[57] - 1)  *  60 + 2;

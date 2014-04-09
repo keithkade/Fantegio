@@ -49,9 +49,9 @@ function convertToGameGridXY (dragger){
 }
 
 //converts canvas x and y to gameGrid x and y for clickers
-function addGameGridXY (clickAble){
-   clickAble.gameGridX = (clickAble.x-2)/60 + 1;
-   clickAble.gameGridY = (clickAble.y-2)/60 + 1;	
+function addGameGridXY (clickable){
+   clickable.gameGridX = (clickable.x-2)/60 + 1;
+   clickable.gameGridY = (clickable.y-2)/60 + 1;	
 }
 
 var xOffset;
@@ -278,6 +278,39 @@ function updateTurnIndicator(){
 	else{
 	   document.getElementById("turnIndicator").innerHTML = "         ";
 	}
+}
+
+// Called when server emits "boulder locations" to show boulders on board setup
+function initializeBoulders(locations) {
+	rock1.graphics.beginFill("black").drawCircle(28, 28, 20);
+	rock2.graphics.beginFill("black").drawCircle(28, 28, 20);
+	rock3.graphics.beginFill("black").drawCircle(28, 28, 20);
+
+	// Switch for player 2
+	if (playerNum == 2) {
+		rock1.y = (Math.abs(locations[1] - 3) - 1)  *  60 + 2;
+		rock2.y = (Math.abs(locations[3] - 3) - 1)  *  60 + 2;
+		rock3.y = (Math.abs(locations[5] - 3) - 1)  *  60 + 2;
+	}
+	else if (playerNum == 1) {
+		rock2.y = (locations[3] - 1)  *  60 + 2;
+		rock1.y = (locations[1] - 1)  *  60 + 2;
+		rock3.y = (locations[5] - 1)  *  60 + 2;
+	}
+
+	rock1.x = (locations[0] - 1)  *  60 + 2;
+	addGameGridXY(rock1);
+
+	rock2.x = (locations[2] - 1)  *  60 + 2;
+	addGameGridXY(rock2);
+
+	rock3.x = (locations[4] - 1)  *  60 + 2;
+	addGameGridXY(rock3);
+
+	setupStage.addChild(rock1);
+	setupStage.addChild(rock2);
+	setupStage.addChild(rock3);
+	setupStage.update();
 }
 
 // Show direction of opponent's last move

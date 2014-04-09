@@ -14,6 +14,47 @@ io.sockets.on('connection', function(client) {
 		client.on('move', handleMove);
 	});
 
+var bouldersSet = false;
+function initializeBoulders() {
+	if (!bouldersSet) {
+		bouldersSet = true;
+
+		//creating three boulders
+		var boulder1 = new Piece();
+		boulder1.strength = 17;
+		boulder1.type = "boulder";
+		boulder1.team = 3;
+		// Random square with x in [1,3] and y in [4,5]
+		boulder1.X = Math.floor((Math.random() * 3) + 1);
+		boulder1.Y = Math.floor((Math.random() * 2) + 4);
+		allPieces[28] = boulder1;
+		
+		var boulder2 = new Piece();
+		boulder2.strength = 17;
+		boulder2.type = "boulder";
+		boulder2.team = 3;
+		// Random square with x in [4,6] and y in [4,5]
+		boulder2.X = Math.floor((Math.random() * 3) + 4);
+		boulder2.Y = Math.floor((Math.random() * 2) + 4);
+		allPieces[29] = boulder2;
+		
+		var boulder3 = new Piece();
+		boulder3.strength = 17;
+		boulder3.type = "boulder";
+		boulder3.team = 3;
+		// Random square with x in [7,9] and y in [4,5]
+		boulder3.X = Math.floor((Math.random() * 3) + 7);
+		boulder3.Y = Math.floor((Math.random() * 2) + 4);
+		allPieces[30] = boulder3;
+	}
+	// Send boulder locations to each client
+	var tempArray = [allPieces[28].X, allPieces[28].Y - 3,
+		allPieces[29].X, allPieces[29].Y - 3,
+		allPieces[30].X, allPieces[30].Y - 3];
+	console.log(tempArray);
+	io.sockets.emit("boulder locations", tempArray);
+}
+ 
 // Piece object
 function Piece() {
 	this.strength = 11;
@@ -67,7 +108,7 @@ function spaceEmpty(X, Y) {
 
 // Handle connections to port being monitored
 function handler(request,response) {
-	console.log('Got kicked..');//rmv
+	console.log('Got kicked..');
 	var path = url.parse(request.url).pathname;
 
 	switch (path) {
@@ -147,6 +188,8 @@ function handler(request,response) {
 					response.write(data);
 					response.end();
 				});
+			// Let client load socket and start listening
+			setTimeout(initializeBoulders, 1000);
 			break;
 		case '/boardSetup.js':
 			fs.readFile(__dirname + path, function(error, data) {
@@ -572,37 +615,10 @@ function setupBoard(data) {
 
 	// If both players have connected, signal start game
 	if (numClients == 2) {
-		//creating three boulders
-		var boulder1 = new Piece();
-		boulder1.strength = 17;
-		boulder1.type = "boulder";
-		boulder1.team = 3;
-		// Random square with x in [1,3] and y in [4,5]
-		boulder1.X = Math.floor((Math.random() * 3) + 1);
-		boulder1.Y = Math.floor((Math.random() * 2) + 4);
-		allPieces[28] = boulder1;
-		
-		var boulder2 = new Piece();
-		boulder2.strength = 17;
-		boulder2.type = "boulder";
-		boulder2.team = 3;
-		// Random square with x in [4,6] and y in [4,5]
-		boulder2.X = Math.floor((Math.random() * 3) + 4);
-		boulder2.Y = Math.floor((Math.random() * 2) + 4);
-		allPieces[29] = boulder2;
-		
-		var boulder3 = new Piece();
-		boulder3.strength = 17;
-		boulder3.type = "boulder";
-		boulder3.team = playerNumber;
-		// Random square with x in [7,9] and y in [4,5]
-		boulder3.X = Math.floor((Math.random() * 3) + 7);
-		boulder3.Y = Math.floor((Math.random() * 2) + 4);
-		allPieces[30] = boulder3;
-		
 		var locArray = getLocations(allPieces);
 		io.sockets.emit("start game", locArray);
 		// So that server does't have to be restarted
+		bouldersSet = false;
 		numClients = 0;
 	}
 }
