@@ -11,6 +11,9 @@ socket.on('game over', gameOver);
 socket.on('mystic', showAroundMystic);
 socket.on('boulder locations', initializeBoulders);
 
+// Client is ready to recieve boulder locations
+socket.emit("send boulders");
+
 //put all of the piece locations into an array and send to server
 //also update the page by removing old html elements and adding new ones
 function startGame(){

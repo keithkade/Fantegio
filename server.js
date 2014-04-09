@@ -10,6 +10,7 @@ server.listen(portNumber);
 // Listen for initial connection
 // Execute setupBoard for each client that connects
 io.sockets.on('connection', function(client) {
+		client.on('send boulders', initializeBoulders);
 		client.on('setup', setupBoard);
 		client.on('move', handleMove);
 	});
@@ -188,8 +189,6 @@ function handler(request,response) {
 					response.write(data);
 					response.end();
 				});
-			// Let client load socket and start listening
-			setTimeout(initializeBoulders, 1000);
 			break;
 		case '/boardSetup.js':
 			fs.readFile(__dirname + path, function(error, data) {
