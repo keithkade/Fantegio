@@ -1,14 +1,14 @@
 //==========================================================================Rocks
 //rocks will recieve x and y from server
-var rock1 = new createjs.Bitmap("images/ImportantThing.png");
+var rock1 = new createjs.Bitmap("images/Boulder.png");
 //rock1.graphics.beginFill("black").drawCircle(29, 29, 20);
 rock1.pieceType = "rock";
 rock1.team = '3';
-var rock2 = new createjs.Bitmap("images/ImportantThing.png");
+var rock2 = new createjs.Bitmap("images/Boulder.png");
 //rock2.graphics.beginFill("black").drawCircle(209, 60, 20);
 rock2.pieceType = "rock";
 rock2.team = '3';
-var rock3 = new createjs.Bitmap("images/ImportantThing.png");
+var rock3 = new createjs.Bitmap("images/Boulder.png");
 //rock3.graphics.beginFill("black").drawCircle(329, 60, 20);
 rock3.pieceType = "rock";
 rock3.team = '3';
