@@ -16,84 +16,98 @@ rock3.team = '3';
 //==========================================================================Player 1 game pieces
 
 //create clickable important thing
+var p1squareIT = new createjs.Shape();
 var p1importantThingBMP = new createjs.Bitmap("images/ImportantThing.png");
 var p1importantThingClickable = new createjs.Container();
 p1importantThingClickable.pieceType =  "Important Thing";
 p1importantThingClickable.team = '1';
 
 //create clickable trap1
+var p1squareT1 = new createjs.Shape();
 var p1trap1BMP = new createjs.Bitmap("images/Trap.png");
 var p1trap1Clickable = new createjs.Container();
 p1trap1Clickable.pieceType = "Trap";
 p1trap1Clickable.team = '1';
 
 //create clickable trap2
+var p1squareT2 = new createjs.Shape();
 var p1trap2BMP = new createjs.Bitmap("images/Trap.png");
 var p1trap2Clickable = new createjs.Container();
 p1trap2Clickable.pieceType = "Trap";
 p1trap2Clickable.team = '1';
 
 //create clickable archer
+var p1squareAr = new createjs.Shape();
 var p1archerBMP = new createjs.Bitmap("images/Archer.png");
 var p1archerClickable = new createjs.Container();
 p1archerClickable.pieceType = "Archer";
 p1archerClickable.team = '1';
 
 //create clickable mystic
-var p1mystic1BMP = new createjs.Bitmap("images/Mystic.png");
+var p1squareMy = new createjs.Shape();
+var p1mysticBMP = new createjs.Bitmap("images/Mystic.png");
 var p1mysticClickable = new createjs.Container();
 p1mysticClickable.pieceType = "Mystic";
 p1mysticClickable.team = '1';
 
 //create clickable rider1
+var p1squareR1 = new createjs.Shape();
 var p1rider1BMP = new createjs.Bitmap("images/Rider.png");
 var p1rider1Clickable = new createjs.Container();
 p1rider1Clickable.pieceType = "Rider";
 p1rider1Clickable.team = '1';
 
 //create clickable rider2
+var p1squareR2 = new createjs.Shape();
 var p1rider2BMP = new createjs.Bitmap("images/Rider.png");
 var p1rider2Clickable = new createjs.Container();
 p1rider2Clickable.pieceType = "Rider";
 p1rider2Clickable.team =  '1';
 
 //create clickable assassin
+var p1squareAs = new createjs.Shape();
 var p1assassinBMP = new createjs.Bitmap("images/Assassin.png");
 var p1assassinClickable = new createjs.Container();
 p1assassinClickable.pieceType = "Assassin";
 p1assassinClickable.team =  '1';
 
 //create clickable soldier1
+var p1squareS1 = new createjs.Shape();
 var p1soldier1BMP = new createjs.Bitmap("images/Soldier.png");
 var p1soldier1Clickable = new createjs.Container();
 p1soldier1Clickable.pieceType = "Soldier";
 p1soldier1Clickable.team =  '1';
 
 //create clickable soldier2
+var p1squareS2 = new createjs.Shape();
 var p1soldier2BMP = new createjs.Bitmap("images/Soldier.png");
 var p1soldier2Clickable = new createjs.Container();
 p1soldier2Clickable.pieceType = "Soldier";
 p1soldier2Clickable.team =  '1';
 
 //create clickable engineer1
+var p1squareE1 = new createjs.Shape();
 var p1engineer1BMP = new createjs.Bitmap("images/Engineer.png");
 var p1engineer1Clickable = new createjs.Container();
 p1engineer1Clickable.pieceType = "Engineer";
 p1engineer1Clickable.team =  '1';
 
 //create clickable engineer2
+var p1squareE2 = new createjs.Shape();
 var p1engineer2BMP = new createjs.Bitmap("images/Engineer.png");
 var p1engineer2Clickable = new createjs.Container();
 p1engineer2Clickable.pieceType = "Engineer";
 p1engineer2Clickable.team =  '1';
 
 //create clickable captain
+var p1squareCa = new createjs.Shape();
 var p1captainBMP = new createjs.Bitmap("images/Captain.png");
 var p1captainClickable = new createjs.Container();
 p1captainClickable.pieceType = "Captain";
 p1captainClickable.team =  '1';
 
 //create clickable commander
+var p1squareCo = new createjs.Shape();
 var p1commanderBMP = new createjs.Bitmap("images/Commander.png");
 var p1commanderClickable = new createjs.Container();
 p1commanderClickable.pieceType = "Commander";
@@ -101,84 +115,98 @@ p1commanderClickable.team =  '1';
 
 //==========================================================================Player 2 game pieces
 //create clickable important thing
+var p2squareIT = new createjs.Shape();
 var p2importantThingBMP = new createjs.Bitmap("images/ImportantThing.png");
 var p2importantThingClickable = new createjs.Container();
 p2importantThingClickable.pieceType =  "Important Thing";
 p2importantThingClickable.team =  '2';
 
 //create clickable trap2
+var p2squareT1 = new createjs.Shape();
 var p2trap1BMP = new createjs.Bitmap("images/Trap.png");
 var p2trap1Clickable = new createjs.Container();
 p2trap1Clickable.pieceType = "Trap";
 p2trap1Clickable.team =  '2';
 
 //create clickable trap2
+var p2squareT2 = new createjs.Shape();
 var p2trap2BMP = new createjs.Bitmap("images/Trap.png");
 var p2trap2Clickable = new createjs.Container();
 p2trap2Clickable.pieceType = "Trap";
 p2trap2Clickable.team =  '2';
 
 //create clickable archer
+var p2squareAr = new createjs.Shape();
 var p2archerBMP = new createjs.Bitmap("images/Archer.png");
 var p2archerClickable = new createjs.Container();
 p2archerClickable.pieceType = "Archer";
 p2archerClickable.team =  '2';
 
 //create clickable mystic
+var p2squareMy = new createjs.Shape();
 var p2mystic1BMP = new createjs.Bitmap("images/Mystic.png");
 var p2mysticClickable = new createjs.Container();
 p2mysticClickable.pieceType = "Mystic";
 p2mysticClickable.team =  '2';
 
 //create clickable rider1
+var p2squareR1 = new createjs.Shape();
 var p2rider1BMP = new createjs.Bitmap("images/Rider.png");
 var p2rider1Clickable = new createjs.Container();
 p2rider1Clickable.pieceType = "Rider";
 p2rider1Clickable.team =  '2';
 
 //create clickable rider2
+var p2squareR2 = new createjs.Shape();
 var p2rider2BMP = new createjs.Bitmap("images/Rider.png");
 var p2rider2Clickable = new createjs.Container();
 p2rider2Clickable.pieceType = "Rider";
 p2rider2Clickable.team =  '2';
 
 //create clickable assassin
+var p2squareAs = new createjs.Shape();
 var p2assassinBMP = new createjs.Bitmap("images/Assassin.png");
 var p2assassinClickable = new createjs.Container();
 p2assassinClickable.pieceType = "Assassin";
 p2assassinClickable.team =  '2';
 
 //create clickable soldier1
+var p2squareS1 = new createjs.Shape();
 var p2soldier1BMP = new createjs.Bitmap("images/Soldier.png");
 var p2soldier1Clickable = new createjs.Container();
 p2soldier1Clickable.pieceType = "Soldier";
 p2soldier1Clickable.team =  '2';
 
 //create clickable soldier2
+var p2squareS2 = new createjs.Shape();
 var p2soldier2BMP = new createjs.Bitmap("images/Soldier.png");
 var p2soldier2Clickable = new createjs.Container();
 p2soldier2Clickable.pieceType = "Soldier";
 p2soldier2Clickable.team =  '2';
 
 //create clickable engineer1
+var p2squareE1 = new createjs.Shape();
 var p2engineer1BMP = new createjs.Bitmap("images/Engineer.png");
 var p2engineer1Clickable = new createjs.Container();
 p2engineer1Clickable.pieceType = "Engineer";
 p2engineer1Clickable.team =  '2';
 
 //create clickable engineer2
+var p2squareE2 = new createjs.Shape();
 var p2engineer2BMP = new createjs.Bitmap("images/Engineer.png");
 var p2engineer2Clickable = new createjs.Container();
 p2engineer2Clickable.pieceType = "Engineer";
 p2engineer2Clickable.team =  '2';
 
 //create clickable captain
+var p2squareCa = new createjs.Shape();
 var p2captainBMP = new createjs.Bitmap("images/Captain.png");
 var p2captainClickable = new createjs.Container();
 p2captainClickable.pieceType = "Captain";
 p2captainClickable.team =  '2';
 
 //create clickable commander
+var p2squareCo = new createjs.Shape();
 var p2commanderBMP = new createjs.Bitmap("images/Commander.png");
 var p2commanderClickable = new createjs.Container();
 p2commanderClickable.pieceType = "Commander";
