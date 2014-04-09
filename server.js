@@ -3,7 +3,7 @@ var url = require('url');
 var io = require('socket.io').listen(server);
 var fs = require('fs');
 
-var portNumber = 32423;
+var portNumber = 32421;
 console.log("Server running on port " + portNumber + ".");
 server.listen(portNumber);
 
@@ -586,8 +586,8 @@ function setupBoard(data) {
 		boulder2.strength = 17;
 		boulder2.type = "boulder";
 		boulder2.team = 3;
-		// Random square with x in [4,5] and y in [4,5]
-		boulder2.X = Math.floor((Math.random() * 2) + 4);
+		// Random square with x in [4,6] and y in [4,5]
+		boulder2.X = Math.floor((Math.random() * 3) + 4);
 		boulder2.Y = Math.floor((Math.random() * 2) + 4);
 		allPieces[29] = boulder2;
 		
@@ -595,8 +595,8 @@ function setupBoard(data) {
 		boulder3.strength = 17;
 		boulder3.type = "boulder";
 		boulder3.team = playerNumber;
-		// Random square with x in [1,3] and y in [4,5]
-		boulder3.X = Math.floor((Math.random() * 3) + 6);
+		// Random square with x in [7,9] and y in [4,5]
+		boulder3.X = Math.floor((Math.random() * 3) + 7);
 		boulder3.Y = Math.floor((Math.random() * 2) + 4);
 		allPieces[30] = boulder3;
 		
@@ -647,7 +647,7 @@ function handleMove(data) {
 // Used by checkAroundMystic
 function pieceToReveal(X, Y, opponentNum) {
 	// Check for out of bounds..
-	if (X < 1 || X > 8 || Y < 1 || Y > 8) {
+	if (X < 1 || X > 9 || Y < 1 || Y > 8) {
 		return false;
 	}
 	for (var i = 0; i < allPieces.length; ++i) {
@@ -860,7 +860,7 @@ function validMove(xOld, yOld, xNew, yNew, actionType) {
 	var moving = allPieces[mInd];
 	var attacked = allPieces[aInd];
 		
-	if (xNew < 1 || xNew > 8 || yNew < 1 || yNew > 8) {
+	if (xNew < 1 || xNew > 9 || yNew < 1 || yNew > 8) {
 		var message = "Pieces cannot move off of the board.";
 		var tempArray = [xOld, yOld, message];
 		io.sockets.emit('invalid move', tempArray);
