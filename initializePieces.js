@@ -355,7 +355,7 @@ function setBoard(initXYArray){
       addGameGridXY(p1trap2Clickable);
       gameStage.addChild(p1trap2Clickable);
 
-      p1importantThingClickable.addChild(p1importantThing1BMP);
+      p1importantThingClickable.addChild(p1importantThingBMP);
       p1importantThingClickable.addEventListener("click", pieceClick);
       p1importantThingClickable.x = (initXYArray[26] - 1)  *  60 + 2;
       p1importantThingClickable.y = (initXYArray[27] - 1)  *  60 + 2;
