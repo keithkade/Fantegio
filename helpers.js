@@ -282,9 +282,9 @@ function updateTurnIndicator(){
 
 // Called when server emits "boulder locations" to show boulders on board setup
 function initializeBoulders(locations) {
-	rock1.graphics.beginFill("black").drawCircle(28, 28, 20);
-	rock2.graphics.beginFill("black").drawCircle(28, 28, 20);
-	rock3.graphics.beginFill("black").drawCircle(28, 28, 20);
+	//rock1.graphics.beginFill("black").drawCircle(28, 28, 20);
+	//rock2.graphics.beginFill("black").drawCircle(28, 28, 20);
+	//rock3.graphics.beginFill("black").drawCircle(28, 28, 20);
 
 	// Switch for player 2
 	if (playerNum == 2) {
