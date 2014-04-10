@@ -52,7 +52,6 @@ function initializeBoulders() {
 	var tempArray = [allPieces[28].X, allPieces[28].Y - 3,
 		allPieces[29].X, allPieces[29].Y - 3,
 		allPieces[30].X, allPieces[30].Y - 3];
-	console.log(tempArray);
 	io.sockets.emit("boulder locations", tempArray);
 }
  
@@ -383,7 +382,6 @@ function handler(request,response) {
 // As a note, the _1 or _2 denotes the player that corresponds to the var
 var numClients = 0;
 function setupBoard(data) {
-	console.log(data);
 	// This function extracts the user name from the login message, stores
 	// it to the client object, sends a login_ok message to the client, and
 	// sends notifications to other clients.
@@ -656,7 +654,6 @@ function handleMove(data) {
 
 			// Just signal a simple move
 			var tempArray = [xOld, yOld, xNew, yNew];
-			console.log(tempArray);
 			io.sockets.emit("simple move", tempArray);
 		}
 		else {
@@ -740,7 +737,6 @@ function checkAroundMystic() {
 		// Need to emit every time even if all names are empty string
 		// so that old labels can be cleared (if there are any).
 		var tempArray = [1, x, y, p1Name, p2Name, p3Name, p4Name];
-		console.log(tempArray);
 		io.sockets.emit("mystic", tempArray);
 	}
 	if (mysticTeam2 !== undefined) {
@@ -769,7 +765,6 @@ function checkAroundMystic() {
 		// Need to emit every time even if all names are empty string
 		// so that old labels can be cleared (if there are any).
 		var tempArray = [2, x, y, p1Name, p2Name, p3Name, p4Name];
-		console.log(tempArray);
 		io.sockets.emit("mystic", tempArray);
 	}
 }
@@ -789,7 +784,6 @@ function anyValidMoves(playerNumber) {
 		return true;
 	}
 
-	console.log("Num pieces left: " + piecesLeft.length);
 	// Check if any pieces have any possible moves left
 	for (var i = 0; i < piecesLeft.length; ++i) {
 		// Trap and important thing are immobile
