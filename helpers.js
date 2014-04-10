@@ -19,6 +19,36 @@ var isGameLocOccupied = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0]
 ];
 
+//finding the index of piece from pieceCaptured array which is not highlighted yet
+function findCapturedPieceIndex(clickable){
+	for(var i = 0; i < piecesCaptured.length; i++){
+		if(piecesCaptured[i].pieceType == clickable.pieceType
+			& piecesCaptured[i].isHighlighted == false){
+				return i;
+			}
+	}
+}
+
+//finding the piece from pieceCaptured array which is not highlighted yet
+function findCapturedPiece(clickable){
+	for(var i = 0; i < piecesCaptured.length; i++){
+		if(piecesCaptured[i].pieceType == clickable.pieceType
+			&& piecesCaptured[i].isHighlighted == false){
+				return piecesCaptured[i];
+			}
+	}
+}
+
+//finding the piece from pieceLost array which is not highlighted yet
+function findLostPiece(clickable){
+	for(var i = 0; i < piecesLost.length; i++){
+		if(piecesLost[i].pieceType == clickable.pieceType
+			&& piecesLost[i].isHighlighted == false){
+				return piecesLost[i];
+			}
+	}
+}
+
 //when game starts we hide and/or show html elements
 function hideElem(divId){
    document.getElementById(divId).style.display = 'none';
@@ -339,13 +369,20 @@ function showMovementArrow(xOld, yOld, xNew, yNew) {
 //this function adds the clickable to the pieces lost array of appropriate player
 function pieceLost(clickable){
 	if(playerNum == 1){
-		piecesLost.push(clickable);
-		drawPiecesOnLost(clickable, piecesLost.length);
+		var clickableCaptured = findLostPiece(clickable);
+		clickableCaptured.isHighlighted = true;
+		clickableCaptured.alpha = 1;
+		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+
 		
 	}
 	else{
-		piecesLost.push(clickable);
-		drawPiecesOnLost(clickable, piecesLost.length);
+		var clickableCaptured = findLostPiece(clickable);
+		clickableCaptured.isHighlighted = true;
+		clickableCaptured.alpha = 1;
+		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+
+		
 	}
 }
 
@@ -354,75 +391,59 @@ function pieceLost(clickable){
 function pieceCaptured(clickable){
 
 	if(playerNum == 1){
-		//adding the content in the grey box
+		var clickableCapturedIndex = findCapturedPieceIndex(clickable);
+		var clickableCaptured = findCapturedPiece(clickable);
 		var newSquare1 = new createjs.Shape();
-		var newSquareText = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
-		newSquareText.textAlign = "center";
-		newSquareText.x = 28;
-		newSquareText.y = 15;
-		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		clickable.addChild(newSquare1, newSquareText);
-		
-		//adding the new clickable in the piecesCaptured array and then displaying it
-		piecesCaptured.push(clickable);
-		drawPiecesOnCaptured(clickable,piecesCaptured.length);
+		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
+		newSquareIT.textAlign = "center";
+		newSquareIT.x = 28;
+		newSquareIT.y = 15;
+		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+
+		clickable.addChild(newSquare1, newSquareIT);
+		piecesCaptured[clickableCapturedIndex] = clickable;
+		clickable.x =clickableCaptured.x;
+		clickable.y = clickableCaptured.y;
+		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		captStage.addChild(clickable);
+		captStage.removeChild(clickableCaptured);
+		captStage.update();		
+		/*var clickableCapturedIndex = findCapturedPieceIndex(clickable);
+		var clickableCaptured = findCapturedPiece(clickable);
+		clickableCaptured.isHighlighted = true;
+		clickableCaptured.alpha = 1;
+		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		captStage.update();		*/
+
+
 	}
 	else{
-		//adding the content in the grey box
+		var clickableCapturedIndex = findCapturedPieceIndex(clickable);
+		var clickableCaptured = findCapturedPiece(clickable);
 		var newSquare1 = new createjs.Shape();
-		var newSquareText = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
-		newSquareText.textAlign = "center";
-		newSquareText.x = 28;
-		newSquareText.y = 15;
-		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
-		clickable.addChild(newSquare1, newSquareText);
-		
-		//adding the new clickable in the piecesCaptured array and then displaying it
-		piecesCaptured.push(clickable);
-		drawPiecesOnCaptured(clickable,piecesCaptured.length);
-	}
-}
+		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
+		newSquareIT.textAlign = "center";
+		newSquareIT.x = 28;
+		newSquareIT.y = 15;
+		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
 
-//this function addes the pieces lost in the lost canvas
-function drawPiecesOnLost(clickable, loc){
-	if(loc < 6){
-		clickable.x = (loc - 1)*60 + 3;
-		clickable.y = 3;
-	}
-	else if(loc > 5 && loc < 11){
-		loc = loc%6;
-		clickable.x = (loc - 1)*60 + 3;
-		clickable.y = 60 + 3;
-		
-	}
-	else{
-		loc = loc%6;
-		clickable.x = (loc - 1)*60 + 3;
-		clickable.y = 120 + 3;	
-	}
-	lostStage.addChild(clickable);
-	lostStage.update();
-}
+		clickable.addChild(newSquare1, newSquareIT);
+		piecesCaptured[clickableCapturedIndex] = clickable;
+		clickable.x =clickableCaptured.x;
+		clickable.y = clickableCaptured.y;
+		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		captStage.addChild(clickable);
+		captStage.removeChild(clickableCaptured);
+		captStage.update();		
+		/*var clickableCapturedIndex = findCapturedPieceIndex(clickable);
+		var clickableCaptured = findCapturedPiece(clickable);
+		clickableCaptured.isHighlighted = true;
+		clickableCaptured.alpha = 1;
+		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		captStage.update();	*/	
 
-//this function addes the pieces captured in the captured canvas
-function drawPiecesOnCaptured(clickable, loc){
-	if(loc < 6){
-		clickable.x = (loc - 1)*60 + 3;
-		clickable.y = 3;
-	}
-	else if(loc > 5 && loc < 11){
-		loc = loc%6;
-		clickable.x = (loc - 1)*60 + 3;
-		clickable.y = 60 + 3;
 		
 	}
-	else{
-		loc = loc%6;
-		clickable.x = (loc - 1)*60 + 3;
-		clickable.y = 120 + 3;	
-	}
-	captStage.addChild(clickable);
-	captStage.update();
 }
 
 

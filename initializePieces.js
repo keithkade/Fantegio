@@ -907,7 +907,7 @@ if(playerNum == 1){
 	captImpThingText.textAlign = "center";
 	captImpThingText.x = 28;
 	captImpThingText.y = 15;
-	captImpThing.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	captImpThing.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
 	var captImpThingClickable = new createjs.Container();
 	captImpThingClickable.pieceType = "Important Thing";
 	captImpThingClickable.addChild(captImpThing, captImpThingText);
@@ -1164,7 +1164,7 @@ else{
 	
 	}
 
-	//creating pieces for pieces being lost
+//creating pieces for pieces being lost
 if(playerNum == 1){
 
 	//create lost commander
@@ -1351,6 +1351,204 @@ if(playerNum == 1){
 	lostStage.addChild(lostImportantThingClickable);
 
 }
+
+//creating pieces for pieces being lost
+else{
+
+	//create lost commander
+	var lostCommanderSquare = new createjs.Shape();
+	var lostCommanderBMP = new createjs.Bitmap("images/Commander.png");
+	var lostCommanderClickable = new createjs.Container();
+	lostCommanderClickable.pieceType = "Commander";
+	lostCommanderClickable.addChild(lostCommanderSquare,lostCommanderBMP);
+	lostCommanderClickable.isHighlighted = false;
+	piecesLost.push(lostCommanderClickable);	
+	lostCommanderClickable.x = 0;
+	lostCommanderClickable.y = 0;
+	lostCommanderClickable.alpha = 0.25;
+	lostStage.addChild(lostCommanderClickable);
+	
+	//create lost captain
+	var lostCaptainSquare = new createjs.Shape();
+	var lostCaptainBMP = new createjs.Bitmap("images/Captain.png");
+	var lostCaptainClickable = new createjs.Container();
+	lostCaptainClickable.pieceType = "Captain";
+	lostCaptainClickable.addChild(lostCaptainSquare,lostCaptainBMP);
+	lostCaptainClickable.isHighlighted = false;
+	piecesLost.push(lostCaptainClickable);	
+	lostCaptainClickable.x = 60;
+	lostCaptainClickable.y = 0;
+	lostCaptainClickable.alpha = 0.25;
+	lostStage.addChild(lostCaptainClickable);
+	
+	//create lost soldier 1
+	var lostSoldier1Square = new createjs.Shape();
+	var lostSoldier1BMP = new createjs.Bitmap("images/Soldier.png");
+	var lostSoldier1Clickable = new createjs.Container();
+	lostSoldier1Clickable.pieceType = "Soldier";
+	lostSoldier1Clickable.addChild(lostSoldier1Square,lostSoldier1BMP);
+	lostSoldier1Clickable.isHighlighted = false;
+	piecesLost.push(lostSoldier1Clickable);	
+	lostSoldier1Clickable.x = 120;
+	lostSoldier1Clickable.y = 0;
+	lostSoldier1Clickable.alpha = 0.25;
+	lostStage.addChild(lostSoldier1Clickable);
+	
+	//create lost soldier 2
+	var lostSoldier2Square = new createjs.Shape();
+	var lostSoldier2BMP = new createjs.Bitmap("images/Soldier.png");
+	var lostSoldier2Clickable = new createjs.Container();
+	lostSoldier2Clickable.pieceType = "Soldier";
+	lostSoldier2Clickable.addChild(lostSoldier2Square,lostSoldier2BMP);
+	lostSoldier2Clickable.isHighlighted = false;
+	piecesLost.push(lostSoldier1Clickable);	
+	lostSoldier2Clickable.x = 180;
+	lostSoldier2Clickable.y = 0;
+	lostSoldier2Clickable.alpha = 0.25;
+	lostStage.addChild(lostSoldier2Clickable);
+	
+	//create lost engineer 1
+	var lostEngineer1Square = new createjs.Shape();
+	var lostEngineer1BMP = new createjs.Bitmap("images/Engineer.png");
+	var lostEngineer1Clickable = new createjs.Container();
+	lostEngineer1Clickable.pieceType = "Engineer";
+	lostEngineer1Clickable.addChild(lostEngineer1Square,lostEngineer1BMP);
+	lostEngineer1Clickable.isHighlighted = false;
+	piecesLost.push(lostEngineer1Clickable);	
+	lostEngineer1Clickable.x = 240;
+	lostEngineer1Clickable.y = 0;
+	lostEngineer1Clickable.alpha = 0.25;
+	lostStage.addChild(lostEngineer1Clickable);
+	
+	//create lost engineer 2
+	var lostEngineer2Square = new createjs.Shape();
+	var lostEngineer2BMP = new createjs.Bitmap("images/Engineer.png");
+	var lostEngineer2Clickable = new createjs.Container();
+	lostEngineer2Clickable.pieceType = "Engineer";
+	lostEngineer2Clickable.addChild(lostEngineer2Square,lostEngineer2BMP);
+	lostEngineer2Clickable.isHighlighted = false;
+	piecesLost.push(lostEngineer2Clickable);	
+	lostEngineer2Clickable.x = 0;
+	lostEngineer2Clickable.y = 60;
+	lostEngineer2Clickable.alpha = 0.25;
+	lostStage.addChild(lostEngineer2Clickable);
+	
+	//create lost rider 1
+	var lostRider1Square = new createjs.Shape();
+	var lostRider1BMP = new createjs.Bitmap("images/Rider.png");
+	var lostRider1Clickable = new createjs.Container();
+	lostRider1Clickable.pieceType = "Rider";
+	lostRider1Clickable.addChild(lostRider1Square,lostRider1BMP);
+	lostRider1Clickable.isHighlighted = false;
+	piecesLost.push(lostRider1Clickable);	
+	lostRider1Clickable.x = 60;
+	lostRider1Clickable.y = 60;
+	lostRider1Clickable.alpha = 0.25;
+	lostStage.addChild(lostRider1Clickable);
+	
+	//create lost rider 2
+	var lostRider2Square = new createjs.Shape();
+	var lostRider2BMP = new createjs.Bitmap("images/Rider.png");
+	var lostRider2Clickable = new createjs.Container();
+	lostRider2Clickable.pieceType = "Rider";
+	lostRider2Clickable.addChild(lostRider2Square,lostRider2BMP);
+	lostRider2Clickable.isHighlighted = false;
+	piecesLost.push(lostRider2Clickable);	
+	lostRider2Clickable.x = 120;
+	lostRider2Clickable.y = 60;
+	lostRider2Clickable.alpha = 0.25;
+	lostStage.addChild(lostRider2Clickable);
+	
+	//create lost archer
+	var lostArcherSquare = new createjs.Shape();
+	var lostArcherBMP = new createjs.Bitmap("images/Archer.png");
+	var lostArcherClickable = new createjs.Container();
+	lostArcherClickable.pieceType = "Archer";
+	lostArcherClickable.addChild(lostArcherSquare,lostArcherBMP);
+	lostArcherClickable.isHighlighted = false;
+	piecesLost.push(lostArcherClickable);	
+	lostArcherClickable.x = 180;
+	lostArcherClickable.y = 60;
+	lostArcherClickable.alpha = 0.25;
+	lostStage.addChild(lostArcherClickable);
+
+	//create lost assassin
+	var lostAsSquare = new createjs.Shape();
+	var lostAsBMP = new createjs.Bitmap("images/Assassin.png");
+	var lostAsClickable = new createjs.Container();
+	lostAsClickable.pieceType = "Assassin";
+	lostAsClickable.addChild(lostAsSquare,lostAsBMP);
+	lostAsClickable.isHighlighted = false;
+	piecesLost.push(lostAsClickable);	
+	lostAsClickable.x = 240;
+	lostAsClickable.y = 60;
+	lostAsClickable.alpha = 0.25;
+	lostStage.addChild(lostAsClickable);
+
+	
+	//create lost mystic
+	var lostMysticSquare = new createjs.Shape();
+	var lostMysticBMP = new createjs.Bitmap("images/Mystic.png");
+	var lostMysticClickable = new createjs.Container();
+	lostMysticClickable.pieceType = "Mystic";
+	lostMysticClickable.addChild(lostMysticSquare,lostMysticBMP);
+	lostMysticClickable.isHighlighted = false;
+	piecesLost.push(lostMysticClickable);	
+	lostMysticClickable.x = 0;
+	lostMysticClickable.y = 120;
+	lostMysticClickable.alpha = 0.25;
+	lostStage.addChild(lostMysticClickable);
+	
+	//create lost trap1
+	var lostTrap1Square = new createjs.Shape();
+	var lostTrap1BMP = new createjs.Bitmap("images/Trap.png");
+	var lostTrap1Clickable = new createjs.Container();
+	lostTrap1Clickable.pieceType = "Trap";
+	lostTrap1Clickable.addChild(lostTrap1Square,lostTrap1BMP);
+	lostTrap1Clickable.isHighlighted = false;
+	piecesLost.push(lostTrap1Clickable);	
+	lostTrap1Clickable.x = 60;
+	lostTrap1Clickable.y = 120;
+	lostTrap1Clickable.alpha = 0.25;
+	lostStage.addChild(lostTrap1Clickable);
+
+	//create lost trap2
+	var lostTrap2Square = new createjs.Shape();
+	var lostTrap2BMP = new createjs.Bitmap("images/Trap.png");
+	var lostTrap2Clickable = new createjs.Container();
+	lostTrap2Clickable.pieceType = "Trap";
+	lostTrap2Clickable.addChild(lostTrap2Square,lostTrap2BMP);
+	lostTrap2Clickable.isHighlighted = false;
+	piecesLost.push(lostTrap2Clickable);	
+	lostTrap2Clickable.x = 120;
+	lostTrap2Clickable.y = 120;
+	lostTrap2Clickable.alpha = 0.25;
+	lostStage.addChild(lostTrap2Clickable);
+
+	//create lost important thing
+	var lostImportantThingSquare = new createjs.Shape();
+	var lostImportantThingBMP = new createjs.Bitmap("images/ImportantThing.png");
+	var lostImportantThingClickable = new createjs.Container();
+	lostImportantThingClickable.pieceType = "Important thing";
+	lostImportantThingClickable.addChild(lostImportantThingSquare,lostImportantThingBMP);
+	lostImportantThingClickable.isHighlighted = false;
+	piecesLost.push(lostImportantThingClickable);	
+	lostImportantThingClickable.x = 180;
+	lostImportantThingClickable.y = 120;
+	lostImportantThingClickable.alpha = 0.25;
+	lostStage.addChild(lostImportantThingClickable);
+
+}
+
+
+
+
+
+
+
+
+
+	
 
 
 
