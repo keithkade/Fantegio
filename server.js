@@ -662,6 +662,20 @@ function handleMove(data) {
 		else {
 			// If space not empty, then handle attack
 			resolveConflict(xOld, yOld, xNew, yNew, actionType);
+
+			// After conclict resolution, check for game over
+			var p1HasMoves = anyValidMoves(1);
+			var p2HasMoves = anyValidMoves(2);
+
+			if (!p1HasMoves && !p2HasMoves) { // tie
+				io.sockets.emit("game over", [0]);
+			}
+			else if (!p1HasMoves) {
+				io.sockets.emit("game over", [2]);
+			}
+			else if (!p2HasMoves) {
+				io.sockets.emit("game over", [1]);
+			}
 		}
 	}
 
@@ -760,6 +774,59 @@ function checkAroundMystic() {
 	}
 }
 
+// Return true if player still has moves left, return false otherwise
+function anyValidMoves(playerNumber) {
+	var piecesLeft = new Array();
+	for (var i = 0; i < allPieces.length; ++i) {
+		if (allPieces[i].team == playerNumber) {
+			piecesLeft.push(allPieces[i]);
+		}
+	}
+
+	// If more than 8 pieces left, at least one of them has a valid move
+	// So avoid unnecessary computation
+	if (piecesLeft.length > 8) {
+		return true;
+	}
+
+	console.log("Num pieces left: " + piecesLeft.length);
+	// Check if any pieces have any possible moves left
+	for (var i = 0; i < piecesLeft.length; ++i) {
+		// Trap and important thing are immobile
+		if (piecesLeft[i].type == "Trap" || piecesLeft[i].type == "Important Thing") {
+			continue;
+		}
+		else {
+			// Check above, to the right, below, and to the left for valid moves
+			var x = piecesLeft[i].X;
+			var y = piecesLeft[i].Y;
+			// Check above
+			if (spaceEmpty(x, y - 1) &&
+				x > 0 && x < 10 && (y - 1) > 0 && (y - 1) < 9) {
+				return true;
+			}
+			// Check to the right
+			else if (spaceEmpty(x + 1, y) &&
+				(x + 1) > 0 && (x + 1) < 10 && y > 0 && y < 9) {
+				return true;
+			}
+			// Check below
+			else if (spaceEmpty(x, y + 1) &&
+				x > 0 && x < 10 && (y + 1) > 0 && (y + 1) < 9) {
+				return true;
+			}
+			// Check to the left
+			else if (spaceEmpty(x - 1, y) &&
+				(x - 1) > 0 && (x - 1) < 10 && y > 0 && y < 9) {
+				return true;
+			}
+		}
+	}
+
+	// We haven't found a valid move, so
+	return false;
+}
+
 function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 	// mInd -> moving piece index, aInd -> attacked piece index
 	var mInd = getPieceIndex(xOld, yOld);
@@ -785,8 +852,7 @@ function resolveConflict(xOld, yOld, xNew, yNew, actionType) {
 		}
 	}
 	else if (attacked.type == "Important Thing") {
-		var tempArray = [moving.team];
-		io.sockets.emit("game over", tempArray);
+		io.sockets.emit("game over", [moving.team]);
 	}
 	else if (attacked.type == "Trap") {
 		if (moving.type == "Engineer") {

@@ -75,21 +75,22 @@ function startGame(){
 
 }
 
-//message recieved that someone has won
+//message received that someone has won
 function gameOver(gameOverArray){
 	var playerWon = gameOverArray[0];
 	if (playerWon == 1 && playerNum == 1){
-		alert("You have won!");
+		alert("You won! :)");
 	}	
 	else if (playerWon == 1 && playerNum == 2){
-		alert("You have lost!");
+		alert("Sad day, you lost... :(");
 	}	
 	else if (playerWon == 2 && playerNum == 1){
-		alert("You have lost!");
+		alert("Sad day, you lost... :(");
 	}	
 	else if (playerWon == 2 && playerNum == 2){
-		alert("You have won!");
+		alert("You won! :)");
 	}							
+	window.location.href = "../";
 }
 
 var playerLabels = new Array();

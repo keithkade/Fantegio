@@ -276,7 +276,7 @@ function updateTurnIndicator(){
 	   document.getElementById("turnIndicator").innerHTML = "Your turn";
 	}
 	else{
-	   document.getElementById("turnIndicator").innerHTML = "Waiting on opponent";
+	   document.getElementById("turnIndicator").innerHTML = "Opponent's turn";
 	}
 }
 
