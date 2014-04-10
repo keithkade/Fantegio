@@ -19,12 +19,6 @@ var isGameLocOccupied = [
 [0,0,0,0,0,0,0,0,0,0,0,0,0]
 ];
 
-//this array keeps track of the pieces lost by each player
-var piecesLost = new Array();
-
-//this array keeps track of the pieces captured by each player
-var piecesCaptured = new Array();
-
 //when game starts we hide and/or show html elements
 function hideElem(divId){
    document.getElementById(divId).style.display = 'none';

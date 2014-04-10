@@ -35,6 +35,12 @@ for (var y = 0; y <= setupBoardHeight; y += 60) {
 var lostStage = new createjs.Stage("lostPiecesCanvas");
 var captStage = new createjs.Stage("capPiecesCanvas");
 
+//this array keeps track of the pieces captured by each player
+var piecesCaptured = new Array();
+
+//this array keeps track of the pieces lost by each player
+var piecesLost = new Array();
+
 //draw grid for lostCanvas
 for (var x = 0; x <= 300; x += 60) {
    var line = new createjs.Shape();
