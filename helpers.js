@@ -405,6 +405,7 @@ function pieceCaptured(clickable){
 		clickable.x =clickableCaptured.x;
 		clickable.y = clickableCaptured.y;
 		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		clickable.isHighlighted = true;
 		captStage.addChild(clickable);
 		captStage.removeChild(clickableCaptured);
 		captStage.update();		
@@ -432,6 +433,7 @@ function pieceCaptured(clickable){
 		clickable.x =clickableCaptured.x;
 		clickable.y = clickableCaptured.y;
 		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		clickable.isHighlighted = true;
 		captStage.addChild(clickable);
 		captStage.removeChild(clickableCaptured);
 		captStage.update();		
