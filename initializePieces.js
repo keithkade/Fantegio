@@ -1213,7 +1213,7 @@ if(playerNum == 1){
 	lostSoldier2Clickable.pieceType = "Soldier";
 	lostSoldier2Clickable.addChild(lostSoldier2Square,lostSoldier2BMP);
 	lostSoldier2Clickable.isHighlighted = false;
-	piecesLost.push(lostSoldier1Clickable);	
+	piecesLost.push(lostSoldier2Clickable);	
 	lostSoldier2Clickable.x = 180;
 	lostSoldier2Clickable.y = 0;
 	lostSoldier2Clickable.alpha = 0.25;
@@ -1352,7 +1352,7 @@ if(playerNum == 1){
 
 }
 
-//creating pieces for pieces being lost
+//creating pieces for pieces being lost for player2
 else{
 
 	//create lost commander
@@ -1401,7 +1401,7 @@ else{
 	lostSoldier2Clickable.pieceType = "Soldier";
 	lostSoldier2Clickable.addChild(lostSoldier2Square,lostSoldier2BMP);
 	lostSoldier2Clickable.isHighlighted = false;
-	piecesLost.push(lostSoldier1Clickable);	
+	piecesLost.push(lostSoldier2Clickable);	
 	lostSoldier2Clickable.x = 180;
 	lostSoldier2Clickable.y = 0;
 	lostSoldier2Clickable.alpha = 0.25;

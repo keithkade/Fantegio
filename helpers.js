@@ -401,11 +401,11 @@ function pieceCaptured(clickable){
 		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
 
 		clickable.addChild(newSquare1, newSquareIT);
-		piecesCaptured[clickableCapturedIndex] = clickable;
 		clickable.x =clickableCaptured.x;
 		clickable.y = clickableCaptured.y;
 		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 		clickable.isHighlighted = true;
+		piecesCaptured[clickableCapturedIndex] = clickable;
 		captStage.addChild(clickable);
 		captStage.removeChild(clickableCaptured);
 		captStage.update();		
@@ -414,7 +414,7 @@ function pieceCaptured(clickable){
 		clickableCaptured.isHighlighted = true;
 		clickableCaptured.alpha = 1;
 		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
-		captStage.update();		*/
+		captStage.update();	*/
 
 
 	}
@@ -429,11 +429,12 @@ function pieceCaptured(clickable){
 		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
 
 		clickable.addChild(newSquare1, newSquareIT);
-		piecesCaptured[clickableCapturedIndex] = clickable;
+	
 		clickable.x =clickableCaptured.x;
 		clickable.y = clickableCaptured.y;
 		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 		clickable.isHighlighted = true;
+		piecesCaptured[clickableCapturedIndex] = clickable;
 		captStage.addChild(clickable);
 		captStage.removeChild(clickableCaptured);
 		captStage.update();		
