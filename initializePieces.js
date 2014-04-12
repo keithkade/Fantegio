@@ -681,14 +681,10 @@ if(playerNum == 1){
 	
 	//create captured commander
 	var captCommander = new createjs.Shape();
-	var captCommanderText = new createjs.Text("Commander", "10px Arial", "#000000");
-	captCommanderText.textAlign = "center";
-	captCommanderText.x = 28;
-	captCommanderText.y = 15;
-	captCommander.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captCommanderBMP = new createjs.Bitmap("images/Commander2.png");
 	var captCommanderClickable = new createjs.Container();
 	captCommanderClickable.pieceType = "Commander";
-	captCommanderClickable.addChild(captCommander,captCommanderText);
+	captCommanderClickable.addChild(captCommander,captCommanderBMP);
 	captCommanderClickable.isHighlighted = false;
 	piecesCaptured.push(captCommanderClickable);
 	captCommanderClickable.alpha = 0.25;
@@ -698,14 +694,10 @@ if(playerNum == 1){
 	
 	//create captured captain
 	var captCaptain = new createjs.Shape();
-	var captCaptainText = new createjs.Text("Captain", "10px Arial", "#000000");
-	captCaptainText.textAlign = "center";
-	captCaptainText.x = 28;
-	captCaptainText.y = 15;
-	captCaptain.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captCaptainBMP = new createjs.Bitmap("images/Captain2.png");
 	var captCaptainClickable = new createjs.Container();
 	captCaptainClickable.pieceType = "Captain";
-	captCaptainClickable.addChild(captCaptain,captCaptainText);
+	captCaptainClickable.addChild(captCaptain,captCaptainBMP);
 	captCaptainClickable.isHighlighted = false;
 	piecesCaptured.push(captCaptainClickable);	
 	captCaptainClickable.alpha = 0.25;
@@ -715,14 +707,10 @@ if(playerNum == 1){
 	
 	//create captured soldier1
 	var captSoldier1 = new createjs.Shape();
-	var captSoldier1Text = new createjs.Text("Soldier", "10px Arial", "#000000");
-	captSoldier1Text.textAlign = "center";
-	captSoldier1Text.x = 28;
-	captSoldier1Text.y = 15;
-	captSoldier1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captSoldier1BMP = new createjs.Bitmap("images/Soldier2.png");
 	var captSoldier1Clickable = new createjs.Container();
 	captSoldier1Clickable.pieceType = "Soldier";
-	captSoldier1Clickable.addChild(captSoldier1,captSoldier1Text);
+	captSoldier1Clickable.addChild(captSoldier1,captSoldier1BMP);
 	captSoldier1Clickable.isHighlighted = false;
 	piecesCaptured.push(captSoldier1Clickable);	
 	captSoldier1Clickable.alpha = 0.25;
@@ -732,14 +720,10 @@ if(playerNum == 1){
 
 	//create captured soldier2
 	var captSoldier2 = new createjs.Shape();
-	var captSoldier2Text = new createjs.Text("Soldier", "10px Arial", "#000000");
-	captSoldier2Text.textAlign = "center";
-	captSoldier2Text.x = 28;
-	captSoldier2Text.y = 15;
-	captSoldier2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captSoldier2BMP = new createjs.Bitmap("images/Soldier2.png");
 	var captSoldier2Clickable = new createjs.Container();
 	captSoldier2Clickable.pieceType = "Soldier";
-	captSoldier2Clickable.addChild(captSoldier2,captSoldier2Text);
+	captSoldier2Clickable.addChild(captSoldier2,captSoldier2BMP);
 	captSoldier2Clickable.isHighlighted = false;
 	piecesCaptured.push(captSoldier2Clickable);	
 	captSoldier2Clickable.alpha = 0.25;
@@ -749,14 +733,10 @@ if(playerNum == 1){
 	
 	//create captured engineer1
 	var captEngineer1 = new createjs.Shape();
-	var captEngineer1Text = new createjs.Text("Engineer", "10px Arial", "#000000");
-	captEngineer1Text.textAlign = "center";
-	captEngineer1Text.x = 28;
-	captEngineer1Text.y = 15;
-	captEngineer1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captEngineer1BMP = new createjs.Bitmap("images/Engineer2.png");
 	var captEngineer1Clickable = new createjs.Container();
 	captEngineer1Clickable.pieceType = "Engineer";
-	captEngineer1Clickable.addChild(captEngineer1,captEngineer1Text);
+	captEngineer1Clickable.addChild(captEngineer1,captEngineer1BMP);
 	captEngineer1Clickable.isHighlighted = false;
 	piecesCaptured.push(captEngineer1Clickable);
 	captEngineer1Clickable.alpha = 0.25;
@@ -766,14 +746,10 @@ if(playerNum == 1){
 
 	//create captured engineer2
 	var captEngineer2 = new createjs.Shape();
-	var captEngineer2Text = new createjs.Text("Engineer", "10px Arial", "#000000");
-	captEngineer2Text.textAlign = "center";
-	captEngineer2Text.x = 28;
-	captEngineer2Text.y = 15;
-	captEngineer2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captEngineer2BMP = new createjs.Bitmap("images/Engineer2.png");
 	var captEngineer2Clickable = new createjs.Container();
 	captEngineer2Clickable.pieceType = "Engineer";
-	captEngineer2Clickable.addChild(captEngineer2,captEngineer2Text);
+	captEngineer2Clickable.addChild(captEngineer2,captEngineer2BMP);
 	captEngineer2Clickable.isHighlighted = false;
 	piecesCaptured.push(captEngineer2Clickable);
 	captEngineer2Clickable.alpha = 0.25;
@@ -783,14 +759,10 @@ if(playerNum == 1){
 	
 	//create captured rider1
 	var captRider1 = new createjs.Shape();
-	var captRider1Text = new createjs.Text("Rider", "10px Arial", "#000000");
-	captRider1Text.textAlign = "center";
-	captRider1Text.x = 28;
-	captRider1Text.y = 15;
-	captRider1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captRider1BMP = new createjs.Bitmap("images/Rider2.png");
 	var captRider1Clickable = new createjs.Container();
 	captRider1Clickable.pieceType = "Rider";
-	captRider1Clickable.addChild(captRider1, captRider1Text);
+	captRider1Clickable.addChild(captRider1, captRider1BMP);
 	captRider1Clickable.isHighlighted = false;
 	piecesCaptured.push(captRider1Clickable);
 	captRider1Clickable.alpha = 0.25;
@@ -800,14 +772,10 @@ if(playerNum == 1){
 
 	//create captured rider2
 	var captRider2 = new createjs.Shape();
-	var captRider2Text = new createjs.Text("Rider", "10px Arial", "#000000");
-	captRider2Text.textAlign = "center";
-	captRider2Text.x = 28;
-	captRider2Text.y = 15;
-	captRider2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captRider2BMP = new createjs.Bitmap("images/Rider2.png");
 	var captRider2Clickable = new createjs.Container();
 	captRider2Clickable.pieceType = "Rider";
-	captRider2Clickable.addChild(captRider2, captRider2Text);
+	captRider2Clickable.addChild(captRider2, captRider2BMP);
 	captRider2Clickable.isHighlighted = false;
 	piecesCaptured.push(captRider2Clickable);
 	captRider2Clickable.alpha = 0.25;
@@ -817,14 +785,10 @@ if(playerNum == 1){
 	
 	//create captured archer
 	var captArcher = new createjs.Shape();
-	var captArcherText = new createjs.Text("Archer", "10px Arial", "#000000");
-	captArcherText.textAlign = "center";
-	captArcherText.x = 28;
-	captArcherText.y = 15;
-	captArcher.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captArcherBMP = new createjs.Bitmap("images/Archer2.png");
 	var captArcherClickable = new createjs.Container();
 	captArcherClickable.pieceType = "Archer";
-	captArcherClickable.addChild(captArcher, captArcherText);
+	captArcherClickable.addChild(captArcher, captArcherBMP);
 	captArcherClickable.isHighlighted = false;
 	piecesCaptured.push(captArcherClickable);
 	captArcherClickable.alpha = 0.25;
@@ -834,14 +798,10 @@ if(playerNum == 1){
 	
 	//create captured assassin
 	var captAs = new createjs.Shape();
-	var captAsText = new createjs.Text("Assassin", "10px Arial", "#000000");
-	captAsText.textAlign = "center";
-	captAsText.x = 28;
-	captAsText.y = 15;
-	captAs.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captAsBMP = new createjs.Bitmap("images/Assassin2.png");
 	var captAsClickable = new createjs.Container();
 	captAsClickable.pieceType = "Assassin";
-	captAsClickable.addChild(captAs, captAsText);
+	captAsClickable.addChild(captAs, captAsBMP);
 	captAsClickable.isHighlighted = false;
 	piecesCaptured.push(captAsClickable);	
 	captAsClickable.alpha = 0.25;
@@ -851,14 +811,10 @@ if(playerNum == 1){
 	
 	//create captured mystic
 	var captMystic = new createjs.Shape();
-	var captMysticText = new createjs.Text("Mystic", "10px Arial", "#000000");
-	captMysticText.textAlign = "center";
-	captMysticText.x = 28;
-	captMysticText.y = 15;
-	captMystic.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captMysticBMP = new createjs.Bitmap("images/Mystic2.png");
 	var captMysticClickable = new createjs.Container();
 	captMysticClickable.pieceType = "Mystic";
-	captMysticClickable.addChild(captMystic, captMysticText);
+	captMysticClickable.addChild(captMystic, captMysticBMP);
 	captMysticClickable.isHighlighted = false;
 	piecesCaptured.push(captMysticClickable);
 	captMysticClickable.alpha = 0.25;
@@ -868,14 +824,10 @@ if(playerNum == 1){
 	
 	//create captured trap1
 	var captTrap1 = new createjs.Shape();
-	var captTrap1Text = new createjs.Text("Trap", "10px Arial", "#000000");
-	captTrap1Text.textAlign = "center";
-	captTrap1Text.x = 28;
-	captTrap1Text.y = 15;
-	captTrap1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captTrap1BMP = new createjs.Bitmap("images/Trap2.png");
 	var captTrap1Clickable = new createjs.Container();
 	captTrap1Clickable.pieceType = "Trap";
-	captTrap1Clickable.addChild(captTrap1, captTrap1Text);
+	captTrap1Clickable.addChild(captTrap1, captTrap1BMP);
 	captTrap1Clickable.isHighlighted = false;
 	piecesCaptured.push(captTrap1Clickable);
 	captTrap1Clickable.alpha = 0.25;
@@ -885,14 +837,10 @@ if(playerNum == 1){
 
 	//create captured trap2
 	var captTrap2 = new createjs.Shape();
-	var captTrap2Text = new createjs.Text("Trap", "10px Arial", "#000000");
-	captTrap2Text.textAlign = "center";
-	captTrap2Text.x = 28;
-	captTrap2Text.y = 15;
-	captTrap2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captTrap2BMP = new createjs.Bitmap("images/Trap2.png");
 	var captTrap2Clickable = new createjs.Container();
 	captTrap2Clickable.pieceType = "Trap";
-	captTrap2Clickable.addChild(captTrap2, captTrap2Text);
+	captTrap2Clickable.addChild(captTrap2, captTrap2BMP);
 	captTrap2Clickable.isHighlighted = false;
 	piecesCaptured.push(captTrap2Clickable);
 	captTrap2Clickable.alpha = 0.25;
@@ -903,14 +851,10 @@ if(playerNum == 1){
 
 	//create captured important thing
 	var captImpThing = new createjs.Shape();
-	var captImpThingText = new createjs.Text("Important \nThing", "10px Arial", "#000000");
-	captImpThingText.textAlign = "center";
-	captImpThingText.x = 28;
-	captImpThingText.y = 15;
-	captImpThing.graphics.beginFill(enemyColor).drawRect(0, 0, 57, 57);
+	var captImpThingBMP = new createjs.Bitmap("images/ImportantThing2.png");
 	var captImpThingClickable = new createjs.Container();
 	captImpThingClickable.pieceType = "Important Thing";
-	captImpThingClickable.addChild(captImpThing, captImpThingText);
+	captImpThingClickable.addChild(captImpThing, captImpThingBMP);
 	piecesCaptured.push(captImpThingClickable);	
 	captImpThingClickable.alpha = 0.25;
 	captImpThingClickable.x = 180;
@@ -923,16 +867,13 @@ else{
 
 	//for player 2
 	//initializing the pices captured canvas
+	
 	//create captured commander
 	var captCommander = new createjs.Shape();
-	var captCommanderText = new createjs.Text("Commander", "10px Arial", "#000000");
-	captCommanderText.textAlign = "center";
-	captCommanderText.x = 28;
-	captCommanderText.y = 15;
-	captCommander.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captCommanderBMP = new createjs.Bitmap("images/Commander2.png");
 	var captCommanderClickable = new createjs.Container();
 	captCommanderClickable.pieceType = "Commander";
-	captCommanderClickable.addChild(captCommander,captCommanderText);
+	captCommanderClickable.addChild(captCommander,captCommanderBMP);
 	captCommanderClickable.isHighlighted = false;
 	piecesCaptured.push(captCommanderClickable);
 	captCommanderClickable.alpha = 0.25;
@@ -942,14 +883,10 @@ else{
 	
 	//create captured captain
 	var captCaptain = new createjs.Shape();
-	var captCaptainText = new createjs.Text("Captain", "10px Arial", "#000000");
-	captCaptainText.textAlign = "center";
-	captCaptainText.x = 28;
-	captCaptainText.y = 15;
-	captCaptain.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captCaptainBMP = new createjs.Bitmap("images/Captain2.png");
 	var captCaptainClickable = new createjs.Container();
 	captCaptainClickable.pieceType = "Captain";
-	captCaptainClickable.addChild(captCaptain,captCaptainText);
+	captCaptainClickable.addChild(captCaptain,captCaptainBMP);
 	captCaptainClickable.isHighlighted = false;
 	piecesCaptured.push(captCaptainClickable);	
 	captCaptainClickable.alpha = 0.25;
@@ -959,14 +896,10 @@ else{
 	
 	//create captured soldier1
 	var captSoldier1 = new createjs.Shape();
-	var captSoldier1Text = new createjs.Text("Soldier", "10px Arial", "#000000");
-	captSoldier1Text.textAlign = "center";
-	captSoldier1Text.x = 28;
-	captSoldier1Text.y = 15;
-	captSoldier1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captSoldier1BMP = new createjs.Bitmap("images/Soldier2.png");
 	var captSoldier1Clickable = new createjs.Container();
 	captSoldier1Clickable.pieceType = "Soldier";
-	captSoldier1Clickable.addChild(captSoldier1,captSoldier1Text);
+	captSoldier1Clickable.addChild(captSoldier1,captSoldier1BMP);
 	captSoldier1Clickable.isHighlighted = false;
 	piecesCaptured.push(captSoldier1Clickable);	
 	captSoldier1Clickable.alpha = 0.25;
@@ -976,14 +909,10 @@ else{
 
 	//create captured soldier2
 	var captSoldier2 = new createjs.Shape();
-	var captSoldier2Text = new createjs.Text("Soldier", "10px Arial", "#000000");
-	captSoldier2Text.textAlign = "center";
-	captSoldier2Text.x = 28;
-	captSoldier2Text.y = 15;
-	captSoldier2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captSoldier2BMP = new createjs.Bitmap("images/Soldier2.png");
 	var captSoldier2Clickable = new createjs.Container();
 	captSoldier2Clickable.pieceType = "Soldier";
-	captSoldier2Clickable.addChild(captSoldier2,captSoldier2Text);
+	captSoldier2Clickable.addChild(captSoldier2,captSoldier2BMP);
 	captSoldier2Clickable.isHighlighted = false;
 	piecesCaptured.push(captSoldier2Clickable);	
 	captSoldier2Clickable.alpha = 0.25;
@@ -993,14 +922,10 @@ else{
 	
 	//create captured engineer1
 	var captEngineer1 = new createjs.Shape();
-	var captEngineer1Text = new createjs.Text("Engineer", "10px Arial", "#000000");
-	captEngineer1Text.textAlign = "center";
-	captEngineer1Text.x = 28;
-	captEngineer1Text.y = 15;
-	captEngineer1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captEngineer1BMP = new createjs.Bitmap("images/Engineer2.png");
 	var captEngineer1Clickable = new createjs.Container();
 	captEngineer1Clickable.pieceType = "Engineer";
-	captEngineer1Clickable.addChild(captEngineer1,captEngineer1Text);
+	captEngineer1Clickable.addChild(captEngineer1,captEngineer1BMP);
 	captEngineer1Clickable.isHighlighted = false;
 	piecesCaptured.push(captEngineer1Clickable);
 	captEngineer1Clickable.alpha = 0.25;
@@ -1010,14 +935,10 @@ else{
 
 	//create captured engineer2
 	var captEngineer2 = new createjs.Shape();
-	var captEngineer2Text = new createjs.Text("Engineer", "10px Arial", "#000000");
-	captEngineer2Text.textAlign = "center";
-	captEngineer2Text.x = 28;
-	captEngineer2Text.y = 15;
-	captEngineer2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captEngineer2BMP = new createjs.Bitmap("images/Engineer2.png");
 	var captEngineer2Clickable = new createjs.Container();
 	captEngineer2Clickable.pieceType = "Engineer";
-	captEngineer2Clickable.addChild(captEngineer2,captEngineer2Text);
+	captEngineer2Clickable.addChild(captEngineer2,captEngineer2BMP);
 	captEngineer2Clickable.isHighlighted = false;
 	piecesCaptured.push(captEngineer2Clickable);
 	captEngineer2Clickable.alpha = 0.25;
@@ -1027,14 +948,10 @@ else{
 	
 	//create captured rider1
 	var captRider1 = new createjs.Shape();
-	var captRider1Text = new createjs.Text("Rider", "10px Arial", "#000000");
-	captRider1Text.textAlign = "center";
-	captRider1Text.x = 28;
-	captRider1Text.y = 15;
-	captRider1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captRider1BMP = new createjs.Bitmap("images/Rider2.png");
 	var captRider1Clickable = new createjs.Container();
 	captRider1Clickable.pieceType = "Rider";
-	captRider1Clickable.addChild(captRider1, captRider1Text);
+	captRider1Clickable.addChild(captRider1, captRider1BMP);
 	captRider1Clickable.isHighlighted = false;
 	piecesCaptured.push(captRider1Clickable);
 	captRider1Clickable.alpha = 0.25;
@@ -1044,14 +961,10 @@ else{
 
 	//create captured rider2
 	var captRider2 = new createjs.Shape();
-	var captRider2Text = new createjs.Text("Rider", "10px Arial", "#000000");
-	captRider2Text.textAlign = "center";
-	captRider2Text.x = 28;
-	captRider2Text.y = 15;
-	captRider2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captRider2BMP = new createjs.Bitmap("images/Rider2.png");
 	var captRider2Clickable = new createjs.Container();
 	captRider2Clickable.pieceType = "Rider";
-	captRider2Clickable.addChild(captRider2, captRider2Text);
+	captRider2Clickable.addChild(captRider2, captRider2BMP);
 	captRider2Clickable.isHighlighted = false;
 	piecesCaptured.push(captRider2Clickable);
 	captRider2Clickable.alpha = 0.25;
@@ -1061,14 +974,10 @@ else{
 	
 	//create captured archer
 	var captArcher = new createjs.Shape();
-	var captArcherText = new createjs.Text("Archer", "10px Arial", "#000000");
-	captArcherText.textAlign = "center";
-	captArcherText.x = 28;
-	captArcherText.y = 15;
-	captArcher.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captArcherBMP = new createjs.Bitmap("images/Archer2.png");
 	var captArcherClickable = new createjs.Container();
 	captArcherClickable.pieceType = "Archer";
-	captArcherClickable.addChild(captArcher, captArcherText);
+	captArcherClickable.addChild(captArcher, captArcherBMP);
 	captArcherClickable.isHighlighted = false;
 	piecesCaptured.push(captArcherClickable);
 	captArcherClickable.alpha = 0.25;
@@ -1078,14 +987,10 @@ else{
 	
 	//create captured assassin
 	var captAs = new createjs.Shape();
-	var captAsText = new createjs.Text("Assassin", "10px Arial", "#000000");
-	captAsText.textAlign = "center";
-	captAsText.x = 28;
-	captAsText.y = 15;
-	captAs.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captAsBMP = new createjs.Bitmap("images/Assassin2.png");
 	var captAsClickable = new createjs.Container();
 	captAsClickable.pieceType = "Assassin";
-	captAsClickable.addChild(captAs, captAsText);
+	captAsClickable.addChild(captAs, captAsBMP);
 	captAsClickable.isHighlighted = false;
 	piecesCaptured.push(captAsClickable);	
 	captAsClickable.alpha = 0.25;
@@ -1095,14 +1000,10 @@ else{
 	
 	//create captured mystic
 	var captMystic = new createjs.Shape();
-	var captMysticText = new createjs.Text("Mystic", "10px Arial", "#000000");
-	captMysticText.textAlign = "center";
-	captMysticText.x = 28;
-	captMysticText.y = 15;
-	captMystic.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captMysticBMP = new createjs.Bitmap("images/Mystic2.png");
 	var captMysticClickable = new createjs.Container();
 	captMysticClickable.pieceType = "Mystic";
-	captMysticClickable.addChild(captMystic, captMysticText);
+	captMysticClickable.addChild(captMystic, captMysticBMP);
 	captMysticClickable.isHighlighted = false;
 	piecesCaptured.push(captMysticClickable);
 	captMysticClickable.alpha = 0.25;
@@ -1112,14 +1013,10 @@ else{
 	
 	//create captured trap1
 	var captTrap1 = new createjs.Shape();
-	var captTrap1Text = new createjs.Text("Trap", "10px Arial", "#000000");
-	captTrap1Text.textAlign = "center";
-	captTrap1Text.x = 28;
-	captTrap1Text.y = 15;
-	captTrap1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captTrap1BMP = new createjs.Bitmap("images/Trap2.png");
 	var captTrap1Clickable = new createjs.Container();
 	captTrap1Clickable.pieceType = "Trap";
-	captTrap1Clickable.addChild(captTrap1, captTrap1Text);
+	captTrap1Clickable.addChild(captTrap1, captTrap1BMP);
 	captTrap1Clickable.isHighlighted = false;
 	piecesCaptured.push(captTrap1Clickable);
 	captTrap1Clickable.alpha = 0.25;
@@ -1129,14 +1026,10 @@ else{
 
 	//create captured trap2
 	var captTrap2 = new createjs.Shape();
-	var captTrap2Text = new createjs.Text("Trap", "10px Arial", "#000000");
-	captTrap2Text.textAlign = "center";
-	captTrap2Text.x = 28;
-	captTrap2Text.y = 15;
-	captTrap2.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captTrap2BMP = new createjs.Bitmap("images/Trap2.png");
 	var captTrap2Clickable = new createjs.Container();
 	captTrap2Clickable.pieceType = "Trap";
-	captTrap2Clickable.addChild(captTrap2, captTrap2Text);
+	captTrap2Clickable.addChild(captTrap2, captTrap2BMP);
 	captTrap2Clickable.isHighlighted = false;
 	piecesCaptured.push(captTrap2Clickable);
 	captTrap2Clickable.alpha = 0.25;
@@ -1147,14 +1040,10 @@ else{
 
 	//create captured important thing
 	var captImpThing = new createjs.Shape();
-	var captImpThingText = new createjs.Text("Important \nThing", "10px Arial", "#000000");
-	captImpThingText.textAlign = "center";
-	captImpThingText.x = 28;
-	captImpThingText.y = 15;
-	captImpThing.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
+	var captImpThingBMP = new createjs.Bitmap("images/ImportantThing2.png");
 	var captImpThingClickable = new createjs.Container();
 	captImpThingClickable.pieceType = "Important Thing";
-	captImpThingClickable.addChild(captImpThing, captImpThingText);
+	captImpThingClickable.addChild(captImpThing, captImpThingBMP);
 	piecesCaptured.push(captImpThingClickable);	
 	captImpThingClickable.alpha = 0.25;
 	captImpThingClickable.x = 180;

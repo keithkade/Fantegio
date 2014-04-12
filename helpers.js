@@ -373,18 +373,18 @@ function showMovementArrow(xOld, yOld, xNew, yNew) {
 //this function adds the clickable to the pieces lost array of appropriate player
 function pieceLost(clickable){
 	if(playerNum == 1){
-		var clickableCaptured = findLostPiece(clickable);
-		clickableCaptured.isHighlighted = true;
-		clickableCaptured.alpha = 1;
-		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		var clickableLost = findLostPiece(clickable);
+		clickableLost.isHighlighted = true;
+		clickableLost.alpha = 1;
+		clickableLost.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 
 		
 	}
 	else{
-		var clickableCaptured = findLostPiece(clickable);
-		clickableCaptured.isHighlighted = true;
-		clickableCaptured.alpha = 1;
-		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
+		var clickableLost = findLostPiece(clickable);
+		clickableLost.isHighlighted = true;
+		clickableLost.alpha = 1;
+		clickableLost.shadow = new createjs.Shadow("#000000", 5, 5, 10);
 
 		
 	}
@@ -397,57 +397,19 @@ function pieceCaptured(clickable){
 	if(playerNum == 1){
 		var clickableCapturedIndex = findCapturedPieceIndex(clickable);
 		var clickableCaptured = findCapturedPiece(clickable);
-		var newSquare1 = new createjs.Shape();
-		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
-		newSquareIT.textAlign = "center";
-		newSquareIT.x = 28;
-		newSquareIT.y = 15;
-		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
-
-		clickable.addChild(newSquare1, newSquareIT);
-		clickable.x =clickableCaptured.x;
-		clickable.y = clickableCaptured.y;
-		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
-		clickable.isHighlighted = true;
-		piecesCaptured[clickableCapturedIndex] = clickable;
-		captStage.addChild(clickable);
-		captStage.removeChild(clickableCaptured);
-		captStage.update();		
-		/*var clickableCapturedIndex = findCapturedPieceIndex(clickable);
-		var clickableCaptured = findCapturedPiece(clickable);
 		clickableCaptured.isHighlighted = true;
 		clickableCaptured.alpha = 1;
 		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
-		captStage.update();	*/
 
 
 	}
 	else{
 		var clickableCapturedIndex = findCapturedPieceIndex(clickable);
 		var clickableCaptured = findCapturedPiece(clickable);
-		var newSquare1 = new createjs.Shape();
-		var newSquareIT = new createjs.Text(clickable.pieceType, "10px Arial", "#000000");
-		newSquareIT.textAlign = "center";
-		newSquareIT.x = 28;
-		newSquareIT.y = 15;
-		newSquare1.graphics.beginFill(enemyColor).drawRect(0, 0, 59, 59);
-
-		clickable.addChild(newSquare1, newSquareIT);
-	
-		clickable.x =clickableCaptured.x;
-		clickable.y = clickableCaptured.y;
-		clickable.shadow = new createjs.Shadow("#000000", 5, 5, 10);
-		clickable.isHighlighted = true;
-		piecesCaptured[clickableCapturedIndex] = clickable;
-		captStage.addChild(clickable);
-		captStage.removeChild(clickableCaptured);
-		captStage.update();		
-		/*var clickableCapturedIndex = findCapturedPieceIndex(clickable);
-		var clickableCaptured = findCapturedPiece(clickable);
 		clickableCaptured.isHighlighted = true;
 		clickableCaptured.alpha = 1;
 		clickableCaptured.shadow = new createjs.Shadow("#000000", 5, 5, 10);
-		captStage.update();	*/	
+
 
 		
 	}
