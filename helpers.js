@@ -50,7 +50,7 @@ function findLostPiece(clickable){
 }
 
 function notify(alert){
-	document.getElementById(divId).innerHTML = alert;
+	document.getElementById("notification").innerHTML = alert;
 }
 
 //when game starts we hide and/or show html elements
