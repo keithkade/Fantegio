@@ -365,6 +365,116 @@ function handler(request,response) {
 					response.end();
 				});
 			break;																																					
+		case '/images/ImportantThing2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading ImportantThing2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Trap2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Trap2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Engineer2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Engineer2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Rider2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Rider2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Mystic2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Mystic2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Archer2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Archer2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;	
+		case '/images/Assassin2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Assassin2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/images/Soldier2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Soldier2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/images/Captain2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Captain2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;
+		case '/images/Commander2.png':
+			fs.readFile(__dirname + path, function(error, data) {
+					if (error) {
+						response.writeHead(500);
+						return response.end('Error loading Commander2.png');
+					}
+					response.writeHead(200, {"Content-Type": "application/x-javascript"});
+					response.write(data);
+					response.end();
+				});
+			break;																																					
 		case '/images/Boulder.png':
 			fs.readFile(__dirname + path, function(error, data) {
 					if (error) {
@@ -375,7 +485,7 @@ function handler(request,response) {
 					response.write(data);
 					response.end();
 				});
-			break;
+			break;			
 		case '/images/Enemy.png':
 			fs.readFile(__dirname + path, function(error, data) {
 					if (error) {
