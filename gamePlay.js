@@ -21,7 +21,7 @@ function startGame(){
 	//if not all pieces have been placed then just give the default setup
 	for (var i=0; i < pieceArray.length; i++){
 		if (pieceArray[i].gameGridY > 8){
-			alert("You had at least one piece off the board so you were given the default setup");
+			notify("You had at least one piece off the board so you were given the default setup");
 			setup();
 			startGame();
 		}
@@ -72,6 +72,7 @@ function startGame(){
 	showElem("gameCanvas");
 	showElem("lostPiecesCanvas");
 	showElem("capPiecesCanvas");	
+	showElem("notification");	
 
 }
 
@@ -211,7 +212,7 @@ function resolveConflict(conflictArray){
 		var p2 = pieceAtLocation(xNew, yNew);
 		removeClickable(p1);
 		removeClickable(p2);
-		alert("A " + p1.pieceType + " and a " + p2.pieceType + " were both destroyed.");
+		notify("A " + p1.pieceType + " and a " + p2.pieceType + " were both destroyed.");
 	}
 
 	if (outcome == 1 && playerMoved == 1){ //player1 wins
@@ -219,43 +220,43 @@ function resolveConflict(conflictArray){
 		var winner = pieceAtLocation(xOld, yOld);
 		removeClickable(loser);
 		if (playerNum == 1)
-			alert("You captured your opponent's " + loser.pieceType);
+			notify("You captured your opponent's " + loser.pieceType);
 		else
-			alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);
+			notify("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);
 	}
 	else if (outcome == 2 && playerMoved == 1){ //player2 wins
 		var loser = pieceAtLocation(xOld, yOld); //piece moved 
 		var winner = pieceAtLocation(xNew, yNew);
 		removeClickable(loser);
 		if (playerNum == 2)
-			alert("You captured your opponent's " + loser.pieceType);
+			notify("You captured your opponent's " + loser.pieceType);
 		else
-			alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);		
+			notify("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);		
 	}
 	else if (outcome == 1 && playerMoved == 2){ 
 		var loser = pieceAtLocation(xOld, yOld); //piece moved 
 		var winner = pieceAtLocation(xNew, yNew);
 		removeClickable(loser);
 		if (playerNum == 1)
-			alert("You captured your opponent's " + loser.pieceType);
+			notify("You captured your opponent's " + loser.pieceType);
 		else
-			alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);			
+			notify("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);			
 	}
 	else if (outcome == 2 && playerMoved == 2){ 
 		var loser = pieceAtLocation(xNew, yNew); 
 		var winner = pieceAtLocation(xOld, yOld);
 		removeClickable(loser);		
 		if (playerNum == 2)
-			alert("You captured your opponent's " + loser.pieceType);
+			notify("You captured your opponent's " + loser.pieceType);
 		else
-			alert("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);	
+			notify("Your " + loser.pieceType + " was taken by your opponent's " + winner.pieceType);	
 	}	
 	else if (outcome == 3 && playerMoved == 1){ //failed archer attack
 		var attacked = pieceAtLocation(xNew, yNew);
 		if (playerNum == 1)
-			alert("The piece you attacked has a strength higher than 3.");
+			notify("The piece you attacked has a strength higher than 3.");
 		else {
-			alert("Your " + attacked.pieceType + " was attacked by an archer.");
+			notify("Your " + attacked.pieceType + " was attacked by an archer.");
 			// Draw a circle on the attacked piece
 			var c = new createjs.Shape();
 			c.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
@@ -267,9 +268,9 @@ function resolveConflict(conflictArray){
 	else if (outcome == 3 && playerMoved == 2){ //failed archer attack
 		var attacked = pieceAtLocation(xNew, yNew);
 		if (playerNum == 2)
-			alert("The piece you attacked has a strength higher than 3.");
+			notify("The piece you attacked has a strength higher than 3.");
 		else {
-			alert("Your " + attacked.pieceType + " was attacked by an archer.");
+			notify("Your " + attacked.pieceType + " was attacked by an archer.");
 			// Draw a circle on the attacked piece
 			var c = new createjs.Shape();
 			c.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
@@ -282,17 +283,17 @@ function resolveConflict(conflictArray){
 		var loser = pieceAtLocation(xNew, yNew);
 		removeClickable(loser);		
 		if (playerNum == 1)
-			alert("You defeated your opponent's " + loser.pieceType + ".");
+			notify("You defeated your opponent's " + loser.pieceType + ".");
 		else
-			alert("Your " + loser.pieceType + " was defeated by your opponent's archer.");
+			notify("Your " + loser.pieceType + " was defeated by your opponent's archer.");
 	}
 	else if (outcome == 4 && playerMoved == 2){
 		var loser = pieceAtLocation(xNew, yNew);
 		removeClickable(loser);		
 		if (playerNum == 2)
-			alert("You defeated your opponent's " + loser.pieceType + ".");
+			notify("You defeated your opponent's " + loser.pieceType + ".");
 		else
-			alert("Your " + loser.pieceType + " was defeated by your opponent's archer.");
+			notify("Your " + loser.pieceType + " was defeated by your opponent's archer.");
 	}
 
 	// Always remove last direction arrow, even if archer attacked
@@ -730,7 +731,7 @@ function movePiece(event){
 		socket.emit("move", move);
 	}
 	else{
-		alert("Not your turn");
+		notify("Not your turn");
 	}
 }
 
@@ -748,6 +749,6 @@ function shootPiece(event){
 		socket.emit("move", move);
 	}
 	else{
-		alert("Not your turn");
+		notify("Not your turn");
 	}
 }

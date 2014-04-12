@@ -49,6 +49,10 @@ function findLostPiece(clickable){
 	}
 }
 
+function notify(alert){
+	document.getElementById(divId).innerHTML = alert;
+}
+
 //when game starts we hide and/or show html elements
 function hideElem(divId){
    document.getElementById(divId).style.display = 'none';
