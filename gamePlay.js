@@ -116,10 +116,37 @@ function showAroundMystic(data) {
 
 		// Piece above mystic
 		if (p1Name != "") {
-			var label = new createjs.Text(p1Name, "10px Arial", "#000000");
-			label.textAlign = "center";
-			label.x = 28;
-			label.y = 15;
+			var label;
+			if (p1Name == "Commander") {
+				label = new createjs.Bitmap("images/Commander2.png");
+			}
+			else if (p1Name == "Captain") {
+				label = new createjs.Bitmap("images/Captain2.png");
+			}
+			else if (p1Name == "Soldier") {
+				label = new createjs.Bitmap("images/Soldier2.png");
+			}
+			else if (p1Name == "Engineer") {
+				label = new createjs.Bitmap("images/Engineer2.png");
+			}
+			else if (p1Name == "Rider") {
+				label = new createjs.Bitmap("images/Rider2.png");
+			}
+			else if (p1Name == "Archer") {
+				label = new createjs.Bitmap("images/Archer2.png");
+			}
+			else if (p1Name == "Assassin") {
+				label = new createjs.Bitmap("images/Assassin2.png");
+			}
+			else if (p1Name == "Mystic") {
+				label = new createjs.Bitmap("images/Mystic2.png");
+			}
+			else if (p1Name == "Trap") {
+				label = new createjs.Bitmap("images/Trap2.png");
+			}
+			else if (p1Name == "Important Thing") {
+				label = new createjs.Bitmap("images/ImportantThing2.png");
+			}
 			label.name = "label";
 			var piece;
 			if (playerNum == 1) {
@@ -134,10 +161,37 @@ function showAroundMystic(data) {
 		}
 		// Piece to the right of the mystic
 		if (p2Name != "") {
-			var label = new createjs.Text(p2Name, "10px Arial", "#000000");
-			label.textAlign = "center";
-			label.x = 28;
-			label.y = 15;
+			var label;
+			if (p2Name == "Commander") {
+				label = new createjs.Bitmap("images/Commander2.png");
+			}
+			else if (p2Name == "Captain") {
+				label = new createjs.Bitmap("images/Captain2.png");
+			}
+			else if (p2Name == "Soldier") {
+				label = new createjs.Bitmap("images/Soldier2.png");
+			}
+			else if (p2Name == "Engineer") {
+				label = new createjs.Bitmap("images/Engineer2.png");
+			}
+			else if (p2Name == "Rider") {
+				label = new createjs.Bitmap("images/Rider2.png");
+			}
+			else if (p2Name == "Archer") {
+				label = new createjs.Bitmap("images/Archer2.png");
+			}
+			else if (p2Name == "Assassin") {
+				label = new createjs.Bitmap("images/Assassin2.png");
+			}
+			else if (p2Name == "Mystic") {
+				label = new createjs.Bitmap("images/Mystic2.png");
+			}
+			else if (p2Name == "Trap") {
+				label = new createjs.Bitmap("images/Trap2.png");
+			}
+			else if (p2Name == "Important Thing") {
+				label = new createjs.Bitmap("images/ImportantThing2.png");
+			}
 			label.name = "label";
 			var piece = pieceAtLocation(xCur + 1, yCur);
 			piece.addChild(label);
@@ -145,10 +199,37 @@ function showAroundMystic(data) {
 		}
 		// Piece below mystic
 		if (p3Name != "") {
-			var label = new createjs.Text(p3Name, "10px Arial", "#000000");
-			label.textAlign = "center";
-			label.x = 28;
-			label.y = 15;
+			var label;
+			if (p3Name == "Commander") {
+				label = new createjs.Bitmap("images/Commander2.png");
+			}
+			else if (p3Name == "Captain") {
+				label = new createjs.Bitmap("images/Captain2.png");
+			}
+			else if (p3Name == "Soldier") {
+				label = new createjs.Bitmap("images/Soldier2.png");
+			}
+			else if (p3Name == "Engineer") {
+				label = new createjs.Bitmap("images/Engineer2.png");
+			}
+			else if (p3Name == "Rider") {
+				label = new createjs.Bitmap("images/Rider2.png");
+			}
+			else if (p3Name == "Archer") {
+				label = new createjs.Bitmap("images/Archer2.png");
+			}
+			else if (p3Name == "Assassin") {
+				label = new createjs.Bitmap("images/Assassin2.png");
+			}
+			else if (p3Name == "Mystic") {
+				label = new createjs.Bitmap("images/Mystic2.png");
+			}
+			else if (p3Name == "Trap") {
+				label = new createjs.Bitmap("images/Trap2.png");
+			}
+			else if (p3Name == "Important Thing") {
+				label = new createjs.Bitmap("images/ImportantThing2.png");
+			}
 			label.name = "label";
 			var piece;
 			if (playerNum == 1) {
@@ -163,10 +244,37 @@ function showAroundMystic(data) {
 		}
 		// Piece to the left of the mystic
 		if (p4Name != "") {
-			var label = new createjs.Text(p4Name, "10px Arial", "#000000");
-			label.textAlign = "center";
-			label.x = 28;
-			label.y = 15;
+			var label;
+			if (p4Name == "Commander") {
+				label = new createjs.Bitmap("images/Commander2.png");
+			}
+			else if (p4Name == "Captain") {
+				label = new createjs.Bitmap("images/Captain2.png");
+			}
+			else if (p4Name == "Soldier") {
+				label = new createjs.Bitmap("images/Soldier2.png");
+			}
+			else if (p4Name == "Engineer") {
+				label = new createjs.Bitmap("images/Engineer2.png");
+			}
+			else if (p4Name == "Rider") {
+				label = new createjs.Bitmap("images/Rider2.png");
+			}
+			else if (p4Name == "Archer") {
+				label = new createjs.Bitmap("images/Archer2.png");
+			}
+			else if (p4Name == "Assassin") {
+				label = new createjs.Bitmap("images/Assassin2.png");
+			}
+			else if (p4Name == "Mystic") {
+				label = new createjs.Bitmap("images/Mystic2.png");
+			}
+			else if (p4Name == "Trap") {
+				label = new createjs.Bitmap("images/Trap2.png");
+			}
+			else if (p4Name == "Important Thing") {
+				label = new createjs.Bitmap("images/ImportantThing2.png");
+			}
 			label.name = "label";
 			var piece = pieceAtLocation(xCur - 1, yCur);
 			piece.addChild(label);
@@ -258,6 +366,13 @@ function resolveConflict(conflictArray){
 		else {
 			notify("Your " + attacked.pieceType + " was attacked by an archer.");
 			// Draw a circle on the attacked piece
+			/*
+			 * want to mark piece with "Attacked" or something similar
+			var label = new createjs.Text(p4Name, "10px Arial", "#000000");
+			label.x = 0;
+			label.y = 0;
+			label.textAlign = "center";
+			*/
 			var c = new createjs.Shape();
 			c.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
 			c.name = "highlightIcon";
