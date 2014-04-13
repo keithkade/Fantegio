@@ -912,7 +912,7 @@ function anyValidMoves(playerNumber) {
 
 	// If more than 8 pieces left, at least one of them has a valid move
 	// So avoid unnecessary computation
-	if (piecesLeft.length > 8) {
+	if (piecesLeft.length > 9) {
 		return true;
 	}
 
