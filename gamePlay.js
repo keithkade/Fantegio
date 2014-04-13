@@ -70,8 +70,12 @@ function startGame(){
 	hideElem("startButton");
 	hideElem("timer");
 	showElem("gameCanvas");
+        showElem("lostPiecesLabel");
 	showElem("lostPiecesCanvas");
-	showElem("capPiecesCanvas");	
+        showElem("capPiecesLabel");
+	showElem("capPiecesCanvas");
+        showElem("unitInfoLabel");
+        showElem("unitInfoBox");
 	showElem("notification");	
 
 }
@@ -588,6 +592,8 @@ function highlightPossibleMoves(p) {
 	border.name = "highlightIcon";
 	p.addChild(border);
 	highlightSpaces.push(p);
+
+        updateUnitInfo(p);
 
 	// Don't highlight moves during opponent's turn
 	if (playerNum != playerTurn) {

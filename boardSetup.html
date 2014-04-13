@@ -18,7 +18,8 @@
   		#turnIndicator {color:#F7DE99;font-size:150%;margin-top:20px;}
   		#notification {color:white;font-size:125%;margin-top:60px;border-style:solid;border-width:2px;display: none;}
   		#setupCanvas {border:1px solid #000000;display: block; position:absolute; left:6px; top:6px;}
-  		#gameCanvas {border:1px solid #000000;display: none; position:absolute; left:6px; top:6px;}
+                #gameCanvas {border:1px solid #000000;display: none; position:absolute; left:6px; top:6px;}
+  		#unitInformation {color:#FFFFFF;margin-top:20px;}
   		h3 {color:white;}
   	</style>
 </head>
@@ -51,14 +52,20 @@
    	</div>
    	
    	<div  style="float:right;height:100%;width: 35%;display: block">
-		<p> Pieces Lost </p>				
+		<p id="lostPiecesLabel" style="display: none"> Pieces Lost </p>				
 		<canvas id="lostPiecesCanvas" width="300" height="180" style="border:1px solid #000000;display: none">		
 		</canvas>
-		
-		<p> Pieces Captured </p>	
+                
+                <p id="unitInfoLabel" style="display: none"> Unit Info </p>
+                <div id="unitInfoBox" style="height:110px;width:300px;border:1px solid #000000;display: none">
+                   <span id="unitInformation">
+                   </span>
+                </div>
+
+		<p id="capPiecesLabel" style="display: none"> Pieces Captured </p>	
 		<canvas id="capPiecesCanvas" width="300" height="180" style="border:1px solid #000000;display: none">		
 		</canvas>
-		
+                
 		<script src="initializeStages.js"></script>
 		<script src="initializeDraggers.js"></script>
         <script src="initializePieces.js"></script>
