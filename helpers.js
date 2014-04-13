@@ -312,28 +312,28 @@ function updateUnitInfo(selectedPiece){
    switch(selectedPiece.pieceType)
    {
       case "Commander": 
-         document.getElementById("unitInformation").innerHTML = "Commander<br>Stength: 6<br>Loses when defending against Assassin.";
+         document.getElementById("unitInformation").innerHTML = "Commander<br>Strength: 6<br>Loses when defending against Assassin.";
          break;
       case "Captain":
-         document.getElementById("unitInformation").innerHTML = "Captain<br>Stength: 5";
+         document.getElementById("unitInformation").innerHTML = "Captain<br>Strength: 5";
          break;
       case "Soldier":
-         document.getElementById("unitInformation").innerHTML = "Soldier<br>Stength: 4";
+         document.getElementById("unitInformation").innerHTML = "Soldier<br>Strength: 4";
          break;
       case "Engineer":
          document.getElementById("unitInformation").innerHTML = "Engineer<br>Strength: 3<br>Does not dies when attacking traps.";
          break;
       case "Rider":
-         document.getElementById("unitInformation").innerHTML = "Rider<br>Stength: 2<br>Can move until there is collision";
+         document.getElementById("unitInformation").innerHTML = "Rider<br>Strength: 2<br>Can move until there is collision";
          break;
       case "Assassin":
-         document.getElementById("unitInformation").innerHTML = "Assassin<br>Stength: 1<br>Will kill Commander if attacking";
+         document.getElementById("unitInformation").innerHTML = "Assassin<br>Strength: 1<br>Will kill Commander if attacking";
          break;
       case "Archer":
-         document.getElementById("unitInformation").innerHTML = "Archer<br>Stength: 1<br>Can shoot units 2 away if no boulders in way. Shots hit with a strength of 3 and do not kill the archer in ties or losses. Shooting takes a turn.";
+         document.getElementById("unitInformation").innerHTML = "Archer<br>Strength: 1<br>Can shoot units 2 away if no boulders in way. Shots hit with a strength of 3 and do not kill the archer in ties or losses. Shooting takes a turn.";
          break;
       case "Mystic":
-         document.getElementById("unitInformation").innerHTML = "Mysitic<br>Stength: 1<br>Reveals enemy units adjacent to the piece. Diagonals are not considered adjacent.";
+         document.getElementById("unitInformation").innerHTML = "Mysitic<br>Strength: 1<br>Reveals enemy units adjacent to the piece. Diagonals are not considered adjacent.";
          break;
       case "Trap":
          document.getElementById("unitInformation").innerHTML = "Trap<br>Immobile. Activates when attacked. Kills itself and anything that attacked it, unless it is an Engineer.";
