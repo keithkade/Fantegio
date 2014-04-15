@@ -95,6 +95,10 @@ function addDragAndDrop (toDrag){
          yOffset = evt.stageY % 60; 	
          });
          
+   toDrag.on("mouseover",function(evt) {
+         updateUnitInfo(evt.currentTarget);	
+         });  		 
+                
    //move piece on drag			
    toDrag.on("pressmove",function(evt) {
          evt.currentTarget.lastX = evt.currentTarget.gameGridX;
@@ -330,7 +334,7 @@ function updateUnitInfo(selectedPiece){
          document.getElementById("unitInformation").innerHTML = "Assassin<br>Strength: 1<br>Will kill Commander if attacking";
          break;
       case "Archer":
-         document.getElementById("unitInformation").innerHTML = "Archer<br>Strength: 1<br>Can shot units 2 away if no obstructions in the way. Shots have 3 strength. Archer does not risk death when shooting.";
+         document.getElementById("unitInformation").innerHTML = "Archer<br>Strength: 1<br>Can shoot units 2 away if no obstructions in the way. Shots have 3 strength. Archer does not risk death when shooting.";
          break;
       case "Mystic":
          document.getElementById("unitInformation").innerHTML = "Mysitic<br>Strength: 1<br>Reveals enemy units adjacent to the piece. Diagonals are not considered adjacent.";

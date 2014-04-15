@@ -1,5 +1,6 @@
 //==========================================================================setup board 
 var setupStage = new createjs.Stage("setupCanvas");
+setupStage.enableMouseOver(10);
 
 var setupBoardHeight = 300;
 var setupBoardWidth = 540;
