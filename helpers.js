@@ -337,7 +337,7 @@ function updateUnitInfo(selectedPiece){
          document.getElementById("unitInformation").innerHTML = "Archer<br>Strength: 1<br>Can shoot units 2 away if no obstructions in the way. Shots have 3 strength. Archer does not risk death when shooting.";
          break;
       case "Mystic":
-         document.getElementById("unitInformation").innerHTML = "Mysitic<br>Strength: 1<br>Reveals enemy units adjacent to the piece. Diagonals are not considered adjacent.";
+         document.getElementById("unitInformation").innerHTML = "Mystic<br>Strength: 1<br>Reveals enemy units adjacent to the piece. Diagonals are not considered adjacent.";
          break;
       case "Trap":
          document.getElementById("unitInformation").innerHTML = "Trap<br>Immobile. Activates when attacked. Kills itself and anything that attacked it, unless it is an Engineer.";
