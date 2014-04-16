@@ -63,7 +63,6 @@ function startGame(){
 	//send return to server			
 	socket.emit("setup", resultArray);
 
-	hideElem("infoScroll");
 	hideElem("setupCanvas");
 	hideElem("defaultButton");
 	hideElem("startButton");
