@@ -1,4 +1,3 @@
-
 //create socket for communication
 var socket = io.connect('http://' + document.location.host);
 
@@ -74,8 +73,6 @@ function startGame(){
 	showElem("lostPiecesCanvas");
         showElem("capPiecesLabel");
 	showElem("capPiecesCanvas");
-        showElem("unitInfoLabel");
-        showElem("unitInfoBox");
 	showElem("notification");	
 
 }
