@@ -3,7 +3,7 @@ var url = require('url');
 var io = require('socket.io').listen(server);
 var fs = require('fs');
 
-var portNumber = 33331;
+var portNumber = 32421;
 console.log("Server running on port " + portNumber + ".");
 server.listen(portNumber);
 

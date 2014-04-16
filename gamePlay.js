@@ -374,7 +374,7 @@ function resolveConflict(conflictArray){
 			label.textAlign = "center";
 			*/
 			var c = new createjs.Shape();
-			c.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			c.graphics.beginFill("#f91506").drawCircle(29, 30, 7);
 			c.name = "highlightIcon";
 			attacked.addChild(c);
 			highlightSpaces.push(attacked);
@@ -388,7 +388,7 @@ function resolveConflict(conflictArray){
 			notify("Your " + attacked.pieceType + " was attacked by an archer.");
 			// Draw a circle on the attacked piece
 			var c = new createjs.Shape();
-			c.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			c.graphics.beginFill("#f91506").drawCircle(29, 30, 7);
 			c.name = "highlightIcon";
 			attacked.addChild(c);
 			highlightSpaces.push(attacked);
@@ -581,10 +581,11 @@ function highlightPossibleMoves(p) {
 
 	// Highlight piece selected
 	var border = new createjs.Shape();
-	border.graphics.beginStroke("#CCCC00");
+	border.graphics.beginStroke("#70eb00");
 	border.graphics.setStrokeStyle(3);
 	border.snapToPixel = true;
 	border.graphics.drawRect(0, 0, 56, 56);
+	border.alpha = .75;
 	border.name = "highlightIcon";
 	p.addChild(border);
 	highlightSpaces.push(p);
@@ -603,14 +604,15 @@ function highlightPossibleMoves(p) {
 			var above = pieceAtLocation(p.gameGridX, p.gameGridY + i);
 			if (above == false) {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#CCCC00").drawRect(15,15,30,30);
+				h.graphics.beginFill("#70eb00").drawRect(15,15,30,30);
+				h.alpha = .85;
 				h.name = "highlightIcon";
 				board[p.gameGridX][p.gameGridY + i].addChild(h);
 				highlightSpaces.push(board[p.gameGridX][p.gameGridY + i]);
 			}
 			else if (above.team != playerNum && above.pieceType != "rock") {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+				h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 				h.name = "highlightIcon";
 				above.addChild(h);
 				highlightSpaces.push(above);
@@ -625,14 +627,15 @@ function highlightPossibleMoves(p) {
 			var right = pieceAtLocation(p.gameGridX + i, p.gameGridY);
 			if (right == false) {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#CCCC00").drawRect(15,15,30,30);
+				h.graphics.beginFill("#70eb00").drawRect(15,15,30,30);
+				h.alpha = .85;
 				h.name = "highlightIcon";
 				board[p.gameGridX + i][p.gameGridY].addChild(h);
 				highlightSpaces.push(board[p.gameGridX + i][p.gameGridY]);
 			}
 			else if (right.team != playerNum && right.pieceType != "rock") {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+				h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 				h.name = "highlightIcon";
 				right.addChild(h);
 				highlightSpaces.push(right);
@@ -647,14 +650,15 @@ function highlightPossibleMoves(p) {
 			var below = pieceAtLocation(p.gameGridX, p.gameGridY + i);
 			if (below == false) {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#CCCC00").drawRect(15,15,30,30);
+				h.graphics.beginFill("#70eb00").drawRect(15,15,30,30);
+				h.alpha = .85;
 				h.name = "highlightIcon";
 				board[p.gameGridX][p.gameGridY + i].addChild(h);
 				highlightSpaces.push(board[p.gameGridX][p.gameGridY + i]);
 			}
 			else if (below.team != playerNum && below.pieceType != "rock") {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+				h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 				h.name = "highlightIcon";
 				below.addChild(h);
 				highlightSpaces.push(below);
@@ -669,14 +673,15 @@ function highlightPossibleMoves(p) {
 			var left = pieceAtLocation(p.gameGridX + i, p.gameGridY);
 			if (left == false) {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#CCCC00").drawRect(15,15,30,30);
+				h.graphics.beginFill("#70eb00").drawRect(15,15,30,30);
+				h.alpha = .85;
 				h.name = "highlightIcon";
 				board[p.gameGridX + i][p.gameGridY].addChild(h);
 				highlightSpaces.push(board[p.gameGridX + i][p.gameGridY]);
 			}
 			else if (left.team != playerNum && left.pieceType != "rock") {
 				var h = new createjs.Shape();
-				h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+				h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 				h.name = "highlightIcon";
 				left.addChild(h);
 				highlightSpaces.push(left);
@@ -696,14 +701,15 @@ function highlightPossibleMoves(p) {
 		// Empty space above
 		if (above == false && (p.gameGridY - 1) > 0) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#CCCC00").drawRect(15, 15, 30, 30);
+			h.graphics.beginFill("#70eb00").drawRect(15, 15, 30, 30);
+			h.alpha = .85;
 			h.name = "highlightIcon";
 			board[p.gameGridX][p.gameGridY - 1].addChild(h);
 			highlightSpaces.push(board[p.gameGridX][p.gameGridY - 1]);
 		}
 		else if ((p.gameGridY - 1) > 0 && above.team != playerNum && above.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+			h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 			h.name = "highlightIcon";
 			above.addChild(h);
 			highlightSpaces.push(above);
@@ -711,14 +717,15 @@ function highlightPossibleMoves(p) {
 		// Empty space to the right
 		if (right == false && (p.gameGridX + 1) < 10) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#CCCC00").drawRect(15, 15, 30, 30);
+			h.graphics.beginFill("#70eb00").drawRect(15, 15, 30, 30);
+			h.alpha = .85;
 			h.name = "highlightIcon";
 			board[p.gameGridX + 1][p.gameGridY].addChild(h);
 			highlightSpaces.push(board[p.gameGridX + 1][p.gameGridY]);
 		}
 		else if ((p.gameGridX + 1) < 10 && right.team != playerNum && right.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+			h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 			h.name = "highlightIcon";
 			right.addChild(h);
 			highlightSpaces.push(right);
@@ -726,14 +733,15 @@ function highlightPossibleMoves(p) {
 		// Empty space below
 		if (below == false && (p.gameGridY + 1) < 9) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#CCCC00").drawRect(15, 15, 30, 30);
+			h.graphics.beginFill("#70eb00").drawRect(15, 15, 30, 30);
+			h.alpha = .85;
 			h.name = "highlightIcon";
 			board[p.gameGridX][p.gameGridY + 1].addChild(h);
 			highlightSpaces.push(board[p.gameGridX][p.gameGridY + 1]);
 		}
 		else if ((p.gameGridY + 1) < 9 && below.team != playerNum && below.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+			h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 			h.name = "highlightIcon";
 			below.addChild(h);
 			highlightSpaces.push(below);
@@ -741,14 +749,15 @@ function highlightPossibleMoves(p) {
 		// Empty space to the left
 		if (left == false && (p.gameGridX - 1) > 0) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#CCCC00").drawRect(15, 15, 30, 30);
+			h.graphics.beginFill("#70eb00").drawRect(15, 15, 30, 30);
+			h.alpha = .85;
 			h.name = "highlightIcon";
 			board[p.gameGridX - 1][p.gameGridY].addChild(h);
 			highlightSpaces.push(board[p.gameGridX - 1][p.gameGridY]);
 		}
 		else if ((p.gameGridX - 1) > 0 && left.team != playerNum && left.pieceType != "rock") {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawRect(20, 20, 17, 17);
+			h.graphics.beginFill("#f91506").drawRect(20, 20, 17, 17);
 			h.name = "highlightIcon";
 			left.addChild(h);
 			highlightSpaces.push(left);
@@ -766,7 +775,7 @@ function highlightPossibleMoves(p) {
 				above.team != playerNum && above.pieceType != "rock" &&
 				pieceAtLocation(p.gameGridX, p.gameGridY - 1) == false) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			h.graphics.beginFill("#f91506").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
 			above.addChild(h);
 			highlightSpaces.push(above);
@@ -776,7 +785,7 @@ function highlightPossibleMoves(p) {
 				right.team != playerNum && right.pieceType != "rock" &&
 				pieceAtLocation(p.gameGridX + 1, p.gameGridY) == false) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			h.graphics.beginFill("#f91506").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
 			right.addChild(h);
 			highlightSpaces.push(right);
@@ -786,7 +795,7 @@ function highlightPossibleMoves(p) {
 				below.team != playerNum && below.pieceType != "rock" &&
 				pieceAtLocation(p.gameGridX, p.gameGridY + 1) == false) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			h.graphics.beginFill("#f91506").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
 			below.addChild(h);
 			highlightSpaces.push(below);
@@ -796,7 +805,7 @@ function highlightPossibleMoves(p) {
 				left.team != playerNum && left.pieceType != "rock" &&
 				pieceAtLocation(p.gameGridX - 1, p.gameGridY) == false) {
 			var h = new createjs.Shape();
-			h.graphics.beginFill("#FF0000").drawCircle(29, 30, 7);
+			h.graphics.beginFill("#f91506").drawCircle(29, 30, 7);
 			h.name = "highlightIcon";
 			left.addChild(h);
 			highlightSpaces.push(left);
